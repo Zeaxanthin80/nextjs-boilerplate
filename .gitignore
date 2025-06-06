@@ -42,3 +42,4 @@ next-env.d.ts
 
 # Local documentation (personal notes)
 # VERCEL_WORKFLOW_GUIDE.md
+.env*.local

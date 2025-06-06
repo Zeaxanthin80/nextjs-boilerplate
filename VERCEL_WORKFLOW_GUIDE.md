@@ -80,6 +80,11 @@ Or supplement GitHub workflow
 
 ## Setup Instructions
 
+> **⚠️ Important:** The setup steps below depend on which team approach you choose (see Section 5: Team Member Vercel Setup Options). 
+> - **Minimal Setup**: Only Jose needs steps 2-4 (Login & Link). Norma & Lily only need step 1 (CLI install)
+> - **Full Access**: All team members need all steps 1-4
+> - **Hybrid (Recommended)**: Jose needs all steps 1-4, Norma & Lily need steps 1 & 4 only
+
 ### 1. Install Vercel CLI
 ```bash
 npm i -g vercel
@@ -89,12 +94,18 @@ npm i -g vercel
 ```bash
 vercel login
 ```
+**Who needs this:** 
+- **Hybrid Approach (Recommended):** Jose only
+- **Full Team Access:** All team members
+- **Minimal Setup:** No one (skip this step)
 
 ### 3. Link Your Project
 ```bash
 vercel link
 ```
 This connects your local folder to your existing Vercel project.
+
+**Who needs this:** Same as step 2 above.
 
 ### 4. Verify Setup
 ```bash
