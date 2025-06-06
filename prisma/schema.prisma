@@ -1,0 +1,105 @@
+// Marketing SaaS Database Schema
+// Generated for Jose, Norma, and Lily's capstone project
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User Management
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  role      UserRole @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  accounts    Account[]
+  campaigns   Campaign[]
+  
+  @@map("users")
+}
+
+model Account {
+  id        String   @id @default(cuid())
+  name      String
+  plan      PlanType @default(FREE)
+  ownerId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  owner     User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  campaigns Campaign[]
+  
+  @@map("accounts")
+}
+
+// Campaign Management
+model Campaign {
+  id          String        @id @default(cuid())
+  name        String
+  description String?
+  status      CampaignStatus @default(DRAFT)
+  budget      Float?
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relations
+  accountId   String
+  creatorId   String
+  account     Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  creator     User    @relation(fields: [creatorId], references: [id])
+  analytics   Analytics[]
+  
+  @@map("campaigns")
+}
+
+// Analytics
+model Analytics {
+  id         String   @id @default(cuid())
+  campaignId String
+  date       DateTime @default(now())
+  
+  // Metrics
+  impressions Int @default(0)
+  clicks      Int @default(0)
+  conversions Int @default(0)
+  cost        Float @default(0)
+  
+  // Relations
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  
+  @@map("analytics")
+}
+
+// Enums
+enum UserRole {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum PlanType {
+  FREE
+  STARTER
+  PRO
+  ENTERPRISE
+}
+
+enum CampaignStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  COMPLETED
+  ARCHIVED
+}
