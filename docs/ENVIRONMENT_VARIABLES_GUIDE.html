@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environment Variables Guide - Marketing SaaS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Environment Variables Guide</h1>
+            <p>Complete environment configuration reference for Marketing SaaS application by Jose, Norma, and Lily</p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav">
+            <h3>📋 Table of Contents</h3>
+            <ol>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#file-structure">File Structure</a></li>
+                <li><a href="#development-vars">Development Variables</a></li>
+                <li><a href="#production-vars">Production Variables</a></li>
+                <li><a href="#security-practices">Security Best Practices</a></li>
+                <li><a href="#team-setup">Team Setup Instructions</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+                <li><a href="#variable-reference">Variable Reference</a></li>
+            </ol>
+        </div>
+
+        <!-- Overview -->
+        <div class="content" id="overview">
+            <h2>Overview</h2>
+            
+            <p>Environment variables are crucial for configuring your Marketing SaaS application across different environments (development, preview, production). This guide covers how to set up and manage these variables securely for your team.</p>
+            
+            <div class="alert alert-info">
+                <h3><span class="status-icon info">💡</span>Why Environment Variables?</h3>
+                <ul>
+                    <li><strong>Security:</strong> Keep sensitive data (API keys, database URLs) out of your code</li>
+                    <li><strong>Flexibility:</strong> Use different configurations for development vs production</li>
+                    <li><strong>Team Collaboration:</strong> Share configurations without exposing secrets</li>
+                    <li><strong>Deployment:</strong> Automatic configuration across different environments</li>
+                </ul>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit">
+                    <div class="icon">🔒</div>
+                    <strong>Secure</strong><br>
+                    Sensitive data stays out of Git
+                </div>
+                <div class="benefit">
+                    <div class="icon">🌍</div>
+                    <strong>Environment-Specific</strong><br>
+                    Different configs per environment
+                </div>
+                <div class="benefit">
+                    <div class="icon">👥</div>
+                    <strong>Team-Friendly</strong><br>
+                    Easy sharing and management
+                </div>
+                <div class="benefit">
+                    <div class="icon">⚡</div>
+                    <strong>Fast Setup</strong><br>
+                    Quick configuration deployment
+                </div>
+            </div>
+        </div>
+
+        <!-- File Structure -->
+        <div class="content" id="file-structure">
+            <h2>File Structure</h2>
+            
+            <h3>Environment Files in Your Project</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>File</th>
+                            <th>Purpose</th>
+                            <th>Committed to Git</th>
+                            <th>Used By</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>.env.example</code></td>
+                            <td>Template for team members</td>
+                            <td><span class="status-icon check">✅</span>Yes</td>
+                            <td>All team members</td>
+                        </tr>
+                        <tr>
+                            <td><code>.env.local</code></td>
+                            <td>Local development variables</td>
+                            <td><span class="status-icon cross">❌</span>No</td>
+                            <td>Individual developers</td>
+                        </tr>
+                        <tr>
+                            <td><code>.env</code></td>
+                            <td>Default environment variables</td>
+                            <td><span class="status-icon warning">⚠️</span>Depends</td>
+                            <td>Fallback for all environments</td>
+                        </tr>
+                        <tr>
+                            <td>Vercel Dashboard</td>
+                            <td>Production & preview variables</td>
+                            <td><span class="status-icon info">N/A</span></td>
+                            <td>Deployed environments</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Next.js Environment Variable Loading Order</h3>
+            <div class="workflow-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Highest Priority</h4>
+                    <code>.env.local</code> (local development)
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Environment Specific</h4>
+                    <code>.env.development</code>, <code>.env.production</code>, etc.
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Lowest Priority</h4>
+                    <code>.env</code> (fallback for all environments)
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong><span class="status-icon warning">⚠️</span>Important:</strong> <code>.env.local</code> is always loaded (and overrides other files) and should never be committed to Git.
+            </div>
+        </div>
+
+        <!-- Development Variables -->
+        <div class="content" id="development-vars">
+            <h2>Development Variables</h2>
+            
+            <h3>Your .env.example Template</h3>
+            <div class="code-block">
+<span class="comment"># Database Configuration</span>
+DATABASE_URL=<span class="string">"postgresql://username:password@localhost:5432/marketing_saas_dev"</span>
+DIRECT_URL=<span class="string">"postgresql://username:password@localhost:5432/marketing_saas_dev"</span>
+
+<span class="comment"># Authentication (NextAuth.js)</span>
+NEXTAUTH_URL=<span class="string">"http://localhost:3000"</span>
+NEXTAUTH_SECRET=<span class="string">"your-nextauth-secret-here"</span>
+
+<span class="comment"># OAuth Providers (Development)</span>
+GOOGLE_CLIENT_ID=<span class="string">"your-google-client-id"</span>
+GOOGLE_CLIENT_SECRET=<span class="string">"your-google-client-secret"</span>
+GITHUB_CLIENT_ID=<span class="string">"your-github-client-id"</span>
+GITHUB_CLIENT_SECRET=<span class="string">"your-github-client-secret"</span>
+
+<span class="comment"># Email Service (SendGrid)</span>
+SENDGRID_API_KEY=<span class="string">"SG.your-sendgrid-api-key"</span>
+FROM_EMAIL=<span class="string">"noreply@yourapp.com"</span>
+
+<span class="comment"># Payment Processing (Stripe - Test Keys)</span>
+STRIPE_PUBLISHABLE_KEY=<span class="string">"pk_test_your-stripe-publishable-key"</span>
+STRIPE_SECRET_KEY=<span class="string">"sk_test_your-stripe-secret-key"</span>
+STRIPE_WEBHOOK_SECRET=<span class="string">"whsec_your-webhook-secret"</span>
+
+<span class="comment"># Analytics (Optional)</span>
+GOOGLE_ANALYTICS_ID=<span class="string">"GA-XXXXXXXXX"</span>
+MIXPANEL_TOKEN=<span class="string">"your-mixpanel-token"</span>
+
+<span class="comment"># Feature Flags</span>
+ENABLE_ANALYTICS=<span class="string">"true"</span>
+ENABLE_PAYMENTS=<span class="string">"true"</span>
+ENABLE_EMAIL_CAMPAIGNS=<span class="string">"true"</span>
+
+<span class="comment"># Development Tools</span>
+LOG_LEVEL=<span class="string">"debug"</span>
+VERCEL_URL=<span class="string">"http://localhost:3000"</span>
+            </div>
+
+            <h3>Setting Up Your Local Environment</h3>
+            <div class="workflow-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Copy the Template</h4>
+                    <div class="code-block">
+<span class="command">cp .env.example .env.local</span>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Fill in Development Values</h4>
+                    <p>Replace placeholders with actual development credentials:</p>
+                    <ul>
+                        <li>Use <strong>test API keys</strong> for external services</li>
+                        <li>Use <strong>development database</strong> URLs</li>
+                        <li>Use <strong>localhost URLs</strong> for local services</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Verify Configuration</h4>
+                    <div class="code-block">
+<span class="command">npm run dev</span>
+<span class="comment"># Check that the application starts without errors</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Production Variables -->
+        <div class="content" id="production-vars">
+            <h2>Production Variables</h2>
+            
+            <h3>Managing Production Secrets</h3>
+            <div class="alert alert-danger">
+                <h4><span class="status-icon cross">❌</span>Production Security Rules</h4>
+                <ul>
+                    <li><strong>Never use test keys</strong> in production</li>
+                    <li><strong>Use strong, unique secrets</strong> for NEXTAUTH_SECRET</li>
+                    <li><strong>Enable production mode</strong> for all services</li>
+                    <li><strong>Use secure URLs</strong> (HTTPS only)</li>
+                    <li><strong>Restrict API key permissions</strong> to minimum required</li>
+                </ul>
+            </div>
+
+            <h3>Production Environment Configuration</h3>
+            <div class="team-grid">
+                <div class="team-card jose">
+                    <h4>Database (Prisma Postgres)</h4>
+                    <div class="role">Managed by Jose via Vercel</div>
+                    <div class="code-block">
+<span class="comment"># Production database URLs</span>
+DATABASE_URL=<span class="string">"prisma+postgres://..."</span>
+DIRECT_URL=<span class="string">"postgresql://..."</span>
+                    </div>
+                </div>
+
+                <div class="team-card norma">
+                    <h4>Authentication</h4>
+                    <div class="role">Production OAuth setup</div>
+                    <div class="code-block">
+<span class="comment"># Production authentication</span>
+NEXTAUTH_URL=<span class="string">"https://yourapp.vercel.app"</span>
+NEXTAUTH_SECRET=<span class="string">"production-secret"</span>
+                    </div>
+                </div>
+
+                <div class="team-card lily">
+                    <h4>Third-Party Services</h4>
+                    <div class="role">Production API keys</div>
+                    <div class="code-block">
+<span class="comment"># Production service keys</span>
+SENDGRID_API_KEY=<span class="string">"SG.production-key"</span>
+STRIPE_SECRET_KEY=<span class="string">"sk_live_..."</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Vercel Environment Variable Management</h3>
+            <div class="code-block">
+<span class="comment"># Commands for Jose (Project Lead):</span>
+<span class="command">vercel env ls</span>                                    <span class="comment"># List all environment variables</span>
+<span class="command">vercel env add VARIABLE_NAME production</span>          <span class="comment"># Add production variable</span>
+<span class="command">vercel env add VARIABLE_NAME preview</span>             <span class="comment"># Add preview variable</span>
+<span class="command">vercel env add VARIABLE_NAME development</span>         <span class="comment"># Add development variable</span>
+<span class="command">vercel env rm VARIABLE_NAME production</span>           <span class="comment"># Remove production variable</span>
+            </div>
+        </div>
+
+        <!-- Security Practices -->
+        <div class="content" id="security-practices">
+            <h2>Security Best Practices</h2>
+            
+            <h3>Environment Variable Security</h3>
+            <div class="workflow-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Secret Management</h4>
+                    <ul>
+                        <li><strong>Generate strong secrets:</strong> Use tools like <code>openssl rand -base64 32</code></li>
+                        <li><strong>Rotate regularly:</strong> Change production secrets monthly</li>
+                        <li><strong>Use different secrets:</strong> Never reuse secrets across environments</li>
+                        <li><strong>Limit access:</strong> Only Jose has access to production secrets</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>API Key Security</h4>
+                    <ul>
+                        <li><strong>Minimum permissions:</strong> Only grant necessary API permissions</li>
+                        <li><strong>Environment separation:</strong> Use test keys for development</li>
+                        <li><strong>Regular audit:</strong> Review and revoke unused API keys</li>
+                        <li><strong>Monitor usage:</strong> Track API key usage for anomalies</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Team Sharing</h4>
+                    <ul>
+                        <li><strong>Secure channels only:</strong> Use encrypted messaging or password managers</li>
+                        <li><strong>No public channels:</strong> Never share secrets in Slack, Discord, or email</li>
+                        <li><strong>Time-limited access:</strong> Share only when needed, revoke when done</li>
+                        <li><strong>Individual accountability:</strong> Each team member has their own development keys</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Common Security Mistakes to Avoid</h3>
+            <div class="alert alert-danger">
+                <h4><span class="status-icon cross">❌</span>Never Do This:</h4>
+                <ul>
+                    <li>Commit <code>.env.local</code> files to Git</li>
+                    <li>Share production secrets in chat messages</li>
+                    <li>Use production API keys for development</li>
+                    <li>Hard-code secrets directly in your source code</li>
+                    <li>Use default or weak secrets</li>
+                    <li>Share secrets via email or unencrypted channels</li>
+                </ul>
+            </div>
+
+            <h3>Audit Checklist</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Security Check</th>
+                            <th>Development</th>
+                            <th>Production</th>
+                            <th>Frequency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Rotate NEXTAUTH_SECRET</td>
+                            <td><span class="status-icon warning">⚠️</span>As needed</td>
+                            <td><span class="status-icon check">✅</span>Monthly</td>
+                            <td>Regular</td>
+                        </tr>
+                        <tr>
+                            <td>Review API key permissions</td>
+                            <td><span class="status-icon check">✅</span>Weekly</td>
+                            <td><span class="status-icon check">✅</span>Weekly</td>
+                            <td>Ongoing</td>
+                        </tr>
+                        <tr>
+                            <td>Audit team access</td>
+                            <td><span class="status-icon info">N/A</span></td>
+                            <td><span class="status-icon check">✅</span>Monthly</td>
+                            <td>Regular</td>
+                        </tr>
+                        <tr>
+                            <td>Check for leaked secrets</td>
+                            <td><span class="status-icon check">✅</span>Every commit</td>
+                            <td><span class="status-icon check">✅</span>Weekly</td>
+                            <td>Continuous</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Team Setup -->
+        <div class="content" id="team-setup">
+            <h2>Team Setup Instructions</h2>
+            
+            <div class="team-grid">
+                <div class="team-card jose">
+                    <h4>Jose (Project Lead) - Environment Setup</h4>
+                    <div class="role">Full access to all environments</div>
+                    
+                    <h5>Initial Setup (Completed ✅):</h5>
+                    <div class="code-block">
+<span class="comment"># Already completed:</span>
+<span class="command">vercel env pull .env.local</span>         <span class="comment"># Downloaded production variables</span>
+<span class="command">cp .env.local .env.example</span>        <span class="comment"># Created team template</span>
+<span class="comment"># Removed sensitive values from .env.example</span>
+<span class="command">git add .env.example</span>              <span class="comment"># Committed template to Git</span>
+                    </div>
+
+                    <h5>Ongoing Responsibilities:</h5>
+                    <ul>
+                        <li>Manage production environment variables in Vercel</li>
+                        <li>Provide development credentials to team members</li>
+                        <li>Regular security audits and secret rotation</li>
+                        <li>Monitor for leaked secrets in commits</li>
+                    </ul>
+                </div>
+
+                <div class="team-card norma">
+                    <h4>Norma (Frontend/UI) - Environment Setup</h4>
+                    <div class="role">Development environment access</div>
+                    
+                    <h5>One-Time Setup:</h5>
+                    <div class="code-block">
+<span class="comment"># Clone repository and setup</span>
+<span class="command">git clone &lt;repository-url&gt;</span>
+<span class="command">cd nextjs-boilerplate</span>
+<span class="command">npm install</span>
+
+<span class="comment"># Copy environment template</span>
+<span class="command">cp .env.example .env.local</span>
+
+<span class="comment"># Ask Jose for development credentials to fill in .env.local</span>
+<span class="comment"># Generate Prisma client</span>
+<span class="command">npm run db:generate</span>
+
+<span class="comment"># Start development</span>
+<span class="command">npm run dev</span>
+                    </div>
+
+                    <h5>Environment Variables Norma Needs:</h5>
+                    <ul>
+                        <li>Development database URL</li>
+                        <li>NextAuth.js development secret</li>
+                        <li>Test OAuth credentials (Google, GitHub)</li>
+                        <li>Development email service credentials</li>
+                    </ul>
+                </div>
+
+                <div class="team-card lily">
+                    <h4>Lily (Features/Integration) - Environment Setup</h4>
+                    <div class="role">Development environment access</div>
+                    
+                    <h5>One-Time Setup:</h5>
+                    <div class="code-block">
+<span class="comment"># Clone repository and setup</span>
+<span class="command">git clone &lt;repository-url&gt;</span>
+<span class="command">cd nextjs-boilerplate</span>
+<span class="command">npm install</span>
+
+<span class="comment"># Copy environment template</span>
+<span class="command">cp .env.example .env.local</span>
+
+<span class="comment"># Ask Jose for development credentials to fill in .env.local</span>
+<span class="comment"># Generate Prisma client</span>
+<span class="command">npm run db:generate</span>
+
+<span class="comment"># Start development</span>
+<span class="command">npm run dev</span>
+                    </div>
+
+                    <h5>Environment Variables Lily Needs:</h5>
+                    <ul>
+                        <li>Development database URL</li>
+                        <li>Test email service credentials (SendGrid)</li>
+                        <li>Test payment processing credentials (Stripe)</li>
+                        <li>Analytics service test tokens</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Secure Credential Sharing Process</h3>
+            <div class="workflow-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Jose Prepares Credentials</h4>
+                    <ul>
+                        <li>Create development versions of all required services</li>
+                        <li>Generate test API keys and development secrets</li>
+                        <li>Prepare individual credential sets for Norma and Lily</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Secure Distribution</h4>
+                    <ul>
+                        <li>Use encrypted messaging (Signal, encrypted email)</li>
+                        <li>Or use a secure password manager (shared vault)</li>
+                        <li>Or in-person/video call transfer</li>
+                        <li>Never use Slack, Discord, SMS, or regular email</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Team Member Setup</h4>
+                    <ul>
+                        <li>Receive credentials through secure channel</li>
+                        <li>Copy to <code>.env.local</code> file</li>
+                        <li>Test that application starts correctly</li>
+                        <li>Confirm setup with Jose</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Variable Reference -->
+        <div class="content" id="variable-reference">
+            <h2>Complete Variable Reference</h2>
+            
+            <h3>Database Variables</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Description</th>
+                            <th>Required</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>DATABASE_URL</code></td>
+                            <td>Primary database connection URL</td>
+                            <td><span class="status-icon check">✅</span>Yes</td>
+                            <td><code>prisma+postgres://...</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>DIRECT_URL</code></td>
+                            <td>Direct database connection for migrations</td>
+                            <td><span class="status-icon check">✅</span>Yes</td>
+                            <td><code>postgresql://...</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Authentication Variables</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Description</th>
+                            <th>Required</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>NEXTAUTH_URL</code></td>
+                            <td>Base URL of your application</td>
+                            <td><span class="status-icon check">✅</span>Yes</td>
+                            <td><code>http://localhost:3000</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>NEXTAUTH_SECRET</code></td>
+                            <td>Secret for JWT signing</td>
+                            <td><span class="status-icon check">✅</span>Yes</td>
+                            <td><code>random-32-char-string</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>GOOGLE_CLIENT_ID</code></td>
+                            <td>Google OAuth client ID</td>
+                            <td><span class="status-icon warning">⚠️</span>Optional</td>
+                            <td><code>123456789.apps.googleusercontent.com</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>GOOGLE_CLIENT_SECRET</code></td>
+                            <td>Google OAuth client secret</td>
+                            <td><span class="status-icon warning">⚠️</span>Optional</td>
+                            <td><code>GOCSPX-...</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Email Service Variables</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Description</th>
+                            <th>Required</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>SENDGRID_API_KEY</code></td>
+                            <td>SendGrid API key for email sending</td>
+                            <td><span class="status-icon check">✅</span>Yes</td>
+                            <td><code>SG.abc123...</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>FROM_EMAIL</code></td>
+                            <td>Default sender email address</td>
+                            <td><span class="status-icon check">✅</span>Yes</td>
+                            <td><code>noreply@yourapp.com</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Payment Processing Variables</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Description</th>
+                            <th>Required</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>STRIPE_PUBLISHABLE_KEY</code></td>
+                            <td>Stripe public key (client-side)</td>
+                            <td><span class="status-icon warning">⚠️</span>For payments</td>
+                            <td><code>pk_test_...</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>STRIPE_SECRET_KEY</code></td>
+                            <td>Stripe secret key (server-side)</td>
+                            <td><span class="status-icon warning">⚠️</span>For payments</td>
+                            <td><code>sk_test_...</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>STRIPE_WEBHOOK_SECRET</code></td>
+                            <td>Stripe webhook verification secret</td>
+                            <td><span class="status-icon warning">⚠️</span>For webhooks</td>
+                            <td><code>whsec_...</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="content" id="troubleshooting">
+            <h2>Troubleshooting</h2>
+            
+            <h3>Common Issues</h3>
+            
+            <div class="alert alert-danger">
+                <h4>Issue: "Environment variable not found"</h4>
+                <p><strong>Symptoms:</strong> Application crashes with missing environment variable errors</p>
+                <p><strong>Solutions:</strong></p>
+                <ol>
+                    <li>Check that <code>.env.local</code> exists and contains the required variable</li>
+                    <li>Verify the variable name spelling and casing</li>
+                    <li>Restart your development server after adding variables</li>
+                    <li>Check that the variable is not commented out (#)</li>
+                </ol>
+            </div>
+
+            <div class="alert alert-warning">
+                <h4>Issue: "Database connection failed"</h4>
+                <p><strong>Symptoms:</strong> Prisma can't connect to database</p>
+                <p><strong>Solutions:</strong></p>
+                <ol>
+                    <li>Verify <code>DATABASE_URL</code> is correct and not expired</li>
+                    <li>Check if you need <code>DIRECT_URL</code> for migrations</li>
+                    <li>Test database connectivity: <code>npx prisma db push</code></li>
+                    <li>Regenerate Prisma client: <code>npm run db:generate</code></li>
+                </ol>
+            </div>
+
+            <div class="alert alert-info">
+                <h4>Issue: "Authentication not working"</h4>
+                <p><strong>Symptoms:</strong> Login redirects fail, session errors</p>
+                <p><strong>Solutions:</strong></p>
+                <ol>
+                    <li>Check <code>NEXTAUTH_URL</code> matches your local URL</li>
+                    <li>Verify <code>NEXTAUTH_SECRET</code> is set and not empty</li>
+                    <li>Confirm OAuth client IDs and secrets are correct</li>
+                    <li>Check OAuth app settings in provider dashboards</li>
+                </ol>
+            </div>
+
+            <h3>Debugging Environment Variables</h3>
+            <div class="code-block">
+<span class="comment"># Check what environment variables are loaded (development only!)</span>
+<span class="command">console.log(process.env.DATABASE_URL)</span>
+<span class="command">console.log(process.env.NEXTAUTH_SECRET)</span>
+
+<span class="comment"># Note: Never log sensitive variables in production!</span>
+            </div>
+
+            <h3>Getting Help</h3>
+            <div class="workflow-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Check This Guide</h4>
+                    <p>Review the variable reference and common issues above</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Ask Team Lead</h4>
+                    <p>Contact Jose for environment-specific issues or credential problems</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Check Service Documentation</h4>
+                    <p>Review documentation for specific services (Stripe, SendGrid, etc.)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="content">
+            <div class="alert alert-success">
+                <h2><span class="status-icon check">🔐</span>Environment Security Success</h2>
+                <p>Following this guide ensures:</p>
+                <ul>
+                    <li><strong>Secure Development:</strong> Proper separation of development and production secrets</li>
+                    <li><strong>Team Collaboration:</strong> Easy onboarding and environment sharing</li>
+                    <li><strong>Production Safety:</strong> No accidental exposure of sensitive data</li>
+                    <li><strong>Maintainable Code:</strong> Clean separation of configuration and code</li>
+                </ul>
+                
+                <p><strong>Remember:</strong> When in doubt about environment variables, ask Jose or check this guide. Security is everyone's responsibility!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Same interactive features as other HTML docs
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add copy functionality to code blocks
+        document.querySelectorAll('.code-block').forEach(block => {
+            const button = document.createElement('button');
+            button.innerHTML = '📋 Copy';
+            button.style.cssText = `
+                position: absolute;
+                top: 0.5rem;
+                right: 0.5rem;
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 4px;
+                padding: 0.25rem 0.5rem;
+                font-size: 0.75rem;
+                cursor: pointer;
+                transition: all 0.2s;
+            `;
+            
+            block.style.position = 'relative';
+            block.appendChild(button);
+            
+            button.addEventListener('click', () => {
+                const text = block.textContent.replace('📋 Copy', '').trim();
+                navigator.clipboard.writeText(text).then(() => {
+                    button.innerHTML = '✅ Copied!';
+                    setTimeout(() => {
+                        button.innerHTML = '📋 Copy';
+                    }, 2000);
+                });
+            });
+        });
+
+        // Add active navigation highlighting
+        const observerOptions = {
+            rootMargin: '-20% 0px -60% 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.nav a').forEach(link => {
+                        link.style.background = '';
+                        link.style.color = '#3b82f6';
+                    });
+                    
+                    const activeLink = document.querySelector(`.nav a[href="#${entry.target.id}"]`);
+                    if (activeLink) {
+                        activeLink.style.background = '#eff6ff';
+                        activeLink.style.color = '#1d4ed8';
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.content[id]').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
