@@ -278,6 +278,7 @@ tr:hover {
     padding: 1.5rem;
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.4);
     border-left: 4px solid #3b82f6;
+    margin-bottom: 1rem;
 }
 
 .step-number {
@@ -291,12 +292,10 @@ tr:hover {
     justify-content: center;
     font-weight: 600;
     margin-right: 1rem;
+    margin-bottom: 1rem;
 }
 
-#setup .workflow-steps .step .step-number, 
-#practical-example .workflow-steps .step .step-number {
-   margin-bottom: 1rem;
-}
+
 
 /* Benefits Grid */
 .benefits-grid {
