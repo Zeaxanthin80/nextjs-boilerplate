@@ -222,6 +222,11 @@ tr:hover {
     color: #991b1b;
 }
 
+.alert ul {
+    margin-top: 1.5rem;
+    padding-left: 3.5rem;
+}
+
 /* Status Icons */
 .status-icon {
     font-size: 1.2rem;
