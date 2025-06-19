@@ -242,16 +242,23 @@ tr:hover {
 }
 
 .team-card {
-    background: white;
+    background: rgb(231, 230, 230);
     border-radius: 8px;
     padding: 1.5rem;
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.4);
     border-left: 4px solid;
+    background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/fabric_1.png');
+    background-size: 200px 200px;
+    background-repeat: repeat;
+
 }
 
-.team-card.jose { border-color: #3b82f6; }
-.team-card.norma { border-color: #10b981; }
-.team-card.lily { border-color: #f59e0b; }
+.team-card.jose { 
+    border-color: #3b82f6; }
+.team-card.norma { 
+    border-color: #10b981; }
+.team-card.lily { 
+    border-color: #f59e0b; }
 
 .team-card h4 {
     color: #1f2937;
