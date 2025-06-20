@@ -47,5 +47,8 @@ next-env.d.ts
 # env files (can opt-in for committing if needed)
 .env*.local
 
+# Team credentials file - NEVER COMMIT THIS
+TEAM_CREDENTIALS.md
+
 # Generated Prisma client
 /app/generated/prisma

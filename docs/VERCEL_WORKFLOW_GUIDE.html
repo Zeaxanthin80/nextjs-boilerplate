@@ -347,10 +347,13 @@
 
               <span class="comment"># 5. Start development server</span> <br>
               <span class="command">vercel dev</span>
-              <span class="comment"># Enhanced development server</span> <br>
+              <span class="comment"># Enhanced development server (works without Vercel login)</span> <br>
               <span class="comment"># OR</span> <br>
               <span class="command">npm run dev</span>
-              <span class="comment"># Basic Next.js server</span>
+              <span class="comment"># Basic Next.js server</span> <br> <br>
+
+              <span class="comment"># Note: vercel dev works without logging in to Vercel</span> <br>
+              <span class="comment"># It will use your local .env.local file for environment variables</span>
             </div>
 
             <h5>Daily Workflow:</h5>
@@ -383,7 +386,10 @@
 
               <span class="comment"># 5. Start development server</span> <br>
               <span class="command">vercel dev</span> <br>
-              <span class="comment"># Enhanced development server</span>
+              <span class="comment"># Enhanced development server (works without Vercel login)</span> <br> <br>
+
+              <span class="comment"># Note: vercel dev works without logging in to Vercel</span> <br>
+              <span class="comment"># It will use your local .env.local file for environment variables</span>
             </div>
 
             <h5>Focus Areas:</h5>
@@ -429,7 +435,12 @@
 
             <span class="comment"># Use for local development enhancement only</span> <br>
             <span class="command">vercel dev</span>
-            <span class="comment"># Works without linking to Vercel account</span>
+            <span class="comment"># Works without linking to Vercel account!</span> <br>
+            <span class="comment"># Uses local .env.local file for environment variables</span>
+          </div>
+          <div class="alert alert-info" style="margin-top: 1rem;">
+            <strong><span class="status-icon info">💡</span>Important:</strong>
+            When team members run <code>vercel dev</code> without being logged in, they'll see a login prompt. Simply use the arrow keys to navigate to <strong>"Cancel"</strong> and press Enter. The command will continue and work using local environment variables.
           </div>
         </div>
 
@@ -745,6 +756,55 @@
 
             <span class="comment"># Then restart your dev server</span>
           </div>
+        </div>
+
+        <div class="alert alert-success">
+          <h4>4. "vercel dev asks me to login but I'm just a team member"</h4>
+          <p><strong>Solution:</strong> You don't need to login! Here's what to do:</p>
+          <div class="code-block">
+            <span class="comment"># When you see the login prompt with options like:</span> <br>
+            <span class="comment"># > Log in to Vercel (Use arrow keys)</span> <br>
+            <span class="comment"># > Continue with GitHub</span> <br>
+            <span class="comment"># > Continue with GitLab</span> <br>
+            <span class="comment"># > Continue with Bitbucket</span> <br>
+            <span class="comment"># > Continue with Email</span> <br>
+            <span class="comment"># > Continue with SAML Single Sign-On</span> <br>
+            <span class="comment"># > Cancel</span> <br> <br>
+
+            <span class="comment"># Simply navigate to "Cancel" and press Enter</span> <br>
+            <span class="comment"># The command will continue and work with your local .env.local file</span>
+          </div>
+          <p><strong>Step-by-step:</strong></p>
+          <ol>
+            <li>Run <code>vercel dev</code></li>
+            <li>When login prompt appears, use arrow keys to navigate to <strong>"Cancel"</strong></li>
+            <li>Press <strong>Enter</strong> to select Cancel</li>
+            <li>The development server will start using your local environment variables</li>
+          </ol>
+          <p><strong>Note:</strong> Only Jose (project lead) needs to login to Vercel for production deployments and environment variable management.</p>
+        </div>
+
+        <div class="alert alert-warning">
+          <h4>5. "vercel dev cancels login but server doesn't start"</h4>
+          <p><strong>Problem:</strong> Missing or incorrect .env.local file</p>
+          <p><strong>Solution:</strong></p>
+          <div class="code-block">
+            <span class="comment"># 1. Make sure you have copied the environment template</span> <br>
+            <span class="command">cp .env.example .env.local</span> <br> <br>
+
+            <span class="comment"># 2. Edit .env.local with development database credentials</span> <br>
+            <span class="comment"># Ask Jose for development database URL or set up local database</span> <br> <br>
+
+            <span class="comment"># 3. If still having issues, try basic Next.js server instead</span> <br>
+            <span class="command">npm run dev</span> <br>
+            <span class="comment"># This works without any Vercel-specific configuration</span>
+          </div>
+          <p><strong>Common fixes:</strong></p>
+          <ul>
+            <li>Ensure <code>.env.local</code> exists in project root</li>
+            <li>Make sure <code>DATABASE_URL</code> is properly formatted</li>
+            <li>Remove or comment out <code>VERCEL_OIDC_TOKEN</code> for team members</li>
+          </ul>
         </div>
 
         <div class="alert alert-warning">
