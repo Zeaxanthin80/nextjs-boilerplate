@@ -12,6 +12,7 @@ This documentation covers all aspects of setting up, developing, and managing th
 |-------|---------|-----------------|---------|
 | **Vercel Workflow Guide** | Complete workflow setup and team collaboration | All team members | [📄 Markdown](./VERCEL_WORKFLOW_GUIDE.md) \| [🌐 HTML](./VERCEL_WORKFLOW_GUIDE.html) |
 | **Database Setup Guide** | Database configuration and Prisma setup | All team members | [📄 Markdown](./DATABASE_SETUP_GUIDE.md) \| [🌐 HTML](./DATABASE_SETUP_GUIDE.html) |
+| **Database User Setup** | Individual database credentials and team setup | Jose (Project Lead) | [📄 Markdown](./DATABASE_USER_SETUP.md) \| [🌐 HTML](./DATABASE_USER_SETUP.html) |
 | **Project Lead Guide** | Administrative tasks and project management | Jose (Project Lead) | [📄 Markdown](./PROJECT_LEAD_GUIDE.md) \| [🌐 HTML](./PROJECT_LEAD_GUIDE.html) |
 | **Environment Variables Guide** | Environment configuration reference | All team members | [📄 Markdown](./ENVIRONMENT_VARIABLES_GUIDE.md) \| [🌐 HTML](./ENVIRONMENT_VARIABLES_GUIDE.html) |
 
