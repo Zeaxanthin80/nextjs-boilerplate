@@ -10,7 +10,7 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>Cloud Database Setup Guide - Prisma Postgres</h1>
+            <h1>Cloud Database Setup Guide - Marketing SaaS</h1>
             <p>Complete cloud database configuration for Marketing SaaS application <br> by Jose, Norma, and Lily</p>
             
             <div class="alert alert-warning">
@@ -83,7 +83,7 @@
             </div>
         </div>
 
-        <!-- Overview -->
+        <!-- 1. Overview -->
         <div class="content" id="overview">
             <h2>Overview</h2>
             
@@ -128,9 +128,9 @@
             </div>
         </div>
 
-        <!-- Create Database -->
+        <!-- 2. Create Database -->
         <div class="content" id="create-database">
-            <h2>1. Create Database in Vercel</h2>
+            <h2>2. Create Database in Vercel</h2>
             
             <div class="workflow-steps">
                 <div class="step">
@@ -160,45 +160,45 @@
             </div>
         </div>
 
-        <!-- Install Prisma -->
+        <!-- 3. Install Prisma -->
         <div class="content" id="install-prisma">
-            <h2>2. Install Prisma</h2>
+            <h2>3. Install Prisma</h2>
             
             <div class="workflow-steps">
                 <div class="step">
                     <span class="step-number">1</span>
                     <h4>Install Prisma Packages</h4>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="comment"># Install Prisma CLI and Client</span>
 <span class="command">npm install prisma @prisma/client</span>
 
 <span class="comment"># Install Prisma CLI globally (optional but recommended)</span>
 <span class="command">npm install -g prisma</span>
-                    </div>
+                    </pre>
                 </div>
 
                 <div class="step">
                     <span class="step-number">2</span>
                     <h4>Verify Installation</h4>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="command">npx prisma --version</span>
-                    </div>
+                    </pre>
                     <p>You should see Prisma version information.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Initialize Prisma -->
+        <!-- 4. Initialize Prisma -->
         <div class="content" id="initialize-prisma">
-            <h2>3. Initialize Prisma</h2>
+            <h2>4. Initialize Prisma</h2>
             
             <div class="workflow-steps">
                 <div class="step">
                     <span class="step-number">1</span>
                     <h4>Initialize Prisma in Your Project</h4>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="command">npx prisma init</span>
-                    </div>
+                    </pre>
                     <p>This creates:</p>
                     <ul>
                         <li><code>prisma/schema.prisma</code> - Database schema file</li>
@@ -210,18 +210,18 @@
                     <span class="step-number">2</span>
                     <h4>Verify Prisma Files</h4>
                     <p>Check that these files were created:</p>
-                    <div class="code-block">
+                    <pre class="code-block">
 prisma/
   schema.prisma
 .env (or .env.local)
-                    </div>
+                    </pre>
                 </div>
             </div>
         </div>
 
-        <!-- Configure Connection -->
+        <!-- 5. Configure Connection -->
         <div class="content" id="configure-connection">
-            <h2>4. Configure Database Connection</h2>
+            <h2>5. Configure Database Connection</h2>
             
             <div class="workflow-steps">
                 <div class="step">
@@ -229,9 +229,9 @@ prisma/
                     <h4>Update Environment Variables</h4>
                     <p>Open your <code>.env.local</code> file and add your database connection:</p>
                     <div class="code-block">
-<span class="comment"># Database</span>
+<pre><span class="comment"># Database</span>
 DATABASE_URL=<span class="string">"your-prisma-postgres-connection-url"</span>
-DIRECT_URL=<span class="string">"your-direct-connection-url"</span>
+DIRECT_URL=<span class="string">"your-direct-connection-url"</span></pre>
                     </div>
                     <div class="alert alert-info">
                         <strong><span class="status-icon info">💡</span>Tip:</strong> If you already ran <code>vercel env pull .env.local</code>, these might already be there!
@@ -242,7 +242,7 @@ DIRECT_URL=<span class="string">"your-direct-connection-url"</span>
                     <span class="step-number">2</span>
                     <h4>Update Prisma Schema</h4>
                     <p>Edit <code>prisma/schema.prisma</code>:</p>
-                    <div class="code-block">
+                    <pre class="code-block">
 generator client {
   provider = <span class="string">"prisma-client-js"</span>
 }
@@ -251,26 +251,26 @@ datasource db {
   provider = <span class="string">"postgresql"</span>
   url      = env(<span class="string">"DATABASE_URL"</span>)
 }
-                    </div>
+                    </pre>
                 </div>
             </div>
         </div>
 
-        <!-- Create Schema -->
+        <!-- 6. Create Schema -->
         <div class="content" id="create-schema">
-            <h2>5. Create Marketing SaaS Schema</h2>
+            <h2>6. Create Marketing SaaS Schema</h2>
             
             <div class="step">
                 <h4>Define Your Data Models</h4>
                 <p>Replace the content in <code>prisma/schema.prisma</code> with your marketing SaaS schema:</p>
-                <div class="code-block">
+                <pre class="code-block">
 generator client {
   provider = <span class="string">"prisma-client-js"</span>
 }
 
 datasource db {
   provider = <span class="string">"postgresql"</span>
-  url      = env(<span class="string">"DATABASE_URL"</span>)
+  url = env(<span class="string">"DATABASE_URL"</span>)
 }
 
 <span class="comment">// User Management</span>
@@ -365,21 +365,21 @@ enum CampaignStatus {
   COMPLETED
   ARCHIVED
 }
-                </div>
+                </pre>
             </div>
         </div>
 
-        <!-- Generate Client -->
+        <!-- 7. Generate Client -->
         <div class="content" id="generate-client">
-            <h2>6. Generate Prisma Client</h2>
+            <h2>7. Generate Prisma Client</h2>
             
             <div class="workflow-steps">
                 <div class="step">
                     <span class="step-number">1</span>
                     <h4>Generate the Client</h4>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="command">npx prisma generate</span>
-                    </div>
+                    </pre>
                     <p>This creates the Prisma Client based on your schema.</p>
                 </div>
 
@@ -387,7 +387,7 @@ enum CampaignStatus {
                     <span class="step-number">2</span>
                     <h4>Add Generation Script</h4>
                     <p>Update your <code>package.json</code> scripts:</p>
-                    <div class="code-block">
+                    <pre class="code-block">
 {
   <span class="string">"scripts"</span>: {
     <span class="string">"dev"</span>: <span class="string">"next dev --turbopack"</span>,
@@ -400,24 +400,24 @@ enum CampaignStatus {
     <span class="string">"db:studio"</span>: <span class="string">"prisma studio"</span>
   }
 }
-                    </div>
+                    </pre>
                 </div>
             </div>
         </div>
 
 
 
-        <!-- Run Migration -->
+        <!-- 8. Run Migration -->
         <div class="content" id="run-migration">
-            <h2>7. Run First Migration</h2>
+            <h2>8. Run First Migration</h2>
             
             <div class="workflow-steps">
                 <div class="step">
                     <span class="step-number">1</span>
                     <h4>Create and Apply Migration</h4>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="command">npx prisma migrate dev --name init</span>
-                    </div>
+                    </pre>
                     <p>This will:</p>
                     <ul>
                         <li>Create a migration file based on your schema</li>
@@ -430,9 +430,9 @@ enum CampaignStatus {
                     <span class="step-number">2</span>
                     <h4>Alternative: Push Schema Directly</h4>
                     <p>For development, you can also push your schema directly without creating migration files:</p>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="command">npx prisma db push</span>
-                    </div>
+                    </pre>
                     <div class="alert alert-info">
                         <strong><span class="status-icon info">💡</span>When to use what:</strong>
                         <ul>
@@ -446,24 +446,24 @@ enum CampaignStatus {
                     <span class="step-number">3</span>
                     <h4>Verify Migration Success</h4>
                     <p>You should see output similar to:</p>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="comment">✔ Generated Prisma Client (v5.x.x) to ./node_modules/@prisma/client</span>
 <span class="comment">✔ Your database is now in sync with your schema.</span>
-                    </div>
+                    </pre>
                 </div>
             </div>
         </div>
 
-        <!-- Verify Setup -->
+        <!-- 9. Verify Setup -->
         <div class="content" id="verify-setup">
-            <h2>8. Verify Setup</h2>
+            <h2>9. Verify Setup</h2>
             
             <div class="workflow-steps">
                 <div class="step">
                     <span class="step-number">1</span>
                     <h4>Test Database Connection</h4>
                     <p>Create a test script to verify your setup. Create <code>test-database.js</code> in your project root:</p>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="comment">// test-database.js</span>
 const { PrismaClient } = require('@prisma/client');
 
@@ -531,15 +531,15 @@ async function testDatabase() {
 }
 
 testDatabase();
-                    </div>
+                    </pre>
                 </div>
 
                 <div class="step">
                     <span class="step-number">2</span>
                     <h4>Run the Test</h4>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="command">node test-database.js</span>
-                    </div>
+                    </pre>
                     <p>You should see successful creation of test data!</p>
                 </div>
 
@@ -547,9 +547,9 @@ testDatabase();
                     <span class="step-number">3</span>
                     <h4>Launch Prisma Studio</h4>
                     <p>View your data visually:</p>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="command">npx prisma studio</span>
-                    </div>
+                    </pre>
                     <p>This will open <a href="http://localhost:5555" target="_blank">http://localhost:5555</a> where you can see your database tables and data.</p>
                 </div>
 
@@ -557,11 +557,11 @@ testDatabase();
                     <span class="step-number">4</span>
                     <h4>Clean Up Test Data (Optional)</h4>
                     <p>If you want to remove the test data:</p>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="comment">// In Prisma Studio, you can delete the test records</span>
 <span class="comment">// Or reset the database entirely:</span>
 <span class="command">npx prisma migrate reset</span>
-                    </div>
+                    </pre>
                 </div>
             </div>
 
@@ -577,9 +577,9 @@ testDatabase();
             </div>
         </div>
 
-        <!-- Team Sync Instructions -->
+        <!-- 10. Team Sync Instructions -->
         <div class="content" id="team-sync">
-            <h2>9. Team Sync Instructions</h2>
+            <h2>10. Team Sync Instructions</h2>
             
             <div class="team-grid">
                 <div class="team-card jose">
@@ -611,7 +611,7 @@ testDatabase();
             </div>
 
             <h3>Shared Team Commands</h3>
-            <div class="code-block">
+            <pre class="code-block">
 <span class="comment"># Start development with database</span>
 <span class="command">npm run dev</span>
 
@@ -623,38 +623,38 @@ testDatabase();
 
 <span class="comment"># Create new migration</span>
 <span class="command">npm run db:migrate</span>
-            </div>
+            </pre>
         </div>
 
-        <!-- Troubleshooting -->
+        <!-- 11. Troubleshooting -->
         <div class="content" id="troubleshooting">
-            <h2>10. Troubleshooting</h2>
+            <h2>11. Troubleshooting</h2>
             
             <h3>Common Issues</h3>
             
             <div class="alert alert-danger">
                 <h4>Issue: "Environment variable not found: DATABASE_URL"</h4>
                 <p><strong>Solution:</strong></p>
-                <div class="code-block">
+                <pre class="code-block">
 <span class="command">vercel env pull .env.local</span>
-                </div>
+                </pre>
             </div>
 
             <div class="alert alert-warning">
                 <h4>Issue: "Client not generated"</h4>
                 <p><strong>Solution:</strong></p>
-                <div class="code-block">
+                <pre class="code-block">
 <span class="command">npx prisma generate</span>
-                </div>
+                </pre>
             </div>
 
             <div class="alert alert-danger">
                 <h4>Issue: "Migration failed"</h4>
                 <p><strong>Solution:</strong></p>
-                <div class="code-block">
+                <pre class="code-block">
 <span class="command">npx prisma migrate reset</span>
 <span class="command">npx prisma migrate dev --name init</span>
-                </div>
+                </pre>
             </div>
 
             <div class="alert alert-warning">
