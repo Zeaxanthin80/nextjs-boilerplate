@@ -26,14 +26,14 @@
                 <li><a href="#environment-management">Environment Management</a></li>
                 <li><a href="#deployment-management">Deployment Management</a></li>
                 <li><a href="#project-management">Project Management</a></li>
-                <li><a href="#troubleshooting">Troubleshooting & Support</a></li>
                 <li><a href="#timeline">7-Week Timeline Management</a></li>
+                <li><a href="#troubleshooting">Troubleshooting & Support</a></li>
             </ol>
         </div>
 
-        <!-- Overview -->
+        <!-- 1. Project Lead Overview -->
         <div class="content" id="overview">
-            <h2>Project Lead Overview</h2>
+            <h2>1. Project Lead Overview</h2>
             
             <div class="alert alert-info">
                 <h3><span class="status-icon info">👑</span>Jose's Role as Project Lead</h3>
@@ -86,9 +86,9 @@
             </div>
         </div>
 
-        <!-- Core Responsibilities -->
+        <!-- 2. Core Responsibilities -->
         <div class="content" id="responsibilities">
-            <h2>Core Responsibilities</h2>
+            <h2>2. Core Responsibilities</h2>
             
             <div class="workflow-steps">
                 <div class="step">
@@ -129,9 +129,9 @@
             </div>
         </div>
 
-        <!-- Initial Setup -->
+        <!-- 3. Initial Project Setup -->
         <div class="content" id="initial-setup">
-            <h2>Initial Project Setup</h2>
+            <h2>3. Initial Project Setup</h2>
             
             <div class="alert alert-success">
                 <h3><span class="status-icon check">✅</span>Completed Tasks</h3>
@@ -186,32 +186,32 @@
             </div>
         </div>
 
-        <!-- Vercel Setup -->
+        <!-- 4. Vercel Project Configuration -->
         <div class="content" id="vercel-setup">
-            <h2>Vercel Project Configuration</h2>
+            <h2>4. Vercel Project Configuration</h2>
             
             <h3>Project Connection Status</h3>
             <div class="workflow-steps">
                 <div class="step">
                     <span class="step-number">1</span>
                     <h4>Vercel CLI Setup (Completed)</h4>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="comment"># These commands have been executed successfully:</span>
 <span class="command">npm i -g vercel</span>
 <span class="command">vercel login</span>
 <span class="command">vercel link --yes</span>
 <span class="comment"># ✅ Project successfully linked to nextjs-boilerplate</span>
-                    </div>
+                    </pre>
                 </div>
 
                 <div class="step">
                     <span class="step-number">2</span>
                     <h4>Environment Variables (Configured)</h4>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="comment"># Environment variables have been pulled and configured:</span>
 <span class="command">vercel env pull .env.local</span>
 <span class="comment"># ✅ DATABASE_URL and development variables downloaded</span>
-                    </div>
+                    </pre>
                 </div>
             </div>
 
@@ -226,21 +226,21 @@
             </div>
 
             <h3>Advanced Vercel Management</h3>
-            <div class="code-block">
+            <pre class="code-block">
 <span class="comment"># Project management commands for Jose:</span>
-<span class="command">vercel ls</span>                    <span class="comment"># List all deployments</span>
-<span class="command">vercel inspect &lt;url&gt;</span>         <span class="comment"># Get deployment details</span>
+<span class="command">vercel ls</span>                   <span class="comment"># List all deployments</span>
+<span class="command">vercel inspect &lt;url&gt;</span>        <span class="comment"># Get deployment details</span>
 <span class="command">vercel env ls</span>               <span class="comment"># List environment variables</span>
 <span class="command">vercel env add</span>              <span class="comment"># Add new environment variable</span>
 <span class="command">vercel logs &lt;url&gt;</span>           <span class="comment"># View deployment logs</span>
 <span class="command">vercel promote &lt;url&gt;</span>        <span class="comment"># Promote preview to production</span>
 <span class="command">vercel rollback &lt;url&gt;</span>       <span class="comment"># Rollback to previous deployment</span>
-            </div>
+            </pre>
         </div>
 
-        <!-- Team Onboarding -->
+        <!-- 5. Team Meamber Onboarding -->
         <div class="content" id="team-onboarding">
-            <h2>Team Member Onboarding</h2>
+            <h2>5. Team Member Onboarding</h2>
             
             <div class="alert alert-info">
                 <h4>📋 Onboarding Prerequisites</h4>
@@ -272,17 +272,16 @@
                     </ol>
 
                     <h5>Development Setup:</h5>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="comment"># Commands for Norma to run:</span>
 <span class="command">git clone https://github.com/your-team/nextjs-boilerplate.git</span>
 <span class="command">cd nextjs-boilerplate</span>
 <span class="command">npm install</span>
 <span class="command">npm i -g vercel</span>
-<span class="command">cp .env.example .env.local</span>
-<span class="comment"># (You'll provide the .env.local values)</span>
+<span class="command">cp .env.example .env.local</span> <span class="comment"># (You'll provide the .env.local values)</span>
 <span class="command">npm run db:generate</span>
 <span class="command">vercel dev</span>
-                    </div>
+                    </pre>
 
                     <h5>Environment Variables for Norma:</h5>
                     <p>Create a secure way to share development credentials (not production):</p>
@@ -305,17 +304,16 @@
                     </ol>
 
                     <h5>Development Setup:</h5>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="comment"># Commands for Lily to run:</span>
 <span class="command">git clone https://github.com/your-team/nextjs-boilerplate.git</span>
 <span class="command">cd nextjs-boilerplate</span>
 <span class="command">npm install</span>
 <span class="command">npm i -g vercel</span>
-<span class="command">cp .env.example .env.local</span>
-<span class="comment"># (You'll provide the .env.local values)</span>
+<span class="command">cp .env.example .env.local</span> <span class="comment"># (You'll provide the .env.local values)</span>
 <span class="command">npm run db:generate</span>
 <span class="command">vercel dev</span>
-                    </div>
+                    </pre>
 
                     <h5>Testing Access:</h5>
                     <p>Lily will need access to testing tools and environments:</p>
@@ -343,9 +341,9 @@
             </div>
         </div>
 
-        <!-- Environment Management -->
+        <!-- 6. Environment Management -->
         <div class="content" id="environment-management">
-            <h2>Environment Management</h2>
+            <h2>6. Environment Management</h2>
             
             <h3>Environment Variable Strategy</h3>
             <div class="table-container">
@@ -393,19 +391,174 @@
             </div>
 
             <h3>Environment Variable Commands</h3>
-            <div class="code-block">
+            <pre class="code-block">
 <span class="comment"># Environment management commands for Jose:</span>
 <span class="command">vercel env ls</span>                             <span class="comment"># List all environment variables</span>
 <span class="command">vercel env add VARIABLE_NAME</span>              <span class="comment"># Add new environment variable</span>
 <span class="command">vercel env rm VARIABLE_NAME</span>               <span class="comment"># Remove environment variable</span>
-<span class="command">vercel env pull .env.local</span>               <span class="comment"># Download development variables</span>
+<span class="command">vercel env pull .env.local</span>                <span class="comment"># Download development variables</span>
 <span class="command">vercel env pull .env.production --environment=production</span>  <span class="comment"># Download production variables</span>
-            </div>
+            </pre>
         </div>
 
-        <!-- Project Management -->
+        <!-- 7. Deployment Management -->
+        <div class="content" id="deployment-management">
+            <h2>7. Deployment Management</h2>
+            
+            <h3>Vercel Deployment Strategy</h3>
+            <div class="alert alert-info">
+                <h4>Automated Deployment Pipeline</h4>
+                <p>Your project is configured with automatic deployments:</p>
+                <ul>
+                    <li><strong>Production:</strong> Automatic deployment from <code>main</code> branch</li>
+                    <li><strong>Preview:</strong> Automatic deployment from pull requests</li>
+                    <li><strong>Development:</strong> Local development with <code>vercel dev</code></li>
+                </ul>
+            </div>
+
+            <div class="workflow-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Production Deployment Process</h4>
+                    <ul>
+                        <li>Merge approved pull requests to <code>main</code></li>
+                        <li>Vercel automatically triggers production build</li>
+                        <li>Database migrations run automatically (if configured)</li>
+                        <li>New version goes live at your production URL</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Preview Deployments</h4>
+                    <ul>
+                        <li>Every pull request gets a unique preview URL</li>
+                        <li>Test features before merging to production</li>
+                        <li>Share preview URLs with team for testing</li>
+                        <li>Preview environments use staging database</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Manual Deployment Commands</h4>
+                    <pre class="code-block">
+<span class="comment"># Deploy to production manually (if needed)</span>
+<span class="command">vercel --prod</span>
+
+<span class="comment"># Deploy to preview environment</span>
+<span class="command">vercel</span>
+
+<span class="comment"># Check deployment status</span>
+<span class="command">vercel ls</span>
+
+<span class="comment"># View deployment logs</span>
+<span class="command">vercel logs [deployment-url]</span>
+                    </pre>
+                </div>
+            </div>
+
+            <h3>Deployment Monitoring</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>How to Monitor</th>
+                            <th>Action Threshold</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Build Time</td>
+                            <td>Vercel dashboard</td>
+                            <td>&gt; 2 minutes</td>
+                        </tr>
+                        <tr>
+                            <td>Deployment Success Rate</td>
+                            <td>Vercel deployment history</td>
+                            <td>&lt; 95%</td>
+                        </tr>
+                        <tr>
+                            <td>Performance</td>
+                            <td>Vercel Analytics</td>
+                            <td>First Load &gt; 3s</td>
+                        </tr>
+                        <tr>
+                            <td>Error Rate</td>
+                            <td>Vercel Function logs</td>
+                            <td>&gt; 1% errors</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Rollback Procedures</h3>
+            <div class="alert alert-warning">
+                <h4><span class="status-icon warning">⚠️</span>When to Rollback</h4>
+                <ul>
+                    <li>Critical bugs in production</li>
+                    <li>Performance degradation</li>
+                    <li>Database migration issues</li>
+                    <li>Security vulnerabilities</li>
+                </ul>
+            </div>
+
+            <div class="workflow-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Immediate Rollback</h4>
+                    <pre class="code-block">
+<span class="comment"># Find previous stable deployment</span>
+<span class="command">vercel ls --scope team</span>
+
+<span class="comment"># Rollback to previous deployment</span>
+<span class="command">vercel rollback [previous-deployment-url] --timeout 20s</span>
+
+<span class="comment"># Verify rollback success</span>
+<span class="command">vercel inspect [production-domain]</span>
+                    </pre>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Post-Rollback Actions</h4>
+                    <ul>
+                        <li>Notify team about the rollback</li>
+                        <li>Investigate root cause of the issue</li>
+                        <li>Create hotfix branch if needed</li>
+                        <li>Update documentation with lessons learned</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Database Migration Management</h3>
+            <div class="alert alert-info">
+                <h4>Migration Strategy</h4>
+                <p>For the cloud database setup, coordinate migrations carefully:</p>
+                <ol>
+                    <li>Test migrations on preview deployments first</li>
+                    <li>Coordinate with team before production migrations</li>
+                    <li>Have rollback plan for schema changes</li>
+                    <li>Monitor application after migration deployment</li>
+                </ol>
+            </div>
+
+            <pre class="code-block">
+<span class="comment"># Check migration status in production</span>
+<span class="command">npx prisma migrate status --schema=./prisma/schema.prisma</span>
+
+<span class="comment"># Apply pending migrations (use carefully in production)</span>
+<span class="command">npx prisma migrate deploy</span>
+
+<span class="comment"># Reset database (ONLY in development/staging)</span>
+<span class="command">npx prisma migrate reset --force</span>
+            </pre>
+        </div>
+
+        <!-- 8. Project Management -->
         <div class="content" id="project-management">
-            <h2>Project Management</h2>
+            <h2>8. Project Management</h2>
             
             <h3>Daily Responsibilities</h3>
             <div class="workflow-steps">
@@ -477,9 +630,9 @@
             </div>
         </div>
 
-        <!-- Timeline -->
+        <!-- 9. 7-Week Timeline Management -->
         <div class="content" id="timeline">
-            <h2>7-Week Timeline Management</h2>
+            <h2>9. 7-Week Timeline Management</h2>
             
             <h3>Accelerated Development Schedule</h3>
             
@@ -569,9 +722,9 @@
             </div>
         </div>
 
-        <!-- Troubleshooting -->
+        <!-- 10. Troubleshooting & Support -->
         <div class="content" id="troubleshooting">
-            <h2>Troubleshooting & Support</h2>
+            <h2>10. Troubleshooting & Support</h2>
             
             <h3>Common Issues & Solutions</h3>
             
@@ -579,20 +732,20 @@
                 <h4>Team Member Can't Access Database</h4>
                 <p><strong>Symptoms:</strong> Environment variable errors, connection failures</p>
                 <p><strong>Solution:</strong></p>
-                <div class="code-block">
+                <pre class="code-block">
 <span class="comment"># For the team member:</span>
-<span class="command">git pull origin main</span>                <span class="comment"># Get latest .env.example</span>
-<span class="command">cp .env.example .env.local</span>         <span class="comment"># Create local env file</span>
+<span class="command">git pull origin main</span>              <span class="comment"># Get latest .env.example</span>
+<span class="command">cp .env.example .env.local</span>        <span class="comment"># Create local env file</span>
 <span class="comment"># Jose provides the actual values securely</span>
 <span class="command">npm run db:generate</span>               <span class="comment"># Regenerate Prisma client</span>
-                </div>
+                </pre>
             </div>
 
             <div class="alert alert-warning">
                 <h4>Deployment Failures</h4>
                 <p><strong>Symptoms:</strong> Build errors, deployment timeouts</p>
                 <p><strong>Solution:</strong></p>
-                <div class="code-block">
+                <pre class="code-block">
 <span class="comment"># Check deployment logs:</span>
 <span class="command">vercel logs &lt;deployment-url&gt;</span>
 
@@ -601,7 +754,7 @@
 
 <span class="comment"># If needed, rollback:</span>
 <span class="command">vercel rollback &lt;previous-deployment-url&gt;</span>
-                </div>
+                </pre>
             </div>
 
             <div class="alert alert-info">

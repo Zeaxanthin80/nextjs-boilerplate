@@ -41,7 +41,7 @@
 
         <!-- 1. Overview -->
         <div class="content" id="overview">
-            <h2>Overview</h2>
+            <h2>1. Overview</h2>
             
             <p>Environment variables are crucial for configuring your Marketing SaaS application across different environments (development, preview, production). This guide covers how to set up and manage these variables securely for your team.</p>
             
@@ -81,7 +81,7 @@
 
         <!-- 2. File Structure -->
         <div class="content" id="file-structure">
-            <h2>File Structure</h2>
+            <h2>2. File Structure</h2>
             
             <h3>Environment Files in Your Project</h3>
             <div class="table-container">
@@ -149,55 +149,55 @@
 
         <!-- 3. Development Variables -->
         <div class="content" id="development-vars">
-            <h2>Development Variables</h2>
+            <h2>3. Development Variables</h2>
             
             <h3>Your .env.example Template</h3>
-            <div class="code-block">
+            <pre class="code-block">
 <span class="comment"># Database Configuration</span>
 DATABASE_URL=<span class="string">"postgresql://username:password@localhost:5432/marketing_saas_dev"</span><br>
 DIRECT_URL=<span class="string">"postgresql://username:password@localhost:5432/marketing_saas_dev"</span><br>
-<br>
-<span class="comment"># Authentication (NextAuth.js)</span><br>
-NEXTAUTH_URL=<span class="string">"http://localhost:3000"</span><br>
-NEXTAUTH_SECRET=<span class="string">"your-nextauth-secret-here"</span><br>
-<br>
-<span class="comment"># OAuth Providers (Development)</span><br>
-GOOGLE_CLIENT_ID=<span class="string">"your-google-client-id"</span><br>
-GOOGLE_CLIENT_SECRET=<span class="string">"your-google-client-secret"</span><br>
-GITHUB_CLIENT_ID=<span class="string">"your-github-client-id"</span><br>
-GITHUB_CLIENT_SECRET=<span class="string">"your-github-client-secret"</span><br>
-<br>
-<span class="comment"># Email Service (SendGrid)</span><br>
-SENDGRID_API_KEY=<span class="string">"SG.your-sendgrid-api-key"</span><br>
-FROM_EMAIL=<span class="string">"noreply@yourapp.com"</span><br>
-<br>
-<span class="comment"># Payment Processing (Stripe - Test Keys)</span><br>
-STRIPE_PUBLISHABLE_KEY=<span class="string">"pk_test_your-stripe-publishable-key"</span><br>
-STRIPE_SECRET_KEY=<span class="string">"sk_test_your-stripe-secret-key"</span><br>
-STRIPE_WEBHOOK_SECRET=<span class="string">"whsec_your-webhook-secret"</span><br>
-<br>
-<span class="comment"># Analytics (Optional)</span><br>
-GOOGLE_ANALYTICS_ID=<span class="string">"GA-XXXXXXXXX"</span><br>
-MIXPANEL_TOKEN=<span class="string">"your-mixpanel-token"</span><br>
-<br>
-<span class="comment"># Feature Flags</span><br>
-ENABLE_ANALYTICS=<span class="string">"true"</span><br>
-ENABLE_PAYMENTS=<span class="string">"true"</span><br>
-ENABLE_EMAIL_CAMPAIGNS=<span class="string">"true"</span><br>
-<br>
-<span class="comment"># Development Tools</span><br>
-LOG_LEVEL=<span class="string">"debug"</span><br>
-VERCEL_URL=<span class="string">"http://localhost:3000"</span><br>
-            </div>
+
+<span class="comment"># Authentication (NextAuth.js)</span>
+NEXTAUTH_URL=<span class="string">"http://localhost:3000"</span>
+NEXTAUTH_SECRET=<span class="string">"your-nextauth-secret-here"</span>
+
+<span class="comment"># OAuth Providers (Development)</span>
+GOOGLE_CLIENT_ID=<span class="string">"your-google-client-id"</span>
+GOOGLE_CLIENT_SECRET=<span class="string">"your-google-client-secret"</span>
+GITHUB_CLIENT_ID=<span class="string">"your-github-client-id"</span>
+GITHUB_CLIENT_SECRET=<span class="string">"your-github-client-secret"</span>
+
+<span class="comment"># Email Service (SendGrid)</span>
+SENDGRID_API_KEY=<span class="string">"SG.your-sendgrid-api-key"</span>
+FROM_EMAIL=<span class="string">"noreply@yourapp.com"</span>
+
+<span class="comment"># Payment Processing (Stripe - Test Keys)</span>
+STRIPE_PUBLISHABLE_KEY=<span class="string">"pk_test_your-stripe-publihable-key"</span>
+STRIPE_SECRET_KEY=<span class="string">"sk_test_your-stripe-secret-key"</span>
+STRIPE_WEBHOOK_SECRET=<span class="string">"whsec_your-webhook-secret"</span>
+
+<span class="comment"># Analytics (Optional)</span>
+GOOGLE_ANALYTICS_ID=<span class="string">"GA-XXXXXXXXX"</span>
+MIXPANEL_TOKEN=<span class="string">"your-mixpanel-token"</span>
+
+<span class="comment"># Feature Flags</span>
+ENABLE_ANALYTICS=<span class="string">"true"</span>
+ENABLE_PAYMENTS=<span class="string">"true"</span>
+ENABLE_EMAIL_CAMPAIGNS=<span class="string">"true"</span>
+
+<span class="comment"># Development Tools</span>
+LOG_LEVEL=<span class="string">"debug"</span>
+VERCEL_URL=<span class="string">"http://localhost:3000"</span>
+            </pre>
 
             <h3>Setting Up Your Local Environment</h3>
             <div class="workflow-steps">
                 <div class="step">
                     <span class="step-number">1</span>
                     <h4>Copy the Template</h4>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="command">cp .env.example .env.local</span>
-                    </div>
+                    </pre>
                 </div>
 
                 <div class="step">
@@ -214,17 +214,17 @@ VERCEL_URL=<span class="string">"http://localhost:3000"</span><br>
                 <div class="step">
                     <span class="step-number">3</span>
                     <h4>Verify Configuration</h4>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="command">npm run dev</span>
 <span class="comment"># Check that the application starts without errors</span>
-                    </div>
+                    </pre>
                 </div>
             </div>
         </div>
 
         <!-- 4. Production Variables -->
         <div class="content" id="production-vars">
-            <h2>Production Variables</h2>
+            <h2>4. Production Variables</h2>
             
             <h3>Managing Production Secrets</h3>
             <div class="alert alert-danger">
@@ -243,48 +243,48 @@ VERCEL_URL=<span class="string">"http://localhost:3000"</span><br>
                 <div class="team-card jose">
                     <h4>Database (Prisma Postgres)</h4>
                     <div class="role">Managed by Jose via Vercel</div>
-                    <div class="code-block">
-<span class="comment"># Production database URLs</span><br>
-DATABASE_URL=<span class="string">"prisma+postgres://..."</span><br>
+                    <pre class="code-block">
+<span class="comment"># Production database URLs</span>
+DATABASE_URL=<span class="string">"prisma+postgres://..."</span>
 DIRECT_URL=<span class="string">"postgresql://..."</span>
-                    </div>
+                    </pre>
                 </div>
 
                 <div class="team-card norma">
                     <h4>Authentication</h4>
                     <div class="role">Production OAuth setup</div>
-                    <div class="code-block">
-<span class="comment"># Production authentication</span><br>
-NEXTAUTH_URL=<span class="string">"https://yourapp.vercel.app"</span><br>
+                    <pre class="code-block">
+<span class="comment"># Production authentication</span>
+NEXTAUTH_URL=<span class="string">"https://yourapp.vercel.app"</span>
 NEXTAUTH_SECRET=<span class="string">"production-secret"</span>
-                    </div>
+                    </pre>
                 </div>
 
                 <div class="team-card lily">
                     <h4>Third-Party Services</h4>
                     <div class="role">Production API keys</div>
-                    <div class="code-block">
-<span class="comment"># Production service keys</span><br>
-SENDGRID_API_KEY=<span class="string">"SG.production-key"</span><br>
+                    <pre class="code-block">
+<span class="comment"># Production service keys</span>
+SENDGRID_API_KEY=<span class="string">"SG.production-key"</span>
 STRIPE_SECRET_KEY=<span class="string">"sk_live_..."</span>
-                    </div>
+                    </pre>
                 </div>
             </div>
 
             <h3>Vercel Environment Variable Management</h3>
-            <div class="code-block">
-<span class="comment"># Commands for Jose (Project Lead):</span><br>
-<span class="command">vercel env ls</span><br>                                    <span class="comment"># List all environment variables</span><br>
-<span class="command">vercel env add VARIABLE_NAME production</span><br>          <span class="comment"># Add production variable</span><br>
-<span class="command">vercel env add VARIABLE_NAME preview</span><br>             <span class="comment"># Add preview variable</span><br>
-<span class="command">vercel env add VARIABLE_NAME development</span><br>         <span class="comment"># Add development variable</span><br>
-<span class="command">vercel env rm VARIABLE_NAME production</span><br>     <span class="comment"># Remove production variable</span><br>
-            </div>
+            <pre class="code-block">
+<span class="comment"># Commands for Jose (Project Lead):</span>
+<span class="command">vercel env ls</span>                                    <span class="comment"># List all environment variables</span>
+<span class="command">vercel env add VARIALE_NAME production</span>           <span class="comment"># Add production variable</span>
+<span class="command">vercel env add VARIABLE_NAME preview</span>             <span class="comment"># Add preview variable</span>
+<span class="command">vercel env add VARIABLE_NAME development</span>         <span class="comment"># Add development variable</span>
+<span class="command">vercel env rm VARIABLE_NAME production</span>           <span class="comment"># Remove production variable</span>
+            </pre>
         </div>
 
         <!-- 5. Security Practices -->
         <div class="content" id="security-practices">
-            <h2>Security Best Practices</h2>
+            <h2>5. Security Best Practices</h2>
             
             <h3>Environment Variable Security</h3>
             <div class="workflow-steps">
@@ -378,7 +378,7 @@ STRIPE_SECRET_KEY=<span class="string">"sk_live_..."</span>
 
         <!-- 6. Team Setup -->
         <div class="content" id="team-setup">
-            <h2>Team Setup Instructions</h2>
+            <h2>6. Team Setup Instructions</h2>
             
             <div class="team-grid">
                 <div class="team-card jose">
@@ -386,13 +386,13 @@ STRIPE_SECRET_KEY=<span class="string">"sk_live_..."</span>
                     <div class="role">Full access to all environments</div>
                     
                     <h5>Initial Setup (Completed ✅):</h5>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="comment"># Already completed:</span>
 <span class="command">vercel env pull .env.local</span>         <span class="comment"># Downloaded production variables</span>
-<span class="command">cp .env.local .env.example</span>        <span class="comment"># Created team template</span>
+<span class="command">cp .env.local .env.example</span>         <span class="comment"># Created team template</span>
 <span class="comment"># Removed sensitive values from .env.example</span>
 <span class="command">git add .env.example</span>              <span class="comment"># Committed template to Git</span>
-                    </div>
+                    </pre>
 
                     <h5>Ongoing Responsibilities:</h5>
                     <ul>
@@ -408,7 +408,7 @@ STRIPE_SECRET_KEY=<span class="string">"sk_live_..."</span>
                     <div class="role">Development environment access</div>
                     
                     <h5>One-Time Setup:</h5>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="comment"># Clone repository and setup</span>
 <span class="command">git clone &lt;repository-url&gt;</span>
 <span class="command">cd nextjs-boilerplate</span>
@@ -423,7 +423,7 @@ STRIPE_SECRET_KEY=<span class="string">"sk_live_..."</span>
 
 <span class="comment"># Start development</span>
 <span class="command">npm run dev</span>
-                    </div>
+                    </pre>
 
                     <h5>Environment Variables Norma Needs:</h5>
                     <ul>
@@ -439,7 +439,7 @@ STRIPE_SECRET_KEY=<span class="string">"sk_live_..."</span>
                     <div class="role">Development environment access</div>
                     
                     <h5>One-Time Setup:</h5>
-                    <div class="code-block">
+                    <pre class="code-block">
 <span class="comment"># Clone repository and setup</span>
 <span class="command">git clone &lt;repository-url&gt;</span>
 <span class="command">cd nextjs-boilerplate</span>
@@ -454,7 +454,7 @@ STRIPE_SECRET_KEY=<span class="string">"sk_live_..."</span>
 
 <span class="comment"># Start development</span>
 <span class="command">npm run dev</span>
-                    </div>
+                    </pre>
 
                     <h5>Environment Variables Lily Needs:</h5>
                     <ul>
@@ -504,7 +504,7 @@ STRIPE_SECRET_KEY=<span class="string">"sk_live_..."</span>
 
         <!-- 7. Variable Reference -->
         <div class="content" id="variable-reference">
-            <h2>Complete Variable Reference</h2>
+            <h2>7. Complete Variable Reference</h2>
             
             <h3>Database Variables</h3>
             <div class="table-container">
@@ -639,7 +639,7 @@ STRIPE_SECRET_KEY=<span class="string">"sk_live_..."</span>
 
         <!-- 8. Troubleshooting -->
         <div class="content" id="troubleshooting">
-            <h2>Troubleshooting</h2>
+            <h2>8. Troubleshooting</h2>
             
             <h3>Common Issues</h3>
             
@@ -680,13 +680,13 @@ STRIPE_SECRET_KEY=<span class="string">"sk_live_..."</span>
             </div>
 
             <h3>Debugging Environment Variables</h3>
-            <div class="code-block">
+            <pre class="code-block">
 <span class="comment"># Check what environment variables are loaded (development only!)</span>
 <span class="command">console.log(process.env.DATABASE_URL)</span>
 <span class="command">console.log(process.env.NEXTAUTH_SECRET)</span>
 
 <span class="comment"># Note: Never log sensitive variables in production!</span>
-            </div>
+            </pre>
 
             <h3>Getting Help</h3>
             <div class="workflow-steps">
