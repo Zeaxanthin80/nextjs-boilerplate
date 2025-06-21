@@ -1,9 +1,21 @@
-# Database Setup Instructions for Team
+# Database User Setup Guide - Local Database Setup
+
+> **⚠️ Important:** This guide is for setting up **local PostgreSQL** with individual user accounts. If your team wants a shared cloud database instead, use the [Database Setup Guide](./DATABASE_SETUP_GUIDE.md) instead.
 
 ## Overview
-- **Same database** for all team members: `nextjs_boilerplate_dev`
+This setup provides:
+- 🏠 **Local PostgreSQL** - database runs on each team member's machine
+- 👥 **Individual user accounts** - each team member has unique credentials  
+- 🔐 **Enhanced security** - separate user permissions and audit trails
+- 📚 **Educational value** - learn PostgreSQL administration
+
+**Prerequisites:** Complete the [Project Lead Guide](./PROJECT_LEAD_GUIDE.md) first for overall project setup.
+
+## Team Database Strategy
+- **Same database name** for all team members: `nextjs_boilerplate_dev`
 - **Individual user credentials** for security and audit trails
 - **Two environment templates**: One for Jose (project lead), one for team members
+- **Secure credential distribution** via email (never committed to Git)
 
 ## Setup Steps
 
@@ -38,7 +50,7 @@ cp .env.example .env.local
 ### 4. Team Member Setup
 1. Receive credentials via email from Jose
 2. Copy `.env.example` to `.env.local`
-3. Replace placeholders with your credentials:
+3. Replace placeholders with your credentials (see [Environment Variables Guide](./ENVIRONMENT_VARIABLES_GUIDE.md) for detailed instructions):
    ```bash
    # Change this:
    DATABASE_URL="postgresql://YOUR_USERNAME:YOUR_PASSWORD@localhost:5432/nextjs_boilerplate_dev"
@@ -46,6 +58,7 @@ cp .env.example .env.local
    # To this (example for Norma):
    DATABASE_URL="postgresql://norma_dev:norma_secure_pass_456@localhost:5432/nextjs_boilerplate_dev"
    ```
+4. Test your connection: `npm run db:generate && npm run dev`
 
 ## File Structure
 ```
