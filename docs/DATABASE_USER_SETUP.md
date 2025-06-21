@@ -1,6 +1,6 @@
-# Database User Setup Guide - Local Database Setup
+# Local Database Setup Guide - PostgreSQL
 
-> **⚠️ Important:** This guide is for setting up **local PostgreSQL** with individual user accounts. If your team wants a shared cloud database instead, use the [Database Setup Guide](./DATABASE_SETUP_GUIDE.md) instead.
+> **⚠️ Important:** This guide is for setting up **local PostgreSQL** with individual user accounts. If your team wants a shared cloud database instead, use the [Cloud Database Setup Guide](./DATABASE_SETUP_GUIDE.md) instead.
 
 ## Overview
 This setup provides:

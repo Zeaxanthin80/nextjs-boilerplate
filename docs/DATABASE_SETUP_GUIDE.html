@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database Setup Guide - Marketing SaaS</title>
+    <title>Cloud Database Setup Guide - Marketing SaaS</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>Database Setup Guide - Prisma Postgres</h1>
-            <p>Complete database configuration for Marketing SaaS application <br> by Jose, Norma, and Lily</p>
+            <h1>Cloud Database Setup Guide - Prisma Postgres</h1>
+            <p>Complete cloud database configuration for Marketing SaaS application <br> by Jose, Norma, and Lily</p>
+            
+            <div class="alert alert-warning">
+                <h4>⚠️ Important: Database Strategy Choice</h4>
+                <p>This guide is for setting up a <strong>cloud-hosted database</strong> on Vercel. If your team wants individual local PostgreSQL setups instead, use the <a href="./DATABASE_USER_SETUP.html">Local Database Setup Guide</a> instead.</p>
+                <p><strong>Prerequisites:</strong> Complete the <a href="./PROJECT_LEAD_GUIDE.html">Project Lead Guide</a> first for Vercel account setup.</p>
+            </div>
         </div>
 
         <!-- Navigation -->
@@ -80,10 +86,45 @@
         <!-- Overview -->
         <div class="content" id="overview">
             <h2>Overview</h2>
-            <p>This guide walks you through setting up Prisma Postgres for your marketing SaaS application. "Prisma Postgres" is a Postgres database optimized for Prisma ORM, but you still need to install and configure Prisma in your project.</p>
             
             <div class="alert alert-info">
-                <strong><span class="status-icon info">💡</span>Important Note:</strong> Even though you're using "Prisma Postgres", you still need to install the Prisma toolkit in your project. The name refers to a PostgreSQL database that's optimized for Prisma ORM.
+                <h3><span class="status-icon info">☁️</span>Cloud Database Strategy</h3>
+                <p>This guide walks you through setting up <strong>Prisma Postgres</strong> (cloud database) for your Marketing SaaS application. This approach provides:</p>
+                <ul>
+                    <li>☁️ <strong>Shared cloud database</strong> - all team members connect to the same database</li>
+                    <li>🚀 <strong>No local PostgreSQL required</strong> - database runs on Vercel's infrastructure</li>
+                    <li>🔄 <strong>Real-time collaboration</strong> - all team members see the same data</li>
+                    <li>🔗 <strong>Integrated with Vercel</strong> - seamless deployment and environment management</li>
+                </ul>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card jose">
+                    <h4>🎯 Recommended for Teams</h4>
+                    <div class="role">Easier collaboration and setup</div>
+                    <ul>
+                        <li>✅ Shared data across all team members</li>
+                        <li>✅ No local database installation needed</li>
+                        <li>✅ Automatic backups and scaling</li>
+                        <li>✅ Integrated with Vercel deployments</li>
+                    </ul>
+                </div>
+
+                <div class="team-card norma">
+                    <h4>📋 What This Creates</h4>
+                    <div class="role">Infrastructure setup</div>
+                    <ul>
+                        <li>🗄️ Cloud Prisma Postgres database</li>
+                        <li>📊 Marketing SaaS schema (Users, Campaigns, Analytics)</li>
+                        <li>🔧 Prisma Client configuration</li>
+                        <li>🌐 Environment variables for team</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <h4>⚠️ Cross-Reference</h4>
+                <p>For environment variable setup after database creation, see the <a href="./ENVIRONMENT_VARIABLES_GUIDE.html">Environment Variables Guide</a>.</p>
             </div>
         </div>
 
@@ -364,6 +405,267 @@ enum CampaignStatus {
             </div>
         </div>
 
+        <!-- Run Migration -->
+        <div class="content" id="run-migration">
+            <h2>7. Run First Migration</h2>
+            
+            <div class="workflow-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Create and Apply Migration</h4>
+                    <div class="code-block">
+<span class="command">npx prisma migrate dev --name init</span>
+                    </div>
+                    <p>This will create a migration file and apply your schema to the Prisma Postgres database.</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Alternative: Push Schema Directly</h4>
+                    <p>For development, you can also push directly:</p>
+                    <div class="code-block">
+<span class="command">npx prisma db push</span>
+                    </div>
+                    <div class="alert alert-info">
+                        <strong><span class="status-icon info">💡</span>Note:</strong> <code>db push</code> is faster for development, but <code>migrate dev</code> creates proper migration history.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verify Setup -->
+        <div class="content" id="verify-setup">
+            <h2>8. Verify Setup</h2>
+            
+            <div class="workflow-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Test Database Connection</h4>
+                    <p>Create <code>test-database.js</code> in your project root:</p>
+                    <div class="code-block">
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
+
+async function testDatabase() {
+  try {
+    console.log('🔍 Testing cloud database...');
+    
+    const testUser = await prisma.user.create({
+      data: {
+        email: 'test@marketingsaas.com',
+        name: 'Test User'
+      }
+    });
+    console.log('✅ Test user created:', testUser);
+    
+    const users = await prisma.user.findMany();
+    console.log('✅ Users found:', users.length);
+    
+  } catch (error) {
+    console.error('❌ Test failed:', error);
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+testDatabase();
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Run the Test</h4>
+                    <div class="code-block">
+<span class="command">node test-database.js</span>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Launch Prisma Studio</h4>
+                    <div class="code-block">
+<span class="command">npx prisma studio</span>
+                    </div>
+                    <p>Opens visual database browser at <code>http://localhost:5555</code></p>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <h3><span class="status-icon check">✅</span>Setup Complete!</h3>
+                <p>Your cloud database is ready! Your team can now start development with the shared Prisma Postgres database.</p>
+            </div>
+        </div>
+
+        <!-- Run Migration -->
+        <div class="content" id="run-migration">
+            <h2>7. Run First Migration</h2>
+            
+            <div class="workflow-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Create and Apply Migration</h4>
+                    <div class="code-block">
+<span class="command">npx prisma migrate dev --name init</span>
+                    </div>
+                    <p>This will:</p>
+                    <ul>
+                        <li>Create a migration file based on your schema</li>
+                        <li>Apply the migration to your Prisma Postgres database</li>
+                        <li>Generate the Prisma Client</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Alternative: Push Schema Directly</h4>
+                    <p>For development, you can also push your schema directly without creating migration files:</p>
+                    <div class="code-block">
+<span class="command">npx prisma db push</span>
+                    </div>
+                    <div class="alert alert-info">
+                        <strong><span class="status-icon info">💡</span>When to use what:</strong>
+                        <ul>
+                            <li><code>prisma migrate dev</code> - Creates migration files (recommended for production)</li>
+                            <li><code>prisma db push</code> - Direct schema sync (good for rapid prototyping)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Verify Migration Success</h4>
+                    <p>You should see output similar to:</p>
+                    <div class="code-block">
+<span class="comment">✔ Generated Prisma Client (v5.x.x) to ./node_modules/@prisma/client</span>
+<span class="comment">✔ Your database is now in sync with your schema.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verify Setup -->
+        <div class="content" id="verify-setup">
+            <h2>8. Verify Setup</h2>
+            
+            <div class="workflow-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Test Database Connection</h4>
+                    <p>Create a test script to verify your setup. Create <code>test-database.js</code> in your project root:</p>
+                    <div class="code-block">
+<span class="comment">// test-database.js</span>
+const { PrismaClient } = require('@prisma/client');
+
+const prisma = new PrismaClient();
+
+async function testDatabase() {
+  try {
+    console.log('🔍 Testing database connection...');
+    
+    <span class="comment">// Test connection</span>
+    await prisma.$connect();
+    console.log('✅ Database connected successfully!');
+    
+    <span class="comment">// Create test user</span>
+    const testUser = await prisma.user.create({
+      data: {
+        email: 'test@marketingsaas.com',
+        name: 'Test User',
+        role: 'USER'
+      }
+    });
+    console.log('✅ Test user created:', testUser);
+    
+    <span class="comment">// Create test account</span>
+    const testAccount = await prisma.account.create({
+      data: {
+        name: 'Test Marketing Account',
+        plan: 'FREE',
+        ownerId: testUser.id
+      }
+    });
+    console.log('✅ Test account created:', testAccount);
+    
+    <span class="comment">// Create test campaign</span>
+    const testCampaign = await prisma.campaign.create({
+      data: {
+        name: 'Welcome Campaign',
+        description: 'Test marketing campaign',
+        status: 'DRAFT',
+        accountId: testAccount.id,
+        creatorId: testUser.id
+      }
+    });
+    console.log('✅ Test campaign created:', testCampaign);
+    
+    <span class="comment">// Add analytics</span>
+    const testAnalytics = await prisma.analytics.create({
+      data: {
+        campaignId: testCampaign.id,
+        impressions: 1000,
+        clicks: 50,
+        conversions: 5,
+        cost: 25.0
+      }
+    });
+    console.log('✅ Test analytics created:', testAnalytics);
+    
+    console.log('🎉 All database operations working correctly!');
+    
+  } catch (error) {
+    console.error('❌ Database test failed:', error);
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+testDatabase();
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Run the Test</h4>
+                    <div class="code-block">
+<span class="command">node test-database.js</span>
+                    </div>
+                    <p>You should see successful creation of test data!</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Launch Prisma Studio</h4>
+                    <p>View your data visually:</p>
+                    <div class="code-block">
+<span class="command">npx prisma studio</span>
+                    </div>
+                    <p>This will open <a href="http://localhost:5555" target="_blank">http://localhost:5555</a> where you can see your database tables and data.</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <h4>Clean Up Test Data (Optional)</h4>
+                    <p>If you want to remove the test data:</p>
+                    <div class="code-block">
+<span class="comment">// In Prisma Studio, you can delete the test records</span>
+<span class="comment">// Or reset the database entirely:</span>
+<span class="command">npx prisma migrate reset</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <h3><span class="status-icon check">🎯</span>Setup Complete!</h3>
+                <p>If all tests passed, your cloud database is ready for development. Your team can now:</p>
+                <ul>
+                    <li>✅ Connect to the shared Prisma Postgres database</li>
+                    <li>✅ Create, read, update, and delete marketing SaaS data</li>
+                    <li>✅ Use Prisma Studio for visual database management</li>
+                    <li>✅ Start building API routes and components</li>
+                </ul>
+            </div>
+        </div>
+
         <!-- Team Sync Instructions -->
         <div class="content" id="team-sync">
             <h2>9. Team Sync Instructions</h2>
@@ -577,5 +879,27 @@ enum CampaignStatus {
             observer.observe(section);
         });
     </script>
+    
+    <!-- Cross-Reference Footer -->
+    <div class="content">
+        <div class="alert alert-info">
+            <h3>📋 Cross-References & Next Steps</h3>
+            <p><strong>Database setup complete!</strong> Your team can now:</p>
+            <ul>
+                <li>Follow the <a href="./ENVIRONMENT_VARIABLES_GUIDE.html">Environment Variables Guide</a> for team configuration</li>
+                <li>Begin API development and database integration</li>
+                <li>Use <code>npm run db:studio</code> to visually manage your database</li>
+            </ul>
+            
+            <p><strong>📚 Related Documentation:</strong></p>
+            <ul>
+                <li><a href="./README.html">📄 Main Documentation Index</a> - Overview and setup flow</li>
+                <li><a href="./PROJECT_LEAD_GUIDE.html">👑 Project Lead Guide</a> - Team management and advanced setup</li>
+                <li><a href="./ENVIRONMENT_VARIABLES_GUIDE.html">⚙️ Environment Variables Guide</a> - Team environment configuration</li>
+                <li><a href="./VERCEL_WORKFLOW_GUIDE.html">🌐 Vercel Workflow Guide</a> - Deployment and collaboration workflow</li>
+            </ul>
+            <p><strong>Last Updated:</strong> June 20, 2025 | <strong>Strategy:</strong> ☁️ Cloud Database Setup Guide (Prisma Postgres)</p>
+        </div>
+    </div>
 </body>
 </html>

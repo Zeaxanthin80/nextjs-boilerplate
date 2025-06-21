@@ -36,10 +36,10 @@ Follow these guides **in exact order** for cloud database setup:
 |-------|-------|---------|---------------|---------|
 | **1st** | **Vercel Workflow Guide** | Team collaboration and deployment setup | All team members read<br>Jose implements | [📄 MD](./VERCEL_WORKFLOW_GUIDE.md) \| [🌐 HTML](./VERCEL_WORKFLOW_GUIDE.html) |
 | **2nd** | **Project Lead Guide** | Administrative setup and team management | Jose (Project Lead) | [📄 MD](./PROJECT_LEAD_GUIDE.md) \| [🌐 HTML](./PROJECT_LEAD_GUIDE.html) |
-| **3rd** | **Database Setup Guide** | Cloud Prisma Postgres setup and schema | Jose (Project Lead) | [📄 MD](./DATABASE_SETUP_GUIDE.md) \| [🌐 HTML](./DATABASE_SETUP_GUIDE.html) |
+| **3rd** | **Cloud Database Setup Guide** | Cloud Prisma Postgres setup and schema | Jose (Project Lead) | [📄 MD](./DATABASE_SETUP_GUIDE.md) \| [🌐 HTML](./DATABASE_SETUP_GUIDE.html) |
 | **4th** | **Environment Variables Guide** | Team environment configuration | All team members | [📄 MD](./ENVIRONMENT_VARIABLES_GUIDE.md) \| [🌐 HTML](./ENVIRONMENT_VARIABLES_GUIDE.html) |
 
-**Skip DATABASE_USER_SETUP** - not needed for cloud approach.
+**Skip LOCAL_DATABASE_SETUP_GUIDE** - not needed for cloud approach.
 
 ---
 
@@ -51,18 +51,18 @@ Follow these guides **in exact order** for local database setup:
 |-------|-------|---------|---------------|---------|
 | **1st** | **Vercel Workflow Guide** | Team collaboration and deployment setup | All team members read<br>Jose implements | [📄 MD](./VERCEL_WORKFLOW_GUIDE.md) \| [🌐 HTML](./VERCEL_WORKFLOW_GUIDE.html) |
 | **2nd** | **Project Lead Guide** | Administrative setup and team management | Jose (Project Lead) | [📄 MD](./PROJECT_LEAD_GUIDE.md) \| [🌐 HTML](./PROJECT_LEAD_GUIDE.html) |
-| **3rd** | **Database User Setup** | Local PostgreSQL with individual credentials | Jose (Project Lead) | [📄 MD](./DATABASE_USER_SETUP.md) \| [🌐 HTML](./DATABASE_USER_SETUP.html) |
+| **3rd** | **Local Database Setup Guide** | Local PostgreSQL with individual credentials | Jose (Project Lead) | [📄 MD](./DATABASE_USER_SETUP.md) \| [🌐 HTML](./DATABASE_USER_SETUP.html) |
 | **4th** | **Environment Variables Guide** | Team environment configuration | All team members | [📄 MD](./ENVIRONMENT_VARIABLES_GUIDE.md) \| [🌐 HTML](./ENVIRONMENT_VARIABLES_GUIDE.html) |
 
-**Skip DATABASE_SETUP_GUIDE** - not needed for local approach.
+**Skip CLOUD_DATABASE_SETUP_GUIDE** - not needed for local approach.
 
 ## 🔍 Database Guides Clarification
 
-### DATABASE_SETUP_GUIDE vs DATABASE_USER_SETUP - What's the Difference?
+### CLOUD_DATABASE_SETUP_GUIDE vs LOCAL_DATABASE_SETUP_GUIDE - What's the Difference?
 
 **⚠️ Important:** These guides represent **TWO DIFFERENT DATABASE STRATEGIES** - choose one approach for your team.
 
-| Aspect | DATABASE_SETUP_GUIDE | DATABASE_USER_SETUP |
+| Aspect | CLOUD_DATABASE_SETUP_GUIDE | LOCAL_DATABASE_SETUP_GUIDE |
 |--------|---------------------|-------------------|
 | **Database Type** | ☁️ **Cloud Database** (Prisma Postgres on Vercel) | 🏠 **Local Database** (PostgreSQL on each machine) |
 | **Purpose** | Complete cloud database setup and Prisma configuration | Local PostgreSQL with individual user accounts |
@@ -76,13 +76,13 @@ Follow these guides **in exact order** for local database setup:
 ### 📋 **Choose Your Database Strategy:**
 
 #### 🎯 **Option A: Cloud Database (RECOMMENDED)**
-1. Follow **DATABASE_SETUP_GUIDE** → Creates shared cloud database
-2. Skip DATABASE_USER_SETUP → Not needed for cloud approach
+1. Follow **CLOUD_DATABASE_SETUP_GUIDE** → Creates shared cloud database
+2. Skip LOCAL_DATABASE_SETUP_GUIDE → Not needed for cloud approach
 3. All team members connect to the same cloud database via Vercel
 
 #### 🎯 **Option B: Local Database with Individual Users**
-1. Skip DATABASE_SETUP_GUIDE → Not needed for local approach  
-2. Follow **DATABASE_USER_SETUP** → Sets up local PostgreSQL with team users
+1. Skip CLOUD_DATABASE_SETUP_GUIDE → Not needed for local approach  
+2. Follow **LOCAL_DATABASE_SETUP_GUIDE** → Sets up local PostgreSQL with team users
 3. Each team member has local database with individual credentials
 
 ## 🎯 Project Information
@@ -100,14 +100,14 @@ Follow these guides **in exact order** for local database setup:
 #### Cloud Database Approach:
 1. Complete **Vercel Workflow Guide** setup ➜ [Guide](./VERCEL_WORKFLOW_GUIDE.md)
 2. Complete **Project Lead Guide** administrative tasks ➜ [Guide](./PROJECT_LEAD_GUIDE.md)  
-3. Set up cloud database using **Database Setup Guide** ➜ [Guide](./DATABASE_SETUP_GUIDE.md)
+3. Set up cloud database using **Cloud Database Setup Guide** ➜ [Guide](./DATABASE_SETUP_GUIDE.md)
 4. Configure team environment variables ➜ [Environment Guide](./ENVIRONMENT_VARIABLES_GUIDE.md)
 5. Share development credentials with Norma and Lily securely
 
 #### Local Database Approach:
 1. Complete **Vercel Workflow Guide** setup ➜ [Guide](./VERCEL_WORKFLOW_GUIDE.md)
 2. Complete **Project Lead Guide** administrative tasks ➜ [Guide](./PROJECT_LEAD_GUIDE.md)
-3. Set up local PostgreSQL using **Database User Setup** ➜ [Guide](./DATABASE_USER_SETUP.md)
+3. Set up local PostgreSQL using **Local Database Setup Guide** ➜ [Guide](./DATABASE_USER_SETUP.md)
 4. Configure team environment variables ➜ [Environment Guide](./ENVIRONMENT_VARIABLES_GUIDE.md)
 5. Create individual database users and share credentials with team
 
@@ -172,18 +172,18 @@ node test-database.js   # Test database connection
 - **For:** Jose (project administrator) | **Priority:** 🔥 Critical for Jose
 - **Cross-references:** References all other guides for team onboarding tasks
 
-### [☁️ Database Setup Guide](./DATABASE_SETUP_GUIDE.md) | [🌐 HTML](./DATABASE_SETUP_GUIDE.html)
+### [☁️ Cloud Database Setup Guide](./DATABASE_SETUP_GUIDE.md) | [🌐 HTML](./DATABASE_SETUP_GUIDE.html)
 - **Purpose:** Cloud database infrastructure setup (Prisma Postgres on Vercel)
 - **Covers:** Vercel database creation, Prisma configuration, schema deployment, team sync
 - **For:** Jose (Project Lead) + reference for all team members | **Priority:** 🔥 Critical if using cloud DB
-- **Note:** ⚠️ Use this OR Database User Setup, not both
+- **Note:** ⚠️ Use this OR Local Database Setup Guide, not both
 - **Cross-references:** Links to Environment Variables Guide for connection strings
 
-### [🏠 Database User Setup](./DATABASE_USER_SETUP.md) | [🌐 HTML](./DATABASE_USER_SETUP.html)
+### [🏠 Local Database Setup Guide](./DATABASE_USER_SETUP.md) | [🌐 HTML](./DATABASE_USER_SETUP.html)
 - **Purpose:** Local PostgreSQL with individual user accounts and credentials
 - **Covers:** Local PostgreSQL setup, user creation, credential distribution, security
 - **For:** Jose (setup) + all team members (credential usage) | **Priority:** 🔥 Critical if using local DB
-- **Note:** ⚠️ Use this OR Database Setup Guide, not both
+- **Note:** ⚠️ Use this OR Cloud Database Setup Guide, not both
 - **Cross-references:** Links to Environment Variables Guide for local configuration
 
 ### [⚙️ Environment Variables Guide](./ENVIRONMENT_VARIABLES_GUIDE.md) | [🌐 HTML](./ENVIRONMENT_VARIABLES_GUIDE.html)
@@ -215,8 +215,8 @@ node test-database.js   # Test database connection
 1. **Identify your issue type:**
    - 🌐 **Vercel/Deployment issues** → [Vercel Workflow Guide - Troubleshooting](./VERCEL_WORKFLOW_GUIDE.md#troubleshooting)
    - 🗄️ **Database connection issues** → Check which database guide you're using:
-     - Cloud DB: [Database Setup Guide - Troubleshooting](./DATABASE_SETUP_GUIDE.md#troubleshooting)  
-     - Local DB: [Database User Setup - Troubleshooting](./DATABASE_USER_SETUP.md#troubleshooting)
+     - Cloud DB: [Cloud Database Setup Guide - Troubleshooting](./DATABASE_SETUP_GUIDE.md#troubleshooting)  
+     - Local DB: [Local Database Setup Guide - Troubleshooting](./DATABASE_USER_SETUP.md#troubleshooting)
    - ⚙️ **Environment variable issues** → [Environment Variables Guide - Troubleshooting](./ENVIRONMENT_VARIABLES_GUIDE.md#troubleshooting)
    - 👑 **Team coordination issues** → [Project Lead Guide - Troubleshooting](./PROJECT_LEAD_GUIDE.md#troubleshooting)
 
@@ -251,8 +251,8 @@ node test-database.js   # Test database connection
 |--------------|----------|
 | **Understand Git + Vercel workflow** | [Vercel Workflow Guide](./VERCEL_WORKFLOW_GUIDE.md) |
 | **Set up team management and permissions** | [Project Lead Guide](./PROJECT_LEAD_GUIDE.md) |
-| **Set up cloud database (shared)** | [Database Setup Guide](./DATABASE_SETUP_GUIDE.md) |
-| **Set up local database (individual)** | [Database User Setup](./DATABASE_USER_SETUP.md) |
+| **Set up cloud database (shared)** | [Cloud Database Setup Guide](./DATABASE_SETUP_GUIDE.md) |
+| **Set up local database (individual)** | [Local Database Setup Guide](./DATABASE_USER_SETUP.md) |
 | **Configure environment variables** | [Environment Variables Guide](./ENVIRONMENT_VARIABLES_GUIDE.md) |
 | **Understand database strategy options** | [Database Guides Clarification](#-database-guides-clarification) |
 | **Get team member onboarding checklist** | [Setup Checklist by Role](#-setup-checklist-by-role) |

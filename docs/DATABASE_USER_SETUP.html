@@ -3,18 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Database User Setup Guide - Marketing SaaS</title>
+    <title>Local Database Setup Guide - Marketing SaaS</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="container">
       <!-- Header -->
       <div class="header">
-        <h1>Database User Setup Guide</h1>
+        <h1>Local Database Setup Guide - PostgreSQL</h1>
         <p>
-          Individual database credentials and team setup for Marketing SaaS capstone project <br> by Jose,
+          Local PostgreSQL with individual user credentials for Marketing SaaS capstone project <br> by Jose,
           Norma, and Lily
         </p>
+        
+        <div class="alert alert-warning">
+          <h4>⚠️ Important: Database Strategy Choice</h4>
+          <p>This guide is for setting up <strong>local PostgreSQL</strong> with individual user accounts. If your team wants a shared cloud database instead, use the <a href="./DATABASE_SETUP_GUIDE.html">Cloud Database Setup Guide</a> instead.</p>
+          <p><strong>Prerequisites:</strong> Complete the <a href="./PROJECT_LEAD_GUIDE.html">Project Lead Guide</a> first for overall project setup.</p>
+        </div>
       </div>
 
       <!-- Navigation -->
@@ -34,19 +40,21 @@
         <h2>Overview</h2>
         
         <div class="alert alert-info">
-          <strong><span class="status-icon info">🎯</span>Database Strategy:</strong>
+          <strong><span class="status-icon info">�</span>Local Database Strategy:</strong>
+          <p>This setup provides:</p>
           <ul>
-            <li><strong>Same database</strong> for all team members: <code>nextjs_boilerplate_dev</code></li>
-            <li><strong>Individual user credentials</strong> for security and audit trails</li>
-            <li><strong>Two environment templates:</strong> One for Jose (project lead), one for team members</li>
+            <li>🏠 <strong>Local PostgreSQL</strong> - database runs on each team member's machine</li>
+            <li>👥 <strong>Individual user accounts</strong> - each team member has unique credentials</li>
+            <li>🔐 <strong>Enhanced security</strong> - separate user permissions and audit trails</li>
+            <li>📚 <strong>Educational value</strong> - learn PostgreSQL administration</li>
           </ul>
         </div>
 
         <div class="benefits-grid">
           <div class="benefit">
-            <div class="icon">👥</div>
-            <strong>Shared Database</strong><br />
-            All team members work on the same data
+            <div class="icon">🏠</div>
+            <strong>Local Control</strong><br />
+            Full control over your database
           </div>
           <div class="benefit">
             <div class="icon">🔐</div>
@@ -63,6 +71,11 @@
             <strong>Audit Trails</strong><br />
             Track who made what changes
           </div>
+        </div>
+
+        <div class="alert alert-warning">
+          <h4>⚠️ Cross-Reference</h4>
+          <p>For environment variable configuration after user setup, see the <a href="./ENVIRONMENT_VARIABLES_GUIDE.html">Environment Variables Guide</a>.</p>
         </div>
       </div>
 
@@ -388,5 +401,27 @@
         observer.observe(section);
       });
     </script>
+    
+    <!-- Cross-Reference Footer -->
+    <div class="content">
+        <div class="alert alert-info">
+            <h3>📋 Cross-References & Next Steps</h3>
+            <p><strong>Local database setup complete!</strong> Your team can now:</p>
+            <ul>
+                <li>Follow the <a href="./ENVIRONMENT_VARIABLES_GUIDE.html">Environment Variables Guide</a> for team configuration</li>
+                <li>Each team member has individual database credentials</li>
+                <li>Begin collaborative development with individual audit trails</li>
+            </ul>
+            
+            <p><strong>📚 Related Documentation:</strong></p>
+            <ul>
+                <li><a href="./README.html">📄 Main Documentation Index</a> - Overview and setup flow</li>
+                <li><a href="./PROJECT_LEAD_GUIDE.html">👑 Project Lead Guide</a> - Team management and advanced setup</li>
+                <li><a href="./ENVIRONMENT_VARIABLES_GUIDE.html">⚙️ Environment Variables Guide</a> - Team environment configuration</li>
+                <li><a href="./VERCEL_WORKFLOW_GUIDE.html">🌐 Vercel Workflow Guide</a> - Deployment and collaboration workflow</li>
+            </ul>
+            <p><strong>Last Updated:</strong> June 20, 2025 | <strong>Strategy:</strong> 🏠 Local Database (Individual PostgreSQL)</p>
+        </div>
+    </div>
   </body>
 </html>

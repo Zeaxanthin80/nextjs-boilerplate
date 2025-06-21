@@ -1,6 +1,6 @@
-# Database Setup Guide - Cloud Database (Prisma Postgres)
+# Cloud Database Setup Guide - Prisma Postgres
 
-> **⚠️ Important:** This guide is for setting up a **cloud-hosted database** on Vercel. If your team wants individual local PostgreSQL setups instead, use the [Database User Setup Guide](./DATABASE_USER_SETUP.md) instead.
+> **⚠️ Important:** This guide is for setting up a **cloud-hosted database** on Vercel. If your team wants individual local PostgreSQL setups instead, use the [Local Database Setup Guide](./DATABASE_USER_SETUP.md) instead.
 
 ## Overview
 This guide walks you through setting up **Prisma Postgres** (cloud database) for your Marketing SaaS application. This approach provides:
