@@ -193,7 +193,7 @@ tr:hover {
 .alert {
     padding: 1rem;
     border-radius: 8px;
-    margin: 1rem 0;
+    margin: 2rem;
     border-left: 4px solid;
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.4);
 }
