@@ -179,7 +179,14 @@ node test-database.js   # Test database connection
 - **Note:** ⚠️ Use this OR Local Database Setup Guide, not both
 - **Cross-references:** Links to Environment Variables Guide for connection strings
 
-### [🏠 Local Database Setup Guide](./DATABASE_USER_SETUP.md) | [🌐 HTML](./DATABASE_USER_SETUP.html)
+### [� Cloud Database Development Workflow](./CLOUD_DATABASE_WORKFLOW.md) | [🌐 HTML](./CLOUD_DATABASE_WORKFLOW.html)
+- **Purpose:** How team members collaborate with the shared cloud database during development
+- **Covers:** Daily workflow, team collaboration, schema changes, data management, troubleshooting
+- **For:** All team members using cloud database | **Priority:** ⭐ Important for cloud DB users
+- **Note:** 🔗 Companion guide to Cloud Database Setup Guide
+- **Cross-references:** Works with Cloud Database Setup Guide and Environment Variables Guide
+
+### [�🏠 Local Database Setup Guide](./DATABASE_USER_SETUP.md) | [🌐 HTML](./DATABASE_USER_SETUP.html)
 - **Purpose:** Local PostgreSQL with individual user accounts and credentials
 - **Covers:** Local PostgreSQL setup, user creation, credential distribution, security
 - **For:** Jose (setup) + all team members (credential usage) | **Priority:** 🔥 Critical if using local DB
