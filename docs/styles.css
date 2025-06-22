@@ -45,7 +45,7 @@ body {
     background: #eff6ff;
     border-color: #3b82f6;
     color: #1e40af;
-    margin: 0 2rem;s
+    margin: 0 2rem;
 }
 
 /* Navigation */
@@ -107,6 +107,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
     color: #1f2937;
     margin-bottom: 1rem;
+    margin-top: 1rem;
     line-height: 1.2;
 }
 
@@ -198,7 +199,7 @@ tr:hover {
 
 /* Alert Boxes */
 .alert {
-    padding: 1rem;
+    padding: 2rem;
     border-radius: 8px;
     margin: 2rem 0;
     border-left: 4px solid;
@@ -218,9 +219,13 @@ tr:hover {
 }
 
 .alert-success {
-    background: #f0fdf4;
+    background: #f3faf6;
     border-color: #10b981;
     color: #065f46;
+    background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/white-waves.png');
+    background-size: 300px 300px;
+    background-repeat: repeat;
+    background-blend-mode: multiply;
 }
 
 .alert-danger {
@@ -322,6 +327,7 @@ tr:hover {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 1rem;
     margin: 1.5rem 0;
+    
 }
 
 .benefit {
@@ -330,6 +336,7 @@ tr:hover {
     border-radius: 6px;
     padding: 1rem;
     text-align: center;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3);
 }
 
 .benefit .icon {
@@ -358,7 +365,7 @@ tr:hover {
 
     .nav, .content {
         padding: 2rem;
-        padding-top: 3rem;
+        padding-top: 2rem;
         
     }
 
