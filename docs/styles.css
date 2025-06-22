@@ -41,6 +41,13 @@ body {
     opacity: 0.9;
 }
 
+.header .alert {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #1e40af;
+    margin: 0 2rem;s
+}
+
 /* Navigation */
 .nav {
     background: white;
