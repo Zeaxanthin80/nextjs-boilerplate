@@ -19,7 +19,8 @@
 ### Essential Terms
 - **PR (Pull Request)**: A GitHub feature to propose and review code changes before merging into main branch
 - **npm run dev**: Basic Next.js local development server using local environment
-- **vercel dev**: Enhanced development server that mimics Vercel's production environment
+- **vercel dev**: Development server for Vercel-specific features (authentication required)
+- **npm run dev**: Next.js development server (recommended for most development work)
 - **Preview Deployment**: Temporary deployment of your changes for testing (automatically created from PRs)
 - **Production Deployment**: Live website accessible to users (deployed from main branch)
 
@@ -159,7 +160,7 @@ git checkout main
 git pull origin main
 git checkout -b feature/auth-system
 # Make your changes...
-vercel dev  # Start enhanced development server
+vercel dev  # Start development server (Jose - for infrastructure work)
 git add .
 git commit -m "feat: implement NextAuth.js authentication system"
 git push origin feature/auth-system
@@ -183,10 +184,12 @@ npm i -g vercel
 cp .env.example .env.local
 # Edit .env.local with development credentials (Jose will provide)
 
-# 5. Start development server
-vercel dev  # Enhanced development server
-# OR
-npm run dev  # Basic Next.js server
+# 5. Start development server (RECOMMENDED for most work)
+npm run dev  # Next.js development server - perfect for frontend work!
+
+# Alternative: vercel dev (only if needed for specific Vercel features)
+# Only needed for Edge middleware or custom Vercel routing
+# Requires Vercel login for most functionality
 
 # 6. Your daily workflow:
 git checkout main
@@ -216,8 +219,8 @@ npm i -g vercel
 cp .env.example .env.local
 # Edit .env.local with development credentials (Jose will provide)
 
-# 5. Start development server
-vercel dev  # Enhanced development server
+# 5. Start development server (RECOMMENDED for feature work)
+npm run dev  # Next.js development server - perfect for feature development!
 
 # 6. Your daily workflow:
 git checkout main
@@ -291,29 +294,32 @@ git checkout -b feature/your-new-feature
 
 ## Team Member Vercel Setup Options
 
-#### **Option 1: Minimal Setup (Recommended for Most Teams)**
+#### **Option 1: Simplified Setup (Recommended for Most Teams)**
 
 **What each team member needs:**
 ```bash
-# Only install Vercel CLI (no account linking required)
-npm i -g vercel
+# Team members use Next.js development server (Vercel-recommended)
+npm run dev  # Perfect for frontend/UI and feature development
 
-# Use for local development enhancement only
-vercel dev  # Works without linking to Vercel account
+# Optional: Install Vercel CLI for enhanced workflow
+npm i -g vercel  # Useful for preview deployments and CLI commands
 ```
 
 **Benefits:**
-- ✅ Enhanced local development (production-like environment)
-- ✅ No Vercel account required for team members
-- ✅ No access to production environment variables
-- ✅ Simple and secure
-- ✅ All deployments happen through GitHub (automated)
+- ✅ Fast development with Next.js dev server
+- ✅ No authentication required
+- ✅ All Next.js features included (API routes, routing, hot reload)
+- ✅ Officially recommended by Vercel for Next.js projects
+- ✅ Perfect for team collaboration
+
+**Vercel's Official Recommendation:**
+> "If you're using a framework and your framework's Development Command already provides all the features you need, we do not recommend using vercel dev."
 
 **Workflow:**
 ```bash
 # Team member daily workflow
 git checkout -b feature/new-feature
-vercel dev  # Local development with enhanced features
+npm run dev  # Next.js development server - works immediately!
 # Make changes, test locally
 git add .
 git commit -m "Add new feature"
@@ -355,14 +361,15 @@ vercel link  # Select the shared project
 #### **Option 3: Hybrid Approach (Recommended for Capstone)**
 
 **Setup:**
-- **Jose (Project Lead)**: Full Vercel access with linking
-- **Norma & Lily (Developers)**: Vercel CLI for local development only
+- **Jose (Project Lead)**: Full Vercel CLI access for infrastructure management
+- **Norma & Lily (Developers)**: Use `npm run dev` for daily development (Vercel-recommended)
 
 **Benefits:**
-- ✅ One person manages deployments and settings
-- ✅ Others get enhanced local development
-- ✅ Simpler permission management
+- ✅ Follows Vercel's official recommendations
+- ✅ One person manages deployments and infrastructure
+- ✅ Others get optimal development experience
 - ✅ Clear responsibility structure
+- ✅ No authentication complexity
 
 ```bash
 # Jose (Project Lead) - Full Setup
@@ -371,8 +378,9 @@ vercel link
 vercel env pull .env.local  # Downloads production env vars
 
 # Norma & Lily setup:
-npm i -g vercel
-# That's it! They use vercel dev without linking
+# No special setup needed! Just use Next.js development server
+npm run dev  # Works immediately, no authentication required
+# That's it! They use npm run dev (Next.js development server)
 ```
 
 ### Environment Variables Management
@@ -402,15 +410,16 @@ cp .env.example .env.local
 
 ### Vercel CLI Commands Without Account Linking
 
-#### **What Works Without vercel link:**
+#### **What Works Without Authentication:**
 ```bash
-vercel dev          # ✅ Enhanced local development
-vercel --version    # ✅ Check CLI version
-npx vercel dev      # ✅ Alternative if globally installed CLI has issues
+npm run dev         # ✅ Next.js development server (RECOMMENDED)
+npm install         # ✅ Install dependencies
+git commands        # ✅ All Git operations
 ```
 
-#### **What Requires vercel link:**
+#### **What Requires Vercel Login:**
 ```bash
+vercel dev          # ❌ Requires authentication for full functionality
 vercel --prod=false # ❌ Requires linked project
 vercel env pull     # ❌ Requires project access
 vercel logs         # ❌ Requires project access
@@ -450,8 +459,8 @@ npm i -g vercel
 cp .env.example .env.local
 # Edit .env.local with development credentials
 
-# Start development
-vercel dev
+# Start development (RECOMMENDED)
+npm run dev  # Next.js development server - perfect for most work!
 ```
 
 #### **Daily Development Workflow:**
@@ -462,7 +471,7 @@ git pull origin main
 git checkout -b feature/your-feature
 
 # Start development server
-vercel dev  # Enhanced local development
+npm run dev  # Next.js development server (recommended for most work)
 
 # Make changes, test locally
 git add .
@@ -496,31 +505,45 @@ git push origin feature/your-feature
 
 #### **Common Issues:**
 
-**1. "vercel dev" not working without linking:**
+**1. "Should I use vercel dev or npm run dev?"**
 ```bash
-# Solution: Use basic Next.js dev server
+# RECOMMENDED: Use npm run dev for most development work
 npm run dev
 
-# Or install packages for enhanced development
-npm install @vercel/node
+# Why npm run dev is better for team members:
+# - Works immediately after npm install
+# - No authentication required
+# - Includes all Next.js features (API routes, hot reload, routing)
+# - Officially recommended by Vercel for Next.js projects
+
+# Only use vercel dev when:
+# - You need Edge middleware testing (rare)
+# - Working with Vercel-specific routing
+# - Jose needs production environment for infrastructure work
 ```
 
 **2. Environment variables not available:**
 ```bash
-# Team members without linking need to manually set up .env.local
+# Team members should set up .env.local for development
 cp .env.example .env.local
-# Add development API keys and database URLs
+# Edit with development credentials (Jose will provide these securely)
+
+# For most development work, you don't need production environment variables
+npm run dev  # Uses your local .env.local file
 ```
 
 **3. Different team members seeing different behavior:**
 ```bash
-# Ensure everyone is using the same versions
+# Ensure everyone is using the same approach
+# All team members should use:
+npm run dev  # Consistent Next.js development server
+
+# Check versions if having issues
 node --version
 npm --version
-vercel --version
 
 # Update if needed
-npm i -g vercel@latest
+npm install -g npm@latest
 ```
 
 ---
@@ -529,14 +552,25 @@ npm i -g vercel@latest
 
 Let's add a contact form to demonstrate the complete workflow:
 
-### Step 1: Local Development (CLI)
+### Step 1: Local Development (For Jose - Infrastructure Lead)
 ```bash
-# Start local dev with production environment
+# Start local dev with production environment (Jose only)
 cd /home/jose/nextjs-boilerplate
 vercel dev
 
 # Open http://localhost:3000
-# You now have production environment variables available locally
+# Jose has production environment variables available locally
+# This is needed for infrastructure work and deployment testing
+```
+
+### Step 1: Local Development (For Team Members)
+```bash
+# Start local development (Norma & Lily)
+cd /home/jose/nextjs-boilerplate
+npm run dev
+
+# Open http://localhost:3000
+# Perfect for frontend/UI work and feature development
 ```
 
 ### Step 2: Create Feature Branch
@@ -551,7 +585,8 @@ git branch
 ### Step 3: Make Changes
 ```bash
 # Edit your files (app/page.tsx, create API routes, etc.)
-# Test changes with vercel dev running
+# Test changes with npm run dev running (for most team members)
+# OR vercel dev running (for Jose's infrastructure work)
 ```
 
 ### Step 4: Quick Preview (CLI) - Optional
@@ -658,8 +693,11 @@ main branch (production)
 
 #### 1. Environment Structure
 ```bash
-# Development (local)
-vercel dev  # Uses development database
+# Development (local - team members)
+npm run dev  # Uses development database and local environment
+
+# Development (local - Jose for infrastructure)
+vercel dev  # Uses production-like environment when needed
 
 # Staging (preview deployments)
 # Uses staging database, test payment processor
@@ -716,8 +754,10 @@ git pull origin main
 # Create feature branch
 git checkout -b feature/your-feature-name
 
-# Start development
-vercel dev
+# Start development (choose based on your role)
+npm run dev     # Recommended for most development work
+# OR
+vercel dev      # Only if you need Vercel-specific features
 
 # Work on your feature...
 # Commit frequently with descriptive messages
@@ -1028,10 +1068,10 @@ git log --oneline              # View commit history
 git diff                       # View unstaged changes
 ```
 
-### Vercel CLI Commands
+### Vercel CLI Commands (For Jose - Project Lead)
 ```bash
 # Development
-vercel dev                     # Start development server
+vercel dev                     # Start development server (requires auth)
 vercel --prod=false           # Create preview deployment
 vercel --prod                 # Deploy to production
 vercel link                   # Connect local project to Vercel
@@ -1053,9 +1093,9 @@ vercel whoami                # Check current user
 vercel --version             # Check CLI version
 ```
 
-### NPM Commands
+### NPM Commands (For All Team Members)
 ```bash
-npm run dev                  # Start basic Next.js dev server
+npm run dev                  # Start Next.js dev server (RECOMMENDED)
 npm run build               # Build for production
 npm run start               # Start production server locally
 npm install                 # Install dependencies
@@ -1135,9 +1175,10 @@ git commit -m "Update dependencies to latest versions"
 - Keep `.env.local` in `.gitignore`
 
 ### 4. Testing Strategy
-1. **Local testing**: Use `vercel dev` for production-like environment
-2. **Preview testing**: Create PR for team review
+1. **Local testing**: Use `npm run dev` for daily development work
+2. **Preview testing**: Create PR for team review and automatic preview deployment
 3. **Production monitoring**: Watch for errors after deployment
+4. **Infrastructure testing**: Jose uses `vercel dev` when needed for deployment preparation
 
 ### 5. Deployment Strategy
 - **Small changes**: Direct merge to main

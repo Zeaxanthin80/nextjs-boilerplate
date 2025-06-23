@@ -281,7 +281,9 @@
           <div class="step">
             <span class="step-number">4</span>
             <h4>Verify Setup</h4>
-            <div class="code-block">vercel --version vercel whoami</div>
+            <pre class="code-block">
+vercel --version 
+vercel whoami</pre>
           </div>
         </div>
       </div>
@@ -349,24 +351,21 @@
 
               <span class="comment"># 4. Set up environment variables</span> <br>
               <span class="command">cp .env.example .env.local</span> <br>
-              <span class="comment"># Edit .env.local with development credentials (Jose will provide)</span> <br> <br>
+              <span class="comment"># Edit .env.local with development credentials (Jose will provide)</span> <br> <br>          <span class="comment"># 5. Start development server (RECOMMENDED)</span> <br>
+          <span class="command">npm run dev</span>
+          <span class="comment"># Next.js development server - perfect for frontend work!</span> <br>
+          <span class="comment"># Includes hot reload, routing, API routes, and all Next.js features</span> <br> <br>
 
-              <span class="comment"># 5. Start development server</span> <br>
-              <span class="command">vercel dev</span>
-              <span class="comment"># Enhanced development server (works without Vercel login)</span> <br>
-              <span class="comment"># OR</span> <br>
-              <span class="command">npm run dev</span>
-              <span class="comment"># Basic Next.js server</span> <br> <br>
-
-              <span class="comment"># Note: vercel dev works without logging in to Vercel</span> <br>
-              <span class="comment"># It will use your local .env.local file for environment variables</span>
+          <span class="comment"># Alternative: vercel dev (if you have specific Vercel features)</span> <br>
+          <span class="comment"># Only needed for Edge middleware or custom Vercel routing</span> <br>
+          <span class="comment"># Requires Vercel login for most functionality</span>
             </div>
 
             <h5>Daily Workflow:</h5>
             <ul>
               <li>Pull latest changes from main</li>
               <li>Create feature branch for UI components</li>
-              <li>Use <code>vercel dev</code> for development</li>
+              <li>Use <code>npm run dev</code> for development (recommended)</li>
               <li>Create PRs for code review</li>
             </ul>
           </div>
@@ -388,14 +387,14 @@
 
               <span class="comment"># 4. Set up environment variables</span> <br>
               <span class="command">cp .env.example .env.local</span>
-              <span class="comment"># Edit .env.local with development credentials (Jose will provide)</span> <br> <br>
+              <span class="comment"># Edit .env.local with development credentials (Jose will provide)</span> <br> <br>          <span class="comment"># 5. Start development server (RECOMMENDED)</span> <br>
+          <span class="command">npm run dev</span> <br>
+          <span class="comment"># Next.js development server - perfect for feature work!</span> <br>
+          <span class="comment"># Handles API routes, integrations, and all development needs</span> <br> <br>
 
-              <span class="comment"># 5. Start development server</span> <br>
-              <span class="command">vercel dev</span> <br>
-              <span class="comment"># Enhanced development server (works without Vercel login)</span> <br> <br>
-
-              <span class="comment"># Note: vercel dev works without logging in to Vercel</span> <br>
-              <span class="comment"># It will use your local .env.local file for environment variables</span>
+          <span class="comment"># Alternative: vercel dev (only if needed for specific features)</span> <br>
+          <span class="comment"># Use only for Edge middleware or Vercel-specific routing</span> <br>
+          <span class="comment"># Requires Vercel login for full functionality</span>
             </div>
 
             <h5>Focus Areas:</h5>
@@ -431,45 +430,45 @@
       <div class="content" id="team-options">
         <h2>5. Team Member Vercel Setup Options</h2>
 
-        <h3>Option 1: Minimal Setup (Recommended for Most Teams)</h3>
+        <h3>Option 1: Simplified Setup (Recommended for Most Teams)</h3>
         <div class="alert alert-success">
           <strong>What each team member needs:</strong>
           <div class="code-block">
-            <span class="comment"
-              ># Only install Vercel CLI (no account linking required)</span> <br>
-            <span class="command">npm i -g vercel</span> <br> <br>
+            <span class="comment"># Team members use Next.js development server</span> <br>
+            <span class="command">npm run dev</span> <br>
+            <span class="comment"># Perfect for frontend/UI and feature development</span> <br>
+            <span class="comment"># Includes hot reload, API routes, and all Next.js features</span> <br> <br>
 
-            <span class="comment"># Use for local development enhancement only</span> <br>
-            <span class="command">vercel dev</span>
-            <span class="comment"># Works without linking to Vercel account!</span> <br>
-            <span class="comment"># Uses local .env.local file for environment variables</span>
+            <span class="comment"># Optional: Install Vercel CLI for enhanced workflow</span> <br>
+            <span class="command">npm i -g vercel</span> <br>
+            <span class="comment"># Useful for preview deployments and CLI commands</span>
           </div>
           <div class="alert alert-info" style="margin-top: 1rem;">
-            <strong><span class="status-icon info">💡</span>Important:</strong>
-            When team members run <code>vercel dev</code> without being logged in, they'll see a login prompt. Simply use the arrow keys to navigate to <strong>"Cancel"</strong> and press Enter. The command will continue and work using local environment variables.
+            <strong><span class="status-icon info">💡</span>Vercel's Recommendation:</strong>
+            For Next.js projects, <code>npm run dev</code> provides all the features most developers need. Vercel officially states: "If you're using a framework and your framework's Development Command already provides all the features you need, we do not recommend using vercel dev."
           </div>
         </div>
 
         <div class="benefits-grid">
           <div class="benefit">
             <div class="icon">🚀</div>
-            <strong>Enhanced Development</strong><br />
-            Production-like environment locally
+            <strong>Fast Development</strong><br />
+            Next.js dev server with hot reload
           </div>
           <div class="benefit">
             <div class="icon">🔒</div>
-            <strong>No Account Required</strong><br />
-            Team members don't need Vercel accounts
+            <strong>No Authentication Needed</strong><br />
+            Works immediately after npm install
           </div>
           <div class="benefit">
-            <div class="icon">🔐</div>
-            <strong>Secure</strong><br />
-            No access to production environment variables
+            <div class="icon">✅</div>
+            <strong>All Features Included</strong><br />
+            API routes, routing, and Next.js features
           </div>
           <div class="benefit">
             <div class="icon">⚡</div>
-            <strong>Simple Setup</strong><br />
-            Just install CLI and start developing
+            <strong>Vercel-Recommended</strong><br />
+            Official recommendation for Next.js projects
           </div>
         </div>
 
@@ -493,17 +492,14 @@
           <strong>Setup Distribution:</strong>
           <ul>
             <li>
-              <strong>Jose (Project Lead):</strong> Full Vercel access with
-              linking
+              <strong>Jose (Project Lead):</strong> Full Vercel CLI access with login/linking for infrastructure management
             </li>
             <li>
-              <strong>Norma & Lily (Developers):</strong> Vercel CLI for local
-              development only
+              <strong>Norma & Lily (Developers):</strong> Use <code>npm run dev</code> for daily development work
             </li>
           </ul>
           <p>
-            This provides the best balance of access control and development
-            experience.
+            This follows Vercel's official recommendations and provides the best development experience for your team roles.
           </p>
         </div>
       </div>
@@ -523,7 +519,8 @@
               <span class="command">vercel dev</span> <br> <br>
 
               <span class="comment"># Open http://localhost:3000</span> <br>
-              <span class="comment"># You now have production environment variables available locally</span>
+              <span class="comment"># Jose has production environment variables available locally</span> <br>
+              <span class="comment"># This is needed for infrastructure work and deployment testing</span>
             </div>
           </div>
 
@@ -765,52 +762,39 @@
         </div>
 
         <div class="alert alert-success">
-          <h4>4. "vercel dev asks me to login but I'm just a team member"</h4>
-          <p><strong>Solution:</strong> You don't need to login! Here's what to do:</p>
+          <h4>Updated Recommendation: Use npm run dev for Team Members</h4>
+          <p><strong>Solution:</strong> Based on Vercel's official documentation, team members should use Next.js's built-in development server:</p>
           <div class="code-block">
-            <span class="comment"># When you see the login prompt with options like:</span> <br>
-            <span class="comment"># > Log in to Vercel (Use arrow keys)</span> <br>
-            <span class="comment"># > Continue with GitHub</span> <br>
-            <span class="comment"># > Continue with GitLab</span> <br>
-            <span class="comment"># > Continue with Bitbucket</span> <br>
-            <span class="comment"># > Continue with Email</span> <br>
-            <span class="comment"># > Continue with SAML Single Sign-On</span> <br>
-            <span class="comment"># > Cancel</span> <br> <br>
-
-            <span class="comment"># Simply navigate to "Cancel" and press Enter</span> <br>
-            <span class="comment"># The command will continue and work with your local .env.local file</span>
+            <span class="comment"># Recommended approach for Norma and Lily:</span> <br>
+            <span class="command">npm run dev</span> <br>
+            <span class="comment"># This provides all the features needed for Next.js development</span> <br>
+            <span class="comment"># No authentication required, works immediately</span>
           </div>
-          <p><strong>Step-by-step:</strong></p>
-          <ol>
-            <li>Run <code>vercel dev</code></li>
-            <li>When login prompt appears, use arrow keys to navigate to <strong>"Cancel"</strong></li>
-            <li>Press <strong>Enter</strong> to select Cancel</li>
-            <li>The development server will start using your local environment variables</li>
-          </ol>
-          <p><strong>Note:</strong> Only Jose (project lead) needs to login to Vercel for production deployments and environment variable management.</p>
+          <p><strong>Why this works better:</strong></p>
+          <ul>
+            <li><code>npm run dev</code> includes hot reload, API routes, and all Next.js features</li>
+            <li>No authentication or login prompts</li>
+            <li>Officially recommended by Vercel for Next.js projects</li>
+            <li>Perfect for frontend/UI work (Norma) and feature development (Lily)</li>
+          </ul>
+          <p><strong>When to use vercel dev:</strong> Only Jose needs this for infrastructure work, deployment testing, and accessing production environment variables.</p>
         </div>
 
         <div class="alert alert-warning">
-          <h4>5. "vercel dev cancels login but server doesn't start"</h4>
-          <p><strong>Problem:</strong> Missing or incorrect .env.local file</p>
-          <p><strong>Solution:</strong></p>
+          <h4>5. "Should I use vercel dev or npm run dev?"</h4>
+          <p><strong>Answer:</strong> For most team members, use <code>npm run dev</code></p>
+          <p><strong>Explanation:</strong></p>
           <div class="code-block">
-            <span class="comment"># 1. Make sure you have copied the environment template</span> <br>
-            <span class="command">cp .env.example .env.local</span> <br> <br>
-
-            <span class="comment"># 2. Edit .env.local with development database credentials</span> <br>
-            <span class="comment"># Ask Jose for development database URL or set up local database</span> <br> <br>
-
-            <span class="comment"># 3. If still having issues, try basic Next.js server instead</span> <br>
+            <span class="comment"># For Norma (Frontend/UI) and Lily (Features/Integration):</span> <br>
             <span class="command">npm run dev</span> <br>
-            <span class="comment"># This works without any Vercel-specific configuration</span>
+            <span class="comment"># Perfect for: React components, styling, API integration, features</span> <br>
+            <span class="comment"># Includes: Hot reload, API routes, Next.js routing, fast refresh</span> <br> <br>
+
+            <span class="comment"># For Jose (Infrastructure/Lead) only when needed:</span> <br>
+            <span class="command">vercel dev</span> <br>
+            <span class="comment"># Needed for: Production environment testing, deployment preparation</span>
           </div>
-          <p><strong>Common fixes:</strong></p>
-          <ul>
-            <li>Ensure <code>.env.local</code> exists in project root</li>
-            <li>Make sure <code>DATABASE_URL</code> is properly formatted</li>
-            <li>Remove or comment out <code>VERCEL_OIDC_TOKEN</code> for team members</li>
-          </ul>
+          <p><strong>Vercel's Official Recommendation:</strong> "If you're using a framework and your framework's Development Command already provides all the features you need, we do not recommend using vercel dev."</p>
         </div>
 
         <div class="alert alert-warning">
@@ -825,10 +809,10 @@
         </div>
 
         <div class="alert alert-danger">
-          <h4>5. "Preview deployment failed"</h4>
+          <h4>6. "Preview deployment failed"</h4>
           <p>Check the Vercel dashboard for build logs:</p>
           <div class="code-block">
-            <span class="comment"># Or check logs via CLI</span> <br>
+            <span class="comment"># Or check logs via CLI (Jose only)</span> <br>
             <span class="command">vercel logs &lt;deployment-url&gt;</span>
           </div>
         </div>

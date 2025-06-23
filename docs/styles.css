@@ -297,12 +297,17 @@ tr:hover {
 }
 
 .step {
-    background: white;
+    background: rgb(224, 237, 255);
     border-radius: 8px;
     padding: 1.5rem;
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.4);
     border-left: 4px solid #3b82f6;
     margin-bottom: 1rem;
+
+    background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/oriental.png');
+    background-size: 200px 200px;
+    background-repeat: repeat;
+    background-blend-mode: overlay;
 }
 
 .step-number {

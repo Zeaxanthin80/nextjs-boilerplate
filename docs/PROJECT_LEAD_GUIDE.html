@@ -217,12 +217,12 @@
 
             <h3>Managing Team Access</h3>
             <div class="alert alert-info">
-                <h4>Current Setup: Hybrid Approach</h4>
+                <h4>Current Setup: Optimized Approach</h4>
                 <ul>
-                    <li><strong>Jose (You):</strong> Full Vercel access with project linking</li>
-                    <li><strong>Norma & Lily:</strong> Vercel CLI for enhanced local development only</li>
+                    <li><strong>Jose (You):</strong> Full Vercel CLI access for infrastructure and deployment management</li>
+                    <li><strong>Norma & Lily:</strong> Use <code>npm run dev</code> for efficient daily development (Vercel-recommended)</li>
                 </ul>
-                <p>This approach provides the best balance of security and development experience.</p>
+                <p>This approach follows Vercel's official recommendations and provides the best development experience for each role.</p>
             </div>
 
             <h3>Advanced Vercel Management</h3>
@@ -277,10 +277,9 @@
 <span class="command">git clone https://github.com/your-team/nextjs-boilerplate.git</span>
 <span class="command">cd nextjs-boilerplate</span>
 <span class="command">npm install</span>
-<span class="command">npm i -g vercel</span>
 <span class="command">cp .env.example .env.local</span> <span class="comment"># (You'll provide the .env.local values)</span>
 <span class="command">npm run db:generate</span>
-<span class="command">vercel dev</span>
+<span class="command">npm run dev</span> <span class="comment"># Recommended: Next.js development server</span>
                     </pre>
 
                     <h5>Environment Variables for Norma:</h5>
@@ -309,10 +308,9 @@
 <span class="command">git clone https://github.com/your-team/nextjs-boilerplate.git</span>
 <span class="command">cd nextjs-boilerplate</span>
 <span class="command">npm install</span>
-<span class="command">npm i -g vercel</span>
 <span class="command">cp .env.example .env.local</span> <span class="comment"># (You'll provide the .env.local values)</span>
 <span class="command">npm run db:generate</span>
-<span class="command">vercel dev</span>
+<span class="command">npm run dev</span> <span class="comment"># Recommended: Next.js development server</span>
                     </pre>
 
                     <h5>Testing Access:</h5>
