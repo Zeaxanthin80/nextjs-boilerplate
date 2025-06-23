@@ -1,127 +1,70 @@
 # Vercel + GitHub Workflow Guide
 
 ## Table of Contents
-1. [Quick Summary - Key Definitions](#quick-summary---key-definitions)
+1. [Quick Summary - Team Roles](#quick-summary---team-roles)
 2. [Understanding the Integration](#understanding-the-integration)
-3. [Setup Instructions](#setup-instructions)
-4. [Quick Setup Guide for Team Members](#quick-setup-guide-for-team-members)
-5. [Team Member Vercel Setup Options](#team-member-vercel-setup-options)
+3. [Setup Instructions for Jose (Project Lead)](#setup-instructions-for-jose-project-lead)
+4. [Setup Instructions for Team Members](#setup-instructions-for-team-members)
+5. [Daily Development Workflow](#daily-development-workflow)
 6. [Practical Example - Combined Workflow](#practical-example---combined-workflow)
-7. [Team Collaboration for Capstone Projects](#team-collaboration-for-capstone-projects)
+7. [Team Collaboration Best Practices](#team-collaboration-best-practices)
 8. [Command Reference](#command-reference)
 9. [Troubleshooting](#troubleshooting)
 10. [Best Practices](#best-practices)
 
 ---
 
-## Quick Summary - Key Definitions
+## Quick Summary - Team Roles
+
+### **Jose (Project Lead)**
+- **Has Vercel account and manages all deployments**
+- **Manages environment variables and production settings**
+- **Reviews and merges pull requests**
+- **Handles all Vercel CLI operations**
+
+### **Norma & Lily (Team Members)**
+- **Use GitHub for collaboration (no Vercel account needed)**
+- **Use `npm run dev` for all local development**
+- **Create branches and submit pull requests**
+- **Focus on coding without deployment concerns**
 
 ### Essential Terms
-- **PR (Pull Request)**: A GitHub feature to propose and review code changes before merging into main branch
-- **npm run dev**: Basic Next.js local development server using local environment
-- **vercel dev**: Development server for Vercel-specific features (authentication required)
-- **npm run dev**: Next.js development server (recommended for most development work)
-- **Preview Deployment**: Temporary deployment of your changes for testing (automatically created from PRs)
-- **Production Deployment**: Live website accessible to users (deployed from main branch)
-
-### Additional Useful Terms
-- **Branch**: Separate line of development in Git (like a copy of your code to work on)
-- **Commit**: Snapshot of your code changes with a descriptive message
-- **Merge**: Combining changes from one branch into another (usually into main)
-- **Environment Variables**: Configuration values (API keys, database URLs) stored securely
-- **Serverless Functions**: Code that runs on-demand without managing servers (in `/api` folder)
-- **Edge Runtime**: Vercel's global network that runs your code closer to users
-- **Hot Reload**: Automatic page refresh when you save code changes
-- **CI/CD**: Continuous Integration/Continuous Deployment (automated testing and deployment)
-- **Rollback**: Reverting to a previous version if something breaks
-- **Staging**: Testing environment that mimics production
+- **Pull Request (PR)**: GitHub feature to propose and review code changes before merging into main branch
+- **npm run dev**: Next.js local development server (what team members use)
+- **Preview Deployment**: Automatic temporary deployment created from PRs for testing
+- **Production Deployment**: Live website deployed from main branch (Jose manages)
 
 ---
 
 ## Understanding the Integration
 
-### Your Current Setup
-You started with:
-1. **Vercel Dashboard** → Created project from Next.js template
-2. **Connected to GitHub** → Vercel created a new GitHub repo
-3. **Auto-deployed** → Vercel deployed the template to production
-4. **Cloned locally** → You cloned the GitHub repo to work on it locally
+### Current Setup (Simplified)
+1. **GitHub Repository** → Contains your code
+2. **Vercel Project** → Connected to GitHub repository (Jose manages)
+3. **Automatic Deployments** → Vercel automatically deploys from GitHub
 
-### Two Integration Workflows
-
-#### Workflow 1: GitHub-Driven (Automatic) - Your Primary Method
+### **GitHub-Driven Workflow (Only Method Used)**
 ```
-GitHub Repo ←→ Vercel Project (Connected)
+GitHub Repo ←→ Vercel Project (Jose manages connection)
      ↓
-Push to main branch → Auto-deploys to Production
-Create PR → Auto-creates Preview Deployment
+Push to main branch → Jose reviews → Auto-deploys to Production
+Create PR → Auto-creates Preview Deployment for testing
 ```
 
 **Benefits:**
-- Automatic deployments
-- Team collaboration through PRs
-- Code review process
-- Deployment history
-
-#### Workflow 2: CLI-Driven (Manual) - Additional Control
-```
-Local Machine → Vercel CLI → Direct Deployment
-     ↓
-Skip GitHub entirely for quick tests
-Or supplement GitHub workflow
-```
-
-**Benefits:**
-- Quick testing without Git commits
-- Emergency deployments
-- Local development enhancement
-- Environment variable management
+- Automatic deployments without team complexity
+- Team collaboration through standard GitHub workflow
+- Code review process through pull requests
+- Clear separation of responsibilities
+- Preview deployments for testing changes
 
 ---
 
-## Setup Instructions
+## Setup Instructions for Jose (Project Lead)
 
-> **⚠️ Important:** The setup steps below depend on which team approach you choose (see Section 5: Team Member Vercel Setup Options). 
-> - **Minimal Setup**: Only Jose needs steps 2-4 (Login & Link). Norma & Lily only need step 1 (CLI install)
-> - **Full Access**: All team members need all steps 1-4
-> - **Hybrid (Recommended)**: Jose needs all steps 1-4, Norma & Lily need steps 1 & 4 only
-
-### 1. Install Vercel CLI
+### Initial Project Setup
 ```bash
-npm i -g vercel
-```
-
-### 2. Login to Vercel
-```bash
-vercel login
-```
-**Who needs this:** 
-- **Hybrid Approach (Recommended):** Jose only
-- **Full Team Access:** All team members
-- **Minimal Setup:** No one (skip this step)
-
-### 3. Link Your Project
-```bash
-vercel link
-```
-This connects your local folder to your existing Vercel project.
-
-**Who needs this:** Same as step 2 above.
-
-### 4. Verify Setup
-```bash
-vercel --version
-vercel whoami
-```
-
----
-
-## Quick Setup Guide for Team Members
-
-### **For Jose (Backend/Infrastructure - Project Lead):**
-
-```bash
-# 1. Create/clone the repository (if not already done)
+# 1. Clone the repository (if not already done)
 git clone https://github.com/your-team/nextjs-boilerplate.git
 cd nextjs-boilerplate
 
@@ -144,7 +87,10 @@ cp .env.local .env.example
 git add .env.example
 git commit -m "Add environment variables template for team"
 git push origin main
+```
 
+### GitHub Repository Setup
+```bash
 # 7. Set up branch protection rules on GitHub:
 # Go to GitHub → Settings → Branches → Add rule
 # - Branch name pattern: main
@@ -154,107 +100,117 @@ git push origin main
 # 8. Invite team members as collaborators:
 # GitHub → Settings → Manage access → Invite collaborators
 # Add Norma and Lily with "Write" permissions
+```
 
-# 9. Your daily workflow:
+### Jose's Daily Development Commands
+```bash
+# Start development server (for infrastructure/backend work)
+vercel dev
+
+# Alternative: Standard Next.js dev server
+npm run dev
+
+# Manage environment variables
+vercel env pull .env.local  # Pull latest from production
+vercel env add              # Add new environment variables
+
+# Check deployment status
+vercel ls                   # List deployments
+vercel logs                 # View deployment logs
+```
+
+---
+
+## Setup Instructions for Team Members
+
+### **For Norma & Lily (No Vercel Account Needed)**
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/your-team/nextjs-boilerplate.git
+cd nextjs-boilerplate
+
+# 2. Install dependencies
+npm install
+
+# 3. Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with development credentials (Jose will provide)
+
+# 4. Start development server
+npm run dev  # This is all you need!
+```
+
+**That's it!** Team members only need these 4 steps. No Vercel CLI installation, no authentication, no complex setup.
+
+### Team Members' Daily Development Commands
+```bash
+# This is the only command you need for development:
+npm run dev
+
+# Standard Git workflow:
 git checkout main
 git pull origin main
+git checkout -b feature/your-feature-name
+# Make your changes...
+git add .
+git commit -m "Add new feature"
+git push origin feature/your-feature-name
+# Create PR on GitHub
+```
+---
+
+## Daily Development Workflow
+
+### **Jose's Workflow (Project Lead)**
+```bash
+# Morning routine:
+git checkout main
+git pull origin main
+
+# Review pending PRs on GitHub
+# Check Vercel dashboard for deployment status
+
+# Start working on infrastructure/backend features:
 git checkout -b feature/auth-system
-# Make your changes...
-vercel dev  # Start development server (Jose - for infrastructure work)
+vercel dev  # Start development server with Vercel features
+# Make changes...
 git add .
-git commit -m "feat: implement NextAuth.js authentication system"
+git commit -m "feat: implement NextAuth.js authentication"
 git push origin feature/auth-system
-# Create PR on GitHub, review team PRs, manage deployments
-```
-
-### **For Norma (Frontend/UI):**
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/your-team/nextjs-boilerplate.git
-cd nextjs-boilerplate
-
-# 2. Install dependencies
-npm install
-
-# 3. Install Vercel CLI (for enhanced local development)
-npm i -g vercel
-
-# 4. Set up environment variables
-cp .env.example .env.local
-# Edit .env.local with development credentials (Jose will provide)
-
-# 5. Start development server (RECOMMENDED for most work)
-npm run dev  # Next.js development server - perfect for frontend work!
-
-# Alternative: vercel dev (only if needed for specific Vercel features)
-# Only needed for Edge middleware or custom Vercel routing
-# Requires Vercel login for most functionality
-
-# 6. Your daily workflow:
-git checkout main
-git pull origin main
-git checkout -b feature/dashboard-redesign
-# Make your changes...
-git add .
-git commit -m "Improve dashboard layout and add responsive design"
-git push origin feature/dashboard-redesign
 # Create PR on GitHub
+
+# Review team member PRs:
+# - Test preview deployments
+# - Code review on GitHub
+# - Merge approved PRs (triggers production deployment)
 ```
 
-### **For Lily (Features/Integration):**
-
+### **Norma & Lily's Workflow (Team Members)**
 ```bash
-# 1. Clone the repository
-git clone https://github.com/your-team/nextjs-boilerplate.git
-cd nextjs-boilerplate
-
-# 2. Install dependencies
-npm install
-
-# 3. Install Vercel CLI (for enhanced local development)
-npm i -g vercel
-
-# 4. Set up environment variables
-cp .env.example .env.local
-# Edit .env.local with development credentials (Jose will provide)
-
-# 5. Start development server (RECOMMENDED for feature work)
-npm run dev  # Next.js development server - perfect for feature development!
-
-# 6. Your daily workflow:
+# Morning routine:
 git checkout main
-git pull origin main
-git checkout -b feature/email-campaigns
-# Make your changes...
+git pull origin main  # Get latest changes from Jose and team
+
+# Start working on your feature:
+git checkout -b feature/dashboard-ui
+npm run dev  # Start development server
+# Make changes...
 git add .
-git commit -m "Add email campaign sending functionality"
-git push origin feature/email-campaigns
+git commit -m "Improve dashboard layout and responsiveness"
+git push origin feature/dashboard-ui
 # Create PR on GitHub
+
+# Wait for Jose's review and merge
+# Check preview deployment link in PR for testing
 ```
 
-### **Team Communication Setup:**
-
-```bash
-# Daily standup (15 minutes, can be async):
-# 1. What did you work on yesterday?
-# 2. What will you work on today?
-# 3. Any blockers or questions?
-
-# Weekly demo (Friday afternoon):
-# - Show progress on preview deployment
-# - Demo new features
-# - Plan next week's work
-# - Address any integration issues
-```
-
-### **Git Workflow for Team:**
-
+### **Git Workflow for Team**
 ```bash
 # Feature branch naming convention:
-git checkout -b feature/login-ui          # Norma
-git checkout -b feature/email-api         # Jose  
-git checkout -b feature/campaign-testing  # Lily
+git checkout -b feature/login-ui          # Norma - Frontend work
+git checkout -b feature/email-api         # Jose - Backend/infrastructure
+git checkout -b feature/campaign-testing  # Lily - Feature integration
 
 # Commit message format:
 git commit -m "feat: add responsive navigation menu
@@ -270,184 +226,34 @@ git pull origin main  # Get latest changes
 git checkout -b feature/your-new-feature
 ```
 
-### **VS Code Extensions (Recommended):**
+### **Environment Variables Management**
 
+#### **Jose's Responsibility:**
 ```bash
-# Install these extensions for better development:
-# - ES7+ React/Redux/React-Native snippets
-# - Tailwind CSS IntelliSense
-# - Prisma
-# - GitLens
-# - Auto Rename Tag
-# - Prettier - Code formatter
-```
+# Manage production environment variables
+vercel env add STRIPE_SECRET_KEY  # Add new variables
+vercel env pull .env.local        # Download latest for local testing
 
-### **VS Code Color Theme (Recommended):**
-
-```bash
-# Install these color themes for better team coordination:
-# - Frequency Grey <- Preferred
-# - Frequency Dark
-```
-
----
-
-## Team Member Vercel Setup Options
-
-#### **Option 1: Simplified Setup (Recommended for Most Teams)**
-
-**What each team member needs:**
-```bash
-# Team members use Next.js development server (Vercel-recommended)
-npm run dev  # Perfect for frontend/UI and feature development
-
-# Optional: Install Vercel CLI for enhanced workflow
-npm i -g vercel  # Useful for preview deployments and CLI commands
-```
-
-**Benefits:**
-- ✅ Fast development with Next.js dev server
-- ✅ No authentication required
-- ✅ All Next.js features included (API routes, routing, hot reload)
-- ✅ Officially recommended by Vercel for Next.js projects
-- ✅ Perfect for team collaboration
-
-**Vercel's Official Recommendation:**
-> "If you're using a framework and your framework's Development Command already provides all the features you need, we do not recommend using vercel dev."
-
-**Workflow:**
-```bash
-# Team member daily workflow
-git checkout -b feature/new-feature
-npm run dev  # Next.js development server - works immediately!
-# Make changes, test locally
-git add .
-git commit -m "Add new feature"
-git push origin feature/new-feature
-# Create PR on GitHub → Vercel auto-deploys preview
-```
-
-#### **Option 2: Full Team Access (For Advanced Teams)**
-
-**What each team member needs:**
-```bash
-# 1. Create individual Vercel accounts (free)
-# 2. Project owner invites team members to Vercel project
-# 3. Each member links their local project
-vercel login  # Login with their own account
-vercel link   # Link to shared project
-```
-
-**Benefits:**
-- ✅ Access to production environment variables
-- ✅ Can create manual preview deployments
-- ✅ Can view deployment logs and analytics
-- ✅ Can manage environment variables
-
-**Team Setup Process:**
-```bash
-# Project owner (Jose):
-# 1. Go to Vercel Dashboard → Project → Settings → Members
-# 2. Invite team members by email
-# 3. Set appropriate permissions (Developer/Viewer)
-
-# Team members (Norma & Lily):
-# 1. Accept Vercel invitation email
-# 2. Create Vercel account (if needed)
-vercel login
-vercel link  # Select the shared project
-```
-
-#### **Option 3: Hybrid Approach (Recommended for Capstone)**
-
-**Setup:**
-- **Jose (Project Lead)**: Full Vercel CLI access for infrastructure management
-- **Norma & Lily (Developers)**: Use `npm run dev` for daily development (Vercel-recommended)
-
-**Benefits:**
-- ✅ Follows Vercel's official recommendations
-- ✅ One person manages deployments and infrastructure
-- ✅ Others get optimal development experience
-- ✅ Clear responsibility structure
-- ✅ No authentication complexity
-
-```bash
-# Jose (Project Lead) - Full Setup
-vercel login
-vercel link
-vercel env pull .env.local  # Downloads production env vars
-
-# Norma & Lily setup:
-# No special setup needed! Just use Next.js development server
-npm run dev  # Works immediately, no authentication required
-# That's it! They use npm run dev (Next.js development server)
-```
-
-### Environment Variables Management
-
-#### **Shared Development Environment Variables**
-Create a `.env.example` file for team coordination:
-
-```bash
-# .env.example (committed to Git)
-NEXTAUTH_SECRET=your-secret-here
-NEXTAUTH_URL=http://localhost:3000
-DATABASE_URL=postgresql://username:password@localhost:5432/dbname
-STRIPE_PUBLISHABLE_KEY=pk_test_...
-STRIPE_SECRET_KEY=sk_test_...
-GOOGLE_CLIENT_ID=your-google-client-id
-GOOGLE_CLIENT_SECRET=your-google-client-secret
-```
-
-#### **Team Member Environment Setup**
-```bash
-# Each team member creates their own .env.local
-cp .env.example .env.local
-
-# Fill in with development/test credentials
-# Use test API keys, local database, etc.
-```
-
-### Vercel CLI Commands Without Account Linking
-
-#### **What Works Without Authentication:**
-```bash
-npm run dev         # ✅ Next.js development server (RECOMMENDED)
-npm install         # ✅ Install dependencies
-git commands        # ✅ All Git operations
-```
-
-#### **What Requires Vercel Login:**
-```bash
-vercel dev          # ❌ Requires authentication for full functionality
-vercel --prod=false # ❌ Requires linked project
-vercel env pull     # ❌ Requires project access
-vercel logs         # ❌ Requires project access
-vercel ls          # ❌ Requires account access
-```
-
-### Recommended Workflow for Your Capstone Team
-
-#### **Initial Setup (Jose - Project Lead Only):**
-```bash
-# Jose (Project Lead) - Full Setup
-vercel login
-vercel link
-vercel env pull .env.local
-
-# Create .env.example for team
+# Update team template when new variables are added
 cp .env.local .env.example
 # Remove sensitive values, keep structure
 git add .env.example
-git commit -m "Add environment variables template"
+git commit -m "Update environment variables template"
 git push origin main
 ```
 
-#### **Team Member Setup (Norma & Lily):**
+#### **Team Members:**
 ```bash
-# Clone repository
-git clone https://github.com/your-team/nextjs-boilerplate.git
-cd nextjs-boilerplate
+# Use development credentials provided by Jose
+cp .env.example .env.local
+# Edit .env.local with development values (Jose provides these)
+
+# Example .env.local for team members:
+NEXTAUTH_SECRET=dev-secret-key
+NEXTAUTH_URL=http://localhost:3000
+DATABASE_URL=postgresql://dev_user:dev_pass@localhost:5432/dev_db
+STRIPE_PUBLISHABLE_KEY=pk_test_...  # Test keys only
+```
 
 # Install dependencies
 npm install
@@ -641,356 +447,96 @@ git pull origin main
 
 # Delete the feature branch (optional)
 git branch -d add-contact-form
-```
-
 ---
 
-## Team Collaboration for Capstone Projects
+## Team Collaboration Best Practices
 
-### Why This Workflow is Perfect for Your Marketing SaaS
-
-✅ **3-Person Team Coordination**: PR-based workflow prevents conflicts and ensures code review  
-✅ **Preview Deployments**: Stakeholders can test features before they go live  
-✅ **Environment Management**: Separate dev, staging, and production environments  
-✅ **Version Control**: Track who changed what and when (important for grading)  
-✅ **Professional Standards**: Industry-standard workflow that looks great in portfolios  
-✅ **SaaS-Ready**: Built-in support for databases, authentication, and APIs  
-
-### Team Setup and Organization
-
-#### 1. Repository Setup
+### **Repository Setup (Jose's Responsibility)**
 ```bash
-# One team member creates the main repository
-# Add other team members as collaborators:
+# 1. Set up branch protection rules on GitHub:
+# Go to GitHub → Settings → Branches → Add rule
+# - Branch name pattern: main
+# - Require pull request reviews before merging
+# - Require status checks to pass before merging
+
+# 2. Invite team members as collaborators:
 # GitHub → Settings → Manage access → Invite collaborators
-
-# Everyone clones the same repository
-git clone https://github.com/your-team/nextjs-boilerplate.git
-cd nextjs-boilerplate
-
-# Everyone links their local project to Vercel
-vercel link
+# Add Norma and Lily with "Write" permissions
 ```
 
-#### 2. Branch Protection Rules (Recommended)
-Set up branch protection on GitHub:
-- Go to **Settings** → **Branches** → **Add rule**
-- Branch name pattern: `main`
-- ✅ Require pull request reviews before merging
-- ✅ Require status checks to pass before merging
-- ✅ Require branches to be up to date before merging
+### **Daily Team Workflow**
 
-#### 3. Team Workflow Structure
-```
-main branch (production)
-├── dev branch (shared development)
-├── feature/user-authentication (Jose)
-├── feature/dashboard-ui (Norma)
-└── feature/email-campaigns (Lily)
-```
-
-### SaaS-Specific Implementation
-
-#### 1. Environment Structure
+#### **Morning Routine (All Team Members)**
 ```bash
-# Development (local - team members)
-npm run dev  # Uses development database and local environment
-
-# Development (local - Jose for infrastructure)
-vercel dev  # Uses production-like environment when needed
-
-# Staging (preview deployments)
-# Uses staging database, test payment processor
-
-# Production
-# Uses production database, live payment processor
-```
-
-#### 2. Essential SaaS Features Setup
-
-**Authentication System:**
-```bash
-# Install NextAuth.js for authentication
-npm install next-auth
-npm install @auth/prisma-adapter prisma @prisma/client
-
-# Set up providers (Google, GitHub, email)
-# Environment variables needed:
-# NEXTAUTH_SECRET=
-# GOOGLE_CLIENT_ID=
-# GOOGLE_CLIENT_SECRET=
-```
-
-**Database Setup:**
-```bash
-# Install Prisma for database management
-npm install prisma @prisma/client
-npx prisma init
-
-# Environment variables:
-# DATABASE_URL="postgresql://..."
-# DIRECT_URL="postgresql://..." (for migrations)
-```
-
-**Payment Processing:**
-```bash
-# Install Stripe for subscriptions
-npm install stripe @stripe/stripe-js
-
-# Environment variables:
-# STRIPE_SECRET_KEY=
-# STRIPE_PUBLISHABLE_KEY=
-# STRIPE_WEBHOOK_SECRET=
-```
-
-#### 3. Team Development Workflow
-
-**Daily Workflow:**
-```bash
-# Start each day
 git checkout main
-git pull origin main
+git pull origin main  # Get latest changes
 
-# Create feature branch
-git checkout -b feature/your-feature-name
-
-# Start development (choose based on your role)
-npm run dev     # Recommended for most development work
-# OR
-vercel dev      # Only if you need Vercel-specific features
-
-# Work on your feature...
-# Commit frequently with descriptive messages
-git add .
-git commit -m "Add user registration form with validation"
-
-# Push and create PR when ready
-git push origin feature/your-feature-name
+# Check for any new environment variables
+cp .env.example .env.local  # Update if Jose added new variables
 ```
 
-**Weekly Integration:**
+#### **Feature Development Process**
+1. **Start New Feature:** Create descriptive branch name
+   ```bash
+   git checkout -b feature/login-ui          # Norma - Frontend work
+   git checkout -b feature/email-api         # Jose - Backend/infrastructure  
+   git checkout -b feature/campaign-testing  # Lily - Feature integration
+   ```
+
+2. **Development:** Work locally with `npm run dev`
+3. **Testing:** Test your changes thoroughly
+4. **Commit:** Use clear, descriptive commit messages
+5. **Push:** Push branch and create PR on GitHub
+6. **Review:** Jose reviews and merges approved PRs
+
+#### **Communication Setup**
 ```bash
-# Merge completed features to dev branch
-git checkout dev
-git pull origin dev
-git merge feature/completed-feature
-git push origin dev
-
-# Test integration
-vercel --prod=false  # Creates preview deployment
-```
-
-#### 4. Project Organization by Team Member
-
-**Jose: Backend/Infrastructure**
-- Authentication system (NextAuth.js)
-- Database schema design (Prisma)
-- API routes and serverless functions
-- Environment setup and deployment
-- Stripe integration for subscriptions
-
-**Norma: Frontend/UI**
-- Dashboard components and layouts
-- Landing page and marketing site
-- User interface design and styling
-- Responsive design and mobile optimization
-- Component library and design system
-
-**Lily: Features/Integration**
-- Email campaign functionality
-- Analytics and reporting dashboard
-- Third-party integrations (SendGrid, etc.)
-- Testing and quality assurance
-- User experience and flow optimization
-
-### Marketing SaaS Specific Features
-
-#### 1. Core Features to Implement
-```bash
-# Email marketing functionality
-npm install @sendgrid/mail nodemailer
-
-# Analytics and tracking
-npm install @vercel/analytics mixpanel
-
-# Charts and dashboards
-npm install recharts chart.js
-
-# Form handling
-npm install react-hook-form zod
-```
-
-#### 2. API Routes Structure
-```
-/api
-├── auth/           # Authentication endpoints
-├── users/          # User management
-├── campaigns/      # Email campaigns
-├── analytics/      # Usage analytics
-├── billing/        # Subscription management
-└── webhooks/       # External service webhooks
-```
-
-#### 3. Database Schema Example
-```prisma
-// prisma/schema.prisma
-model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  plan      Plan     @default(FREE)
-  campaigns Campaign[]
-  createdAt DateTime @default(now())
-}
-
-model Campaign {
-  id          String   @id @default(cuid())
-  title       String
-  content     String
-  recipients  String[]
-  status      Status   @default(DRAFT)
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
-  createdAt   DateTime @default(now())
-}
-
-enum Plan {
-  FREE
-  PRO
-  ENTERPRISE
-}
-
-enum Status {
-  DRAFT
-  SCHEDULED
-  SENT
-}
-```
-
-### Project Management Integration
-
-#### 1. GitHub Issues for Task Management
-```bash
-# Create issues for each feature
-# Example issues:
-- [ ] Set up user authentication system
-- [ ] Design dashboard wireframes
-- [ ] Implement email campaign creation
-- [ ] Add payment processing
-- [ ] Create landing page
-- [ ] Set up analytics tracking
-```
-
-#### 2. GitHub Projects Board
-Set up a project board with columns:
-- **Backlog**: Features to implement
-- **In Progress**: Currently being worked on
-- **Review**: In pull request review
-- **Testing**: In preview deployment testing
-- **Done**: Merged and deployed
-
-#### 3. Communication Workflow
-```bash
-# Daily standup (can be async in Slack/Discord):
+# Daily standup (15 minutes, can be async):
 # 1. What did you work on yesterday?
 # 2. What will you work on today?
 # 3. Any blockers or questions?
 
-# Weekly demo:
+# Weekly demo (Friday afternoon):
 # - Show progress on preview deployment
-# - Discuss next week's priorities
-# - Review any issues or bugs
+# - Demo new features
+# - Plan next week's work
+# - Address any integration issues
 ```
 
-### Capstone Documentation
+### **Team Member Responsibilities**
 
-#### 1. Track Everything for Your Portfolio
+#### **Jose (Project Lead)**
+- **✅ Manage Vercel deployments and environment variables**
+- **✅ Review and merge all pull requests**
+- **✅ Handle backend/infrastructure work**
+- **✅ Manage database schema and API routes**
+- **✅ Setup and maintain development environment for team**
+
+#### **Norma (Frontend/UI)**
+- **✅ Create user interface components and layouts**
+- **✅ Implement responsive design and styling**
+- **✅ Work on landing pages and marketing site**
+- **✅ Use `npm run dev` for all development work**
+- **✅ Submit pull requests for all changes**
+
+#### **Lily (Features/Integration)**
+- **✅ Implement business features and user flows**
+- **✅ Handle third-party integrations and APIs**
+- **✅ Test features and ensure quality**
+- **✅ Use `npm run dev` for all development work**
+- **✅ Submit pull requests for all changes**
+
+### **VS Code Extensions (Recommended for Team)**
 ```bash
-# Keep detailed commit messages
-git commit -m "feat: add email template editor with drag-drop functionality
-
-- Implement drag-drop interface using react-dnd
-- Add template preview functionality
-- Include responsive design for mobile
-- Add unit tests for template validation
-
-Closes #23"
-
-# Document architectural decisions
-# Create docs/ folder with:
-# - README.md (project overview)
-# - ARCHITECTURE.md (technical decisions)
-# - API.md (API documentation)
-# - DEPLOYMENT.md (deployment process)
+# Install these extensions for better development:
+# - ES7+ React/Redux/React-Native snippets
+# - Tailwind CSS IntelliSense
+# - Prisma
+# - GitLens
+# - Auto Rename Tag
+# - Prettier - Code formatter
+# - GitHub Pull Requests and Issues
 ```
-
-#### 2. Demo Preparation
-```bash
-# Create separate demo environment
-git checkout -b demo-environment
-# Set up demo data, clean UI, etc.
-vercel --prod=false  # Deploy demo version
-
-# Prepare presentation materials:
-# - Live demo URL
-# - GitHub repository
-# - Technical documentation
-# - Feature walkthrough
-```
-
-### Grading and Assessment Benefits
-
-✅ **Version Control History**: Professors can see individual contributions  
-✅ **Professional Workflow**: Demonstrates industry-standard practices  
-✅ **Deployment Pipeline**: Shows understanding of modern development  
-✅ **Team Collaboration**: Evidence of effective teamwork  
-✅ **Documentation**: Well-documented codebase and processes  
-✅ **Live Demo**: Working application with real URL  
-
-### 7-Week Capstone Timeline (Accelerated)
-
-**Week 1: Foundation & Setup** 🚀
-- **Jose (Backend)**: Repository setup, basic Next.js app, database schema
-- **Norma (Frontend)**: Team onboarding, design system setup, basic components
-- **Lily (Features)**: Project planning, API research, testing framework
-- **Deliverable**: Working Next.js app with basic authentication
-
-**Week 2: Core Authentication & UI** 🔐
-- **Jose**: NextAuth.js setup, user registration/login, database integration
-- **Norma**: Landing page, dashboard layout, navigation components
-- **Lily**: User flow testing, form validation, basic email setup
-- **Deliverable**: Users can register, login, and see basic dashboard
-
-**Week 3: Essential SaaS Features** 📧
-- **Jose**: Email campaign API routes, database models for campaigns
-- **Norma**: Campaign creation UI, email template builder
-- **Lily**: Email sending integration (SendGrid), campaign management
-- **Deliverable**: Users can create and send basic email campaigns
-
-**Week 4: Dashboard & Analytics** 📊
-- **Jose**: Analytics API, campaign performance tracking
-- **Norma**: Dashboard with charts, campaign analytics UI
-- **Lily**: Data integration, reporting features, user feedback
-- **Deliverable**: Working dashboard with campaign analytics
-
-**Week 5: Subscriptions & Polish** 💳
-- **Jose**: Stripe integration, subscription management API
-- **Norma**: Pricing page, subscription UI, mobile responsiveness
-- **Lily**: Payment flow testing, feature limitations by plan
-- **Deliverable**: Complete SaaS with subscription tiers
-
-**Week 6: Testing & Documentation** 🧪
-- **Jose**: Performance optimization, security review, API documentation
-- **Norma**: UI/UX improvements, accessibility, design polish
-- **Lily**: End-to-end testing, bug fixes, user documentation
-- **Deliverable**: Production-ready application with documentation
-
-**Week 7: Final Demo Preparation** 🎯
-- **All Team**: Demo environment setup, presentation materials, final testing
-- **Jose**: Deploy demo version, prepare technical documentation
-- **Norma**: Create presentation slides, demo script
-- **Lily**: Test all user flows, prepare feature walkthrough
-- **Deliverable**: Live demo, presentation, and project submission
 
 ### Simplified 7-Week SaaS Scope (MVP Approach)
 
@@ -1108,32 +654,26 @@ npm install package-name    # Install specific package
 
 ### Common Issues
 
-#### 1. "vercel command not found"
+#### 1. "npm run dev not working"
 ```bash
-# Solution: Install globally
-npm i -g vercel
+# Solution: Make sure dependencies are installed
+npm install
 
-# Or use npx
-npx vercel
+# Check if port 3000 is available
+npm run dev -- --port 3001  # Use different port if needed
 ```
 
-#### 2. "Project not linked"
+#### 2. "Environment variables not working"
 ```bash
-# Solution: Link your project
-vercel link
+# Solution: Make sure .env.local exists and has correct values
+cp .env.example .env.local
+# Edit .env.local with development credentials (Jose provides these)
 
-# Follow the prompts to connect to your existing Vercel project
+# Restart development server after changes
+npm run dev
 ```
 
-#### 3. "Environment variables not working"
-```bash
-# Solution: Pull from production
-vercel env pull .env.local
-
-# Then restart your dev server
-```
-
-#### 4. "Git push rejected"
+#### 3. "Git push rejected"
 ```bash
 # Solution: Pull latest changes first
 git pull origin main
@@ -1142,12 +682,41 @@ git pull origin main
 git push origin your-branch-name
 ```
 
-#### 5. "Preview deployment failed"
-Check the Vercel dashboard for build logs:
+#### 4. "Can't create pull request"
 ```bash
-# Or check logs via CLI
+# Make sure you're on the correct branch
+git branch  # Check current branch
+
+# Make sure you've pushed your branch
+git push origin your-branch-name
+
+# Then go to GitHub.com to create PR
+```
+
+#### 5. "Preview deployment failed" (Jose only)
+```bash
+# Check Vercel dashboard for build logs
+# Or check logs via CLI (Jose only)
 vercel logs <deployment-url>
 ```
+
+#### 6. "Should I use npm run dev or vercel dev?"
+**Answer:** Team members should ALWAYS use `npm run dev`
+
+```bash
+# For Norma and Lily (team members):
+npm run dev  # This is all you need!
+
+# For Jose (infrastructure work only):
+vercel dev   # Only when needed for deployment testing
+```
+
+**Why `npm run dev` is better for team members:**
+- ✅ No authentication required
+- ✅ Works immediately after `npm install`
+- ✅ Includes all Next.js features (hot reload, API routes, routing)
+- ✅ Officially recommended by Vercel for Next.js projects
+- ✅ Perfect for frontend/UI work and feature development
 
 ---
 
