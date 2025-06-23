@@ -155,57 +155,60 @@ Create PR → Auto-creates Preview Deployment for testing</pre>
 
         <h3>Initial Project Setup</h3>
         <pre class="code-block">
-# 1. Clone the repository (if not already done)
-git clone https://github.com/your-team/nextjs-boilerplate.git
-cd nextjs-boilerplate
+<span class="comment"># 1. Clone the repository (if not already done)</span>
+<span class="command">git clone https://github.com/your-team/nextjs-boilerplate.git</span>
+<span class="command">cd nextjs-boilerplate</span>
 
-# 2. Install dependencies
-npm install
+<span class="comment"># 2. Install dependencies</span>
+<span class="command">npm install</span>
 
-# 3. Install Vercel CLI globally
-npm i -g vercel
+<span class="comment"># 3. Install Vercel CLI globally</span>
+<span class="command">npm i -g vercel</span>
 
-# 4. Login and link to Vercel project
-vercel login
-vercel link
+<span class="comment"># 4. Login and link to Vercel project</span>
+<span class="command">vercel login</span>
+<span class="command">vercel link</span>
 
-# 5. Pull production environment variables
-vercel env pull .env.local
+<span class="comment"># 5. Pull production environment variables</span>
+<span class="command">vercel env pull .env.local</span>
 
-# 6. Create environment template for team
-cp .env.local .env.example
-# Edit .env.example to remove sensitive values, keep structure only
-git add .env.example
-git commit -m "Add environment variables template for team"
-git push origin main</pre>
+<span class="comment"># 6. Create environment template for team</span>
+<span class="command">cp .env.local .env.example</span>
+<span class="comment"># Edit .env.example to remove sensitive values, keep structure only</span>
+<span class="command">git add .env.example</span>
+<span class="command">git commit -m "Add environment variables template for team"</span>
+<span class="command">git push origin main</span>
+</pre>
 
         <h3>GitHub Repository Setup</h3>
         <pre class="code-block">
-# 7. Set up branch protection rules on GitHub:
-# Go to GitHub → Settings → Branches → Add rule
-# - Branch name pattern: main
-# - Require pull request reviews before merging
-# - Require status checks to pass before merging
+<span class="comment"># 7. Set up branch protection rules on GitHub:</span>
+<span class="comment"># Go to GitHub → Settings → Branches → Add rule</span>
+<span class="comment"># - Branch name pattern: main</span>
+<span class="comment"># - Require pull request reviews before merging</span>
+<span class="comment"># - Require status checks to pass before merging</span>
 
-# 8. Invite team members as collaborators:
-# GitHub → Settings → Manage access → Invite collaborators
-# Add Norma and Lily with "Write" permissions</pre>
+<span class="comment"># 8. Invite team members as collaborators:</span>
+<span class="comment"># GitHub → Settings → Manage access → Invite collaborators</span>
+<span class="comment"># Add Norma and Lily with "Write" permissions</span>
+</pre>
 
         <h3>Jose's Daily Development Commands</h3>
         <pre class="code-block">
-# Start development server (for infrastructure/backend work)
-vercel dev
+<span class="comment"># Start development server (for infrastructure/backend work)</span>
+<span class="command">vercel dev</span>
 
-# Alternative: Standard Next.js dev server
-npm run dev
+<span class="comment"># Alternative: Standard Next.js dev server</span>
+<span class="command">npm run dev</span>
 
-# Manage environment variables
-vercel env pull .env.local  # Pull latest from production
-vercel env add              # Add new environment variables
+<span class="comment"># Manage environment variables</span>
+<span class="command">vercel env pull .env.local</span>  <span class="comment"># Pull latest from production</span>
+<span class="command">vercel env add</span>              <span class="comment"># Add new environment variables</span>
 
-# Check deployment status
-vercel ls                   # List deployments
-vercel logs                 # View deployment logs</pre>
+<span class="comment"># Check deployment status</span>
+<span class="command">vercel ls</span>                   <span class="comment"># List deployments</span>
+<span class="command">vercel logs</span>                 <span class="comment"># View deployment logs</span>
+</pre>
       </div>
 
       <!-- 4. Team Setup -->
@@ -215,19 +218,20 @@ vercel logs                 # View deployment logs</pre>
         <h3><strong>For Norma & Lily (No Vercel Account Needed)</strong></h3>
 
         <pre class="code-block">
-# 1. Clone the repository
-git clone https://github.com/your-team/nextjs-boilerplate.git
-cd nextjs-boilerplate
+<span class="comment"># 1. Clone the repository</span>
+<span class="command">git clone https://github.com/your-team/nextjs-boilerplate.git</span>
+<span class="command">cd nextjs-boilerplate</span>
 
-# 2. Install dependencies
-npm install
+<span class="comment"># 2. Install dependencies</span>
+<span class="command">npm install</span>
 
-# 3. Set up environment variables
-cp .env.example .env.local
-# Edit .env.local with development credentials (Jose will provide)
+<span class="comment"># 3. Set up environment variables</span>
+<span class="command">cp .env.example .env.local</span>
+<span class="comment"># Edit .env.local with development credentials (Jose will provide)</span>
 
-# 4. Start development server
-npm run dev  # This is all you need!</pre>
+<span class="comment"># 4. Start development server</span>
+<span class="command">npm run dev</span>  <span class="comment"># This is all you need!</span>
+</pre>
 
         <div class="alert alert-success">
           <strong>That's it!</strong> Team members only need these 4 steps. No Vercel CLI installation, no authentication, no complex setup.
@@ -235,18 +239,18 @@ npm run dev  # This is all you need!</pre>
 
         <h3>Team Members' Daily Development Commands</h3>
         <pre class="code-block">
-# This is the only command you need for development:
-npm run dev
+<span class="comment"># This is the only command you need for development:</span>
+<span class="command">npm run dev</span>
 
-# Standard Git workflow:
-git checkout main
-git pull origin main
-git checkout -b feature/your-feature-name
-# Make your changes...
-git add .
-git commit -m "Add new feature"
-git push origin feature/your-feature-name
-# Create PR on GitHub</pre>
+<span class="comment"># Standard Git workflow:</span>
+<span class="command">git checkout main</span>
+<span class="command">git pull origin main</span>
+<span class="command">git checkout -b feature/your-feature-name</span>
+<span class="comment"># Make your changes...</span>
+<span class="command">git add .</span>
+<span class="command">git commit -m "Add new feature"</span>
+<span class="command">git push origin feature/your-feature-name</span>
+<span class="comment"># Create PR on GitHub</span></pre>
       </div>
 
       <!-- 5. Daily Workflow -->
@@ -255,91 +259,95 @@ git push origin feature/your-feature-name
 
         <h3><strong>Jose's Workflow (Project Lead)</strong></h3>
         <pre class="code-block">
-# Morning routine:
-git checkout main
-git pull origin main
+<span class="comment"># Morning routine:</span>
+<span class="command">git checkout main</span>
+<span class="command">git pull origin main</span>
 
-# Review pending PRs on GitHub
-# Check Vercel dashboard for deployment status
+<span class="comment"># Review pending PRs on GitHub</span>
+<span class="comment"># Check Vercel dashboard for deployment status</span>
 
-# Start working on infrastructure/backend features:
-git checkout -b feature/auth-system
-vercel dev  # Start development server with Vercel features
-# Make changes...
-git add .
-git commit -m "feat: implement NextAuth.js authentication"
-git push origin feature/auth-system
-# Create PR on GitHub
+<span class="comment"># Start working on infrastructure/backend features:</span>
+<span class="command">git checkout -b feature/auth-system</span>
+<span class="command">vercel dev</span>  <span class="comment"># Start development server with Vercel features</span>
+<span class="comment"># Make changes...</span>
+<span class="command">git add .</span>
+<span class="command">git commit -m "feat: implement NextAuth.js authentication"</span>
+<span class="command">git push origin feature/auth-system</span>
+<span class="comment"># Create PR on GitHub</span>
 
-# Review team member PRs:
-# - Test preview deployments
-# - Code review on GitHub
-# - Merge approved PRs (triggers production deployment)</pre>
+<span class="comment"># Review team member PRs:</span>
+<span class="comment"># - Test preview deployments</span>
+<span class="comment"># - Code review on GitHub</span>
+<span class="comment"># - Merge approved PRs (triggers production deployment)</span>
+</pre>
 
         <h3><strong>Norma & Lily's Workflow (Team Members)</strong></h3>
         <pre class="code-block">
-# Morning routine:
-git checkout main
-git pull origin main  # Get latest changes from Jose and team
+<span class="comment"># Morning routine:</span>
+<span class="command">git checkout main</span>
+<span class="command">git pull origin main</span>  <span class="comment"># Get latest changes from Jose and team</span>
 
-# Start working on your feature:
-git checkout -b feature/dashboard-ui
-npm run dev  # Start development server
-# Make changes...
-git add .
-git commit -m "Improve dashboard layout and responsiveness"
-git push origin feature/dashboard-ui
-# Create PR on GitHub
+<span class="comment"># Start working on your feature:</span>
+<span class="command">git checkout -b feature/dashboard-ui</span>
+<span class="command">npm run dev</span>  <span class="comment"># Start development server</span>
+<span class="comment"># Make changes...</span>
+<span class="command">git add .</span>
+<span class="command">git commit -m "Improve dashboard layout and responsiveness"</span>
+<span class="command">git push origin feature/dashboard-ui</span>
+<span class="comment"># Create PR on GitHub</span>
 
-# Wait for Jose's review and merge
-# Check preview deployment link in PR for testing</pre>
+<span class="comment"># Wait for Jose's review and merge</span>
+<span class="comment"># Check preview deployment link in PR for testing</span>
+</pre>
 
         <h3><strong>Git Workflow for Team</strong></h3>
         <pre class="code-block">
-# Feature branch naming convention:
-git checkout -b feature/login-ui          # Norma - Frontend work
-git checkout -b feature/email-api         # Jose - Backend/infrastructure
-git checkout -b feature/campaign-testing  # Lily - Feature integration
+<span class="comment"># Feature branch naming convention:</span>
+<span class="command">git checkout -b feature/login-ui</span>          <span class="comment"># Norma - Frontend work</span>
+<span class="command">git checkout -b feature/email-api</span>         <span class="comment"># Jose - Backend/infrastructure</span>
+<span class="command">git checkout -b feature/campaign-testing</span>  <span class="comment"># Lily - Feature integration</span>
 
-# Commit message format:
-git commit -m "feat: add responsive navigation menu
+<span class="comment"># Commit message format:</span>
+<span class="command">git commit -m "feat: add responsive navigation menu
 
 - Implement mobile hamburger menu
 - Add smooth transitions
 - Fix accessibility issues
-- Test on mobile devices"
+- Test on mobile devices"</span>
 
-# Before starting work each day:
-git checkout main
-git pull origin main  # Get latest changes
-git checkout -b feature/your-new-feature</pre>
+<span class="comment"># Before starting work each day:</span>
+<span class="command">git checkout main</span>
+<span class="command">git pull origin main</span>  <span class="comment"># Get latest changes</span>
+<span class="command">git checkout -b feature/your-new-feature</span>
+</pre>
 
         <h3><strong>Environment Variables Management</strong></h3>
 
         <h4><strong>Jose's Responsibility:</strong></h4>
         <pre class="code-block">
-# Manage production environment variables
-vercel env add STRIPE_SECRET_KEY  # Add new variables
-vercel env pull .env.local        # Download latest for local testing
+<span class="comment"># Manage production environment variables</span>
+<span class="command">vercel env add STRIPE_SECRET_KEY</span>  <span class="comment"># Add new variables</span>
+<span class="command">vercel env pull .env.local</span>        <span class="comment"># Download latest for local testing</span>
 
-# Update team template when new variables are added
-cp .env.local .env.example
-# Remove sensitive values, keep structure
-git add .env.example
-git commit -m "Update environment variables template"
-git push origin main</pre>
+<span class="comment"># Update team template when new variables are added</span>
+<span class="command">cp .env.local .env.example</span>
+<span class="comment"># Remove sensitive values, keep structure</span>
+<span class="command">git add .env.example</span>
+<span class="command">git commit -m "Update environment variables template"</span>
+<span class="command">git push origin main</span></pre>
 
         <h4><strong>Team Members:</strong></h4>
         <pre class="code-block">
-# Use development credentials provided by Jose
-cp .env.example .env.local
-# Edit .env.local with development values (Jose provides these)
+<span class="comment"># Use development credentials provided by Jose</span>
+<span class="command">cp .env.example .env.local</span>
+<span class="comment"># Edit .env.local with development values (Jose provides these)</span>
 
-# Example .env.local for team members:
-NEXTAUTH_SECRET=dev-secret-key
-NEXTAUTH_URL=http://localhost:3000
-DATABASE_URL=postgresql://dev_user:dev_pass@localhost:5432/dev_db
-STRIPE_PUBLISHABLE_KEY=pk_test_...  # Test keys only</pre>
+<span class="comment"># Example .env.local for team members:</span>
+<span class="command">NEXTAUTH_SECRET=dev-secret-key</span>
+<span class="command">NEXTAUTH_URL=http://localhost:3000</span>
+<span class="command">DATABASE_URL=postgresql://dev_user:dev_pass@localhost:5432/dev_db</span>
+<span class="command">STRIPE_PUBLISHABLE_KEY=pk_test_...</span>  <span class="comment"># Test keys only</span>
+</pre>
       </div>
 
       <!-- 6. Practical Example -->
@@ -352,57 +360,62 @@ STRIPE_PUBLISHABLE_KEY=pk_test_...  # Test keys only</pre>
             <span class="step-number">1</span>
             <h4>Local Development (Team Member)</h4>
             <pre class="code-block">
-# Norma starts working on contact form UI:
-cd /home/jose/nextjs-boilerplate
-npm run dev  # Start development server
+<span class="comment"># Norma starts working on contact form UI:</span>
+<span class="command">cd /home/jose/nextjs-boilerplate</span>
+<span class="command">npm run dev</span>  <span class="comment"># Start development server</span>
 
-# Open http://localhost:3000
-# Perfect for frontend/UI work with hot reload</pre>
+<span class="comment"># Open http://localhost:3000</span>
+<span class="comment"># Perfect for frontend/UI work with hot reload</span>
+</pre>
           </div>
 
           <div class="step">
             <span class="step-number">2</span>
             <h4>Create Feature Branch</h4>
             <pre class="code-block">
-# Create and switch to new branch
-git checkout -b feature/add-contact-form
+<span class="comment"># Create and switch to new branch</span>
+<span class="command">git checkout -b feature/add-contact-form</span>
 
-# Verify you're on the new branch
-git branch</pre>
+<span class="comment"># Verify you're on the new branch</span>
+<span class="command">git branch</span>
+</pre>
           </div>
 
           <div class="step">
             <span class="step-number">3</span>
             <h4>Make Changes</h4>
             <pre class="code-block">
-# Edit your files (app/page.tsx, create API routes, etc.)
-# Test changes with npm run dev running
-# All Next.js features work perfectly</pre>
+<span class="comment"># Edit your files (app/page.tsx, create API routes, etc.)</span>
+<span class="comment"># Test changes with npm run dev running</span>
+<span class="comment"># All Next.js features work perfectly</span>
+</pre>
           </div>
 
           <div class="step">
             <span class="step-number">4</span>
             <h4>Commit Changes</h4>
             <pre class="code-block">
-# Stage your changes
-git add .
+<span class="comment"># Stage your changes</span>
+<span class="command">git add .</span>
 
-# Commit with descriptive message
-git commit -m "Add contact form with email validation"
+<span class="comment"># Commit with descriptive message</span>
+<span class="command">git commit -m "Add contact form with email validation"</span>
 
-# Check status
-git status</pre>
+<span class="comment"># Check status</span>
+<span class="command">git status</span>
+</pre>
           </div>
 
           <div class="step">
             <span class="step-number">5</span>
             <h4>Push and Create PR</h4>
             <pre class="code-block">
-# Push branch to GitHub
-git push origin feature/add-contact-form
+<span class="comment"># Push branch to GitHub</span>
+<span class="command">git push origin feature/add-contact-form</span>
 
-# Go to GitHub.com → Your repo → You'll see "Create Pull Request" button
-# Click it and fill out the PR description</pre>
+<span class="comment"># Go to GitHub.com → Your repo → You'll see "Create Pull Request" button</span>
+<span class="comment"># Click it and fill out the PR description</span>
+</pre>
           </div>
 
           <div class="step">
@@ -432,14 +445,15 @@ git push origin feature/add-contact-form
             <span class="step-number">8</span>
             <h4>Cleanup</h4>
             <pre class="code-block">
-# Switch back to main branch
-git checkout main
+<span class="comment"># Switch back to main branch</span>
+<span class="command">git checkout main</span>
 
-# Pull the latest changes
-git pull origin main
+<span class="comment"># Pull the latest changes</span>
+<span class="command">git pull origin main</span>
 
-# Delete the feature branch (optional)
-git branch -d feature/add-contact-form</pre>
+<span class="comment"># Delete the feature branch (optional)</span>
+<span class="command">git branch -d feature/add-contact-form</span>
+</pre>
           </div>
         </div>
       </div>
@@ -450,25 +464,27 @@ git branch -d feature/add-contact-form</pre>
 
         <h3><strong>Repository Setup (Jose's Responsibility)</strong></h3>
         <pre class="code-block">
-# 1. Set up branch protection rules on GitHub:
-# Go to GitHub → Settings → Branches → Add rule
-# - Branch name pattern: main
-# - Require pull request reviews before merging
-# - Require status checks to pass before merging
+<span class="comment"># 1. Set up branch protection rules on GitHub:</span>
+<span class="comment"># Go to GitHub → Settings → Branches → Add rule</span>
+<span class="comment"># - Branch name pattern: main</span>
+<span class="comment"># - Require pull request reviews before merging</span>
+<span class="comment"># - Require status checks to pass before merging</span>
 
-# 2. Invite team members as collaborators:
-# GitHub → Settings → Manage access → Invite collaborators
-# Add Norma and Lily with "Write" permissions</pre>
+<span class="comment"># 2. Invite team members as collaborators:</span>
+<span class="comment"># GitHub → Settings → Manage access → Invite collaborators</span>
+<span class="comment"># Add Norma and Lily with "Write" permissions</span>
+</pre>
 
         <h3><strong>Daily Team Workflow</strong></h3>
 
         <h4><strong>Morning Routine (All Team Members)</strong></h4>
         <pre class="code-block">
-git checkout main
-git pull origin main  # Get latest changes
+<span class="command">git checkout main</span>
+<span class="command">git pull origin main</span>  <span class="comment"># Get latest changes</span>
 
-# Check for any new environment variables
-cp .env.example .env.local  # Update if Jose added new variables</pre>
+<span class="comment"># Check for any new environment variables</span>
+<span class="command">cp .env.example .env.local</span>  <span class="comment"># Update if Jose added new variables</span>
+</pre>
 
         <h4><strong>Feature Development Process</strong></h4>
         <ol>
@@ -482,16 +498,17 @@ cp .env.example .env.local  # Update if Jose added new variables</pre>
 
         <h4><strong>Communication Setup</strong></h4>
         <pre class="code-block">
-# Daily standup (15 minutes, can be async):
-# 1. What did you work on yesterday?
-# 2. What will you work on today?
-# 3. Any blockers or questions?
+<span class="comment"># Daily standup (15 minutes, can be async):</span>
+<span class="comment"># 1. What did you work on yesterday?</span>
+<span class="comment"># 2. What will you work on today?</span>
+<span class="comment"># 3. Any blockers or questions?</span>
 
-# Weekly demo (Friday afternoon):
-# - Show progress on preview deployment
-# - Demo new features
-# - Plan next week's work
-# - Address any integration issues</pre>
+<span class="comment"># Weekly demo (Friday afternoon):</span>
+<span class="comment"># - Show progress on preview deployment</span>
+<span class="comment"># - Demo new features</span>
+<span class="comment"># - Plan next week's work</span>
+<span class="comment"># - Address any integration issues</span>
+</pre>
 
         <h3><strong>Team Member Responsibilities</strong></h3>
 
@@ -532,14 +549,15 @@ cp .env.example .env.local  # Update if Jose added new variables</pre>
 
         <h3><strong>VS Code Extensions (Recommended for Team)</strong></h3>
         <pre class="code-block">
-# Install these extensions for better development:
-# - ES7+ React/Redux/React-Native snippets
-# - Tailwind CSS IntelliSense
-# - Prisma
-# - GitLens
-# - Auto Rename Tag
-# - Prettier - Code formatter
-# - GitHub Pull Requests and Issues</pre>
+<span class="comment"># Install these extensions for better development:</span>
+<span class="comment"># - ES7+ React/Redux/React-Native snippets</span>
+<span class="comment"># - Tailwind CSS IntelliSense</span>
+<span class="comment"># - Prisma</span>
+<span class="comment"># - GitLens</span>
+<span class="comment"># - Auto Rename Tag</span>
+<span class="comment"># - Prettier - Code formatter</span>
+<span class="comment"># - GitHub Pull Requests and Issues</span>
+</pre>
       </div>
 
       <!-- 8. Command Reference -->
@@ -550,59 +568,60 @@ cp .env.example .env.local  # Update if Jose added new variables</pre>
           <div class="team-card">
             <h4>Git Commands (All Team Members)</h4>
             <pre class="code-block">
-# Branch management
-git checkout -b feature-name    # Create and switch to new branch
-git checkout main               # Switch to main branch
-git branch                      # List all branches
-git branch -d branch-name       # Delete branch
+<span class="comment"># Branch management</span>
+<span class="command">git checkout -b feature-name</span>    <span class="comment"># Create and switch to new branch</span>
+<span class="command">git checkout main</span>               <span class="comment"># Switch to main branch</span>
+<span class="command">git branch</span>                      <span class="comment"># List all branches</span>
+<span class="command">git branch -d branch-name</span>       <span class="comment"># Delete branch</span>
 
-# Changes management
-git status                      # Check current status
-git add .                       # Stage all changes
-git add filename                # Stage specific file
-git commit -m "message"         # Commit changes
-git push origin branch-name     # Push branch to GitHub
-git pull origin main            # Pull latest changes from main
+<span class="comment"># Changes management</span>
+<span class="command">git status</span>                      <span class="comment"># Check current status</span>
+<span class="command">git add .</span>                       <span class="comment"># Stage all changes</span>
+<span class="command">git add filename</span>                <span class="comment"># Stage specific file</span>
+<span class="command">git commit -m "message"</span>         <span class="comment"># Commit changes</span>
+<span class="command">git push origin branch-name</span>     <span class="comment"># Push branch to GitHub</span>
+<span class="command">git pull origin main</span>            <span class="comment"># Pull latest changes from main</span>
 
-# View history
-git log --oneline              # View commit history
-git diff                       # View unstaged changes</pre>
+<span class="comment"># View history</span>
+<span class="command">git log --oneline</span>              <span class="comment"># View commit history</span>
+<span class="command">git diff</span>                       <span class="comment"># View unstaged changes</span>
+</pre>
           </div>
 
           <div class="team-card">
             <h4>Vercel CLI Commands (Jose Only)</h4>
             <pre class="code-block">
-# Development
-vercel dev                     # Start development server (requires auth)
-vercel --prod=false           # Create preview deployment
-vercel --prod                 # Deploy to production
-vercel link                   # Connect local project to Vercel
+<span class="comment"># Development</span>
+<span class="command">vercel dev</span>                    <span class="comment"># Start development server (requires auth)</span>
+<span class="command">vercel --prod=false</span>           <span class="comment"># Create preview deployment</span>
+<span class="command">vercel --prod </span>                <span class="comment"># Deploy to production</span>
+<span class="command">vercel link</span>                   <span class="comment"># Connect local project to Vercel</span>
 
-# Environment management
-vercel env pull .env.local    # Download production env vars
-vercel env ls                 # List environment variables
-vercel env add               # Add new environment variable
+<span class="comment"># Environment management</span>
+<span class="command">vercel env pull .env.local</span>    <span class="comment"># Download production env vars</span>
+<span class="command">vercel env ls</span>                 <span class="comment"># List environment variables</span>
+<span class="command">vercel env add</span>                <span class="comment"># Add new environment variable</span>
 
-# Project management
-vercel ls                    # List all deployments
-vercel inspect <url>         # Get deployment details
-vercel promote <url>         # Promote preview to production
-vercel rollback <url>        # Rollback to previous deployment
+<span class="comment"># Project management</span>
+<span class="command">vercel ls</span>                    <span class="comment"># List all deployments</span>
+<span class="command">vercel inspect</span>               <span class="comment"># Get deployment details</span>
+<span class="command">vercel promote</span>               <span class="comment"># Promote preview to production</span>
+<span class="command">vercel rollback</span>              <span class="comment"># Rollback to previous deployment</span>
 
-# Logs and debugging
-vercel logs <url>            # View deployment logs
-vercel whoami                # Check current user
-vercel --version             # Check CLI version</pre>
+<span class="comment"># Logs and debugging</span>
+<span class="command">vercel logs</span>                  <span class="comment"># View deployment logs</span>
+<span class="command">vercel whoami  </span>              <span class="comment"># Check current user</span>
+<span class="command">vercel --version</span>             <span class="comment"># Check CLI version</span></pre>
           </div>
 
           <div class="team-card">
             <h4>NPM Commands (All Team Members)</h4>
             <pre class="code-block">
-npm run dev                  # Start Next.js dev server (RECOMMENDED)
-npm run build               # Build for production
-npm run start               # Start production server locally
-npm install                 # Install dependencies
-npm install package-name    # Install specific package</pre>
+<span class="command">npm run dev</span>                 <span class="comment"># Start Next.js dev server (RECOMMENDED)</span>
+<span class="command">npm run build</span>               <span class="comment"># Build for production</span>
+<span class="command">npm run start</span>               <span class="comment"># Start production server locally</span>
+<span class="command">npm install</span>                 <span class="comment"># Install dependencies</span>
+<span class="command">npm install package-name</span>    <span class="comment"># Install specific package</span></pre>
           </div>
         </div>
       </div>
@@ -616,63 +635,63 @@ npm install package-name    # Install specific package</pre>
         <div class="alert alert-info">
           <h4>1. "npm run dev not working"</h4>
           <pre class="code-block">
-# Solution: Make sure dependencies are installed
-npm install
+<span class="comment"># Solution: Make sure dependencies are installed</span>
+<span class="command">npm install</span>
 
-# Check if port 3000 is available
-npm run dev -- --port 3001  # Use different port if needed</pre>
+<span class="comment"># Check if port 3000 is available</span>
+<span class="command">npm run dev -- --port 3001</span>  <span class="comment"># Use different port if needed</span></pre>
         </div>
 
         <div class="alert alert-warning">
           <h4>2. "Environment variables not working"</h4>
           <pre class="code-block">
-# Solution: Make sure .env.local exists and has correct values
-cp .env.example .env.local
-# Edit .env.local with development credentials (Jose provides these)
+<span class="comment"># Solution: Make sure .env.local exists and has correct values</span>
+<span class="command">cp .env.example .env.local</span>
+<span class="comment"># Edit .env.local with development credentials (Jose provides these)</span>
 
-# Restart development server after changes
-npm run dev</pre>
+<span class="comment"># Restart development server after changes</span>
+<span class="command">npm run dev</span></pre>
         </div>
 
         <div class="alert alert-danger">
           <h4>3. "Git push rejected"</h4>
           <pre class="code-block">
-# Solution: Pull latest changes first
-git pull origin main
+<span class="comment"># Solution: Pull latest changes first</span>
+<span class="command">git pull origin main</span>
 
-# Then push again
-git push origin your-branch-name</pre>
+<span class="comment"># Then push again</span>
+<span class="command">git push origin your-branch-name</span></pre>
         </div>
 
         <div class="alert alert-info">
           <h4>4. "Can't create pull request"</h4>
           <pre class="code-block">
-# Make sure you're on the correct branch
-git branch  # Check current branch
+<span class="comment"># Make sure you're on the correct branch</span>
+<span class="command">git branch</span>  <span class="comment"># Check current branch</span>
 
-# Make sure you've pushed your branch
-git push origin your-branch-name
+<span class="comment"># Make sure you've pushed your branch</span>
+<span class="command">git push origin your-branch-name</span>
 
-# Then go to GitHub.com to create PR</pre>
+<span class="comment"># Then go to GitHub.com to create PR</span></pre>
         </div>
 
         <div class="alert alert-warning">
           <h4>5. "Preview deployment failed" (Jose only)</h4>
           <pre class="code-block">
-# Check Vercel dashboard for build logs
-# Or check logs via CLI (Jose only)
-vercel logs <deployment-url></pre>
+<span class="comment"># Check Vercel dashboard for build logs</span>
+<span class="comment"># Or check logs via CLI (Jose only)</span>
+<span class="command">vercel logs</span> <deployment-url></pre>
         </div>
 
         <div class="alert alert-success">
           <h4>6. "Should I use npm run dev or vercel dev?"</h4>
           <p><strong>Answer:</strong> Team members should ALWAYS use <code>npm run dev</code></p>
           <pre class="code-block">
-# For Norma and Lily (team members):
-npm run dev  # This is all you need!
+<span class="comment"># For Norma and Lily (team members):</span>
+<span class="command">npm run dev</span>  <span class="comment"># This is all you need!</span>
 
-# For Jose (infrastructure work only):
-vercel dev   # Only when needed for deployment testing</pre>
+<span class="comment"># For Jose (infrastructure work only):</span>
+<span class="command">vercel dev</span>   <span class="comment"># Only when needed for deployment testing</span></pre>
           <p><strong>Why <code>npm run dev</code> is better for team members:</strong></p>
           <ul>
             <li><span class="status-icon check">✅</span>No authentication required</li>
@@ -693,18 +712,22 @@ vercel dev   # Only when needed for deployment testing</pre>
             <h4>1. Branch Naming</h4>
             <p>Use descriptive branch names:</p>
             <pre class="code-block">
-git checkout -b feature/contact-form
-git checkout -b fix/navbar-mobile
-git checkout -b update/dependencies</pre>
+<span class="command">
+  git checkout -b feature/contact-form
+  git checkout -b fix/navbar-mobile
+  git checkout -b update/dependencies
+</span></pre>
           </div>
 
           <div class="team-card">
             <h4>2. Commit Messages</h4>
             <p>Write clear commit messages:</p>
             <pre class="code-block">
-git commit -m "Add contact form with validation"
-git commit -m "Fix responsive navbar on mobile"
-git commit -m "Update dependencies to latest versions"</pre>
+<span class="command">
+  git commit -m "Add contact form with validation"
+  git commit -m "Fix responsive navbar on mobile"
+  git commit -m "Update dependencies to latest versions"
+</span></pre>
           </div>
 
           <div class="team-card">

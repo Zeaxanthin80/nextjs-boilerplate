@@ -66,14 +66,14 @@
                     <span class="step-number">1</span>
                     <h4>Start Your Development Session</h4>
                     <pre class="code-block">
-<span class="command"># Pull latest code</span>
-git pull origin main
+<span class="comment"># Pull latest code</span>
+<span class="command">git pull origin main</span>
 
-<span class="command"># Install any new dependencies</span>
-npm install
+<span class="comment"># Install any new dependencies</span>
+<span class="command">npm install</span>
 
-<span class="command"># Check for new migrations</span>
-npx prisma migrate status
+<span class="comment"># Check for new migrations</span>
+<span class="command">npx prisma migrate status</span>
                     </pre>
                 </div>
 
@@ -175,11 +175,11 @@ model Subscription {
                     <span class="step-number">4</span>
                     <h4>Test Your Changes</h4>
                     <pre class="code-block">
-<span class="command"># Verify schema is applied</span>
-npx prisma studio
+<span class="comment"># Verify schema is applied</span>
+<span class="command">npx prisma studio</span>
 
-<span class="command"># Test your application</span>
-npm run dev
+<span class="comment"># Test your application</span>
+<span class="command">npm run dev</span>
                     </pre>
                 </div>
 
@@ -267,8 +267,8 @@ await prisma.user.deleteMany({
                         <strong><span class="status-icon error">🚨</span>Danger:</strong> This will delete ALL data in the shared database!
                     </div>
                     <pre class="code-block">
-<span class="command"># Only run after team agreement!</span>
-npx prisma migrate reset --force
+<span class="comment"># Only run after team agreement!</span>
+<span class="command">npx prisma migrate reset --force</span>
                     </pre>
                 </div>
             </div>
@@ -284,14 +284,14 @@ npx prisma migrate reset --force
                     <p><strong>Error:</strong> "Drift detected: Your database schema is not in sync with your migration history."</p>
                     <p><strong>Solution:</strong></p>
                     <pre class="code-block">
-<span class="command"># Check migration status</span>
-npx prisma migrate status
+<span class="comment"># Check migration status</span>
+<span class="command">npx prisma migrate status</span>
 
-<span class="command"># Apply pending migrations</span>
-npx prisma migrate deploy
+<span class="comment"># Apply pending migrations</span>
+<span class="command">npx prisma migrate deploy</span>
 
-<span class="command"># If issues persist, reset (coordinate with team first!)</span>
-npx prisma migrate reset --force
+<span class="comment"># If issues persist, reset (coordinate with team first!)</span>
+<span class="command">npx prisma migrate reset --force</span>
                     </pre>
                 </div>
 
@@ -312,13 +312,13 @@ npx prisma migrate reset --force
                     <p><strong>Error:</strong> "The current database provider doesn't match the one specified in your schema"</p>
                     <p><strong>Solution:</strong></p>
                     <pre class="code-block">
-<span class="command"># Regenerate Prisma client</span>
-npx prisma generate
+<span class="comment"># Regenerate Prisma client</span>
+<span class="command">npx prisma generate</span>
 
-<span class="command"># If that doesn't work, force reinstall</span>
-rm -rf node_modules/.prisma
-npm install
-npx prisma generate
+<span class="comment"># If that doesn't work, force reinstall</span>
+<span class="command">rm -rf node_modules/.prisma</span>
+<span class="command">npm install</span>
+<span class="command">npx prisma generate</span>
                     </pre>
                 </div>
 
@@ -393,7 +393,7 @@ npx prisma generate
                 <div class="command-card">
                     <h4>Schema Changes</h4>
                     <pre class="code-block">
-<span class="command"># Edit schema.prisma first</span>
+<span class="comment"># Edit schema.prisma first</span>
 <span class="command">npx prisma migrate dev --name "description"</span>
 <span class="command">git add .</span>
 <span class="command">git commit -m "Add migration"</span>
