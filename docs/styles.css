@@ -151,6 +151,10 @@ li {
   color: #84ff18; /* Teal-500 */
 }
 
+.command-unix {
+    color: #f5ff38; /* Pink-500 */
+}
+
 /* Git flags in light gray */
 .flag {
   color: #9ca3af; /* Gray-400 */
