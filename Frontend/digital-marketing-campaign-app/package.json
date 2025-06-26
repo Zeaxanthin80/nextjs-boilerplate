@@ -1,0 +1,23 @@
+{
+  "name": "digital-marketing-campaign-app",
+  "version": "1.0.0",
+  "description": "A web application for generating digital marketing campaigns for entrepreneurs and small businesses.",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "live-server src",
+    "build": "echo 'Build step not defined'",
+    "test": "echo 'Test step not defined'"
+  },
+  "keywords": [
+    "digital marketing",
+    "campaigns",
+    "entrepreneurs",
+    "small business"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
