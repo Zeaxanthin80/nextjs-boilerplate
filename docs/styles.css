@@ -385,6 +385,96 @@ tr:hover {
     margin-bottom: 0.5rem;
 }
 
+/* Git Collaboration Guide Specific Styles */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.comparison-card {
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: #f9fafb;
+}
+
+.comparison-card.recommended {
+  border-color: #10b981;
+  background: #ecfdf5;
+}
+
+.comparison-card.not-recommended {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.branch-tree {
+  font-family: 'Fira Code', 'Monaco', 'Menlo', monospace;
+  background: #1a1a1a;
+  color: #e5e5e5;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.branch-tree .main-branch { color: #10b981; }
+.branch-tree .feature-branch { color: #3b82f6; }
+.branch-tree .fix-branch { color: #f59e0b; }
+.branch-tree .hotfix-branch { color: #ef4444; }
+.branch-tree .docs-branch { color: #8b5cf6; }
+
+.contribution-visual {
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+}
+
+.github-profile {
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.activity-graph {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 0.5rem;
+  font-family: monospace;
+  font-size: 0.8rem;
+  margin: 0.5rem 0;
+}
+
+.pros-cons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.pros {
+  background: #ecfdf5;
+  border: 2px solid #10b981;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.cons {
+  background: #fef2f2;
+  border: 2px solid #ef4444;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
 /* Responsive Design */
 @media (max-width: 1800px) {
     .container {
@@ -418,6 +508,8 @@ tr:hover {
         padding: 2rem;
         font-size: .75rem;
     }
+
+    
 }
 
 /* Scrollbar Styling */
