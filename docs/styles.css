@@ -9,7 +9,7 @@ body {
     font-family: -apple-system, Helvetica, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
     line-height: 1.6;
     color: #374151;
-    background-color: #d9dadc;
+    background-color: rgb(131, 136, 145);
 }
 
 /* Container */
