@@ -33,6 +33,7 @@
           <li><a href="#setup">Setup Instructions for Jose (Project Lead)</a></li>
           <li><a href="#team-setup">Setup Instructions for Team Members</a></li>
           <li><a href="#daily-workflow">Daily Development Workflow</a></li>
+          <li><a href="#end-of-day-workflow">End-of-Day Workflow - Wrapping Up</a></li>
           <li><a href="#practical-example">Practical Example - Combined Workflow</a></li>
           <li><a href="#team-collaboration">Team Collaboration Best Practices</a></li>
           <li><a href="#command-reference">Command Reference</a></li>
@@ -346,8 +347,275 @@ Create PR → Auto-creates Preview Deployment for testing</pre>
 <span class="command">NEXTAUTH_SECRET=dev-secret-key</span>
 <span class="command">NEXTAUTH_URL=http://localhost:3000</span>
 <span class="command">DATABASE_URL=postgresql://dev_user:dev_pass@localhost:5432/dev_db</span>
-<span class="command">STRIPE_PUBLISHABLE_KEY=pk_test_...</span>  <span class="comment"># Test keys only</span>
+<span class="command">STRIPE_PUBLISHABLE_KEY=pk_test_...</span>  <span class="comment"># Test keys only</span>        </pre>
+      </div>
+
+      <!-- 5.1 End-of-Day Workflow -->
+      <div class="content" id="end-of-day-workflow">
+        <h2>5.1 End-of-Day Workflow - Wrapping Up Your Work</h2>
+        
+        <h4><strong>For Everyone (Jose, Norma & Lily):</strong></h4>
+        <pre class="code-block">
+<span class="comment"># 1. Save and commit your current progress</span>
+<span class="command">git add .</span>
+<span class="command">git status</span>  <span class="comment"># Review what you're committing</span>
+<span class="command">git commit -m "feat: progress on dashboard layout
+
+- Add responsive grid system for widgets
+- Implement mobile breakpoints
+- TODO: Complete form validation tomorrow
+- NOTES: Consider moving analytics to separate component"</span>
+
+<span class="comment"># 2. Push your feature branch (backup your work)</span>
+<span class="command">git push origin feature/your-feature-name</span>
+
+<span class="comment"># 3. Document tomorrow's tasks (optional but recommended)</span>
+<span class="comment"># Create a quick commit with your notes:</span>
+<span class="command">echo "## Tomorrow's Tasks
+- Complete form validation logic
+- Test mobile responsiveness on actual devices
+- Add error handling for API calls
+- Review Lily's campaign integration PR" > TOMORROW.md</span>
+
+<span class="command">git add TOMORROW.md</span>
+<span class="command">git commit -m "docs: add tomorrow's task list"</span>
+<span class="command">git push origin feature/your-feature-name</span>
 </pre>
+
+        <h4><strong>If Your Feature is Ready for Review:</strong></h4>
+        <pre class="code-block">
+<span class="comment"># 1. Create or update Pull Request on GitHub</span>
+<span class="comment"># Go to GitHub and create PR with this template:</span>
+
+<span class="comment">## What I've Completed Today
+- ✅ Responsive dashboard layout
+- ✅ Mobile navigation improvements  
+- ✅ Basic form validation
+
+## Testing Done
+- ✅ Tested on Chrome, Firefox, Safari
+- ✅ Mobile responsive on iPhone/Android simulators
+- ✅ All existing tests pass: npm test
+
+## Ready for Review
+- [ ] Code review from Jose
+- [ ] Preview deployment testing
+- [ ] Final mobile device testing
+
+## Notes for Reviewer
+- New CSS variables added for theming
+- May conflict with Lily's authentication work (please check)
+- Consider if we need separate component for analytics widget</span>
+
+<span class="comment"># 2. Request review from Jose</span>
+<span class="comment"># In GitHub PR, click "Request review" and select Jose</span>
+
+<span class="comment"># 3. Link any related issues or documentation</span>
+<span class="comment"># Add links to Figma designs, related PRs, or issue numbers</span>
+</pre>
+
+        <h4><strong>Jose's Additional End-of-Day Tasks (Project Lead):</strong></h4>
+        <pre class="code-block">
+<span class="comment"># 1. Review team's pending Pull Requests</span>
+<span class="comment"># Check GitHub notifications and review PRs</span>
+<span class="comment"># Test preview deployments before approving</span>
+
+<span class="comment"># 2. Check deployment status and logs</span>
+<span class="command">vercel ls</span>                    <span class="comment"># List recent deployments</span>
+<span class="command">vercel logs --follow</span>         <span class="comment"># Check for any production issues</span>
+
+<span class="comment"># 3. Merge approved PRs (triggers production deployment)</span>
+<span class="comment"># Only merge PRs that have been properly tested</span>
+
+<span class="comment"># 4. Update team on progress (optional but helpful)</span>
+<span class="comment"># Post in team chat/Slack/Discord:</span>
+<span class="comment"># "✅ Merged: Norma's navigation improvements"</span>
+<span class="comment"># "🔄 Reviewing: Lily's campaign integration"</span>
+<span class="comment"># "🚀 Production: Updated with today's features"</span>
+
+<span class="comment"># 5. Backup any important environment changes</span>
+<span class="command">vercel env pull .env.local</span>   <span class="comment"># Download latest env vars</span>
+<span class="comment"># Update .env.example if new variables were added</span>
+</pre>
+
+        <h4><strong>Team Communication End-of-Day Checklist:</strong></h4>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Action</th>
+                <th>Who</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Commit and push all work</strong></td>
+                <td>Everyone</td>
+                <td>Backup progress, enable team visibility</td>
+              </tr>
+              <tr>
+                <td><strong>Create PR if feature is ready</strong></td>
+                <td>Everyone</td>
+                <td>Request review, trigger preview deployment</td>
+              </tr>
+              <tr>
+                <td><strong>Review and merge team PRs</strong></td>
+                <td>Jose</td>
+                <td>Keep main branch current, deploy improvements</td>
+              </tr>
+              <tr>
+                <td><strong>Update team on progress</strong></td>
+                <td>Everyone</td>
+                <td>Coordination, prevent conflicts</td>
+              </tr>
+              <tr>
+                <td><strong>Document tomorrow's tasks</strong></td>
+                <td>Everyone</td>
+                <td>Faster startup next day</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4><strong>Complete Daily Cycle Summary:</strong></h4>
+        <div class="workflow-steps">
+          <div class="step">
+            <span class="step-number">🌅</span>
+            <strong>Morning Start:</strong>
+            <code>git checkout main → git pull origin main → git checkout -b feature/new-work</code>
+          </div>
+          <div class="step">
+            <span class="step-number">💻</span>
+            <strong>Development:</strong>
+            <code>npm run dev</code> (team) or <code>vercel dev</code> (Jose) → code → test
+          </div>
+          <div class="step">
+            <span class="step-number">🌙</span>
+            <strong>Evening Wrap-up:</strong>
+            <code>git add . → git commit → git push → create PR if ready</code>
+          </div>
+          <div class="step">
+            <span class="step-number">🔄</span>
+            <strong>Review Cycle:</strong>
+            Jose reviews → merges approved PRs → auto-deploys to production
+          </div>
+        </div>
+
+        <div class="alert alert-success">
+          <h4>💡 Pro Tips for End-of-Day</h4>
+          <ul>
+            <li><strong>Always commit something:</strong> Even incomplete work should be committed with notes</li>
+            <li><strong>Write descriptive commit messages:</strong> Help your future self and teammates understand the work</li>
+            <li><strong>Push frequently:</strong> Your work is backed up and visible to the team</li>
+            <li><strong>Communicate blockers:</strong> If stuck, mention it in commit messages or team chat</li>
+            <li><strong>Test before requesting review:</strong> Ensure your code works locally before creating PRs</li>
+          </ul>
+        </div>
+
+        <h4><strong>Next Day Workflow - What to Do Tomorrow Morning</strong></h4>
+        
+        <div class="alert alert-info">
+          <h4>🤔 Key Question: Should I continue on my branch or start fresh?</h4>
+          <p>The answer depends on what happened to your work yesterday. Follow this decision tree:</p>
+        </div>
+
+        <h5><strong>Scenario 1: My feature was completed and merged yesterday</strong></h5>
+        <pre class="code-block">
+<span class="comment"># ✅ ALWAYS do this when starting a new feature:</span>
+<span class="command">git checkout main</span>              <span class="comment"># Switch to main branch</span>
+<span class="command">git pull origin main</span>           <span class="comment"># Get all team updates</span>
+<span class="command">git checkout -b feature/new-task</span> <span class="comment"># Create fresh branch</span>
+
+<span class="comment"># Why? Your old branch is outdated and you need the latest team changes</span>
+</pre>
+
+        <h5><strong>Scenario 2: I'm still working on the same feature (not finished)</strong></h5>
+        <pre class="code-block">
+<span class="comment"># ✅ RECOMMENDED approach - sync with team first:</span>
+<span class="command">git checkout main</span>              <span class="comment"># Switch to main branch</span>
+<span class="command">git pull origin main</span>           <span class="comment"># Get team updates</span>
+<span class="command">git checkout feature/my-feature</span> <span class="comment"># Switch back to your branch</span>
+<span class="command">git merge main</span>                 <span class="comment"># Merge team changes into your branch</span>
+
+<span class="comment"># Alternative (simpler but less safe):</span>
+<span class="command">git checkout feature/my-feature</span> <span class="comment"># Go straight to your branch</span>
+<span class="command">npm run dev</span>                    <span class="comment"># Continue where you left off</span>
+
+<span class="comment"># ⚠️  Risk: You might miss important team changes</span>
+</pre>
+
+        <h5><strong>Scenario 3: My PR is waiting for review</strong></h5>
+        <pre class="code-block">
+<span class="comment"># Option A: Work on a new feature while waiting</span>
+<span class="command">git checkout main</span>              <span class="comment"># Switch to main branch</span>
+<span class="command">git pull origin main</span>           <span class="comment"># Get team updates</span>
+<span class="command">git checkout -b feature/new-task</span> <span class="comment"># Start new work</span>
+
+<span class="comment"># Option B: Make changes to existing PR (if Jose requested)</span>
+<span class="command">git checkout feature/my-pending-pr</span> <span class="comment"># Switch to PR branch</span>
+<span class="comment"># Make requested changes, commit, and push</span>
+</pre>
+
+        <h5><strong>When to ALWAYS run "git pull origin main":</strong></h5>
+        <div class="team-grid">
+          <div class="team-card">
+            <h4>🌅 Daily Start</h4>
+            <ul>
+              <li>Before creating any new branch</li>
+              <li>Before starting new features</li>
+              <li>To see what teammates accomplished</li>
+            </ul>
+          </div>
+
+          <div class="team-card">
+            <h4>🔄 During Development</h4>
+            <ul>
+              <li>Before creating a Pull Request</li>
+              <li>When you see team notifications about merges</li>
+              <li>If you haven't pulled in 2+ days</li>
+            </ul>
+          </div>
+
+          <div class="team-card">
+            <h4>🚨 Conflict Prevention</h4>
+            <ul>
+              <li>When working on shared files</li>
+              <li>Before major feature work</li>
+              <li>When teammates mention breaking changes</li>
+            </ul>
+          </div>
+        </div>
+
+        <h5><strong>Complete Morning Routine (Recommended):</strong></h5>
+        <pre class="code-block">
+<span class="comment"># 1. Check current status</span>
+<span class="command">git status</span>                     <span class="comment"># See what branch you're on</span>
+<span class="command">git branch</span>                     <span class="comment"># List all your branches</span>
+
+<span class="comment"># 2. Get latest team changes</span>
+<span class="command">git checkout main</span>              <span class="comment"># Switch to main</span>
+<span class="command">git pull origin main</span>           <span class="comment"># Pull team updates</span>
+
+<span class="comment"># 3. Decide next action based on scenarios above</span>
+<span class="comment"># - New feature? Create new branch</span>
+<span class="comment"># - Continue work? Switch to your branch and merge main</span>
+<span class="comment"># - Address PR feedback? Switch to PR branch</span>
+
+<span class="comment"># 4. Start development</span>
+<span class="command">npm run dev</span>                    <span class="comment"># Start coding!</span>
+</pre>
+
+        <div class="alert alert-warning">
+          <h4>⚠️ Important: Why Always Pull Main First?</h4>
+          <ul>
+            <li><strong>Avoid Conflicts:</strong> Get team changes before they become hard to merge</li>
+            <li><strong>Stay Current:</strong> Use latest features/fixes from teammates</li>
+            <li><strong>Prevent Surprises:</strong> Know about breaking changes early</li>
+            <li><strong>Easier Reviews:</strong> PRs with current main are easier to review</li>
+            <li><strong>Professional Practice:</strong> This is standard in all development teams</li>
+          </ul>
+        </div>
       </div>
 
       <!-- 6. Practical Example -->
