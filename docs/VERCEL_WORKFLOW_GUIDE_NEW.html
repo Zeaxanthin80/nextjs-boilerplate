@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vercel + GitHub Workflow Guide - Marketing SaaS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <h1>Vercel + GitHub Workflow Guide</h1>
+        <p>
+          Simplified workflow for Marketing SaaS capstone project <br> by Jose,
+          Norma, and Lily
+        </p>
+        
+        <div class="alert alert-info">
+          <h4>📋 Essential Reading</h4>
+          <p>This guide is <strong>essential reading for all team members</strong> to understand the simplified development workflow.</p>
+          <p><strong>Key Change:</strong> Only Jose has Vercel access. Norma and Lily use GitHub and <code>npm run dev</code> only.</p>
+          <p><strong>Next Steps:</strong> After reading this guide, Jose should complete the <a href="./PROJECT_LEAD_GUIDE.html">Project Lead Guide</a>, then choose a database strategy from the <a href="./README.html">main documentation index</a>.</p>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="nav">
+        <h3>📋 Table of Contents</h3>
+        <ol>
+          <li><a href="#quick-summary">Quick Summary - Team Roles</a></li>
+          <li><a href="#understanding">Understanding the Integration</a></li>
+          <li><a href="#setup">Setup Instructions for Jose (Project Lead)</a></li>
+          <li><a href="#team-setup">Setup Instructions for Team Members</a></li>
+          <li><a href="#daily-workflow">Daily Development Workflow</a></li>
+          <li><a href="#practical-example">Practical Example - Combined Workflow</a></li>
+          <li><a href="#team-collaboration">Team Collaboration Best Practices</a></li>
+          <li><a href="#command-reference">Command Reference</a></li>
+          <li><a href="#troubleshooting">Troubleshooting</a></li>
+          <li><a href="#best-practices">Best Practices</a></li>
+        </ol>
+      </div>
+
+      <!-- 1. Quick Summary -->
+      <div class="content" id="quick-summary">
+        <h2>1. Quick Summary - Team Roles</h2>
+
+        <h3><strong>Jose (Project Lead)</strong></h3>
+        <ul>
+          <li><strong>Has Vercel account and manages all deployments</strong></li>
+          <li><strong>Manages environment variables and production settings</strong></li>
+          <li><strong>Reviews and merges pull requests</strong></li>
+          <li><strong>Handles all Vercel CLI operations</strong></li>
+        </ul>
+
+        <h3><strong>Norma & Lily (Team Members)</strong></h3>
+        <ul>
+          <li><strong>Use GitHub for collaboration (no Vercel account needed)</strong></li>
+          <li><strong>Use <code>npm run dev</code> for all local development</strong></li>
+          <li><strong>Create branches and submit pull requests</strong></li>
+          <li><strong>Focus on coding without deployment concerns</strong></li>
+        </ul>
+
+        <h3>Essential Terms</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Term</th>
+                <th>Definition</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Pull Request (PR)</strong></td>
+                <td>
+                  GitHub feature to propose and review code changes before
+                  merging into main branch
+                </td>
+              </tr>
+              <tr>
+                <td><strong>npm run dev</strong></td>
+                <td>
+                  Next.js local development server (what team members use)
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Preview Deployment</strong></td>
+                <td>
+                  Automatic temporary deployment created from PRs for testing
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Production Deployment</strong></td>
+                <td>
+                  Live website deployed from main branch (Jose manages)
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 2. Understanding the Integration -->
+      <div class="content" id="understanding">
+        <h2>2. Understanding the Integration</h2>
+
+        <h3>Current Setup (Simplified)</h3>
+        <div class="workflow-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <strong>GitHub Repository</strong> → Contains your code
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <strong>Vercel Project</strong> → Connected to GitHub repository (Jose manages)
+          </div>
+          <div class="step">
+            <span class="step-number">3</span>
+            <strong>Automatic Deployments</strong> → Vercel automatically deploys from GitHub
+          </div>
+        </div>
+
+        <h3><strong>GitHub-Driven Workflow (Only Method Used)</strong></h3>
+        <div class="team-card">
+          <pre class="code-block">
+GitHub Repo ←→ Vercel Project (Jose manages connection)
+     ↓
+Push to main branch → Jose reviews → Auto-deploys to Production
+Create PR → Auto-creates Preview Deployment for testing</pre>
+          <h5>Benefits:</h5>
+          <ul>
+            <li>
+              <span class="status-icon check">✅</span>Automatic deployments without team complexity
+            </li>
+            <li>
+              <span class="status-icon check">✅</span>Team collaboration through standard GitHub workflow
+            </li>
+            <li>
+              <span class="status-icon check">✅</span>Code review process through pull requests
+            </li>
+            <li>
+              <span class="status-icon check">✅</span>Clear separation of responsibilities
+            </li>
+            <li>
+              <span class="status-icon check">✅</span>Preview deployments for testing changes
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 3. Setup Instructions for Jose -->
+      <div class="content" id="setup">
+        <h2>3. Setup Instructions for Jose (Project Lead)</h2>
+
+        <h3>Initial Project Setup</h3>
+        <pre class="code-block">
+# 1. Clone the repository (if not already done)
+git clone https://github.com/your-team/nextjs-boilerplate.git
+cd nextjs-boilerplate
+
+# 2. Install dependencies
+npm install
+
+# 3. Install Vercel CLI globally
+npm i -g vercel
+
+# 4. Login and link to Vercel project
+vercel login
+vercel link
+
+# 5. Pull production environment variables
+vercel env pull .env.local
+
+# 6. Create environment template for team
+cp .env.local .env.example
+# Edit .env.example to remove sensitive values, keep structure only
+git add .env.example
+git commit -m "Add environment variables template for team"
+git push origin main</pre>
+
+        <h3>GitHub Repository Setup</h3>
+        <pre class="code-block">
+# 7. Set up branch protection rules on GitHub:
+# Go to GitHub → Settings → Branches → Add rule
+# - Branch name pattern: main
+# - Require pull request reviews before merging
+# - Require status checks to pass before merging
+
+# 8. Invite team members as collaborators:
+# GitHub → Settings → Manage access → Invite collaborators
+# Add Norma and Lily with "Write" permissions</pre>
+
+        <h3>Jose's Daily Development Commands</h3>
+        <pre class="code-block">
+# Start development server (for infrastructure/backend work)
+vercel dev
+
+# Alternative: Standard Next.js dev server
+npm run dev
+
+# Manage environment variables
+vercel env pull .env.local  # Pull latest from production
+vercel env add              # Add new environment variables
+
+# Check deployment status
+vercel ls                   # List deployments
+vercel logs                 # View deployment logs</pre>
+      </div>
+
+      <!-- 4. Team Setup -->
+      <div class="content" id="team-setup">
+        <h2>4. Setup Instructions for Team Members</h2>
+
+        <h3><strong>For Norma & Lily (No Vercel Account Needed)</strong></h3>
+
+        <pre class="code-block">
+# 1. Clone the repository
+git clone https://github.com/your-team/nextjs-boilerplate.git
+cd nextjs-boilerplate
+
+# 2. Install dependencies
+npm install
+
+# 3. Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with development credentials (Jose will provide)
+
+# 4. Start development server
+npm run dev  # This is all you need!</pre>
+
+        <div class="alert alert-success">
+          <strong>That's it!</strong> Team members only need these 4 steps. No Vercel CLI installation, no authentication, no complex setup.
+        </div>
+
+        <h3>Team Members' Daily Development Commands</h3>
+        <pre class="code-block">
+# This is the only command you need for development:
+npm run dev
+
+# Standard Git workflow:
+git checkout main
+git pull origin main
+git checkout -b feature/your-feature-name
+# Make your changes...
+git add .
+git commit -m "Add new feature"
+git push origin feature/your-feature-name
+# Create PR on GitHub</pre>
+      </div>
+
+      <!-- 5. Daily Workflow -->
+      <div class="content" id="daily-workflow">
+        <h2>5. Daily Development Workflow</h2>
+
+        <h3><strong>Jose's Workflow (Project Lead)</strong></h3>
+        <pre class="code-block">
+# Morning routine:
+git checkout main
+git pull origin main
+
+# Review pending PRs on GitHub
+# Check Vercel dashboard for deployment status
+
+# Start working on infrastructure/backend features:
+git checkout -b feature/auth-system
+vercel dev  # Start development server with Vercel features
+# Make changes...
+git add .
+git commit -m "feat: implement NextAuth.js authentication"
+git push origin feature/auth-system
+# Create PR on GitHub
+
+# Review team member PRs:
+# - Test preview deployments
+# - Code review on GitHub
+# - Merge approved PRs (triggers production deployment)</pre>
+
+        <h3><strong>Norma & Lily's Workflow (Team Members)</strong></h3>
+        <pre class="code-block">
+# Morning routine:
+git checkout main
+git pull origin main  # Get latest changes from Jose and team
+
+# Start working on your feature:
+git checkout -b feature/dashboard-ui
+npm run dev  # Start development server
+# Make changes...
+git add .
+git commit -m "Improve dashboard layout and responsiveness"
+git push origin feature/dashboard-ui
+# Create PR on GitHub
+
+# Wait for Jose's review and merge
+# Check preview deployment link in PR for testing</pre>
+
+        <h3><strong>Git Workflow for Team</strong></h3>
+        <pre class="code-block">
+# Feature branch naming convention:
+git checkout -b feature/login-ui          # Norma - Frontend work
+git checkout -b feature/email-api         # Jose - Backend/infrastructure
+git checkout -b feature/campaign-testing  # Lily - Feature integration
+
+# Commit message format:
+git commit -m "feat: add responsive navigation menu
+
+- Implement mobile hamburger menu
+- Add smooth transitions
+- Fix accessibility issues
+- Test on mobile devices"
+
+# Before starting work each day:
+git checkout main
+git pull origin main  # Get latest changes
+git checkout -b feature/your-new-feature</pre>
+
+        <h3><strong>Environment Variables Management</strong></h3>
+
+        <h4><strong>Jose's Responsibility:</strong></h4>
+        <pre class="code-block">
+# Manage production environment variables
+vercel env add STRIPE_SECRET_KEY  # Add new variables
+vercel env pull .env.local        # Download latest for local testing
+
+# Update team template when new variables are added
+cp .env.local .env.example
+# Remove sensitive values, keep structure
+git add .env.example
+git commit -m "Update environment variables template"
+git push origin main</pre>
+
+        <h4><strong>Team Members:</strong></h4>
+        <pre class="code-block">
+# Use development credentials provided by Jose
+cp .env.example .env.local
+# Edit .env.local with development values (Jose provides these)
+
+# Example .env.local for team members:
+NEXTAUTH_SECRET=dev-secret-key
+NEXTAUTH_URL=http://localhost:3000
+DATABASE_URL=postgresql://dev_user:dev_pass@localhost:5432/dev_db
+STRIPE_PUBLISHABLE_KEY=pk_test_...  # Test keys only</pre>
+      </div>
+
+      <!-- 6. Practical Example -->
+      <div class="content" id="practical-example">
+        <h2>6. Practical Example - Combined Workflow</h2>
+        <p>Let's add a contact form to demonstrate the complete workflow:</p>
+
+        <div class="workflow-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <h4>Local Development (Team Member)</h4>
+            <pre class="code-block">
+# Norma starts working on contact form UI:
+cd /home/jose/nextjs-boilerplate
+npm run dev  # Start development server
+
+# Open http://localhost:3000
+# Perfect for frontend/UI work with hot reload</pre>
+          </div>
+
+          <div class="step">
+            <span class="step-number">2</span>
+            <h4>Create Feature Branch</h4>
+            <pre class="code-block">
+# Create and switch to new branch
+git checkout -b feature/add-contact-form
+
+# Verify you're on the new branch
+git branch</pre>
+          </div>
+
+          <div class="step">
+            <span class="step-number">3</span>
+            <h4>Make Changes</h4>
+            <pre class="code-block">
+# Edit your files (app/page.tsx, create API routes, etc.)
+# Test changes with npm run dev running
+# All Next.js features work perfectly</pre>
+          </div>
+
+          <div class="step">
+            <span class="step-number">4</span>
+            <h4>Commit Changes</h4>
+            <pre class="code-block">
+# Stage your changes
+git add .
+
+# Commit with descriptive message
+git commit -m "Add contact form with email validation"
+
+# Check status
+git status</pre>
+          </div>
+
+          <div class="step">
+            <span class="step-number">5</span>
+            <h4>Push and Create PR</h4>
+            <pre class="code-block">
+# Push branch to GitHub
+git push origin feature/add-contact-form
+
+# Go to GitHub.com → Your repo → You'll see "Create Pull Request" button
+# Click it and fill out the PR description</pre>
+          </div>
+
+          <div class="step">
+            <span class="step-number">6</span>
+            <h4>Automatic Preview Deployment</h4>
+            <ul>
+              <li>
+                Vercel automatically creates a preview deployment from your PR
+              </li>
+              <li>Preview URL appears as a comment in the PR</li>
+              <li>Team can review both code and live preview</li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="step-number">7</span>
+            <h4>Review and Merge (Jose)</h4>
+            <ul>
+              <li>Jose reviews your changes</li>
+              <li>Tests the preview deployment</li>
+              <li>Once approved, Jose merges the PR</li>
+              <li>Vercel automatically deploys to production</li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="step-number">8</span>
+            <h4>Cleanup</h4>
+            <pre class="code-block">
+# Switch back to main branch
+git checkout main
+
+# Pull the latest changes
+git pull origin main
+
+# Delete the feature branch (optional)
+git branch -d feature/add-contact-form</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Team Collaboration -->
+      <div class="content" id="team-collaboration">
+        <h2>7. Team Collaboration Best Practices</h2>
+
+        <h3><strong>Repository Setup (Jose's Responsibility)</strong></h3>
+        <pre class="code-block">
+# 1. Set up branch protection rules on GitHub:
+# Go to GitHub → Settings → Branches → Add rule
+# - Branch name pattern: main
+# - Require pull request reviews before merging
+# - Require status checks to pass before merging
+
+# 2. Invite team members as collaborators:
+# GitHub → Settings → Manage access → Invite collaborators
+# Add Norma and Lily with "Write" permissions</pre>
+
+        <h3><strong>Daily Team Workflow</strong></h3>
+
+        <h4><strong>Morning Routine (All Team Members)</strong></h4>
+        <pre class="code-block">
+git checkout main
+git pull origin main  # Get latest changes
+
+# Check for any new environment variables
+cp .env.example .env.local  # Update if Jose added new variables</pre>
+
+        <h4><strong>Feature Development Process</strong></h4>
+        <ol>
+          <li><strong>Start New Feature:</strong> Create descriptive branch name</li>
+          <li><strong>Development:</strong> Work locally with <code>npm run dev</code></li>
+          <li><strong>Testing:</strong> Test your changes thoroughly</li>
+          <li><strong>Commit:</strong> Use clear, descriptive commit messages</li>
+          <li><strong>Push:</strong> Push branch and create PR on GitHub</li>
+          <li><strong>Review:</strong> Jose reviews and merges approved PRs</li>
+        </ol>
+
+        <h4><strong>Communication Setup</strong></h4>
+        <pre class="code-block">
+# Daily standup (15 minutes, can be async):
+# 1. What did you work on yesterday?
+# 2. What will you work on today?
+# 3. Any blockers or questions?
+
+# Weekly demo (Friday afternoon):
+# - Show progress on preview deployment
+# - Demo new features
+# - Plan next week's work
+# - Address any integration issues</pre>
+
+        <h3><strong>Team Member Responsibilities</strong></h3>
+
+        <div class="team-grid">
+          <div class="team-card jose">
+            <h4><strong>Jose (Project Lead)</strong></h4>
+            <ul>
+              <li><span class="status-icon check">✅</span>Manage Vercel deployments and environment variables</li>
+              <li><span class="status-icon check">✅</span>Review and merge all pull requests</li>
+              <li><span class="status-icon check">✅</span>Handle backend/infrastructure work</li>
+              <li><span class="status-icon check">✅</span>Manage database schema and API routes</li>
+              <li><span class="status-icon check">✅</span>Setup and maintain development environment for team</li>
+            </ul>
+          </div>
+
+          <div class="team-card norma">
+            <h4><strong>Norma (Frontend/UI)</strong></h4>
+            <ul>
+              <li><span class="status-icon check">✅</span>Create user interface components and layouts</li>
+              <li><span class="status-icon check">✅</span>Implement responsive design and styling</li>
+              <li><span class="status-icon check">✅</span>Work on landing pages and marketing site</li>
+              <li><span class="status-icon check">✅</span>Use <code>npm run dev</code> for all development work</li>
+              <li><span class="status-icon check">✅</span>Submit pull requests for all changes</li>
+            </ul>
+          </div>
+
+          <div class="team-card lily">
+            <h4><strong>Lily (Features/Integration)</strong></h4>
+            <ul>
+              <li><span class="status-icon check">✅</span>Implement business features and user flows</li>
+              <li><span class="status-icon check">✅</span>Handle third-party integrations and APIs</li>
+              <li><span class="status-icon check">✅</span>Test features and ensure quality</li>
+              <li><span class="status-icon check">✅</span>Use <code>npm run dev</code> for all development work</li>
+              <li><span class="status-icon check">✅</span>Submit pull requests for all changes</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3><strong>VS Code Extensions (Recommended for Team)</strong></h3>
+        <pre class="code-block">
+# Install these extensions for better development:
+# - ES7+ React/Redux/React-Native snippets
+# - Tailwind CSS IntelliSense
+# - Prisma
+# - GitLens
+# - Auto Rename Tag
+# - Prettier - Code formatter
+# - GitHub Pull Requests and Issues</pre>
+      </div>
+
+      <!-- 8. Command Reference -->
+      <div class="content" id="command-reference">
+        <h2>8. Command Reference</h2>
+
+        <div class="team-grid">
+          <div class="team-card">
+            <h4>Git Commands (All Team Members)</h4>
+            <pre class="code-block">
+# Branch management
+git checkout -b feature-name    # Create and switch to new branch
+git checkout main               # Switch to main branch
+git branch                      # List all branches
+git branch -d branch-name       # Delete branch
+
+# Changes management
+git status                      # Check current status
+git add .                       # Stage all changes
+git add filename                # Stage specific file
+git commit -m "message"         # Commit changes
+git push origin branch-name     # Push branch to GitHub
+git pull origin main            # Pull latest changes from main
+
+# View history
+git log --oneline              # View commit history
+git diff                       # View unstaged changes</pre>
+          </div>
+
+          <div class="team-card">
+            <h4>Vercel CLI Commands (Jose Only)</h4>
+            <pre class="code-block">
+# Development
+vercel dev                     # Start development server (requires auth)
+vercel --prod=false           # Create preview deployment
+vercel --prod                 # Deploy to production
+vercel link                   # Connect local project to Vercel
+
+# Environment management
+vercel env pull .env.local    # Download production env vars
+vercel env ls                 # List environment variables
+vercel env add               # Add new environment variable
+
+# Project management
+vercel ls                    # List all deployments
+vercel inspect <url>         # Get deployment details
+vercel promote <url>         # Promote preview to production
+vercel rollback <url>        # Rollback to previous deployment
+
+# Logs and debugging
+vercel logs <url>            # View deployment logs
+vercel whoami                # Check current user
+vercel --version             # Check CLI version</pre>
+          </div>
+
+          <div class="team-card">
+            <h4>NPM Commands (All Team Members)</h4>
+            <pre class="code-block">
+npm run dev                  # Start Next.js dev server (RECOMMENDED)
+npm run build               # Build for production
+npm run start               # Start production server locally
+npm install                 # Install dependencies
+npm install package-name    # Install specific package</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. Troubleshooting -->
+      <div class="content" id="troubleshooting">
+        <h2>9. Troubleshooting</h2>
+
+        <h3>Common Issues</h3>
+
+        <div class="alert alert-info">
+          <h4>1. "npm run dev not working"</h4>
+          <pre class="code-block">
+# Solution: Make sure dependencies are installed
+npm install
+
+# Check if port 3000 is available
+npm run dev -- --port 3001  # Use different port if needed</pre>
+        </div>
+
+        <div class="alert alert-warning">
+          <h4>2. "Environment variables not working"</h4>
+          <pre class="code-block">
+# Solution: Make sure .env.local exists and has correct values
+cp .env.example .env.local
+# Edit .env.local with development credentials (Jose provides these)
+
+# Restart development server after changes
+npm run dev</pre>
+        </div>
+
+        <div class="alert alert-danger">
+          <h4>3. "Git push rejected"</h4>
+          <pre class="code-block">
+# Solution: Pull latest changes first
+git pull origin main
+
+# Then push again
+git push origin your-branch-name</pre>
+        </div>
+
+        <div class="alert alert-info">
+          <h4>4. "Can't create pull request"</h4>
+          <pre class="code-block">
+# Make sure you're on the correct branch
+git branch  # Check current branch
+
+# Make sure you've pushed your branch
+git push origin your-branch-name
+
+# Then go to GitHub.com to create PR</pre>
+        </div>
+
+        <div class="alert alert-warning">
+          <h4>5. "Preview deployment failed" (Jose only)</h4>
+          <pre class="code-block">
+# Check Vercel dashboard for build logs
+# Or check logs via CLI (Jose only)
+vercel logs <deployment-url></pre>
+        </div>
+
+        <div class="alert alert-success">
+          <h4>6. "Should I use npm run dev or vercel dev?"</h4>
+          <p><strong>Answer:</strong> Team members should ALWAYS use <code>npm run dev</code></p>
+          <pre class="code-block">
+# For Norma and Lily (team members):
+npm run dev  # This is all you need!
+
+# For Jose (infrastructure work only):
+vercel dev   # Only when needed for deployment testing</pre>
+          <p><strong>Why <code>npm run dev</code> is better for team members:</strong></p>
+          <ul>
+            <li><span class="status-icon check">✅</span>No authentication required</li>
+            <li><span class="status-icon check">✅</span>Works immediately after <code>npm install</code></li>
+            <li><span class="status-icon check">✅</span>Includes all Next.js features (hot reload, API routes, routing)</li>
+            <li><span class="status-icon check">✅</span>Officially recommended by Vercel for Next.js projects</li>
+            <li><span class="status-icon check">✅</span>Perfect for frontend/UI work and feature development</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 10. Best Practices -->
+      <div class="content" id="best-practices">
+        <h2>10. Best Practices</h2>
+
+        <div class="team-grid">
+          <div class="team-card">
+            <h4>1. Branch Naming</h4>
+            <p>Use descriptive branch names:</p>
+            <pre class="code-block">
+git checkout -b feature/contact-form
+git checkout -b fix/navbar-mobile
+git checkout -b update/dependencies</pre>
+          </div>
+
+          <div class="team-card">
+            <h4>2. Commit Messages</h4>
+            <p>Write clear commit messages:</p>
+            <pre class="code-block">
+git commit -m "Add contact form with validation"
+git commit -m "Fix responsive navbar on mobile"
+git commit -m "Update dependencies to latest versions"</pre>
+          </div>
+
+          <div class="team-card">
+            <h4>3. Environment Variables</h4>
+            <ul>
+              <li>
+                <span class="status-icon cross">❌</span>Never commit sensitive
+                data to Git
+              </li>
+              <li>
+                <span class="status-icon check">✅</span>Jose manages production
+                variables with <code>vercel env pull</code>
+              </li>
+              <li>
+                <span class="status-icon check">✅</span>Keep
+                <code>.env.local</code> in <code>.gitignore</code>
+              </li>
+            </ul>
+          </div>
+
+          <div class="team-card">
+            <h4>4. Testing Strategy</h4>
+            <ol>
+              <li>
+                <strong>Local testing:</strong> Use <code>npm run dev</code> for
+                daily development work
+              </li>
+              <li>
+                <strong>Preview testing:</strong> Create PR for team review and automatic preview deployment
+              </li>
+              <li>
+                <strong>Production monitoring:</strong> Watch for errors after
+                deployment
+              </li>
+              <li>
+                <strong>Infrastructure testing:</strong> Jose uses <code>vercel dev</code> when needed for deployment preparation
+              </li>
+            </ol>
+          </div>
+
+          <div class="team-card">
+            <h4>5. Deployment Strategy</h4>
+            <ul>
+              <li><strong>Small changes:</strong> Direct merge to main (Jose)</li>
+              <li>
+                <strong>Large features:</strong> Use feature branches and PRs
+              </li>
+              <li>
+                <strong>Urgent fixes:</strong> Jose uses
+                <code>vercel --prod</code> for emergency deployments
+              </li>
+            </ul>
+          </div>
+
+          <div class="team-card">
+            <h4>6. Team Collaboration</h4>
+            <ul>
+              <li>
+                <span class="status-icon check">✅</span>Always create PRs for
+                code review
+              </li>
+              <li>
+                <span class="status-icon check">✅</span>Use descriptive PR
+                titles and descriptions
+              </li>
+              <li>
+                <span class="status-icon check">✅</span>Test preview
+                deployments before merging
+              </li>
+              <li>
+                <span class="status-icon check">✅</span>Communicate with team
+                about breaking changes
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="content">
+        <div class="alert alert-info">
+          <p>
+            <strong><span class="status-icon info">📝</span>Note:</strong> This
+            guide is for local reference and team documentation. It provides
+            simplified instructions for the Marketing SaaS capstone project.
+          </p>
+          <p>
+            <strong>Last Updated:</strong> June 23, 2025<br />
+            <strong>Project:</strong> Marketing SaaS Platform<br />
+            <strong>Team:</strong> Jose (Project Lead - Vercel access), Norma & Lily (GitHub collaboration only)
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Add copy functionality to code blocks
+      document.querySelectorAll("pre").forEach((block) => {
+        const button = document.createElement("button");
+        button.innerHTML = "📋 Copy";
+        button.style.cssText = `
+                position: absolute;
+                top: 0.5rem;
+                right: 0.5rem;
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 4px;
+                padding: 0.25rem 0.5rem;
+                font-size: 0.75rem;
+                cursor: pointer;
+                transition: all 0.2s;
+            `;
+
+        block.style.position = "relative";
+        block.appendChild(button);
+
+        button.addEventListener("click", () => {
+          const text = block.textContent.replace("📋 Copy", "").trim();
+          navigator.clipboard.writeText(text).then(() => {
+            button.innerHTML = "✅ Copied!";
+            setTimeout(() => {
+              button.innerHTML = "📋 Copy";
+            }, 2000);
+          });
+        });
+
+        button.addEventListener("mouseenter", () => {
+          button.style.background = "rgba(255, 255, 255, 0.2)";
+        });
+
+        button.addEventListener("mouseleave", () => {
+          button.style.background = "rgba(255, 255, 255, 0.1)";
+        });
+      });
+
+      // Add active navigation highlighting
+      const observerOptions = {
+        rootMargin: "-20% 0px -60% 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Remove active class from all nav links
+            document.querySelectorAll(".nav a").forEach((link) => {
+              link.style.background = "";
+              link.style.color = "#3b82f6";
+            });
+
+            // Add active class to current section link
+            const activeLink = document.querySelector(
+              `.nav a[href="#${entry.target.id}"]`
+            );
+            if (activeLink) {
+              activeLink.style.background = "#eff6ff";
+              activeLink.style.color = "#1d4ed8";
+            }
+          }
+        });
+      }, observerOptions);
+
+      // Observe all sections
+      document.querySelectorAll(".content[id]").forEach((section) => {
+        observer.observe(section);
+      });
+    </script>
+  </body>
+</html>

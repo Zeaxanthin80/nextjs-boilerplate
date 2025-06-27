@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing SaaS Documentation - Main Index</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Marketing SaaS Documentation</h1>
+            <p>Welcome to the comprehensive documentation for the Marketing SaaS capstone project <br> by Jose, Norma, and Lily</p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav">
+            <h3>🧭 Quick Navigation</h3>
+            <ul>
+                <li><strong>🚀 New to the project?</strong> Start with <a href="#getting-started">Getting Started</a></li>
+                <li><strong>🔍 Looking for a specific guide?</strong> See <a href="#guide-summaries">Documentation Index</a></li>
+                <li><strong>❓ Need help?</strong> Check <a href="#getting-help">Troubleshooting</a></li>
+                <li><strong>📋 Ready to code?</strong> See <a href="#setup-checklist">Setup Checklist</a></li>
+            </ul>
+        </div>
+
+        <!-- Project Info -->
+        <div class="content">
+            <h2>📚 Documentation Overview</h2>
+            <p>This documentation covers all aspects of setting up, developing, and managing the Marketing SaaS application built with Next.js, Prisma, and Vercel.</p>
+            
+            <div class="team-grid">
+                <div class="team-card jose">
+                    <h4>🎯 Project Info</h4>
+                    <div class="role">7-week capstone project</div>
+                    <p><strong>Tech Stack:</strong> Next.js 15, Prisma, PostgreSQL, Vercel, TypeScript</p>
+                </div>
+
+                <div class="team-card norma">
+                    <h4>👥 Team</h4>
+                    <div class="role">Roles and responsibilities</div>
+                    <ul>
+                        <li><strong>Jose:</strong> Backend/Infrastructure</li>
+                        <li><strong>Norma:</strong> Frontend/UI</li>
+                        <li><strong>Lily:</strong> Features/Integration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Getting Started -->
+        <div class="content" id="getting-started">
+            <h2>🚀 Getting Started (Read in Order)</h2>
+            
+            <div class="alert alert-warning">
+                <h3>📋 Step 1: Choose Your Setup Strategy</h3>
+                <p>Before following any guides, <strong>choose which database approach your team wants:</strong></p>
+                <ul>
+                    <li><strong>☁️ Cloud Database (RECOMMENDED):</strong> Shared Prisma Postgres on Vercel - easier collaboration</li>
+                    <li><strong>🏠 Local Database:</strong> Individual PostgreSQL setups - more complex but educational</li>
+                </ul>
+            </div>
+
+            <h3>🔄 Option A: Cloud Database Setup Flow (RECOMMENDED)</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>Guide</th>
+                            <th>Purpose</th>
+                            <th>Who Does This</th>
+                            <th>Formats</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1st</strong></td>
+                            <td><strong>Vercel Workflow Guide</strong></td>
+                            <td>Team collaboration and deployment setup</td>
+                            <td>All team members read<br>Jose implements</td>
+                            <td><a href="./VERCEL_WORKFLOW_GUIDE.md">📄 MD</a> | <a href="./VERCEL_WORKFLOW_GUIDE.html">🌐 HTML</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2nd</strong></td>
+                            <td><strong>Project Lead Guide</strong></td>
+                            <td>Administrative setup and team management</td>
+                            <td>Jose (Project Lead)</td>
+                            <td><a href="./PROJECT_LEAD_GUIDE.md">📄 MD</a> | <a href="./PROJECT_LEAD_GUIDE.html">🌐 HTML</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3rd</strong></td>
+                            <td><strong>Cloud Database Setup Guide</strong></td>
+                            <td>Cloud Prisma Postgres setup and schema</td>
+                            <td>Jose (Project Lead)</td>
+                            <td><a href="./DATABASE_SETUP_GUIDE.md">📄 MD</a> | <a href="./DATABASE_SETUP_GUIDE.html">🌐 HTML</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4th</strong></td>
+                            <td><strong>Environment Variables Guide</strong></td>
+                            <td>Team environment configuration</td>
+                            <td>All team members</td>
+                            <td><a href="./ENVIRONMENT_VARIABLES_GUIDE.md">📄 MD</a> | <a href="./ENVIRONMENT_VARIABLES_GUIDE.html">🌐 HTML</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><strong>Skip LOCAL_DATABASE_SETUP_GUIDE</strong> - not needed for cloud approach.</p>
+
+            <h3>🔄 Option B: Local Database Setup Flow (ALTERNATIVE)</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>Guide</th>
+                            <th>Purpose</th>
+                            <th>Who Does This</th>
+                            <th>Formats</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1st</strong></td>
+                            <td><strong>Vercel Workflow Guide</strong></td>
+                            <td>Team collaboration and deployment setup</td>
+                            <td>All team members read<br>Jose implements</td>
+                            <td><a href="./VERCEL_WORKFLOW_GUIDE.md">📄 MD</a> | <a href="./VERCEL_WORKFLOW_GUIDE.html">🌐 HTML</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2nd</strong></td>
+                            <td><strong>Project Lead Guide</strong></td>
+                            <td>Administrative setup and team management</td>
+                            <td>Jose (Project Lead)</td>
+                            <td><a href="./PROJECT_LEAD_GUIDE.md">📄 MD</a> | <a href="./PROJECT_LEAD_GUIDE.html">🌐 HTML</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3rd</strong></td>
+                            <td><strong>Local Database Setup Guide</strong></td>
+                            <td>Local PostgreSQL with individual credentials</td>
+                            <td>Jose (Project Lead)</td>
+                            <td><a href="./DATABASE_USER_SETUP.md">📄 MD</a> | <a href="./DATABASE_USER_SETUP.html">🌐 HTML</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4th</strong></td>
+                            <td><strong>Environment Variables Guide</strong></td>
+                            <td>Team environment configuration</td>
+                            <td>All team members</td>
+                            <td><a href="./ENVIRONMENT_VARIABLES_GUIDE.md">📄 MD</a> | <a href="./ENVIRONMENT_VARIABLES_GUIDE.html">🌐 HTML</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><strong>Skip CLOUD_DATABASE_SETUP_GUIDE</strong> - not needed for local approach.</p>
+        </div>
+
+        <!-- Database Clarification -->
+        <div class="content" id="database-guides-clarification">
+            <h2>🔍 Database Guides Clarification</h2>
+            
+            <div class="alert alert-danger">
+                <h3>CLOUD_DATABASE_SETUP_GUIDE vs LOCAL_DATABASE_SETUP_GUIDE - What's the Difference?</h3>
+                <p><strong>⚠️ Important:</strong> These guides represent <strong>TWO DIFFERENT DATABASE STRATEGIES</strong> - choose one approach for your team.</p>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>CLOUD_DATABASE_SETUP_GUIDE</th>
+                            <th>LOCAL_DATABASE_SETUP_GUIDE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Database Type</strong></td>
+                            <td>☁️ <strong>Cloud Database</strong> (Prisma Postgres on Vercel)</td>
+                            <td>🏠 <strong>Local Database</strong> (PostgreSQL on each machine)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>When to Use</strong></td>
+                            <td><strong>RECOMMENDED</strong> - For teams wanting shared data</td>
+                            <td>Alternative - For teams preferring isolated local development</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pros</strong></td>
+                            <td>✅ Shared data across team<br>✅ No local PostgreSQL needed<br>✅ Vercel integration<br>✅ Easier team collaboration</td>
+                            <td>✅ Individual accountability<br>✅ Offline development<br>✅ Full local control<br>✅ Learning PostgreSQL admin</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cons</strong></td>
+                            <td>❌ Requires internet connection<br>❌ Shared database state</td>
+                            <td>❌ Complex setup<br>❌ Local PostgreSQL required<br>❌ Data sync challenges</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Guide Summaries -->
+        <div class="content" id="guide-summaries">
+            <h2>📖 Quick Reference - Guide Summaries</h2>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <h4>📊 Vercel Workflow Guide</h4>
+                    <div class="role">Essential reading for all team members</div>
+                    <p><strong>Priority:</strong> 🔥 Critical</p>
+                    <p><strong>Covers:</strong> GitHub integration, deployment pipelines, PR workflow, team collaboration</p>
+                    <p><a href="./VERCEL_WORKFLOW_GUIDE.md">📄 Markdown</a> | <a href="./VERCEL_WORKFLOW_GUIDE.html">🌐 HTML</a></p>
+                </div>
+
+                <div class="team-card">
+                    <h4>👑 Project Lead Guide</h4>
+                    <div class="role">For Jose (project administrator)</div>
+                    <p><strong>Priority:</strong> 🔥 Critical for Jose</p>
+                    <p><strong>Covers:</strong> Team onboarding, project management, advanced Vercel configuration, security</p>
+                    <p><a href="./PROJECT_LEAD_GUIDE.md">📄 Markdown</a> | <a href="./PROJECT_LEAD_GUIDE.html">🌐 HTML</a></p>
+                </div>
+
+                <div class="team-card">
+                    <h4>☁️ Cloud Database Setup Guide</h4>
+                    <div class="role">Cloud database infrastructure</div>
+                    <p><strong>Priority:</strong> 🔥 Critical if using cloud DB</p>
+                    <p><strong>Note:</strong> ⚠️ Use this OR Local Database Setup Guide, not both</p>
+                    <p><a href="./DATABASE_SETUP_GUIDE.md">📄 Markdown</a> | <a href="./DATABASE_SETUP_GUIDE.html">🌐 HTML</a></p>
+                </div>
+
+                <div class="team-card">
+                    <h4>� Cloud Database Development Workflow</h4>
+                    <div class="role">Team collaboration with shared database</div>
+                    <p><strong>Priority:</strong> ⭐ Important for cloud DB users</p>
+                    <p><strong>Note:</strong> 🔗 Companion to Cloud Database Setup Guide</p>
+                    <p><a href="./CLOUD_DATABASE_WORKFLOW.md">📄 Markdown</a> | <a href="./CLOUD_DATABASE_WORKFLOW.html">🌐 HTML</a></p>
+                </div>
+
+                <div class="team-card">
+                    <h4>�🏠 Local Database Setup Guide</h4>
+                    <div class="role">Local PostgreSQL with individual users</div>
+                    <p><strong>Priority:</strong> 🔥 Critical if using local DB</p>
+                    <p><strong>Note:</strong> ⚠️ Use this OR Cloud Database Setup Guide, not both</p>
+                    <p><a href="./DATABASE_USER_SETUP.md">📄 Markdown</a> | <a href="./DATABASE_USER_SETUP.html">🌐 HTML</a></p>
+                </div>
+
+                <div class="team-card">
+                    <h4>⚙️ Environment Variables Guide</h4>
+                    <div class="role">Configuration reference for all</div>
+                    <p><strong>Priority:</strong> 🔥 Critical</p>
+                    <p><strong>Covers:</strong> Variable explanations, file structure, security practices, team setup</p>
+                    <p><a href="./ENVIRONMENT_VARIABLES_GUIDE.md">📄 Markdown</a> | <a href="./ENVIRONMENT_VARIABLES_GUIDE.html">🌐 HTML</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Checklist -->
+        <div class="content" id="setup-checklist">
+            <h2>📋 Setup Checklist by Role</h2>
+            
+            <div class="workflow-steps">
+                <div class="step">
+                    <span class="step-number">👑</span>
+                    <h4>For Jose (Project Lead):</h4>
+                    <p>Follow the Project Lead Guide completely, then choose your database approach:</p>
+                    
+                    <h5>Cloud Database Approach:</h5>
+                    <ol>
+                        <li>Complete <a href="./VERCEL_WORKFLOW_GUIDE.html">Vercel Workflow Guide</a> setup</li>
+                        <li>Complete <a href="./PROJECT_LEAD_GUIDE.html">Project Lead Guide</a> administrative tasks</li>
+                        <li>Set up cloud database using <a href="./DATABASE_SETUP_GUIDE.html">Cloud Database Setup Guide</a></li>
+                        <li>Configure team environment variables → <a href="./ENVIRONMENT_VARIABLES_GUIDE.html">Environment Guide</a></li>
+                        <li>Share development credentials with Norma and Lily securely</li>
+                    </ol>
+
+                    <h5>Local Database Approach:</h5>
+                    <ol>
+                        <li>Complete <a href="./VERCEL_WORKFLOW_GUIDE.html">Vercel Workflow Guide</a> setup</li>
+                        <li>Complete <a href="./PROJECT_LEAD_GUIDE.html">Project Lead Guide</a> administrative tasks</li>
+                        <li>Set up local PostgreSQL using <a href="./DATABASE_USER_SETUP.html">Local Database Setup Guide</a></li>
+                        <li>Configure team environment variables → <a href="./ENVIRONMENT_VARIABLES_GUIDE.html">Environment Guide</a></li>
+                        <li>Create individual database users and share credentials with team</li>
+                    </ol>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">👥</span>
+                    <h4>For Norma & Lily (Team Members):</h4>
+                    <p>After Jose completes his setup:</p>
+                    
+                    <ol>
+                        <li><strong>Read first:</strong> <a href="./VERCEL_WORKFLOW_GUIDE.html">Vercel Workflow Guide</a> (understand the workflow)</li>
+                        <li>Clone repository: <code>git clone &lt;repo-url&gt;</code></li>
+                        <li>Install dependencies: <code>npm install</code></li>
+                        <li><strong>Set up environment:</strong> Follow <a href="./ENVIRONMENT_VARIABLES_GUIDE.html">Environment Variables Guide</a>
+                            <ul>
+                                <li>Copy <code>.env.example</code> to <code>.env.local</code></li>
+                                <li>Get credentials from Jose (sent via secure email)</li>
+                                <li>Fill in your personal <code>.env.local</code> file</li>
+                            </ul>
+                        </li>
+                        <li>Generate Prisma client: <code>npm run db:generate</code></li>
+                        <li>Test setup: <code>npm run dev</code></li>
+                        <li><strong>Verify database connection:</strong> <code>node test-database.js</code></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Getting Help -->
+        <div class="content" id="getting-help">
+            <h2>🆘 Getting Help</h2>
+            
+            <div class="alert alert-info">
+                <h3>🔍 Problem-Solving Flow:</h3>
+                <ol>
+                    <li><strong>Identify your issue type:</strong>
+                        <ul>
+                            <li>🌐 <strong>Vercel/Deployment issues</strong> → <a href="./VERCEL_WORKFLOW_GUIDE.html#troubleshooting">Vercel Workflow Guide - Troubleshooting</a></li>
+                            <li>🗄️ <strong>Database connection issues</strong> → Check which database guide you're using:
+                                <ul>
+                                    <li>Cloud DB: <a href="./DATABASE_SETUP_GUIDE.html#troubleshooting">Cloud Database Setup Guide - Troubleshooting</a></li>
+                                    <li>Local DB: <a href="./DATABASE_USER_SETUP.html#troubleshooting">Local Database Setup Guide - Troubleshooting</a></li>
+                                </ul>
+                            </li>
+                            <li>⚙️ <strong>Environment variable issues</strong> → <a href="./ENVIRONMENT_VARIABLES_GUIDE.html#troubleshooting">Environment Variables Guide - Troubleshooting</a></li>
+                            <li>👑 <strong>Team coordination issues</strong> → <a href="./PROJECT_LEAD_GUIDE.html#troubleshooting">Project Lead Guide - Troubleshooting</a></li>
+                        </ul>
+                    </li>
+                    <li><strong>Check the specific guide</strong> for your issue type (each guide has its own troubleshooting section)</li>
+                    <li><strong>Search existing issues</strong> in the GitHub repository</li>
+                    <li><strong>Ask in team chat</strong> (Discord/Slack) with context</li>
+                    <li><strong>Create GitHub issue</strong> for bugs or feature requests</li>
+                </ol>
+            </div>
+
+            <h3>🚨 Emergency Contacts:</h3>
+            <div class="team-grid">
+                <div class="team-card jose">
+                    <h4>Jose (Project Lead)</h4>
+                    <div class="role">Infrastructure & Backend</div>
+                    <p>Database issues, Vercel problems, environment variables, infrastructure</p>
+                </div>
+
+                <div class="team-card norma">
+                    <h4>Norma (Frontend Lead)</h4>
+                    <div class="role">UI & Components</div>
+                    <p>UI components, styling issues, React problems</p>
+                </div>
+
+                <div class="team-card lily">
+                    <h4>Lily (Integration Lead)</h4>
+                    <div class="role">Features & Testing</div>
+                    <p>Feature development, testing, third-party integrations</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="content">
+            <div class="alert alert-success">
+                <p><strong>Last Updated:</strong> June 20, 2025</p>
+                <p><strong>Project Status:</strong> ✅ Documentation Reorganized - Database Strategy Clarified</p>
+                <p><strong>Next Phase:</strong> Choose Database Strategy → Complete Setup → Begin Development</p>
+            </div>
+
+            <h3>📋 Quick Links:</h3>
+            <ul>
+                <li><a href="./README.md">📄 Main Documentation (Markdown)</a> | <a href="./README.html">🌐 Main Documentation (HTML)</a> (you are here)</li>
+                <li><strong>All HTML Docs:</strong> <a href="./VERCEL_WORKFLOW_GUIDE.html">Vercel</a> | <a href="./PROJECT_LEAD_GUIDE.html">Project Lead</a> | <a href="./DATABASE_SETUP_GUIDE.html">Cloud Database Setup</a> | <a href="./CLOUD_DATABASE_WORKFLOW.html">Cloud Database Workflow</a> | <a href="./DATABASE_USER_SETUP.html">Local Database Setup</a> | <a href="./ENVIRONMENT_VARIABLES_GUIDE.html">Environment</a></li>
+                <li><strong>All Markdown Docs:</strong> <a href="./VERCEL_WORKFLOW_GUIDE.md">Vercel</a> | <a href="./PROJECT_LEAD_GUIDE.md">Project Lead</a> | <a href="./DATABASE_SETUP_GUIDE.md">Cloud Database Setup</a> | <a href="./CLOUD_DATABASE_WORKFLOW.md">Cloud Database Workflow</a> | <a href="./DATABASE_USER_SETUP.md">Local Database Setup</a> | <a href="./ENVIRONMENT_VARIABLES_GUIDE.md">Environment</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add active navigation highlighting
+        const observerOptions = {
+            rootMargin: '-20% 0px -60% 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    if (id) {
+                        document.querySelectorAll('.nav a').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        const activeLink = document.querySelector(`.nav a[href="#${id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.content[id]').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

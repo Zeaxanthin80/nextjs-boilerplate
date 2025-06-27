@@ -1,7 +1,15 @@
-# Database Setup Guide - Prisma Postgres
+# Cloud Database Setup Guide - Prisma Postgres
+
+> **⚠️ Important:** This guide is for setting up a **cloud-hosted database** on Vercel. If your team wants individual local PostgreSQL setups instead, use the [Local Database Setup Guide](./DATABASE_USER_SETUP.md) instead.
 
 ## Overview
-This guide walks you through setting up Prisma Postgres for your marketing SaaS application. "Prisma Postgres" is a Postgres database optimized for Prisma ORM, but you still need to install and configure Prisma in your project.
+This guide walks you through setting up **Prisma Postgres** (cloud database) for your Marketing SaaS application. This approach provides:
+- ☁️ **Shared cloud database** - all team members connect to the same database
+- 🚀 **No local PostgreSQL required** - database runs on Vercel's infrastructure  
+- 🔄 **Real-time collaboration** - all team members see the same data
+- 🔗 **Integrated with Vercel** - seamless deployment and environment management
+
+**Prerequisites:** Complete the [Project Lead Guide](./PROJECT_LEAD_GUIDE.md) first for Vercel account setup.
 
 ## Table of Contents
 1. [Create Database in Vercel](#1-create-database-in-vercel)
@@ -31,7 +39,7 @@ After creation, Vercel will show you:
 - Direct connection URL
 - Connection pooling URL
 
-**⚠️ Important:** Copy these URLs - you'll need them for environment variables.
+**⚠️ Important:** Copy these URLs - you'll need them for environment variables. See the [Environment Variables Guide](./ENVIRONMENT_VARIABLES_GUIDE.md) for details on how to use these URLs.
 
 ---
 

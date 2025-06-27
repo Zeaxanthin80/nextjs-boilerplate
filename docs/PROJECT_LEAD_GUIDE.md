@@ -302,11 +302,11 @@ nano .env.local
 
 ### 5. Start Development
 ```bash
-# Option 1: Enhanced development server (recommended)
-vercel dev
-
-# Option 2: Basic Next.js server
+# Recommended: Next.js development server
 npm run dev
+
+# Alternative: vercel dev (only if needed for specific Vercel features)
+# Only use if working with Edge middleware or custom routing
 ```
 
 ### 6. Verify Setup
@@ -566,19 +566,21 @@ cat .env.local     # Check contents (be careful with sensitive data)
 # 4. Verify variables are prefixed with NEXT_PUBLIC_ if needed in browser
 ```
 
-#### 3. Vercel Dev Not Working for Team Members
+#### 3. Development Server Recommendations for Team Members
 ```bash
-# Team members without vercel link can still use vercel dev
-# If it doesn't work:
-
-# Option 1: Use basic Next.js dev server
+# RECOMMENDED: Use Next.js development server for most work
 npm run dev
 
-# Option 2: Install Vercel runtime dependencies
-npm install @vercel/node
+# Why this is better:
+# - Works immediately after npm install
+# - No authentication required
+# - Includes all Next.js features (API routes, hot reload, routing)
+# - Officially recommended by Vercel for Next.js projects
 
-# Option 3: Use npx instead of global install
-npx vercel dev
+# Only use vercel dev when:
+# - Working with Edge middleware
+# - Testing Vercel-specific routing
+# - Jose needs production environment for infrastructure work
 ```
 
 #### 4. Git Conflicts and Merge Issues
