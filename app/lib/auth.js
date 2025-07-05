@@ -4,7 +4,10 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "./prisma";
 import bcrypt from "bcryptjs";
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+// This is the configuration object for NextAuth
+import { getServerSession } from "next-auth/next";
+
+export const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
@@ -46,18 +49,20 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
         token.role = user.role;
+        token.id = user.id;
       }
       return token;
     },
     async session({ session, token }) {
-      if (token) {
-        session.user.id = token.sub;
+      if (session?.user) {
         session.user.role = token.role;
+        session.user.id = token.id;
       }
       return session;
     },
@@ -65,5 +70,29 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: {
     signIn: "/auth/signin",
     signUp: "/auth/signup",
+    error: "/auth/error",
   },
-});
+  debug: process.env.NODE_ENV === "development"
+};
+
+// Server-side auth function
+export async function auth() {
+  return await getServerSession(authOptions);
+}
+
+// Client-side auth utilities
+export const signIn = async (...args) => {
+  if (typeof window !== 'undefined') {
+    const { signIn: clientSignIn } = await import('next-auth/react');
+    return clientSignIn(...args);
+  }
+  throw new Error('signIn should be called from the client side');
+};
+
+export const signOut = async (...args) => {
+  if (typeof window !== 'undefined') {
+    const { signOut: clientSignOut } = await import('next-auth/react');
+    return clientSignOut(...args);
+  }
+  throw new Error('signOut should be called from the client side');
+};

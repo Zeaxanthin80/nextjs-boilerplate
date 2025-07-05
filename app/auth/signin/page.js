@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { signIn, getSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -28,10 +28,10 @@ export default function SignIn() {
         setError("Invalid email or password");
       } else {
         router.push("/dashboard");
-        router.refresh();
       }
     } catch (error) {
-      setError("An error occurred. Please try again.");
+      console.error("Sign in error:", error);
+      setError("An error occurred during sign in");
     } finally {
       setLoading(false);
     }
