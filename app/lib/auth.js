@@ -8,6 +8,7 @@ import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth/next";
 
 export const authOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
