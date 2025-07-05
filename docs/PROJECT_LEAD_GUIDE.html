@@ -1,232 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project Lead Guide - Marketing SaaS</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>Project Lead Guide</h1>
-            <p>Administrative and leadership responsibilities for Jose - Marketing SaaS capstone project</p>
+      <!-- Header -->
+      <div class="header">
+        <h1>Project Lead Guide</h1>
+        <p>
+          Administrative and leadership responsibilities for Jose<br />
+          Marketing SaaS capstone project
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <div class="nav">
+        <h3>📋 Table of Contents</h3>
+        <ol>
+          <li><a href="#overview">Project Lead Overview</a></li>
+          <li><a href="#responsibilities">Core Responsibilities</a></li>
+          <li><a href="#initial-setup">Initial Project Setup</a></li>
+          <li><a href="#vercel-setup">Vercel Project Configuration</a></li>
+          <li><a href="#team-onboarding">Team Member Onboarding</a></li>
+          <li><a href="#environment-management">Environment Management</a></li>
+          <li><a href="#deployment-management">Deployment Management</a></li>
+          <li><a href="#project-management">Project Management</a></li>
+          <li><a href="#timeline">7-Week Timeline Management</a></li>
+          <li><a href="#troubleshooting">Troubleshooting & Support</a></li>
+        </ol>
+      </div>
+
+      <!-- 1. Project Lead Overview -->
+      <div class="content" id="overview">
+        <h2>1. Project Lead Overview</h2>
+
+        <div class="alert alert-info">
+          <h3>
+            <span class="status-icon info">👑</span>Jose's Role as Project Lead
+          </h3>
+          <p>
+            As the project lead for this 7-week capstone project, you're
+            responsible for the technical infrastructure, team coordination, and
+            ensuring successful project delivery.
+          </p>
+
+          <div class="alert alert-warning">
+            <h4>🔄 Database Strategy Decision</h4>
+            <p>
+              As project lead, you need to choose your team's database approach:
+            </p>
+            <ul>
+              <li>
+                <strong>☁️ Cloud Database (RECOMMENDED):</strong>
+                <a href="./DATABASE_SETUP_GUIDE.html"
+                  >Cloud Database Setup Guide</a
+                >
+                - Shared Prisma Postgres
+              </li>
+              <li>
+                <strong>🏠 Local Database:</strong>
+                <a href="./DATABASE_USER_SETUP.html"
+                  >Local Database Setup Guide</a
+                >
+                - Individual PostgreSQL setups
+              </li>
+            </ul>
+            <p>
+              See the
+              <a href="./README.html#database-guides-clarification"
+                >main documentation</a
+              >
+              for detailed comparison.
+            </p>
+          </div>
         </div>
 
-        <!-- Navigation -->
-        <div class="nav">
-            <h3>📋 Table of Contents</h3>
-            <ol>
-                <li><a href="#overview">Project Lead Overview</a></li>
-                <li><a href="#responsibilities">Core Responsibilities</a></li>
-                <li><a href="#initial-setup">Initial Project Setup</a></li>
-                <li><a href="#vercel-setup">Vercel Project Configuration</a></li>
-                <li><a href="#team-onboarding">Team Member Onboarding</a></li>
-                <li><a href="#environment-management">Environment Management</a></li>
-                <li><a href="#deployment-management">Deployment Management</a></li>
-                <li><a href="#project-management">Project Management</a></li>
-                <li><a href="#timeline">7-Week Timeline Management</a></li>
-                <li><a href="#troubleshooting">Troubleshooting & Support</a></li>
-            </ol>
+        <div class="team-grid">
+          <div class="team-card jose">
+            <h4>Technical Leadership</h4>
+            <div class="role">Backend/Infrastructure Focus</div>
+            <ul>
+              <li>Database architecture and setup</li>
+              <li>API development and server-side logic</li>
+              <li>Deployment and DevOps configuration</li>
+              <li>Environment and security management</li>
+            </ul>
+          </div>
+
+          <div class="team-card norma">
+            <h4>Team Coordination</h4>
+            <div class="role">Supporting Norma (Frontend/UI)</div>
+            <ul>
+              <li>Code review and technical guidance</li>
+              <li>Integration support between frontend/backend</li>
+              <li>Design system and component architecture</li>
+              <li>Performance optimization coordination</li>
+            </ul>
+          </div>
+
+          <div class="team-card lily">
+            <h4>Project Management</h4>
+            <div class="role">Supporting Lily (Features/Integration)</div>
+            <ul>
+              <li>Feature planning and prioritization</li>
+              <li>Quality assurance and testing oversight</li>
+              <li>Third-party integration management</li>
+              <li>Timeline and milestone tracking</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Core Responsibilities -->
+      <div class="content" id="responsibilities">
+        <h2>2. Core Responsibilities</h2>
+
+        <div class="workflow-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <h4>Infrastructure & DevOps</h4>
+            <ul>
+              <li>Vercel project setup and configuration</li>
+              <li>Database setup and management (Prisma Postgres)</li>
+              <li>Environment variables and secrets management</li>
+              <li>Deployment pipeline configuration</li>
+              <li>Domain and SSL certificate management</li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="step-number">2</span>
+            <h4>Team Leadership</h4>
+            <ul>
+              <li>Onboarding team members (Norma and Lily)</li>
+              <li>Setting up development workflows</li>
+              <li>Code review and approval processes</li>
+              <li>Technical decision making</li>
+              <li>Conflict resolution and problem solving</li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="step-number">3</span>
+            <h4>Development Oversight</h4>
+            <ul>
+              <li>API architecture and implementation</li>
+              <li>Database schema design and migrations</li>
+              <li>Authentication and authorization setup</li>
+              <li>Performance monitoring and optimization</li>
+              <li>Security best practices implementation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Initial Project Setup -->
+      <div class="content" id="initial-setup">
+        <h2>3. Initial Project Setup</h2>
+
+        <div class="alert alert-success">
+          <h3><span class="status-icon check">✅</span>Completed Tasks</h3>
+          <p>These setup tasks have already been completed:</p>
+          <ul>
+            <li>
+              <span class="status-icon check">✅</span>Vercel project created
+              and connected to GitHub
+            </li>
+            <li>
+              <span class="status-icon check">✅</span>Prisma Postgres database
+              setup and configured
+            </li>
+            <li>
+              <span class="status-icon check">✅</span>Marketing SaaS schema
+              deployed
+            </li>
+            <li>
+              <span class="status-icon check">✅</span>Environment variables
+              configured
+            </li>
+            <li>
+              <span class="status-icon check">✅</span>Team documentation
+              created
+            </li>
+          </ul>
         </div>
 
-        <!-- 1. Project Lead Overview -->
-        <div class="content" id="overview">
-            <h2>1. Project Lead Overview</h2>
-            
-            <div class="alert alert-info">
-                <h3><span class="status-icon info">👑</span>Jose's Role as Project Lead</h3>
-                <p>As the project lead for this 7-week capstone project, you're responsible for the technical infrastructure, team coordination, and ensuring successful project delivery.</p>
-                
-                <div class="alert alert-warning">
-                    <h4>🔄 Database Strategy Decision</h4>
-                    <p>As project lead, you need to choose your team's database approach:</p>
-                    <ul>
-                        <li><strong>☁️ Cloud Database (RECOMMENDED):</strong> <a href="./DATABASE_SETUP_GUIDE.html">Cloud Database Setup Guide</a> - Shared Prisma Postgres</li>
-                        <li><strong>🏠 Local Database:</strong> <a href="./DATABASE_USER_SETUP.html">Local Database Setup Guide</a> - Individual PostgreSQL setups</li>
-                    </ul>
-                    <p>See the <a href="./README.html#database-guides-clarification">main documentation</a> for detailed comparison.</p>
-                </div>
-            </div>
-
-            <div class="team-grid">
-                <div class="team-card jose">
-                    <h4>Technical Leadership</h4>
-                    <div class="role">Backend/Infrastructure Focus</div>
-                    <ul>
-                        <li>Database architecture and setup</li>
-                        <li>API development and server-side logic</li>
-                        <li>Deployment and DevOps configuration</li>
-                        <li>Environment and security management</li>
-                    </ul>
-                </div>
-
-                <div class="team-card norma">
-                    <h4>Team Coordination</h4>
-                    <div class="role">Supporting Norma (Frontend/UI)</div>
-                    <ul>
-                        <li>Code review and technical guidance</li>
-                        <li>Integration support between frontend/backend</li>
-                        <li>Design system and component architecture</li>
-                        <li>Performance optimization coordination</li>
-                    </ul>
-                </div>
-
-                <div class="team-card lily">
-                    <h4>Project Management</h4>
-                    <div class="role">Supporting Lily (Features/Integration)</div>
-                    <ul>
-                        <li>Feature planning and prioritization</li>
-                        <li>Quality assurance and testing oversight</li>
-                        <li>Third-party integration management</li>
-                        <li>Timeline and milestone tracking</li>
-                    </ul>
-                </div>
-            </div>
+        <h3>Project Foundation Checklist</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Status</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>GitHub Repository Setup</td>
+                <td><span class="status-icon check">✅</span>Complete</td>
+                <td>Connected to Vercel for automatic deployments</td>
+              </tr>
+              <tr>
+                <td>Vercel Project Configuration</td>
+                <td><span class="status-icon check">✅</span>Complete</td>
+                <td>Production, preview, and development environments</td>
+              </tr>
+              <tr>
+                <td>Database Setup</td>
+                <td><span class="status-icon check">✅</span>Complete</td>
+                <td>Prisma Postgres with marketing SaaS schema</td>
+              </tr>
+              <tr>
+                <td>Environment Variables</td>
+                <td><span class="status-icon check">✅</span>Complete</td>
+                <td>Database URLs and development keys configured</td>
+              </tr>
+              <tr>
+                <td>Team Documentation</td>
+                <td><span class="status-icon check">✅</span>Complete</td>
+                <td>Workflow guides and setup instructions</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
 
-        <!-- 2. Core Responsibilities -->
-        <div class="content" id="responsibilities">
-            <h2>2. Core Responsibilities</h2>
-            
-            <div class="workflow-steps">
-                <div class="step">
-                    <span class="step-number">1</span>
-                    <h4>Infrastructure & DevOps</h4>
-                    <ul>
-                        <li>Vercel project setup and configuration</li>
-                        <li>Database setup and management (Prisma Postgres)</li>
-                        <li>Environment variables and secrets management</li>
-                        <li>Deployment pipeline configuration</li>
-                        <li>Domain and SSL certificate management</li>
-                    </ul>
-                </div>
+      <!-- 4. Vercel Project Configuration -->
+      <div class="content" id="vercel-setup">
+        <h2>4. Vercel Project Configuration</h2>
 
-                <div class="step">
-                    <span class="step-number">2</span>
-                    <h4>Team Leadership</h4>
-                    <ul>
-                        <li>Onboarding team members (Norma and Lily)</li>
-                        <li>Setting up development workflows</li>
-                        <li>Code review and approval processes</li>
-                        <li>Technical decision making</li>
-                        <li>Conflict resolution and problem solving</li>
-                    </ul>
-                </div>
-
-                <div class="step">
-                    <span class="step-number">3</span>
-                    <h4>Development Oversight</h4>
-                    <ul>
-                        <li>API architecture and implementation</li>
-                        <li>Database schema design and migrations</li>
-                        <li>Authentication and authorization setup</li>
-                        <li>Performance monitoring and optimization</li>
-                        <li>Security best practices implementation</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. Initial Project Setup -->
-        <div class="content" id="initial-setup">
-            <h2>3. Initial Project Setup</h2>
-            
-            <div class="alert alert-success">
-                <h3><span class="status-icon check">✅</span>Completed Tasks</h3>
-                <p>These setup tasks have already been completed:</p>
-                <ul>
-                    <li><span class="status-icon check">✅</span>Vercel project created and connected to GitHub</li>
-                    <li><span class="status-icon check">✅</span>Prisma Postgres database setup and configured</li>
-                    <li><span class="status-icon check">✅</span>Marketing SaaS schema deployed</li>
-                    <li><span class="status-icon check">✅</span>Environment variables configured</li>
-                    <li><span class="status-icon check">✅</span>Team documentation created</li>
-                </ul>
-            </div>
-
-            <h3>Project Foundation Checklist</h3>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Task</th>
-                            <th>Status</th>
-                            <th>Notes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>GitHub Repository Setup</td>
-                            <td><span class="status-icon check">✅</span>Complete</td>
-                            <td>Connected to Vercel for automatic deployments</td>
-                        </tr>
-                        <tr>
-                            <td>Vercel Project Configuration</td>
-                            <td><span class="status-icon check">✅</span>Complete</td>
-                            <td>Production, preview, and development environments</td>
-                        </tr>
-                        <tr>
-                            <td>Database Setup</td>
-                            <td><span class="status-icon check">✅</span>Complete</td>
-                            <td>Prisma Postgres with marketing SaaS schema</td>
-                        </tr>
-                        <tr>
-                            <td>Environment Variables</td>
-                            <td><span class="status-icon check">✅</span>Complete</td>
-                            <td>Database URLs and development keys configured</td>
-                        </tr>
-                        <tr>
-                            <td>Team Documentation</td>
-                            <td><span class="status-icon check">✅</span>Complete</td>
-                            <td>Workflow guides and setup instructions</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- 4. Vercel Project Configuration -->
-        <div class="content" id="vercel-setup">
-            <h2>4. Vercel Project Configuration</h2>
-            
-            <h3>Project Connection Status</h3>
-            <div class="workflow-steps">
-                <div class="step">
-                    <span class="step-number">1</span>
-                    <h4>Vercel CLI Setup (Completed)</h4>
-                    <pre class="code-block">
+        <h3>Project Connection Status</h3>
+        <div class="workflow-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <h4>Vercel CLI Setup (Completed)</h4>
+            <pre class="code-block">
 <span class="comment"># These commands have been executed successfully:</span>
 <span class="command">npm i -g vercel</span>
 <span class="command">vercel login</span>
 <span class="command">vercel link --yes</span>
 <span class="comment"># ✅ Project successfully linked to nextjs-boilerplate</span>
                     </pre>
-                </div>
+          </div>
 
-                <div class="step">
-                    <span class="step-number">2</span>
-                    <h4>Environment Variables (Configured)</h4>
-                    <pre class="code-block">
+          <div class="step">
+            <span class="step-number">2</span>
+            <h4>Environment Variables (Configured)</h4>
+            <pre class="code-block">
 <span class="comment"># Environment variables have been pulled and configured:</span>
 <span class="command">vercel env pull .env.local</span>
 <span class="comment"># ✅ DATABASE_URL and development variables downloaded</span>
                     </pre>
-                </div>
-            </div>
+          </div>
+        </div>
 
-            <h3>Managing Team Access</h3>
-            <div class="alert alert-info">
-                <h4>Current Setup: Optimized Approach</h4>
-                <ul>
-                    <li><strong>Jose (You):</strong> Full Vercel CLI access for infrastructure and deployment management</li>
-                    <li><strong>Norma & Lily:</strong> Use <code>npm run dev</code> for efficient daily development (Vercel-recommended)</li>
-                </ul>
-                <p>This approach follows Vercel's official recommendations and provides the best development experience for each role.</p>
-            </div>
+        <h3>Managing Team Access</h3>
+        <div class="alert alert-info">
+          <h4>Current Setup: Optimized Approach</h4>
+          <ul>
+            <li>
+              <strong>Jose (You):</strong> Full Vercel CLI access for
+              infrastructure and deployment management
+            </li>
+            <li>
+              <strong>Norma & Lily:</strong> Use <code>npm run dev</code> for
+              efficient daily development (Vercel-recommended)
+            </li>
+          </ul>
+          <p>
+            This approach follows Vercel's official recommendations and provides
+            the best development experience for each role.
+          </p>
+        </div>
 
-            <h3>Advanced Vercel Management</h3>
-            <pre class="code-block">
+        <h3>Advanced Vercel Management</h3>
+        <pre class="code-block">
 <span class="comment"># Project management commands for Jose:</span>
 <span class="command">vercel ls</span>                   <span class="comment"># List all deployments</span>
 <span class="command">vercel inspect &lt;url&gt;</span>        <span class="comment"># Get deployment details</span>
@@ -236,43 +289,64 @@
 <span class="command">vercel promote &lt;url&gt;</span>        <span class="comment"># Promote preview to production</span>
 <span class="command">vercel rollback &lt;url&gt;</span>       <span class="comment"># Rollback to previous deployment</span>
             </pre>
+      </div>
+
+      <!-- 5. Team Meamber Onboarding -->
+      <div class="content" id="team-onboarding">
+        <h2>5. Team Member Onboarding</h2>
+
+        <div class="alert alert-info">
+          <h4>📋 Onboarding Prerequisites</h4>
+          <p>Before onboarding team members, ensure you've completed:</p>
+          <ol>
+            <li>
+              ✅
+              <a href="./VERCEL_WORKFLOW_GUIDE.html">Vercel Workflow Guide</a> -
+              Complete Vercel setup
+            </li>
+            <li>
+              ✅ Choose database strategy and complete either:
+              <ul>
+                <li>
+                  <a href="./DATABASE_SETUP_GUIDE.html"
+                    >Cloud Database Setup Guide</a
+                  >
+                  (cloud database), OR
+                </li>
+                <li>
+                  <a href="./DATABASE_USER_SETUP.html"
+                    >Local Database Setup Guide</a
+                  >
+                  (local database)
+                </li>
+              </ul>
+            </li>
+            <li>
+              ✅
+              <a href="./ENVIRONMENT_VARIABLES_GUIDE.html"
+                >Environment Variables Guide</a
+              >
+              - Prepare team credentials
+            </li>
+          </ol>
         </div>
 
-        <!-- 5. Team Meamber Onboarding -->
-        <div class="content" id="team-onboarding">
-            <h2>5. Team Member Onboarding</h2>
-            
-            <div class="alert alert-info">
-                <h4>📋 Onboarding Prerequisites</h4>
-                <p>Before onboarding team members, ensure you've completed:</p>
-                <ol>
-                    <li>✅ <a href="./VERCEL_WORKFLOW_GUIDE.html">Vercel Workflow Guide</a> - Complete Vercel setup</li>
-                    <li>✅ Choose database strategy and complete either:
-                        <ul>
-                            <li><a href="./DATABASE_SETUP_GUIDE.html">Cloud Database Setup Guide</a> (cloud database), OR</li>
-                            <li><a href="./DATABASE_USER_SETUP.html">Local Database Setup Guide</a> (local database)</li>
-                        </ul>
-                    </li>
-                    <li>✅ <a href="./ENVIRONMENT_VARIABLES_GUIDE.html">Environment Variables Guide</a> - Prepare team credentials</li>
-                </ol>
-            </div>
-            
-            <h3>Onboarding Checklist for New Team Members</h3>
-            
-            <div class="team-grid">
-                <div class="team-card norma">
-                    <h4>Norma (Frontend/UI) Onboarding</h4>
-                    <div class="role">Steps to get Norma up and running</div>
-                    
-                    <h5>Repository Access:</h5>
-                    <ol>
-                        <li>Add Norma as collaborator on GitHub repository</li>
-                        <li>Grant "Write" permissions for pull request creation</li>
-                        <li>Share repository URL and clone instructions</li>
-                    </ol>
+        <h3>Onboarding Checklist for New Team Members</h3>
 
-                    <h5>Development Setup:</h5>
-                    <pre class="code-block">
+        <div class="team-grid">
+          <div class="team-card norma">
+            <h4>Norma (Frontend/UI) Onboarding</h4>
+            <div class="role">Steps to get Norma up and running</div>
+
+            <h5>Repository Access:</h5>
+            <ol>
+              <li>Add Norma as collaborator on GitHub repository</li>
+              <li>Grant "Write" permissions for pull request creation</li>
+              <li>Share repository URL and clone instructions</li>
+            </ol>
+
+            <h5>Development Setup:</h5>
+            <pre class="code-block">
 <span class="comment"># Commands for Norma to run:</span>
 <span class="command">git clone https://github.com/your-team/nextjs-boilerplate.git</span>
 <span class="command">cd nextjs-boilerplate</span>
@@ -282,28 +356,31 @@
 <span class="command">npm run dev</span> <span class="comment"># Recommended: Next.js development server</span>
                     </pre>
 
-                    <h5>Environment Variables for Norma:</h5>
-                    <p>Create a secure way to share development credentials (not production):</p>
-                    <ul>
-                        <li>Development database URL</li>
-                        <li>Test API keys</li>
-                        <li>Local development secrets</li>
-                    </ul>
-                </div>
+            <h5>Environment Variables for Norma:</h5>
+            <p>
+              Create a secure way to share development credentials (not
+              production):
+            </p>
+            <ul>
+              <li>Development database URL</li>
+              <li>Test API keys</li>
+              <li>Local development secrets</li>
+            </ul>
+          </div>
 
-                <div class="team-card lily">
-                    <h4>Lily (Features/Integration) Onboarding</h4>
-                    <div class="role">Steps to get Lily up and running</div>
-                    
-                    <h5>Repository Access:</h5>
-                    <ol>
-                        <li>Add Lily as collaborator on GitHub repository</li>
-                        <li>Grant "Write" permissions for pull request creation</li>
-                        <li>Share repository URL and clone instructions</li>
-                    </ol>
+          <div class="team-card lily">
+            <h4>Lily (Features/Integration) Onboarding</h4>
+            <div class="role">Steps to get Lily up and running</div>
 
-                    <h5>Development Setup:</h5>
-                    <pre class="code-block">
+            <h5>Repository Access:</h5>
+            <ol>
+              <li>Add Lily as collaborator on GitHub repository</li>
+              <li>Grant "Write" permissions for pull request creation</li>
+              <li>Share repository URL and clone instructions</li>
+            </ol>
+
+            <h5>Development Setup:</h5>
+            <pre class="code-block">
 <span class="comment"># Commands for Lily to run:</span>
 <span class="command">git clone https://github.com/your-team/nextjs-boilerplate.git</span>
 <span class="command">cd nextjs-boilerplate</span>
@@ -313,83 +390,103 @@
 <span class="command">npm run dev</span> <span class="comment"># Recommended: Next.js development server</span>
                     </pre>
 
-                    <h5>Testing Access:</h5>
-                    <p>Lily will need access to testing tools and environments:</p>
-                    <ul>
-                        <li>Test database access</li>
-                        <li>Email testing credentials (SendGrid test)</li>
-                        <li>Analytics testing setup</li>
-                    </ul>
-                </div>
-            </div>
-
-            <h3>Setting Up Branch Protection</h3>
-            <div class="workflow-steps">
-                <div class="step">
-                    <span class="step-number">1</span>
-                    <h4>GitHub Branch Protection Rules</h4>
-                    <p>Go to GitHub → Settings → Branches → Add rule</p>
-                    <ul>
-                        <li>Branch name pattern: <code>main</code></li>
-                        <li><span class="status-icon check">✅</span>Require pull request reviews before merging</li>
-                        <li><span class="status-icon check">✅</span>Require status checks to pass before merging</li>
-                        <li><span class="status-icon check">✅</span>Require branches to be up to date before merging</li>
-                    </ul>
-                </div>
-            </div>
+            <h5>Testing Access:</h5>
+            <p>Lily will need access to testing tools and environments:</p>
+            <ul>
+              <li>Test database access</li>
+              <li>Email testing credentials (SendGrid test)</li>
+              <li>Analytics testing setup</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- 6. Environment Management -->
-        <div class="content" id="environment-management">
-            <h2>6. Environment Management</h2>
-            
-            <h3>Environment Variable Strategy</h3>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Environment</th>
-                            <th>Purpose</th>
-                            <th>Access Level</th>
-                            <th>Configuration</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Development</strong></td>
-                            <td>Local development</td>
-                            <td>All team members</td>
-                            <td>Test databases, development API keys</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Preview</strong></td>
-                            <td>PR testing</td>
-                            <td>Automatic from Vercel</td>
-                            <td>Staging database, test integrations</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Production</strong></td>
-                            <td>Live application</td>
-                            <td>Jose only</td>
-                            <td>Production database, live API keys</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <h3>Setting Up Branch Protection</h3>
+        <div class="workflow-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <h4>GitHub Branch Protection Rules</h4>
+            <p>Go to GitHub → Settings → Branches → Add rule</p>
+            <ul>
+              <li>Branch name pattern: <code>main</code></li>
+              <li>
+                <span class="status-icon check">✅</span>Require pull request
+                reviews before merging
+              </li>
+              <li>
+                <span class="status-icon check">✅</span>Require status checks
+                to pass before merging
+              </li>
+              <li>
+                <span class="status-icon check">✅</span>Require branches to be
+                up to date before merging
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-            <h3>Managing Secrets Securely</h3>
-            <div class="alert alert-warning">
-                <h4><span class="status-icon warning">⚠️</span>Security Best Practices</h4>
-                <ul>
-                    <li><strong>Never commit</strong> <code>.env.local</code> files to Git</li>
-                    <li><strong>Use test credentials</strong> for development environments</li>
-                    <li><strong>Rotate secrets regularly</strong> (monthly for production)</li>
-                    <li><strong>Share credentials securely</strong> (encrypted channels only)</li>
-                </ul>
-            </div>
+      <!-- 6. Environment Management -->
+      <div class="content" id="environment-management">
+        <h2>6. Environment Management</h2>
 
-            <h3>Environment Variable Commands</h3>
-            <pre class="code-block">
+        <h3>Environment Variable Strategy</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Environment</th>
+                <th>Purpose</th>
+                <th>Access Level</th>
+                <th>Configuration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Development</strong></td>
+                <td>Local development</td>
+                <td>All team members</td>
+                <td>Test databases, development API keys</td>
+              </tr>
+              <tr>
+                <td><strong>Preview</strong></td>
+                <td>PR testing</td>
+                <td>Automatic from Vercel</td>
+                <td>Staging database, test integrations</td>
+              </tr>
+              <tr>
+                <td><strong>Production</strong></td>
+                <td>Live application</td>
+                <td>Jose only</td>
+                <td>Production database, live API keys</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Managing Secrets Securely</h3>
+        <div class="alert alert-warning">
+          <h4>
+            <span class="status-icon warning">⚠️</span>Security Best Practices
+          </h4>
+          <ul>
+            <li>
+              <strong>Never commit</strong> <code>.env.local</code> files to Git
+            </li>
+            <li>
+              <strong>Use test credentials</strong> for development environments
+            </li>
+            <li>
+              <strong>Rotate secrets regularly</strong> (monthly for production)
+            </li>
+            <li>
+              <strong>Share credentials securely</strong> (encrypted channels
+              only)
+            </li>
+          </ul>
+        </div>
+
+        <h3>Environment Variable Commands</h3>
+        <pre class="code-block">
 <span class="comment"># Environment management commands for Jose:</span>
 <span class="command">vercel env ls</span>                             <span class="comment"># List all environment variables</span>
 <span class="command">vercel env add VARIABLE_NAME</span>              <span class="comment"># Add new environment variable</span>
@@ -397,50 +494,58 @@
 <span class="command">vercel env pull .env.local</span>                <span class="comment"># Download development variables</span>
 <span class="command">vercel env pull .env.production --environment=production</span>  <span class="comment"># Download production variables</span>
             </pre>
+      </div>
+
+      <!-- 7. Deployment Management -->
+      <div class="content" id="deployment-management">
+        <h2>7. Deployment Management</h2>
+
+        <h3>Vercel Deployment Strategy</h3>
+        <div class="alert alert-info">
+          <h4>Automated Deployment Pipeline</h4>
+          <p>Your project is configured with automatic deployments:</p>
+          <ul>
+            <li>
+              <strong>Production:</strong> Automatic deployment from
+              <code>main</code> branch
+            </li>
+            <li>
+              <strong>Preview:</strong> Automatic deployment from pull requests
+            </li>
+            <li>
+              <strong>Development:</strong> Local development with
+              <code>vercel dev</code>
+            </li>
+          </ul>
         </div>
 
-        <!-- 7. Deployment Management -->
-        <div class="content" id="deployment-management">
-            <h2>7. Deployment Management</h2>
-            
-            <h3>Vercel Deployment Strategy</h3>
-            <div class="alert alert-info">
-                <h4>Automated Deployment Pipeline</h4>
-                <p>Your project is configured with automatic deployments:</p>
-                <ul>
-                    <li><strong>Production:</strong> Automatic deployment from <code>main</code> branch</li>
-                    <li><strong>Preview:</strong> Automatic deployment from pull requests</li>
-                    <li><strong>Development:</strong> Local development with <code>vercel dev</code></li>
-                </ul>
-            </div>
+        <div class="workflow-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <h4>Production Deployment Process</h4>
+            <ul>
+              <li>Merge approved pull requests to <code>main</code></li>
+              <li>Vercel automatically triggers production build</li>
+              <li>Database migrations run automatically (if configured)</li>
+              <li>New version goes live at your production URL</li>
+            </ul>
+          </div>
 
-            <div class="workflow-steps">
-                <div class="step">
-                    <span class="step-number">1</span>
-                    <h4>Production Deployment Process</h4>
-                    <ul>
-                        <li>Merge approved pull requests to <code>main</code></li>
-                        <li>Vercel automatically triggers production build</li>
-                        <li>Database migrations run automatically (if configured)</li>
-                        <li>New version goes live at your production URL</li>
-                    </ul>
-                </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <h4>Preview Deployments</h4>
+            <ul>
+              <li>Every pull request gets a unique preview URL</li>
+              <li>Test features before merging to production</li>
+              <li>Share preview URLs with team for testing</li>
+              <li>Preview environments use staging database</li>
+            </ul>
+          </div>
 
-                <div class="step">
-                    <span class="step-number">2</span>
-                    <h4>Preview Deployments</h4>
-                    <ul>
-                        <li>Every pull request gets a unique preview URL</li>
-                        <li>Test features before merging to production</li>
-                        <li>Share preview URLs with team for testing</li>
-                        <li>Preview environments use staging database</li>
-                    </ul>
-                </div>
-
-                <div class="step">
-                    <span class="step-number">3</span>
-                    <h4>Manual Deployment Commands</h4>
-                    <pre class="code-block">
+          <div class="step">
+            <span class="step-number">3</span>
+            <h4>Manual Deployment Commands</h4>
+            <pre class="code-block">
 <span class="comment"># Deploy to production manually (if needed)</span>
 <span class="command">vercel --prod</span>
 
@@ -453,60 +558,60 @@
 <span class="comment"># View deployment logs</span>
 <span class="command">vercel logs [deployment-url]</span>
                     </pre>
-                </div>
-            </div>
+          </div>
+        </div>
 
-            <h3>Deployment Monitoring</h3>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Metric</th>
-                            <th>How to Monitor</th>
-                            <th>Action Threshold</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Build Time</td>
-                            <td>Vercel dashboard</td>
-                            <td>&gt; 2 minutes</td>
-                        </tr>
-                        <tr>
-                            <td>Deployment Success Rate</td>
-                            <td>Vercel deployment history</td>
-                            <td>&lt; 95%</td>
-                        </tr>
-                        <tr>
-                            <td>Performance</td>
-                            <td>Vercel Analytics</td>
-                            <td>First Load &gt; 3s</td>
-                        </tr>
-                        <tr>
-                            <td>Error Rate</td>
-                            <td>Vercel Function logs</td>
-                            <td>&gt; 1% errors</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <h3>Deployment Monitoring</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>How to Monitor</th>
+                <th>Action Threshold</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Build Time</td>
+                <td>Vercel dashboard</td>
+                <td>&gt; 2 minutes</td>
+              </tr>
+              <tr>
+                <td>Deployment Success Rate</td>
+                <td>Vercel deployment history</td>
+                <td>&lt; 95%</td>
+              </tr>
+              <tr>
+                <td>Performance</td>
+                <td>Vercel Analytics</td>
+                <td>First Load &gt; 3s</td>
+              </tr>
+              <tr>
+                <td>Error Rate</td>
+                <td>Vercel Function logs</td>
+                <td>&gt; 1% errors</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-            <h3>Rollback Procedures</h3>
-            <div class="alert alert-warning">
-                <h4><span class="status-icon warning">⚠️</span>When to Rollback</h4>
-                <ul>
-                    <li>Critical bugs in production</li>
-                    <li>Performance degradation</li>
-                    <li>Database migration issues</li>
-                    <li>Security vulnerabilities</li>
-                </ul>
-            </div>
+        <h3>Rollback Procedures</h3>
+        <div class="alert alert-warning">
+          <h4><span class="status-icon warning">⚠️</span>When to Rollback</h4>
+          <ul>
+            <li>Critical bugs in production</li>
+            <li>Performance degradation</li>
+            <li>Database migration issues</li>
+            <li>Security vulnerabilities</li>
+          </ul>
+        </div>
 
-            <div class="workflow-steps">
-                <div class="step">
-                    <span class="step-number">1</span>
-                    <h4>Immediate Rollback</h4>
-                    <pre class="code-block">
+        <div class="workflow-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <h4>Immediate Rollback</h4>
+            <pre class="code-block">
 <span class="comment"># Find previous stable deployment</span>
 <span class="command">vercel ls --scope team</span>
 
@@ -516,33 +621,33 @@
 <span class="comment"># Verify rollback success</span>
 <span class="command">vercel inspect [production-domain]</span>
                     </pre>
-                </div>
+          </div>
 
-                <div class="step">
-                    <span class="step-number">2</span>
-                    <h4>Post-Rollback Actions</h4>
-                    <ul>
-                        <li>Notify team about the rollback</li>
-                        <li>Investigate root cause of the issue</li>
-                        <li>Create hotfix branch if needed</li>
-                        <li>Update documentation with lessons learned</li>
-                    </ul>
-                </div>
-            </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <h4>Post-Rollback Actions</h4>
+            <ul>
+              <li>Notify team about the rollback</li>
+              <li>Investigate root cause of the issue</li>
+              <li>Create hotfix branch if needed</li>
+              <li>Update documentation with lessons learned</li>
+            </ul>
+          </div>
+        </div>
 
-            <h3>Database Migration Management</h3>
-            <div class="alert alert-info">
-                <h4>Migration Strategy</h4>
-                <p>For the cloud database setup, coordinate migrations carefully:</p>
-                <ol>
-                    <li>Test migrations on preview deployments first</li>
-                    <li>Coordinate with team before production migrations</li>
-                    <li>Have rollback plan for schema changes</li>
-                    <li>Monitor application after migration deployment</li>
-                </ol>
-            </div>
+        <h3>Database Migration Management</h3>
+        <div class="alert alert-info">
+          <h4>Migration Strategy</h4>
+          <p>For the cloud database setup, coordinate migrations carefully:</p>
+          <ol>
+            <li>Test migrations on preview deployments first</li>
+            <li>Coordinate with team before production migrations</li>
+            <li>Have rollback plan for schema changes</li>
+            <li>Monitor application after migration deployment</li>
+          </ol>
+        </div>
 
-            <pre class="code-block">
+        <pre class="code-block">
 <span class="comment"># Check migration status in production</span>
 <span class="command">npx prisma migrate status --schema=./prisma/schema.prisma</span>
 
@@ -552,198 +657,259 @@
 <span class="comment"># Reset database (ONLY in development/staging)</span>
 <span class="command">npx prisma migrate reset --force</span>
             </pre>
+      </div>
+
+      <!-- 8. Project Management -->
+      <div class="content" id="project-management">
+        <h2>8. Project Management</h2>
+
+        <h3>Daily Responsibilities</h3>
+        <div class="workflow-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <h4>Code Review & Pull Requests</h4>
+            <ul>
+              <li>Review all pull requests from team members</li>
+              <li>Test preview deployments before approving</li>
+              <li>Ensure code quality and consistency</li>
+              <li>Provide technical feedback and guidance</li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="step-number">2</span>
+            <h4>Deployment Management</h4>
+            <ul>
+              <li>Monitor production deployments</li>
+              <li>Watch for errors in deployment logs</li>
+              <li>Manage rollbacks if issues occur</li>
+              <li>Coordinate feature releases</li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="step-number">3</span>
+            <h4>Team Communication</h4>
+            <ul>
+              <li>Daily standup facilitation (can be async)</li>
+              <li>Technical problem solving</li>
+              <li>Integration coordination between team members</li>
+              <li>Timeline and milestone tracking</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- 8. Project Management -->
-        <div class="content" id="project-management">
-            <h2>8. Project Management</h2>
-            
-            <h3>Daily Responsibilities</h3>
-            <div class="workflow-steps">
-                <div class="step">
-                    <span class="step-number">1</span>
-                    <h4>Code Review & Pull Requests</h4>
-                    <ul>
-                        <li>Review all pull requests from team members</li>
-                        <li>Test preview deployments before approving</li>
-                        <li>Ensure code quality and consistency</li>
-                        <li>Provide technical feedback and guidance</li>
-                    </ul>
-                </div>
+        <h3>Weekly Team Review Process</h3>
+        <div class="team-grid">
+          <div class="team-card">
+            <h4>Monday - Planning</h4>
+            <ul>
+              <li>Review previous week's accomplishments</li>
+              <li>Plan current week's priorities</li>
+              <li>Assign tasks and responsibilities</li>
+              <li>Identify potential blockers</li>
+            </ul>
+          </div>
 
-                <div class="step">
-                    <span class="step-number">2</span>
-                    <h4>Deployment Management</h4>
-                    <ul>
-                        <li>Monitor production deployments</li>
-                        <li>Watch for errors in deployment logs</li>
-                        <li>Manage rollbacks if issues occur</li>
-                        <li>Coordinate feature releases</li>
-                    </ul>
-                </div>
+          <div class="team-card">
+            <h4>Wednesday - Check-in</h4>
+            <ul>
+              <li>Progress review and status updates</li>
+              <li>Technical problem solving session</li>
+              <li>Integration testing coordination</li>
+              <li>Adjust priorities if needed</li>
+            </ul>
+          </div>
 
-                <div class="step">
-                    <span class="step-number">3</span>
-                    <h4>Team Communication</h4>
-                    <ul>
-                        <li>Daily standup facilitation (can be async)</li>
-                        <li>Technical problem solving</li>
-                        <li>Integration coordination between team members</li>
-                        <li>Timeline and milestone tracking</li>
-                    </ul>
-                </div>
-            </div>
+          <div class="team-card">
+            <h4>Friday - Demo & Retrospective</h4>
+            <ul>
+              <li>Feature demonstration on preview deployment</li>
+              <li>Code review of completed work</li>
+              <li>Retrospective: what went well, what to improve</li>
+              <li>Plan for following week</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-            <h3>Weekly Team Review Process</h3>
-            <div class="team-grid">
-                <div class="team-card">
-                    <h4>Monday - Planning</h4>
-                    <ul>
-                        <li>Review previous week's accomplishments</li>
-                        <li>Plan current week's priorities</li>
-                        <li>Assign tasks and responsibilities</li>
-                        <li>Identify potential blockers</li>
-                    </ul>
-                </div>
+      <!-- 9. 7-Week Timeline Management -->
+      <div class="content" id="timeline">
+        <h2>9. 7-Week Timeline Management</h2>
 
-                <div class="team-card">
-                    <h4>Wednesday - Check-in</h4>
-                    <ul>
-                        <li>Progress review and status updates</li>
-                        <li>Technical problem solving session</li>
-                        <li>Integration testing coordination</li>
-                        <li>Adjust priorities if needed</li>
-                    </ul>
-                </div>
+        <h3>Accelerated Development Schedule</h3>
 
-                <div class="team-card">
-                    <h4>Friday - Demo & Retrospective</h4>
-                    <ul>
-                        <li>Feature demonstration on preview deployment</li>
-                        <li>Code review of completed work</li>
-                        <li>Retrospective: what went well, what to improve</li>
-                        <li>Plan for following week</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="workflow-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <h4>Week 1: Foundation (COMPLETED ✅)</h4>
+            <ul>
+              <li>
+                <span class="status-icon check">✅</span>Repository setup and
+                team onboarding
+              </li>
+              <li>
+                <span class="status-icon check">✅</span>Database configuration
+                with Prisma Postgres
+              </li>
+              <li>
+                <span class="status-icon check">✅</span>Basic Next.js app
+                structure
+              </li>
+              <li>
+                <span class="status-icon check">✅</span>Team documentation and
+                workflow guides
+              </li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="step-number">2</span>
+            <h4>Week 2: Authentication & Core UI</h4>
+            <ul>
+              <li>
+                <strong>Jose:</strong> NextAuth.js setup, user
+                registration/login API
+              </li>
+              <li>
+                <strong>Norma:</strong> Landing page, authentication UI
+                components
+              </li>
+              <li><strong>Lily:</strong> User flow testing, form validation</li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="step-number">3</span>
+            <h4>Week 3: Essential SaaS Features</h4>
+            <ul>
+              <li>
+                <strong>Jose:</strong> Email campaign API routes, database
+                models
+              </li>
+              <li>
+                <strong>Norma:</strong> Campaign creation UI, dashboard layout
+              </li>
+              <li>
+                <strong>Lily:</strong> Email sending integration (SendGrid)
+              </li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="step-number">4</span>
+            <h4>Week 4: Dashboard & Analytics</h4>
+            <ul>
+              <li>
+                <strong>Jose:</strong> Analytics API, campaign performance
+                tracking
+              </li>
+              <li>
+                <strong>Norma:</strong> Dashboard with charts, responsive design
+              </li>
+              <li>
+                <strong>Lily:</strong> Data integration, reporting features
+              </li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="step-number">5</span>
+            <h4>Week 5: Subscriptions & Payments</h4>
+            <ul>
+              <li>
+                <strong>Jose:</strong> Stripe integration, subscription
+                management
+              </li>
+              <li><strong>Norma:</strong> Pricing page, subscription UI</li>
+              <li>
+                <strong>Lily:</strong> Payment flow testing, plan limitations
+              </li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="step-number">6</span>
+            <h4>Week 6: Testing & Polish</h4>
+            <ul>
+              <li>
+                <strong>Jose:</strong> Performance optimization, security review
+              </li>
+              <li><strong>Norma:</strong> UI/UX improvements, accessibility</li>
+              <li><strong>Lily:</strong> End-to-end testing, bug fixes</li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="step-number">7</span>
+            <h4>Week 7: Demo Preparation</h4>
+            <ul>
+              <li><strong>All Team:</strong> Demo environment setup</li>
+              <li>
+                <strong>Jose:</strong> Final deployment, technical documentation
+              </li>
+              <li>
+                <strong>Norma:</strong> Presentation materials, demo script
+              </li>
+              <li><strong>Lily:</strong> Final testing, feature walkthrough</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- 9. 7-Week Timeline Management -->
-        <div class="content" id="timeline">
-            <h2>9. 7-Week Timeline Management</h2>
-            
-            <h3>Accelerated Development Schedule</h3>
-            
-            <div class="workflow-steps">
-                <div class="step">
-                    <span class="step-number">1</span>
-                    <h4>Week 1: Foundation (COMPLETED ✅)</h4>
-                    <ul>
-                        <li><span class="status-icon check">✅</span>Repository setup and team onboarding</li>
-                        <li><span class="status-icon check">✅</span>Database configuration with Prisma Postgres</li>
-                        <li><span class="status-icon check">✅</span>Basic Next.js app structure</li>
-                        <li><span class="status-icon check">✅</span>Team documentation and workflow guides</li>
-                    </ul>
-                </div>
-
-                <div class="step">
-                    <span class="step-number">2</span>
-                    <h4>Week 2: Authentication & Core UI</h4>
-                    <ul>
-                        <li><strong>Jose:</strong> NextAuth.js setup, user registration/login API</li>
-                        <li><strong>Norma:</strong> Landing page, authentication UI components</li>
-                        <li><strong>Lily:</strong> User flow testing, form validation</li>
-                    </ul>
-                </div>
-
-                <div class="step">
-                    <span class="step-number">3</span>
-                    <h4>Week 3: Essential SaaS Features</h4>
-                    <ul>
-                        <li><strong>Jose:</strong> Email campaign API routes, database models</li>
-                        <li><strong>Norma:</strong> Campaign creation UI, dashboard layout</li>
-                        <li><strong>Lily:</strong> Email sending integration (SendGrid)</li>
-                    </ul>
-                </div>
-
-                <div class="step">
-                    <span class="step-number">4</span>
-                    <h4>Week 4: Dashboard & Analytics</h4>
-                    <ul>
-                        <li><strong>Jose:</strong> Analytics API, campaign performance tracking</li>
-                        <li><strong>Norma:</strong> Dashboard with charts, responsive design</li>
-                        <li><strong>Lily:</strong> Data integration, reporting features</li>
-                    </ul>
-                </div>
-
-                <div class="step">
-                    <span class="step-number">5</span>
-                    <h4>Week 5: Subscriptions & Payments</h4>
-                    <ul>
-                        <li><strong>Jose:</strong> Stripe integration, subscription management</li>
-                        <li><strong>Norma:</strong> Pricing page, subscription UI</li>
-                        <li><strong>Lily:</strong> Payment flow testing, plan limitations</li>
-                    </ul>
-                </div>
-
-                <div class="step">
-                    <span class="step-number">6</span>
-                    <h4>Week 6: Testing & Polish</h4>
-                    <ul>
-                        <li><strong>Jose:</strong> Performance optimization, security review</li>
-                        <li><strong>Norma:</strong> UI/UX improvements, accessibility</li>
-                        <li><strong>Lily:</strong> End-to-end testing, bug fixes</li>
-                    </ul>
-                </div>
-
-                <div class="step">
-                    <span class="step-number">7</span>
-                    <h4>Week 7: Demo Preparation</h4>
-                    <ul>
-                        <li><strong>All Team:</strong> Demo environment setup</li>
-                        <li><strong>Jose:</strong> Final deployment, technical documentation</li>
-                        <li><strong>Norma:</strong> Presentation materials, demo script</li>
-                        <li><strong>Lily:</strong> Final testing, feature walkthrough</li>
-                    </ul>
-                </div>
-            </div>
-
-            <h3>Risk Management</h3>
-            <div class="alert alert-warning">
-                <h4><span class="status-icon warning">⚠️</span>Potential Risks & Mitigation</h4>
-                <ul>
-                    <li><strong>Scope Creep:</strong> Stick to MVP features, document "nice-to-have" for later</li>
-                    <li><strong>Technical Blockers:</strong> Have backup plans for complex integrations</li>
-                    <li><strong>Team Coordination:</strong> Daily async check-ins, clear communication channels</li>
-                    <li><strong>Timeline Pressure:</strong> Prioritize core functionality over polish initially</li>
-                </ul>
-            </div>
+        <h3>Risk Management</h3>
+        <div class="alert alert-warning">
+          <h4>
+            <span class="status-icon warning">⚠️</span>Potential Risks &
+            Mitigation
+          </h4>
+          <ul>
+            <li>
+              <strong>Scope Creep:</strong> Stick to MVP features, document
+              "nice-to-have" for later
+            </li>
+            <li>
+              <strong>Technical Blockers:</strong> Have backup plans for complex
+              integrations
+            </li>
+            <li>
+              <strong>Team Coordination:</strong> Daily async check-ins, clear
+              communication channels
+            </li>
+            <li>
+              <strong>Timeline Pressure:</strong> Prioritize core functionality
+              over polish initially
+            </li>
+          </ul>
         </div>
+      </div>
 
-        <!-- 10. Troubleshooting & Support -->
-        <div class="content" id="troubleshooting">
-            <h2>10. Troubleshooting & Support</h2>
-            
-            <h3>Common Issues & Solutions</h3>
-            
-            <div class="alert alert-danger">
-                <h4>Team Member Can't Access Database</h4>
-                <p><strong>Symptoms:</strong> Environment variable errors, connection failures</p>
-                <p><strong>Solution:</strong></p>
-                <pre class="code-block">
+      <!-- 10. Troubleshooting & Support -->
+      <div class="content" id="troubleshooting">
+        <h2>10. Troubleshooting & Support</h2>
+
+        <h3>Common Issues & Solutions</h3>
+
+        <div class="alert alert-danger">
+          <h4>Team Member Can't Access Database</h4>
+          <p>
+            <strong>Symptoms:</strong> Environment variable errors, connection
+            failures
+          </p>
+          <p><strong>Solution:</strong></p>
+          <pre class="code-block">
 <span class="comment"># For the team member:</span>
 <span class="command">git pull origin main</span>              <span class="comment"># Get latest .env.example</span>
 <span class="command">cp .env.example .env.local</span>        <span class="comment"># Create local env file</span>
 <span class="comment"># Jose provides the actual values securely</span>
 <span class="command">npm run db:generate</span>               <span class="comment"># Regenerate Prisma client</span>
                 </pre>
-            </div>
+        </div>
 
-            <div class="alert alert-warning">
-                <h4>Deployment Failures</h4>
-                <p><strong>Symptoms:</strong> Build errors, deployment timeouts</p>
-                <p><strong>Solution:</strong></p>
-                <pre class="code-block">
+        <div class="alert alert-warning">
+          <h4>Deployment Failures</h4>
+          <p><strong>Symptoms:</strong> Build errors, deployment timeouts</p>
+          <p><strong>Solution:</strong></p>
+          <pre class="code-block">
 <span class="comment"># Check deployment logs:</span>
 <span class="command">vercel logs &lt;deployment-url&gt;</span>
 
@@ -753,87 +919,111 @@
 <span class="comment"># If needed, rollback:</span>
 <span class="command">vercel rollback &lt;previous-deployment-url&gt;</span>
                 </pre>
-            </div>
-
-            <div class="alert alert-info">
-                <h4>Performance Issues</h4>
-                <p><strong>Symptoms:</strong> Slow page loads, database timeouts</p>
-                <p><strong>Solutions:</strong></p>
-                <ul>
-                    <li>Check database connection pooling settings</li>
-                    <li>Optimize Prisma queries (use <code>select</code> and <code>include</code> carefully)</li>
-                    <li>Monitor Vercel analytics for performance insights</li>
-                    <li>Consider implementing caching strategies</li>
-                </ul>
-            </div>
-
-            <h3>Emergency Procedures</h3>
-            <div class="workflow-steps">
-                <div class="step">
-                    <span class="step-number">1</span>
-                    <h4>Production Issues</h4>
-                    <ul>
-                        <li>Immediately check Vercel dashboard for errors</li>
-                        <li>Review recent deployments for potential causes</li>
-                        <li>Use <code>vercel rollback</code> if necessary</li>
-                        <li>Communicate status to team and stakeholders</li>
-                    </ul>
-                </div>
-
-                <div class="step">
-                    <span class="step-number">2</span>
-                    <h4>Database Issues</h4>
-                    <ul>
-                        <li>Check Prisma Postgres status in Vercel dashboard</li>
-                        <li>Verify environment variables are correct</li>
-                        <li>Test database connectivity with <code>prisma db push</code></li>
-                        <li>Contact Vercel support if infrastructure issues</li>
-                    </ul>
-                </div>
-            </div>
         </div>
 
-        <!-- Footer -->
-        <div class="content">
-            <div class="alert alert-success">
-                <h2><span class="status-icon check">🎯</span>Project Lead Success</h2>
-                <p>As project lead, your success is measured by:</p>
-                <ul>
-                    <li><strong>Team Productivity:</strong> Smooth workflows and minimal blockers</li>
-                    <li><strong>Technical Excellence:</strong> Robust, scalable architecture</li>
-                    <li><strong>Delivery Timeline:</strong> Meeting the 7-week capstone deadline</li>
-                    <li><strong>Code Quality:</strong> Maintainable, well-documented codebase</li>
-                    <li><strong>Team Collaboration:</strong> Effective communication and coordination</li>
-                </ul>
-                
-                <p><strong>Remember:</strong> Your leadership sets the tone for the entire project. Focus on enabling your team's success while maintaining technical excellence.</p>
-            </div>
+        <div class="alert alert-info">
+          <h4>Performance Issues</h4>
+          <p><strong>Symptoms:</strong> Slow page loads, database timeouts</p>
+          <p><strong>Solutions:</strong></p>
+          <ul>
+            <li>Check database connection pooling settings</li>
+            <li>
+              Optimize Prisma queries (use <code>select</code> and
+              <code>include</code> carefully)
+            </li>
+            <li>Monitor Vercel analytics for performance insights</li>
+            <li>Consider implementing caching strategies</li>
+          </ul>
         </div>
+
+        <h3>Emergency Procedures</h3>
+        <div class="workflow-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <h4>Production Issues</h4>
+            <ul>
+              <li>Immediately check Vercel dashboard for errors</li>
+              <li>Review recent deployments for potential causes</li>
+              <li>Use <code>vercel rollback</code> if necessary</li>
+              <li>Communicate status to team and stakeholders</li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="step-number">2</span>
+            <h4>Database Issues</h4>
+            <ul>
+              <li>Check Prisma Postgres status in Vercel dashboard</li>
+              <li>Verify environment variables are correct</li>
+              <li>
+                Test database connectivity with <code>prisma db push</code>
+              </li>
+              <li>Contact Vercel support if infrastructure issues</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="content">
+        <div class="alert alert-success">
+          <h2><span class="status-icon check">🎯</span>Project Lead Success</h2>
+          <p>As project lead, your success is measured by:</p>
+          <ul>
+            <li>
+              <strong>Team Productivity:</strong> Smooth workflows and minimal
+              blockers
+            </li>
+            <li>
+              <strong>Technical Excellence:</strong> Robust, scalable
+              architecture
+            </li>
+            <li>
+              <strong>Delivery Timeline:</strong> Meeting the 7-week capstone
+              deadline
+            </li>
+            <li>
+              <strong>Code Quality:</strong> Maintainable, well-documented
+              codebase
+            </li>
+            <li>
+              <strong>Team Collaboration:</strong> Effective communication and
+              coordination
+            </li>
+          </ul>
+
+          <p>
+            <strong>Remember:</strong> Your leadership sets the tone for the
+            entire project. Focus on enabling your team's success while
+            maintaining technical excellence.
+          </p>
+        </div>
+      </div>
     </div>
 
     <script>
-        // ...existing JavaScript code...
-        // (Same interactive features as other HTML docs)
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+      // ...existing JavaScript code...
+      // (Same interactive features as other HTML docs)
 
-        // Add copy functionality to code blocks
-        document.querySelectorAll('.code-block').forEach(block => {
-            const button = document.createElement('button');
-            button.innerHTML = '📋 Copy';
-            button.style.cssText = `
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Add copy functionality to code blocks
+      document.querySelectorAll(".code-block").forEach((block) => {
+        const button = document.createElement("button");
+        button.innerHTML = "📋 Copy";
+        button.style.cssText = `
                 position: absolute;
                 top: 0.5rem;
                 right: 0.5rem;
@@ -846,46 +1036,48 @@
                 cursor: pointer;
                 transition: all 0.2s;
             `;
-            
-            block.style.position = 'relative';
-            block.appendChild(button);
-            
-            button.addEventListener('click', () => {
-                const text = block.textContent.replace('📋 Copy', '').trim();
-                navigator.clipboard.writeText(text).then(() => {
-                    button.innerHTML = '✅ Copied!';
-                    setTimeout(() => {
-                        button.innerHTML = '📋 Copy';
-                    }, 2000);
-                });
-            });
+
+        block.style.position = "relative";
+        block.appendChild(button);
+
+        button.addEventListener("click", () => {
+          const text = block.textContent.replace("📋 Copy", "").trim();
+          navigator.clipboard.writeText(text).then(() => {
+            button.innerHTML = "✅ Copied!";
+            setTimeout(() => {
+              button.innerHTML = "📋 Copy";
+            }, 2000);
+          });
         });
+      });
 
-        // Add active navigation highlighting
-        const observerOptions = {
-            rootMargin: '-20% 0px -60% 0px'
-        };
+      // Add active navigation highlighting
+      const observerOptions = {
+        rootMargin: "-20% 0px -60% 0px",
+      };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    document.querySelectorAll('.nav a').forEach(link => {
-                        link.style.background = '';
-                        link.style.color = '#3b82f6';
-                    });
-                    
-                    const activeLink = document.querySelector(`.nav a[href="#${entry.target.id}"]`);
-                    if (activeLink) {
-                        activeLink.style.background = '#eff6ff';
-                        activeLink.style.color = '#1d4ed8';
-                    }
-                }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            document.querySelectorAll(".nav a").forEach((link) => {
+              link.style.background = "";
+              link.style.color = "#3b82f6";
             });
-        }, observerOptions);
 
-        document.querySelectorAll('.content[id]').forEach(section => {
-            observer.observe(section);
+            const activeLink = document.querySelector(
+              `.nav a[href="#${entry.target.id}"]`
+            );
+            if (activeLink) {
+              activeLink.style.background = "#eff6ff";
+              activeLink.style.color = "#1d4ed8";
+            }
+          }
         });
+      }, observerOptions);
+
+      document.querySelectorAll(".content[id]").forEach((section) => {
+        observer.observe(section);
+      });
     </script>
-</body>
+  </body>
 </html>
