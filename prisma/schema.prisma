@@ -1,5 +1,5 @@
-// Marketing SaaS Database Schema
-// Generated for Jose, Norma, and Lily's capstone project
+// AI Campaign Generator Database Schema
+// Updated for social media campaign generation
 
 generator client {
   provider = "prisma-client-js"
@@ -10,45 +10,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Account Management (Add this model)
-model Account {
-  id        String   @id @default(cuid())
-  name      String
-  plan      PlanType @default(FREE)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relations
-  ownerId   String
-  owner     User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  campaigns Campaign[]
-
-  @@map("accounts")
-}
-
-// User Management
+// User Authentication Models
 model User {
   id        String   @id @default(cuid())
   email     String   @unique
-  name      String?
-  password  String?  // Add password field
-  role      UserRole @default(USER)
+  name      String
+  password  String
+  role      String   @default("USER")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Relations
-  accounts    Account[]  // ✅ Now this works!
-  campaigns   Campaign[]
-  
-  // NextAuth.js relations
-  authAccounts AuthAccount[]
-  sessions     Session[]
-  
+  accounts  Account[]
+  sessions  Session[]
+  campaigns Campaign[]
+
   @@map("users")
 }
 
-// NextAuth.js required models
-model AuthAccount {
+model Account {
   id                String  @id @default(cuid())
   userId            String
   type              String
@@ -65,7 +44,7 @@ model AuthAccount {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
-  @@map("auth_accounts")
+  @@map("accounts")
 }
 
 model Session {
@@ -87,64 +66,74 @@ model VerificationToken {
   @@map("verificationtokens")
 }
 
-// Campaign Management
+// Campaign Management Models
 model Campaign {
-  id          String        @id @default(cuid())
+  id          String   @id @default(cuid())
   name        String
   description String?
   status      CampaignStatus @default(DRAFT)
-  budget      Float?
-  startDate   DateTime?
-  endDate     DateTime?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-
-  // Relations
-  accountId   String
-  creatorId   String
-  account     Account @relation(fields: [accountId], references: [id], onDelete: Cascade) // ✅ Now this works!
-  creator     User    @relation(fields: [creatorId], references: [id])
-  analytics   Analytics[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   
+  // Campaign Input Data
+  product     String
+  audience    String
+  tone        CampaignTone
+  goals       String[]
+  
+  // Generated Content
+  content     CampaignContent[]
+  
+  // Relations
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@map("campaigns")
 }
 
-// Analytics
-model Analytics {
-  id         String   @id @default(cuid())
-  campaignId String
-  date       DateTime @default(now())
-  
-  // Metrics
-  impressions Int @default(0)
-  clicks      Int @default(0)
-  conversions Int @default(0)
-  cost        Float @default(0)
+model CampaignContent {
+  id          String   @id @default(cuid())
+  platform    Platform
+  contentType ContentType
+  title       String?
+  content     String   @db.Text
+  hashtags    String[]
+  callToAction String?
+  createdAt   DateTime @default(now())
   
   // Relations
-  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  campaignId  String
+  campaign    Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   
-  @@map("analytics")
-}
-
-// Enums
-enum UserRole {
-  USER
-  ADMIN
-  SUPER_ADMIN
-}
-
-enum PlanType {
-  FREE
-  STARTER
-  PRO
-  ENTERPRISE
+  @@map("campaign_content")
 }
 
 enum CampaignStatus {
   DRAFT
-  ACTIVE
-  PAUSED
-  COMPLETED
+  PUBLISHED
   ARCHIVED
+}
+
+enum CampaignTone {
+  PROFESSIONAL
+  CASUAL
+  HUMOROUS
+  INSPIRATIONAL
+  EDUCATIONAL
+  URGENT
+}
+
+enum Platform {
+  TIKTOK
+  INSTAGRAM
+  FACEBOOK
+  YOUTUBE
+}
+
+enum ContentType {
+  POST
+  STORY
+  REEL
+  VIDEO
+  CAROUSEL
 }
