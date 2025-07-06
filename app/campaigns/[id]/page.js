@@ -413,7 +413,7 @@ export default function CampaignDetail() {
               className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm"
             >
               {/* Platform Header */}
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 border-b border-gray-20">
                 <div className="flex items-center space-x-3">
                   <SocialIcon
                     platform={content.platform}
@@ -450,7 +450,7 @@ export default function CampaignDetail() {
 
               <div>
                 <h4 className="font-medium text-gray-900">Content</h4>
-                <p className="text-gray-600 whitespace-pre-wrap">
+                <p className="text-gray-600 whitespace-pre-wrap bg-gray-50 p-3 rounded-md">
                   {content.content}
                 </p>
               </div>
@@ -458,7 +458,7 @@ export default function CampaignDetail() {
               {content.hashtags && (
                 <div>
                   <h4 className="font-medium text-gray-900">Hashtags</h4>
-                  <p className="text-blue-600">{content.hashtags}</p>
+                  <p className="text-blue-600 bg-gray-50 p-3 rounded-md">{content.hashtags}</p>
                 </div>
               )}
 
@@ -467,7 +467,7 @@ export default function CampaignDetail() {
                   <h4 className="font-medium text-gray-900">
                     Call to Action
                   </h4>
-                  <p className="text-gray-600">{content.callToAction}</p>
+                  <p className="text-gray-600 bg-gray-50 p-3 rounded-md">{content.callToAction}</p>
                 </div>
               )}
 
