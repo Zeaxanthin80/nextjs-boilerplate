@@ -8,7 +8,7 @@ export async function generateCampaignImage({
   prompt,
   style = "natural",
   size = "1024x1024",
-  quality = "standard",
+  quality = "hd",
 }) {
   try {
     const response = await openai.images.generate({
