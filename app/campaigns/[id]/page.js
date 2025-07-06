@@ -9,6 +9,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import Toast from "../../components/Toast";
 import SocialIcon from "../../components/SocialIcon";
 import ImagePreview from "../../components/ImagePreview";
+import SaveImagesButton from "../../components/SaveImagesButton";
 
 const PLATFORM_ICONS = {
   TIKTOK: "🎵",
@@ -470,7 +471,10 @@ export default function CampaignDetail() {
                   </div>
                 </div>
               )}
-
+              
+              {/* Button to save images permanently */}
+              <SaveImagesButton campaignId={campaign.id} />
+              
               {content.callToAction && (
                 <div>
                   <h4 className="font-medium text-gray-900">
