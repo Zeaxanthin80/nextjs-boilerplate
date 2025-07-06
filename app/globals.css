@@ -1,12 +1,126 @@
 @import "tailwindcss";
 
-/* Smooth rotating gradient */
-@keyframes rotateGradient {
+/* CSS Custom Properties for gradient colors */
+:root {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #e2e8f0;
+  --bg-tertiary: #cbd5e1;
+  --bg-quaternary: #94a3b8;
+  --bg-quinary: #64748b;
+
+  /* Transform-based rotation instead of background changes */
+  --rotation: 0deg;
+}
+
+/* Smooth color cycling animation */
+@keyframes colorFlow {
+  0% {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #e2e8f0;
+    --bg-tertiary: #cbd5e1;
+    --bg-quaternary: #94a3b8;
+    --bg-quinary: #64748b;
+  }
+  20% {
+    --bg-primary: #e2e8f0;
+    --bg-secondary: #cbd5e1;
+    --bg-tertiary: #94a3b8;
+    --bg-quaternary: #64748b;
+    --bg-quinary: #f8fafc;
+  }
+  40% {
+    --bg-primary: #cbd5e1;
+    --bg-secondary: #94a3b8;
+    --bg-tertiary: #64748b;
+    --bg-quaternary: #f8fafc;
+    --bg-quinary: #e2e8f0;
+  }
+  60% {
+    --bg-primary: #94a3b8;
+    --bg-secondary: #64748b;
+    --bg-tertiary: #f8fafc;
+    --bg-quaternary: #e2e8f0;
+    --bg-quinary: #cbd5e1;
+  }
+  80% {
+    --bg-primary: #64748b;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #e2e8f0;
+    --bg-quaternary: #cbd5e1;
+    --bg-quinary: #94a3b8;
+  }
+  100% {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #e2e8f0;
+    --bg-tertiary: #cbd5e1;
+    --bg-quaternary: #94a3b8;
+    --bg-quinary: #64748b;
+  }
+}
+
+/* Ultra-performant transform-based rotation */
+@keyframes gradientRotate {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+/* Dark mode colors */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #334155;
+    --bg-secondary: #475569;
+    --bg-tertiary: #64748b;
+    --bg-quaternary: #94a3b8;
+    --bg-quinary: #cbd5e1;
+  }
+
+  @keyframes colorFlow {
+    0% {
+      --bg-primary: #334155;
+      --bg-secondary: #475569;
+      --bg-tertiary: #64748b;
+      --bg-quaternary: #94a3b8;
+      --bg-quinary: #cbd5e1;
+    }
+    20% {
+      --bg-primary: #475569;
+      --bg-secondary: #64748b;
+      --bg-tertiary: #94a3b8;
+      --bg-quaternary: #cbd5e1;
+      --bg-quinary: #334155;
+    }
+    40% {
+      --bg-primary: #64748b;
+      --bg-secondary: #94a3b8;
+      --bg-tertiary: #cbd5e1;
+      --bg-quaternary: #334155;
+      --bg-quinary: #475569;
+    }
+    60% {
+      --bg-primary: #94a3b8;
+      --bg-secondary: #cbd5e1;
+      --bg-tertiary: #334155;
+      --bg-quaternary: #475569;
+      --bg-quinary: #64748b;
+    }
+    80% {
+      --bg-primary: #cbd5e1;
+      --bg-secondary: #334155;
+      --bg-tertiary: #475569;
+      --bg-quaternary: #64748b;
+      --bg-quinary: #94a3b8;
+    }
+    100% {
+      --bg-primary: #334155;
+      --bg-secondary: #475569;
+      --bg-tertiary: #64748b;
+      --bg-quaternary: #94a3b8;
+      --bg-quinary: #cbd5e1;
+    }
   }
 }
 
@@ -18,129 +132,39 @@ body {
   overflow-x: hidden;
 }
 
+/* High-performance pseudo-element approach */
 body::before {
-  content: "";
+  content: '';
   position: fixed;
-  top: -0%;
-  left: -0%;
-  width: 400%;
-  height: 400%;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
   z-index: -1;
+
+  /* Static gradient using CSS variables */
   background: linear-gradient(
     45deg,
-    #f8fafc 0%,
-    #e2e8f0 25%,
-    #cbd5e1 50%,
-    #94a3b8 75%,
-    #64748b 100%
+    var(--bg-primary) 0%,
+    var(--bg-secondary) 25%,
+    var(--bg-tertiary) 50%,
+    var(--bg-quaternary) 75%,
+    var(--bg-quinary) 100%
   );
-  animation: rotateGradient 30s linear infinite;
+
+  /* Hardware-accelerated transform */
+  animation: gradientRotate 20s linear infinite;
+
+  /* Performance optimizations */
+  will-change: transform;
+  transform: translateZ(0); /* Force GPU acceleration */
+  backface-visibility: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  body::before {
-    background: linear-gradient(
-      45deg,
-      #334155 0%,
-      #475569 25%,
-      #64748b 50%,
-      #94a3b8 75%,
-      #cbd5e1 100%
-    );
-  }
-}
-
-/* Dark mode animation */
-@keyframes gradientRotateDark {
-  0% {
-    background: linear-gradient(
-      0deg,
-      #334155 0%,
-      #475569 25%,
-      #64748b 50%,
-      #94a3b8 75%,
-      #cbd5e1 100%
-    );
-  }
-  25% {
-    background: linear-gradient(
-      90deg,
-      #334155 0%,
-      #475569 25%,
-      #64748b 50%,
-      #94a3b8 75%,
-      #cbd5e1 100%
-    );
-  }
-  50% {
-    background: linear-gradient(
-      180deg,
-      #334155 0%,
-      #475569 25%,
-      #64748b 50%,
-      #94a3b8 75%,
-      #cbd5e1 100%
-    );
-  }
-  75% {
-    background: linear-gradient(
-      270deg,
-      #334155 0%,
-      #475569 25%,
-      #64748b 50%,
-      #94a3b8 75%,
-      #cbd5e1 100%
-    );
-  }
-  100% {
-    background: linear-gradient(
-      360deg,
-      #334155 0%,
-      #475569 25%,
-      #64748b 50%,
-      #94a3b8 75%,
-      #cbd5e1 100%
-    );
-  }
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: linear-gradient(
-      135deg,
-      #334155 0%,
-      #475569 25%,
-      #64748b 50%,
-      #94a3b8 75%,
-      #cbd5e1 100%
-    );
-    --foreground: #f1f5f9;
-  }
-}
-
-body {
-  background: var(--background);
-  background-attachment: fixed;
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-  min-height: 100vh;
-
-  /* Apply the animation */
-  animation: gradientRotate 25s ease-in-out infinite;
-}
-
-/* Dark mode animation */
-@media (prefers-color-scheme: dark) {
-  body {
-    animation: gradientRotate 25s ease-in-out infinite;
-  }
+/* Alternative: Color cycling without rotation */
+body.color-flow::before {
+  animation: colorFlow 15s ease-in-out infinite;
+  transform: none;
 }
 
 /* Fix for form inputs to have proper white backgrounds */
