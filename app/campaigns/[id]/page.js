@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import Toast from "../../components/Toast";
+import SocialIcon from "../../components/SocialIcon";
 
 const PLATFORM_ICONS = {
   TIKTOK: "🎵",
@@ -30,6 +31,8 @@ export default function CampaignDetail() {
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState(null);
   const [selectedContent, setSelectedContent] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -96,13 +99,45 @@ export default function CampaignDetail() {
     }
   };
 
+  const deleteCampaign = async () => {
+    setDeleting(true);
+    try {
+      const response = await fetch(`/api/campaigns/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete campaign");
+      }
+
+      setToast({
+        type: "success",
+        message: "Campaign deleted successfully",
+      });
+
+      // Redirect to dashboard after a short delay
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1500);
+    } catch (error) {
+      console.error("Error deleting campaign:", error);
+      setToast({
+        type: "error",
+        message: "Failed to delete campaign",
+      });
+    } finally {
+      setDeleting(false);
+      setShowDeleteModal(false);
+    }
+  };
+
   if (status === "loading" || loading) {
     return <LoadingSpinner />;
   }
 
   if (!campaign) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
             Campaign not found
@@ -115,8 +150,62 @@ export default function CampaignDetail() {
     );
   }
 
+  const isDraft = campaign.status === "DRAFT";
+  const isArchived = campaign.status === "ARCHIVED";
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+          <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div className="mt-3 text-center">
+              <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+                <svg
+                  className="h-6 w-6 text-red-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg leading-6 font-medium text-gray-900 mt-4">
+                Delete Campaign
+              </h3>
+              <div className="mt-2 px-7 py-3">
+                <p className="text-sm text-gray-500">
+                  Are you sure you want to delete "{campaign.name}"? This action
+                  cannot be undone and will permanently remove all campaign
+                  content.
+                </p>
+              </div>
+              <div className="items-center px-4 py-3">
+                <button
+                  onClick={deleteCampaign}
+                  disabled={deleting}
+                  className="px-4 py-2 bg-red-600 text-white text-base font-medium rounded-md w-24 mr-2 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {deleting ? "..." : "Delete"}
+                </button>
+                <button
+                  onClick={() => setShowDeleteModal(false)}
+                  disabled={deleting}
+                  className="px-4 py-2 bg-gray-300 text-gray-800 text-base font-medium rounded-md w-24 hover:bg-gray-400 disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Navigation */}
       <nav className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -130,243 +219,186 @@ export default function CampaignDetail() {
               </Link>
             </div>
             <div className="flex items-center space-x-4">
+              <span className="text-gray-700">
+                Welcome, {session.user?.name}!
+              </span>
               <Link
                 href="/dashboard"
-                className="text-gray-600 hover:text-gray-900"
+                className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md text-sm font-medium"
               >
-                Dashboard
+                Back to Dashboard
               </Link>
-              <span className="text-gray-700">{session?.user?.name}</span>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Main Content */}
       <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         {/* Campaign Header */}
-        <div className="bg-white shadow rounded-lg mb-6">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">
-                  {campaign.name}
-                </h1>
-                <p className="text-gray-600 mt-1">{campaign.description}</p>
-              </div>
-              <div className="flex items-center space-x-4">
+        <div className="bg-white rounded-lg shadow p-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">
+                {campaign.name}
+              </h1>
+              <div className="flex items-center mt-2">
                 <span
-                  className={`px-3 py-1 rounded-full text-sm font-medium ${
-                    campaign.status === "PUBLISHED"
-                      ? "bg-green-100 text-green-800"
-                      : campaign.status === "DRAFT"
+                  className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                    campaign.status === "DRAFT"
                       ? "bg-yellow-100 text-yellow-800"
-                      : "bg-gray-100 text-gray-800"
+                      : campaign.status === "PUBLISHED"
+                      ? "bg-green-100 text-green-800"
+                      : "bg-blue-100 text-blue-800"
                   }`}
                 >
                   {campaign.status}
                 </span>
-                {campaign.status === "DRAFT" && (
-                  <button
-                    onClick={() => updateCampaignStatus("PUBLISHED")}
-                    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-                  >
-                    Publish
-                  </button>
-                )}
-                {campaign.status === "PUBLISHED" && (
-                  <button
-                    onClick={() => updateCampaignStatus("ARCHIVED")}
-                    className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
-                  >
-                    Archive
-                  </button>
-                )}
+                <span className="ml-4 text-sm text-gray-500">
+                  Created: {new Date(campaign.createdAt).toLocaleDateString()}
+                </span>
               </div>
             </div>
+
+            {/* DRAFT Actions */}
+            {isDraft && (
+              <div className="flex space-x-3">
+                <Link
+                  href={`/campaigns/${campaign.id}/edit`}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+                >
+                  ✏️ Edit Campaign
+                </Link>
+                <Link
+                  href={`/campaigns/${campaign.id}/regenerate`}
+                  className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+                >
+                  🔄 Regenerate Content
+                </Link>
+                <button
+                  onClick={() => setShowDeleteModal(true)}
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+                >
+                  🗑️ Delete Campaign
+                </button>
+              </div>
+            )}
+
+            {/* ARCHIVED Actions */}
+            {isArchived && (
+              <div className="flex space-x-3">
+                <button
+                  onClick={() => updateCampaignStatus("PUBLISHED")}
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+                >
+                  📤 Republish
+                </button>
+                <button
+                  onClick={() => setShowDeleteModal(true)}
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+                >
+                  🗑️ Delete Permanently
+                </button>
+              </div>
+            )}
+
+            {/* PUBLISHED Actions */}
+            {campaign.status === "PUBLISHED" && (
+              <div className="flex space-x-3">
+                <button
+                  onClick={() => updateCampaignStatus("ARCHIVED")}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+                >
+                  📦 Archive Campaign
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Campaign Details */}
-          <div className="px-6 py-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div>
-                <h3 className="text-sm font-medium text-gray-500">Product</h3>
-                <p className="mt-1 text-sm text-gray-900">{campaign.product}</p>
-              </div>
-              <div>
-                <h3 className="text-sm font-medium text-gray-500">Audience</h3>
-                <p className="mt-1 text-sm text-gray-900">
-                  {campaign.audience}
-                </p>
-              </div>
-              <div>
-                <h3 className="text-sm font-medium text-gray-500">Tone</h3>
-                <p className="mt-1 text-sm text-gray-900">{campaign.tone}</p>
-              </div>
-              <div>
-                <h3 className="text-sm font-medium text-gray-500">Goals</h3>
-                <div className="mt-1">
-                  {campaign.goals.map((goal, index) => (
-                    <span
-                      key={index}
-                      className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-1 mb-1"
-                    >
-                      {goal}
-                    </span>
-                  ))}
-                </div>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                Product/Service
+              </h3>
+              <p className="text-gray-600">{campaign.product}</p>
+            </div>
+            <div>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                Target Audience
+              </h3>
+              <p className="text-gray-600">{campaign.audience}</p>
+            </div>
+            <div>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Tone</h3>
+              <p className="text-gray-600 capitalize">{campaign.tone}</p>
+            </div>
+            <div>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Goals</h3>
+              <p className="text-gray-600">{campaign.goals}</p>
             </div>
           </div>
         </div>
 
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Platform Selector */}
-          <div className="bg-white shadow rounded-lg p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">
-              Platform Content ({campaign.content?.length || 0})
-            </h2>
-            <div className="space-y-3">
-              {campaign.content?.map((content) => (
+        {/* Platform Content */}
+        <div className="space-y-6">
+          {campaign.content.map((content) => (
+            <div key={content.id} className="bg-white rounded-lg shadow p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  <SocialIcon
+                    platform={content.platform}
+                    size="w-8 h-8"
+                    showName={true}
+                  />
+                </div>
                 <button
-                  key={content.id}
-                  onClick={() => setSelectedContent(content)}
-                  className={`w-full text-left p-3 rounded-lg border-2 transition-colors ${
-                    selectedContent?.id === content.id
-                      ? "border-blue-500 bg-blue-50"
-                      : "border-gray-200 hover:border-gray-300"
-                  }`}
+                  onClick={() => navigator.clipboard.writeText(content.content)}
+                  className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm"
                 >
-                  <div className="flex items-center space-x-3">
-                    <span className="text-2xl">
-                      {PLATFORM_ICONS[content.platform]}
-                    </span>
-                    <div>
-                      <div className="font-medium text-gray-900">
-                        {content.platform}
-                      </div>
-                      <div className="text-sm text-gray-500">
-                        {content.contentType}
-                      </div>
-                    </div>
-                  </div>
+                  📋 Copy
                 </button>
-              ))}
-            </div>
-          </div>
+              </div>
 
-          {/* Content Display */}
-          <div className="lg:col-span-2 bg-white shadow rounded-lg">
-            {selectedContent ? (
-              <div className="p-6">
-                <div className="flex items-center space-x-3 mb-4">
-                  <span className="text-3xl">
-                    {PLATFORM_ICONS[selectedContent.platform]}
-                  </span>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-medium text-gray-900">Title</h4>
+                  <p className="text-gray-600">{content.title}</p>
+                </div>
+
+                <div>
+                  <h4 className="font-medium text-gray-900">Content</h4>
+                  <p className="text-gray-600 whitespace-pre-wrap">
+                    {content.content}
+                  </p>
+                </div>
+
+                {content.hashtags && (
                   <div>
-                    <h2 className="text-xl font-semibold text-gray-900">
-                      {selectedContent.platform} Content
-                    </h2>
-                    <span
-                      className={`px-2 py-1 rounded text-xs font-medium ${
-                        PLATFORM_COLORS[selectedContent.platform]
-                      }`}
-                    >
-                      {selectedContent.contentType}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Title */}
-                {selectedContent.title && (
-                  <div className="mb-4">
-                    <h3 className="text-sm font-medium text-gray-700 mb-2">
-                      Title
-                    </h3>
-                    <p className="text-lg font-semibold text-gray-900">
-                      {selectedContent.title}
-                    </p>
+                    <h4 className="font-medium text-gray-900">Hashtags</h4>
+                    <p className="text-blue-600">{content.hashtags}</p>
                   </div>
                 )}
 
-                {/* Content */}
-                <div className="mb-4">
-                  <h3 className="text-sm font-medium text-gray-700 mb-2">
-                    Content
-                  </h3>
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <p className="whitespace-pre-wrap text-gray-900">
-                      {selectedContent.content}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Hashtags */}
-                {selectedContent.hashtags &&
-                  selectedContent.hashtags.length > 0 && (
-                    <div className="mb-4">
-                      <h3 className="text-sm font-medium text-gray-700 mb-2">
-                        Hashtags
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedContent.hashtags.map((hashtag, index) => (
-                          <span
-                            key={index}
-                            className="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded"
-                          >
-                            {hashtag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                {/* Call to Action */}
-                {selectedContent.callToAction && (
-                  <div className="mb-4">
-                    <h3 className="text-sm font-medium text-gray-700 mb-2">
+                {content.callToAction && (
+                  <div>
+                    <h4 className="font-medium text-gray-900">
                       Call to Action
-                    </h3>
-                    <p className="font-medium text-blue-600">
-                      {selectedContent.callToAction}
-                    </p>
+                    </h4>
+                    <p className="text-gray-600">{content.callToAction}</p>
                   </div>
                 )}
+              </div>
 
-                {/* Copy Button */}
-                <button
-                  onClick={() => {
-                    const fullContent = `${
-                      selectedContent.title
-                        ? selectedContent.title + "\n\n"
-                        : ""
-                    }${selectedContent.content}${
-                      selectedContent.hashtags?.length
-                        ? "\n\n" + selectedContent.hashtags.join(" ")
-                        : ""
-                    }${
-                      selectedContent.callToAction
-                        ? "\n\n" + selectedContent.callToAction
-                        : ""
-                    }`;
-                    navigator.clipboard.writeText(fullContent);
-                    setToast({
-                      type: "success",
-                      message: "Content copied to clipboard!",
-                    });
-                  }}
-                  className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
-                >
-                  Copy Content
-                </button>
-              </div>
-            ) : (
-              <div className="p-6 text-center text-gray-500">
-                <p>Select a platform to view content</p>
-              </div>
-            )}
-          </div>
+              {/* Edit Content Button for DRAFT */}
+              {isDraft && (
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                    ✏️ Edit This Content
+                  </button>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
 

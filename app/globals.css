@@ -1,8 +1,107 @@
 @import "tailwindcss";
 
-:root {
-  --background: #c4d1ce;
-  --foreground: #171717;
+/* Smooth rotating gradient */
+@keyframes rotateGradient {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+body {
+  position: relative;
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: -0%;
+  left: -0%;
+  width: 400%;
+  height: 400%;
+  z-index: -1;
+  background: linear-gradient(
+    45deg,
+    #f8fafc 0%,
+    #e2e8f0 25%,
+    #cbd5e1 50%,
+    #94a3b8 75%,
+    #64748b 100%
+  );
+  animation: rotateGradient 30s linear infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+  body::before {
+    background: linear-gradient(
+      45deg,
+      #334155 0%,
+      #475569 25%,
+      #64748b 50%,
+      #94a3b8 75%,
+      #cbd5e1 100%
+    );
+  }
+}
+
+/* Dark mode animation */
+@keyframes gradientRotateDark {
+  0% {
+    background: linear-gradient(
+      0deg,
+      #334155 0%,
+      #475569 25%,
+      #64748b 50%,
+      #94a3b8 75%,
+      #cbd5e1 100%
+    );
+  }
+  25% {
+    background: linear-gradient(
+      90deg,
+      #334155 0%,
+      #475569 25%,
+      #64748b 50%,
+      #94a3b8 75%,
+      #cbd5e1 100%
+    );
+  }
+  50% {
+    background: linear-gradient(
+      180deg,
+      #334155 0%,
+      #475569 25%,
+      #64748b 50%,
+      #94a3b8 75%,
+      #cbd5e1 100%
+    );
+  }
+  75% {
+    background: linear-gradient(
+      270deg,
+      #334155 0%,
+      #475569 25%,
+      #64748b 50%,
+      #94a3b8 75%,
+      #cbd5e1 100%
+    );
+  }
+  100% {
+    background: linear-gradient(
+      360deg,
+      #334155 0%,
+      #475569 25%,
+      #64748b 50%,
+      #94a3b8 75%,
+      #cbd5e1 100%
+    );
+  }
 }
 
 @theme inline {
@@ -14,13 +113,75 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: linear-gradient(
+      135deg,
+      #334155 0%,
+      #475569 25%,
+      #64748b 50%,
+      #94a3b8 75%,
+      #cbd5e1 100%
+    );
+    --foreground: #f1f5f9;
   }
 }
 
 body {
   background: var(--background);
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+
+  /* Apply the animation */
+  animation: gradientRotate 25s ease-in-out infinite;
+}
+
+/* Dark mode animation */
+@media (prefers-color-scheme: dark) {
+  body {
+    animation: gradientRotate 25s ease-in-out infinite;
+  }
+}
+
+/* Fix for form inputs to have proper white backgrounds */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  background-color: white !important;
+  border: 1px solid #d1d5db !important;
+  color: #1f2937 !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  background-color: white !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Dark mode form inputs */
+@media (prefers-color-scheme: dark) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea,
+  select {
+    background-color: #374151 !important;
+    border: 1px solid #4b5563 !important;
+    color: #f9fafb !important;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    background-color: #374151 !important;
+    border-color: #3b82f6 !important;
+  }
 }

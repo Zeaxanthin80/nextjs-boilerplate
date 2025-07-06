@@ -1,6 +1,6 @@
+import { auth } from "@/app/lib/auth";
+import { prisma } from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
-import { auth } from "../../../lib/auth";
-import { prisma } from "../../../lib/prisma";
 
 export async function GET(request, { params }) {
   try {
@@ -88,39 +88,92 @@ export async function PATCH(request, { params }) {
   }
 }
 
-export async function DELETE(request, { params }) {
-  try {
-    const session = await auth();
+export async function PUT(request, { params }) {
+  const session = await auth();
 
-    if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+    const { name, product, audience, tone, goals, platforms } =
+      await request.json();
+
+    // Verify campaign exists and belongs to user
+    const existingCampaign = await prisma.campaign.findFirst({
+      where: {
+        id: params.id,
+        userId: session.user.id,
+        status: "DRAFT", // Only allow editing of draft campaigns
+      },
+    });
+
+    if (!existingCampaign) {
+      return NextResponse.json(
+        { error: "Campaign not found or not editable" },
+        { status: 404 }
+      );
     }
 
-    const { id } = params;
+    // Update campaign
+    const updatedCampaign = await prisma.campaign.update({
+      where: { id: params.id },
+      data: {
+        name,
+        product,
+        audience,
+        tone,
+        goals,
+        updatedAt: new Date(),
+      },
+      include: {
+        content: true,
+      },
+    });
 
-    const campaign = await prisma.campaign.findFirst({
+    return NextResponse.json(updatedCampaign);
+  } catch (error) {
+    console.error("Campaign update error:", error);
+    return NextResponse.json(
+      { error: "Failed to update campaign" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(request, { params }) {
+  const session = await auth();
+
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+    // Verify campaign exists and belongs to user
+    const existingCampaign = await prisma.campaign.findFirst({
       where: {
-        id,
+        id: params.id,
         userId: session.user.id,
       },
     });
 
-    if (!campaign) {
+    if (!existingCampaign) {
       return NextResponse.json(
         { error: "Campaign not found" },
         { status: 404 }
       );
     }
 
+    // Delete campaign and related content (cascade delete)
     await prisma.campaign.delete({
-      where: { id },
+      where: { id: params.id },
     });
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ message: "Campaign deleted successfully" });
   } catch (error) {
-    console.error("Error deleting campaign:", error);
+    console.error("Campaign delete error:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Failed to delete campaign" },
       { status: 500 }
     );
   }

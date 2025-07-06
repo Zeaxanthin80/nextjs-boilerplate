@@ -38,9 +38,11 @@ export default async function Dashboard() {
     campaignStats.find((stat) => stat.status === "PUBLISHED")?._count || 0;
   const draftCampaigns =
     campaignStats.find((stat) => stat.status === "DRAFT")?._count || 0;
+  const archivedCampaigns =
+    campaignStats.find((stat) => stat.status === "ARCHIVED")?._count || 0;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Navigation */}
       <nav className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -147,27 +149,22 @@ export default async function Dashboard() {
               </div>
             </div>
 
-            {/* Account Info */}
+            {/* Archived Campaigns */}
             <div className="bg-white overflow-hidden shadow rounded-lg">
               <div className="p-5">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
-                      <span className="text-white font-semibold">
-                        {session.user?.name?.charAt(0) || "U"}
-                      </span>
+                    <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                      <span className="text-white">📦</span>
                     </div>
                   </div>
                   <div className="ml-5 w-0 flex-1">
                     <dl>
                       <dt className="text-sm font-medium text-gray-500 truncate">
-                        Account
+                        Archived
                       </dt>
-                      <dd className="text-sm font-medium text-gray-900">
-                        {session.user?.name}
-                      </dd>
-                      <dd className="text-xs text-gray-500">
-                        {session.user?.role}
+                      <dd className="text-2xl font-bold text-gray-900">
+                        {archivedCampaigns}
                       </dd>
                     </dl>
                   </div>
@@ -211,6 +208,8 @@ export default async function Dashboard() {
                                 ? "bg-green-100 text-green-800"
                                 : campaign.status === "DRAFT"
                                 ? "bg-yellow-100 text-yellow-800"
+                                : campaign.status === "ARCHIVED"
+                                ? "bg-blue-100 text-blue-800"
                                 : "bg-gray-100 text-gray-800"
                             }`}
                           >

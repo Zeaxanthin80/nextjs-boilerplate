@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import Toast from "../../components/Toast";
+import { SocialIconOnly } from "../../components/SocialIcon";
 
 const TONES = [
   { value: "PROFESSIONAL", label: "Professional" },
@@ -17,10 +18,10 @@ const TONES = [
 ];
 
 const PLATFORMS = [
-  { value: "TIKTOK", label: "TikTok", icon: "🎵" },
-  { value: "INSTAGRAM", label: "Instagram", icon: "📸" },
-  { value: "FACEBOOK", label: "Facebook", icon: "👥" },
-  { value: "YOUTUBE", label: "YouTube", icon: "📹" },
+  { value: "TIKTOK", label: "TikTok" },
+  { value: "INSTAGRAM", label: "Instagram" },
+  { value: "FACEBOOK", label: "Facebook" },
+  { value: "YOUTUBE", label: "YouTube" },
 ];
 
 export default function CreateCampaign() {
@@ -120,7 +121,7 @@ export default function CreateCampaign() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Navigation */}
       <nav className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -284,7 +285,12 @@ export default function CreateCampaign() {
                           : "border-gray-300 bg-white hover:border-gray-400"
                       }`}
                     >
-                      <div className="text-2xl mb-2">{platform.icon}</div>
+                      <div className="mb-2 flex justify-center">
+                        <SocialIconOnly
+                          platform={platform.value}
+                          size="w-8 h-8"
+                        />
+                      </div>
                       <div className="text-sm font-medium text-gray-900">
                         {platform.label}
                       </div>
