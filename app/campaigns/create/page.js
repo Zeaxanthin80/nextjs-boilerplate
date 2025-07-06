@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import Toast from "../../components/Toast";
-import { SocialIconOnly } from "../../components/SocialIcon";
+import SimpleSocialIcon from "../../components/SimpleSocialIcon";
 
 const TONES = [
   { value: "PROFESSIONAL", label: "Professional" },
@@ -286,7 +286,7 @@ export default function CreateCampaign() {
                       }`}
                     >
                       <div className="mb-2 flex justify-center">
-                        <SocialIconOnly
+                        <SimpleSocialIcon
                           platform={platform.value}
                           size="w-8 h-8"
                         />

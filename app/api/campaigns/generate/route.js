@@ -5,6 +5,8 @@ import {
   generateCampaignName,
   generateCampaignContent,
 } from "../../../lib/openai";
+import { generateChannelImages } from "../../../lib/openai-images";
+import { downloadAndSaveImages } from "../../../lib/image-storage";
 
 export async function POST(request) {
   try {
@@ -50,6 +52,21 @@ export async function POST(request) {
       },
     });
 
+    // Generate images for the campaign
+    console.log("Generating images for campaign...");
+    const imagePrompt = `Professional marketing image for ${product}, targeting ${audience}, ${tone.toLowerCase()} style`;
+    const generatedImages = await generateChannelImages({
+      basePrompt: imagePrompt,
+      channels: platforms.map((p) => p.toLowerCase()),
+    });
+
+    // Download and save images permanently
+    console.log("Downloading and saving images permanently...");
+    const savedImages = await downloadAndSaveImages(
+      generatedImages,
+      campaign.id
+    );
+
     // Generate content for each selected platform
     const contentPromises = platforms.map(async (platform) => {
       try {
@@ -61,6 +78,11 @@ export async function POST(request) {
           platform,
         });
 
+        // Get the saved image for this platform
+        const platformImage = savedImages[platform.toLowerCase()];
+        const imageUrl =
+          platformImage?.permanentUrl || platformImage?.imageUrl || null;
+
         // Create content entry in database
         return prisma.campaignContent.create({
           data: {
@@ -71,6 +93,7 @@ export async function POST(request) {
             content: content.content,
             hashtags: content.hashtags || [],
             callToAction: content.callToAction,
+            imageUrl: imageUrl, // Add the generated image URL
           },
         });
       } catch (error) {
@@ -85,6 +108,7 @@ export async function POST(request) {
             content: `Check out our amazing ${product}! Perfect for ${audience}.`,
             hashtags: ["#marketing", "#campaign"],
             callToAction: "Learn more!",
+            imageUrl: null, // No image for fallback
           },
         });
       }

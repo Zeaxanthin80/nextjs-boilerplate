@@ -10,7 +10,7 @@ export async function GET(request, { params }) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { id } = params;
+    const { id } = await params;
 
     const campaign = await prisma.campaign.findFirst({
       where: {
@@ -51,7 +51,7 @@ export async function PATCH(request, { params }) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { id } = params;
+    const { id } = await params;
     const { status, name, description } = await request.json();
 
     const campaign = await prisma.campaign.findFirst({
@@ -99,10 +99,12 @@ export async function PUT(request, { params }) {
     const { name, product, audience, tone, goals, platforms } =
       await request.json();
 
+    const { id } = await params;
+
     // Verify campaign exists and belongs to user
     const existingCampaign = await prisma.campaign.findFirst({
       where: {
-        id: params.id,
+        id,
         userId: session.user.id,
         status: "DRAFT", // Only allow editing of draft campaigns
       },
@@ -117,7 +119,7 @@ export async function PUT(request, { params }) {
 
     // Update campaign
     const updatedCampaign = await prisma.campaign.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         name,
         product,
@@ -149,10 +151,12 @@ export async function DELETE(request, { params }) {
   }
 
   try {
+    const { id } = await params;
+
     // Verify campaign exists and belongs to user
     const existingCampaign = await prisma.campaign.findFirst({
       where: {
-        id: params.id,
+        id,
         userId: session.user.id,
       },
     });
@@ -166,7 +170,7 @@ export async function DELETE(request, { params }) {
 
     // Delete campaign and related content (cascade delete)
     await prisma.campaign.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ message: "Campaign deleted successfully" });

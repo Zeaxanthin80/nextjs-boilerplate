@@ -4,9 +4,11 @@ import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import Image from "next/image";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import Toast from "../../components/Toast";
 import SocialIcon from "../../components/SocialIcon";
+import ImagePreview from "../../components/ImagePreview";
 
 const PLATFORM_ICONS = {
   TIKTOK: "🎵",
@@ -130,6 +132,58 @@ export default function CampaignDetail() {
       setShowDeleteModal(false);
     }
   };
+
+  // Helper function to get image dimensions text
+  function getImageDimensions(platform) {
+    const dimensions = {
+      TIKTOK: "1024×1792",
+      INSTAGRAM: "1024×1024",
+      FACEBOOK: "1792×1024",
+      YOUTUBE: "1792×1024",
+      LINKEDIN: "1792×1024",
+    };
+    return dimensions[platform?.toUpperCase()] || "1024×1024";
+  }
+
+  // Function to download image
+  async function downloadImage(imageUrl, filename) {
+    try {
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${filename}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Download failed:", error);
+      // Fallback - open in new tab
+      window.open(imageUrl, "_blank");
+    }
+  }
+
+  // Function to copy image URL to clipboard
+  async function copyImageUrl(imageUrl) {
+    try {
+      await navigator.clipboard.writeText(imageUrl);
+      // You could add a toast notification here
+      alert("Image URL copied to clipboard!");
+    } catch (error) {
+      console.error("Copy failed:", error);
+      // Fallback for older browsers
+      const textArea = document.createElement("textarea");
+      textArea.value = imageUrl;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+      alert("Image URL copied to clipboard!");
+    }
+  }
 
   if (status === "loading" || loading) {
     return <LoadingSpinner />;
@@ -339,10 +393,14 @@ export default function CampaignDetail() {
           </div>
         </div>
 
-        {/* Platform Content */}
-        <div className="space-y-6">
-          {campaign.content.map((content) => (
-            <div key={content.id} className="bg-white rounded-lg shadow p-6">
+        {/* Campaign Content */}
+        <div className="space-y-8">
+          {campaign.content.map((content, index) => (
+            <div
+              key={index}
+              className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm"
+            >
+              {/* Platform Header */}
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
                   <SocialIcon
@@ -350,44 +408,56 @@ export default function CampaignDetail() {
                     size="w-8 h-8"
                     showName={true}
                   />
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    {content.platform}
+                  </h3>
                 </div>
-                <button
-                  onClick={() => navigator.clipboard.writeText(content.content)}
-                  className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm"
-                >
-                  📋 Copy
-                </button>
               </div>
 
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-medium text-gray-900">Title</h4>
-                  <p className="text-gray-600">{content.title}</p>
-                </div>
+              {/* Image Preview with Download */}
+              {content.imageUrl && (
+                <ImagePreview
+                  imageUrl={content.imageUrl}
+                  alt={`Generated image for ${content.platform}`}
+                  platform={content.platform}
+                  campaignName={campaign.name}
+                />
+              )}
 
-                <div>
-                  <h4 className="font-medium text-gray-900">Content</h4>
-                  <p className="text-gray-600 whitespace-pre-wrap">
-                    {content.content}
+              {/* Content sections */}
+              {content.title && (
+                <div className="mb-4">
+                  <h4 className="text-sm font-medium text-gray-900 mb-2">
+                    Title
+                  </h4>
+                  <p className="text-gray-700 bg-gray-50 p-3 rounded-md">
+                    {content.title}
                   </p>
                 </div>
+              )}
 
-                {content.hashtags && (
-                  <div>
-                    <h4 className="font-medium text-gray-900">Hashtags</h4>
-                    <p className="text-blue-600">{content.hashtags}</p>
-                  </div>
-                )}
-
-                {content.callToAction && (
-                  <div>
-                    <h4 className="font-medium text-gray-900">
-                      Call to Action
-                    </h4>
-                    <p className="text-gray-600">{content.callToAction}</p>
-                  </div>
-                )}
+              <div>
+                <h4 className="font-medium text-gray-900">Content</h4>
+                <p className="text-gray-600 whitespace-pre-wrap">
+                  {content.content}
+                </p>
               </div>
+
+              {content.hashtags && (
+                <div>
+                  <h4 className="font-medium text-gray-900">Hashtags</h4>
+                  <p className="text-blue-600">{content.hashtags}</p>
+                </div>
+              )}
+
+              {content.callToAction && (
+                <div>
+                  <h4 className="font-medium text-gray-900">
+                    Call to Action
+                  </h4>
+                  <p className="text-gray-600">{content.callToAction}</p>
+                </div>
+              )}
 
               {/* Edit Content Button for DRAFT */}
               {isDraft && (

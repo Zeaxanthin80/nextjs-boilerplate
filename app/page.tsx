@@ -7,7 +7,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="bg-white shadow-sm">
+      <nav className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
@@ -91,6 +91,8 @@ export default async function Home() {
           </div>
         </div>
       </div>
+      {/* Add spacing div to create gap */}
+      <div className="h-16"></div>
 
       {/* Features Section */}
       <div className="bg-white py-24 sm:py-32">

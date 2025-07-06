@@ -1,170 +1,26 @@
 @import "tailwindcss";
 
-/* CSS Custom Properties for gradient colors */
-:root {
-  --bg-primary: #f8fafc;
-  --bg-secondary: #e2e8f0;
-  --bg-tertiary: #cbd5e1;
-  --bg-quaternary: #94a3b8;
-  --bg-quinary: #64748b;
-
-  /* Transform-based rotation instead of background changes */
-  --rotation: 0deg;
-}
-
-/* Smooth color cycling animation */
-@keyframes colorFlow {
+/* Animated gradient background */
+@keyframes gradient {
   0% {
-    --bg-primary: #f8fafc;
-    --bg-secondary: #e2e8f0;
-    --bg-tertiary: #cbd5e1;
-    --bg-quaternary: #94a3b8;
-    --bg-quinary: #64748b;
+    background-position: 0% 50%;
   }
-  20% {
-    --bg-primary: #e2e8f0;
-    --bg-secondary: #cbd5e1;
-    --bg-tertiary: #94a3b8;
-    --bg-quaternary: #64748b;
-    --bg-quinary: #f8fafc;
-  }
-  40% {
-    --bg-primary: #cbd5e1;
-    --bg-secondary: #94a3b8;
-    --bg-tertiary: #64748b;
-    --bg-quaternary: #f8fafc;
-    --bg-quinary: #e2e8f0;
-  }
-  60% {
-    --bg-primary: #94a3b8;
-    --bg-secondary: #64748b;
-    --bg-tertiary: #f8fafc;
-    --bg-quaternary: #e2e8f0;
-    --bg-quinary: #cbd5e1;
-  }
-  80% {
-    --bg-primary: #64748b;
-    --bg-secondary: #f8fafc;
-    --bg-tertiary: #e2e8f0;
-    --bg-quaternary: #cbd5e1;
-    --bg-quinary: #94a3b8;
+  50% {
+    background-position: 100% 50%;
   }
   100% {
-    --bg-primary: #f8fafc;
-    --bg-secondary: #e2e8f0;
-    --bg-tertiary: #cbd5e1;
-    --bg-quaternary: #94a3b8;
-    --bg-quinary: #64748b;
-  }
-}
-
-/* Ultra-performant transform-based rotation */
-@keyframes gradientRotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Dark mode colors */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #334155;
-    --bg-secondary: #475569;
-    --bg-tertiary: #64748b;
-    --bg-quaternary: #94a3b8;
-    --bg-quinary: #cbd5e1;
-  }
-
-  @keyframes colorFlow {
-    0% {
-      --bg-primary: #334155;
-      --bg-secondary: #475569;
-      --bg-tertiary: #64748b;
-      --bg-quaternary: #94a3b8;
-      --bg-quinary: #cbd5e1;
-    }
-    20% {
-      --bg-primary: #475569;
-      --bg-secondary: #64748b;
-      --bg-tertiary: #94a3b8;
-      --bg-quaternary: #cbd5e1;
-      --bg-quinary: #334155;
-    }
-    40% {
-      --bg-primary: #64748b;
-      --bg-secondary: #94a3b8;
-      --bg-tertiary: #cbd5e1;
-      --bg-quaternary: #334155;
-      --bg-quinary: #475569;
-    }
-    60% {
-      --bg-primary: #94a3b8;
-      --bg-secondary: #cbd5e1;
-      --bg-tertiary: #334155;
-      --bg-quaternary: #475569;
-      --bg-quinary: #64748b;
-    }
-    80% {
-      --bg-primary: #cbd5e1;
-      --bg-secondary: #334155;
-      --bg-tertiary: #475569;
-      --bg-quaternary: #64748b;
-      --bg-quinary: #94a3b8;
-    }
-    100% {
-      --bg-primary: #334155;
-      --bg-secondary: #475569;
-      --bg-tertiary: #64748b;
-      --bg-quaternary: #94a3b8;
-      --bg-quinary: #cbd5e1;
-    }
+    background-position: 0% 50%;
   }
 }
 
 body {
+  background: linear-gradient(-45deg, #b3c4cd, #f0f2f7, #cdcccc, #eef2fc);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
   position: relative;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* High-performance pseudo-element approach */
-body::before {
-  content: '';
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  z-index: -1;
-
-  /* Static gradient using CSS variables */
-  background: linear-gradient(
-    45deg,
-    var(--bg-primary) 0%,
-    var(--bg-secondary) 25%,
-    var(--bg-tertiary) 50%,
-    var(--bg-quaternary) 75%,
-    var(--bg-quinary) 100%
-  );
-
-  /* Hardware-accelerated transform */
-  animation: gradientRotate 20s linear infinite;
-
-  /* Performance optimizations */
-  will-change: transform;
-  transform: translateZ(0); /* Force GPU acceleration */
-  backface-visibility: hidden;
-}
-
-/* Alternative: Color cycling without rotation */
-body.color-flow::before {
-  animation: colorFlow 15s ease-in-out infinite;
-  transform: none;
 }
 
 /* Fix for form inputs to have proper white backgrounds */
@@ -185,7 +41,7 @@ textarea:focus,
 select:focus {
   background-color: white !important;
   border-color: #3b82f6 !important;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1) !important;
 }
 
 /* Dark mode form inputs */

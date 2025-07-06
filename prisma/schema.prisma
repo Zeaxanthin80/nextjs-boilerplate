@@ -99,6 +99,7 @@ model CampaignContent {
   content     String   @db.Text
   hashtags    String[]
   callToAction String?
+  imageUrl    String?  // Add image URL field for DALL-E generated images
   createdAt   DateTime @default(now())
   
   // Relations

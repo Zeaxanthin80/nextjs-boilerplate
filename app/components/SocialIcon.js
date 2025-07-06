@@ -76,29 +76,36 @@ export default function SocialIcon({
 
 // Alternative simpler version for just the icon
 export function SocialIconOnly({ platform, size = "w-6 h-6", className = "" }) {
-  const config = PLATFORM_CONFIGS[platform.toUpperCase()];
+  const config = PLATFORM_CONFIGS[platform?.toUpperCase()];
 
   if (!config) {
-    return <span className={className}>❓</span>;
+    return <span className={`${className} text-2xl`}>❓</span>;
   }
 
   return (
     <div
-      className={`${size} relative flex items-center justify-center ${className}`}
+      className={`${size} relative flex items-center justify-center rounded-lg ${config.bgColor} ${className}`}
     >
       <Image
         src={config.logo}
         alt={`${config.name} logo`}
-        width={24}
-        height={24}
-        className="w-full h-full object-contain"
+        width={32}
+        height={32}
+        className="w-full h-full object-contain p-1"
         onError={(e) => {
           // Fallback to emoji if image fails to load
           e.target.style.display = "none";
-          e.target.nextSibling.style.display = "inline";
+          const fallbackElement =
+            e.target.parentNode.querySelector(".fallback-emoji");
+          if (fallbackElement) {
+            fallbackElement.style.display = "flex";
+          }
         }}
       />
-      <span className="text-lg hidden" style={{ display: "none" }}>
+      <span
+        className="fallback-emoji text-white text-xl font-bold hidden items-center justify-center w-full h-full"
+        style={{ display: "none" }}
+      >
         {config.fallback}
       </span>
     </div>
