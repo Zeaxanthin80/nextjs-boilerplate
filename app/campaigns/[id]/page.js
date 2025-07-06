@@ -458,7 +458,13 @@ export default function CampaignDetail() {
               {content.hashtags && (
                 <div>
                   <h4 className="font-medium text-gray-900">Hashtags</h4>
-                  <p className="text-blue-600 bg-gray-50 p-3 rounded-md">{content.hashtags}</p>
+                  <div className="flex flex-wrap gap-2 bg-gray-50 p-3 rounded-md">
+                    {content.hashtags.split(/\s+/).filter(tag => tag).map((tag, i) => (
+                      <span key={i} className="text-blue-600">
+                        {tag.startsWith('#') ? tag : `#${tag}`}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               )}
 
