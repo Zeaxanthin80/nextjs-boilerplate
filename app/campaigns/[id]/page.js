@@ -417,12 +417,12 @@ export default function CampaignDetail() {
                 <div className="flex items-center space-x-3">
                   <SocialIcon
                     platform={content.platform}
-                    size="w-8 h-8"
-                    showName={true}
+                    size="w-16 h-16"
+                    showName={false}
                   />
-                  <h3 className="text-lg font-semibold text-gray-900">
+                  {/*<h3 className="text-lg font-semibold text-gray-900">
                     {content.platform}
-                  </h3>
+                  </h3>*/}
                 </div>
               </div>
 
