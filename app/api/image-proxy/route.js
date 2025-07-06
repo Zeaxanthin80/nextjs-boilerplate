@@ -1,30 +1,20 @@
 import { NextResponse } from 'next/server';
 
-// Cache for storing temporary DALL-E URLs that we've already processed
+// Cache for storing processed image URLs
 const imageCache = new Map();
 
-// Helper function to parse DALL-E URL parameters
-function parseDalleUrl(url) {
-  try {
-    const parsedUrl = new URL(url);
-    if (!parsedUrl.hostname.includes('oaidalleapiprodscus.blob.core.windows.net')) {
-      return null; // Not a DALL-E URL
-    }
+// Cache TTL in milliseconds (10 minutes)
+const CACHE_TTL = 10 * 60 * 1000;
 
-    const params = new URLSearchParams(parsedUrl.search);
-    const stParam = params.get('st');
-    const expiryTime = stParam ? new Date(stParam).getTime() + (2 * 60 * 60 * 1000) : null; // 2 hours from creation
-    
-    return {
-      isExpired: expiryTime ? (Date.now() > expiryTime) : true,
-      expiryTime,
-      url: url.toString()
-    };
-  } catch (error) {
-    console.error('Error parsing DALL-E URL:', error);
-    return null;
+// Clean up old cache entries periodically
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, { timestamp }] of imageCache.entries()) {
+    if (now - timestamp > CACHE_TTL) {
+      imageCache.delete(key);
+    }
   }
-}
+}, CACHE_TTL);
 
 export async function GET(request) {
   try {
@@ -35,13 +25,12 @@ export async function GET(request) {
       return new NextResponse('Image URL is required', { status: 400 });
     }
 
-    // Check if this is a DALL-E URL
-    const dalleInfo = parseDalleUrl(imageUrl);
-    
-    // If it's a DALL-E URL and it's expired, return an error
-    if (dalleInfo && dalleInfo.isExpired) {
-      return new NextResponse('Image has expired', { 
-        status: 410, // Gone
+    // Check if the URL is valid
+    try {
+      new URL(imageUrl);
+    } catch (error) {
+      return new NextResponse('Invalid image URL', { 
+        status: 400,
         headers: { 'Content-Type': 'application/json' }
       });
     }
@@ -68,10 +57,15 @@ export async function GET(request) {
       'Referer': request.headers.get('referer') || 'https://app.marketinghub.com',
     };
 
-    // Add any necessary authentication headers for DALL-E
-    if (dalleInfo) {
-      // Add any required DALL-E specific headers here
-      // Note: DALL-E URLs are signed, so we don't need additional auth
+    // Check if this is a DALL-E URL (Azure blob storage)
+    const isDalleUrl = imageUrl.includes('oaidalleapiprodscus.blob.core.windows.net');
+    
+    // Add any necessary authentication headers for the image source
+    if (isDalleUrl) {
+      // DALL-E URLs are pre-signed and don't need additional auth
+      console.log('Proxying DALL-E image');
+    } else if (process.env.IMAGE_PROXY_AUTH_HEADER) {
+      headers['Authorization'] = process.env.IMAGE_PROXY_AUTH_HEADER;
     }
 
     // Make the request to fetch the image
@@ -82,9 +76,15 @@ export async function GET(request) {
     });
 
     if (!response.ok) {
-      // If we get a 403, the image might have expired
-      if (response.status === 403 || response.status === 404) {
-        return new NextResponse('Image not found or access denied', { 
+      // Handle specific error statuses
+      if (response.status === 403) {
+        return new NextResponse('Access to the requested image is forbidden', { 
+          status: 403,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      if (response.status === 404) {
+        return new NextResponse('The requested image was not found', { 
           status: 404,
           headers: { 'Content-Type': 'application/json' }
         });

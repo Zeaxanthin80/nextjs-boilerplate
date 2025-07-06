@@ -48,7 +48,15 @@ export default function ImageGenerator({
   };
 
   const generateImages = async () => {
-    if (!prompt.trim()) return;
+    if (!prompt.trim()) {
+      alert("Please enter a description for the image");
+      return;
+    }
+
+    if (selectedChannels.length === 0) {
+      alert("Please select at least one channel");
+      return;
+    }
 
     setIsGenerating(true);
     setGeneratedImages({});
@@ -68,14 +76,23 @@ export default function ImageGenerator({
 
       const data = await response.json();
 
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to generate images");
+      }
+
       if (data.success) {
         setGeneratedImages(data.images);
         onImagesGenerated?.(data.images);
       } else {
         console.error("Generation failed:", data.error);
+        alert(`Failed to generate images: ${data.error || "Unknown error"}`);
       }
-    } catch (error) {
+    } catch (error: unknown) {
       console.error("Error generating images:", error);
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : "Failed to generate images. Please try again.";
+      alert(`Error: ${errorMessage}`);
     } finally {
       setIsGenerating(false);
     }

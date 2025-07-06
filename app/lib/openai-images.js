@@ -12,18 +12,21 @@ export async function generateCampaignImage({
 }) {
   try {
     const response = await openai.images.generate({
-      model: "dall-e-3", // or "dall-e-2" for faster/cheaper generation
+      model: "dall-e-3",
       prompt: prompt,
       n: 1,
       size: size, // "1024x1024", "1024x1792", "1792x1024"
-      quality: quality, // "standard" or "hd"
-      style: style, // "natural" or "vivid"
+      quality: quality,
+      style: style,
     });
 
+    // DALL-E 3 returns an array of data objects
+    const imageData = response.data[0];
+    
     return {
       success: true,
-      imageUrl: response.data[0].url,
-      revisedPrompt: response.data[0].revised_prompt,
+      imageUrl: imageData.url || imageData.b64_json,
+      revisedPrompt: imageData.revised_prompt || prompt, // Fallback to original prompt if revised_prompt not available
     };
   } catch (error) {
     console.error("Image generation error:", error);
@@ -40,27 +43,41 @@ export async function generateChannelImages({
   channels = ["social", "email", "web"],
 }) {
   const channelPrompts = {
-    social: `${basePrompt}, optimized for social media, square format, eye-catching`,
-    email: `${basePrompt}, professional email header style, clean and modern`,
-    web: `${basePrompt}, website banner style, wide format, professional`,
-    instagram: `${basePrompt}, Instagram post style, vibrant colors, engaging`,
-    facebook: `${basePrompt}, Facebook cover photo style, wide banner format`,
-    linkedin: `${basePrompt}, LinkedIn professional style, business-focused`,
-    tiktok: `${basePrompt}, TikTok style, vertical format, trendy and dynamic`,
-    youtube: `${basePrompt}, YouTube thumbnail style, vibrant and clickable`,
+    social: `${basePrompt}, optimized for social media, square format, eye-catching, detailed, professional quality`,
+    email: `${basePrompt}, professional email header style, clean and modern, business appropriate`,
+    web: `${basePrompt}, website banner style, wide format, professional, high resolution`,
+    instagram: `${basePrompt}, Instagram post style, vibrant colors, engaging, social media optimized`,
+    facebook: `${basePrompt}, Facebook cover photo style, wide banner format, attention-grabbing`,
+    linkedin: `${basePrompt}, LinkedIn professional style, business-focused, corporate aesthetic`,
+    tiktok: `${basePrompt}, TikTok style, vertical format, trendy and dynamic, youth-oriented`,
+    youtube: `${basePrompt}, YouTube thumbnail style, vibrant and clickable, includes visual hook`,
   };
 
   const results = {};
-
+  
+  // Generate images for each selected channel
   for (const channel of channels) {
     const prompt = channelPrompts[channel] || basePrompt;
-    const result = await generateCampaignImage({
-      prompt,
-      size: getOptimalSize(channel),
-    });
-    results[channel] = result;
+    const size = getOptimalSize(channel);
+    
+    try {
+      const result = await generateCampaignImage({
+        prompt,
+        size: size.size,
+        style: "vivid",
+        quality: "hd"
+      });
+      
+      results[channel] = result;
+    } catch (error) {
+      console.error(`Error generating image for ${channel}:`, error);
+      results[channel] = {
+        success: false,
+        error: `Failed to generate ${channel} image`
+      };
+    }
   }
-
+  
   return results;
 }
 

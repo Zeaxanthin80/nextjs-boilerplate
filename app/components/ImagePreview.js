@@ -6,17 +6,16 @@ import Image from "next/image";
 function getProxiedImageUrl(url) {
   if (!url) return null;
   
-  // If it's a local URL, use it directly
-  if (url.startsWith('/') || url.startsWith('http://localhost') || url.startsWith('http://127.0.0.1')) {
+  // If it's a local URL or data URL, use it directly
+  if (url.startsWith('/') || 
+      url.startsWith('http://localhost') || 
+      url.startsWith('http://127.0.0.1') ||
+      url.startsWith('data:image')) {
     return url;
   }
   
-  // For DALL-E URLs, use our proxy
-  if (url.includes('oaidalleapiprodscus.blob.core.windows.net')) {
-    return `/api/image-proxy?url=${encodeURIComponent(url)}`;
-  }
-  
-  return url;
+  // For external URLs, use our proxy
+  return `/api/image-proxy?url=${encodeURIComponent(url)}`;
 }
 
 export default function ImagePreview({
@@ -51,31 +50,27 @@ export default function ImagePreview({
     });
   }, [imageUrl, platform]);
 
-  // Check if DALL-E URL might be expired based on timestamp
+  // Check if image URL might be expired
   const isImageLikelyExpired = () => {
-    // If it's a local permanent image, it's not expired
-    if (!imageUrl || imageUrl.startsWith("/uploads/")) return false;
-
+    if (!imageUrl || imageUrl.startsWith("/uploads/") || imageUrl.startsWith("data:image")) {
+      return false;
+    }
     try {
       const url = new URL(imageUrl);
-      // Check if it's a DALL-E URL
-      const isDalleUrl = url.hostname.includes("oaidalleapiprodscus.blob.core.windows.net");
-      
+      const isDalleUrl = url.hostname.includes('oaidalleapiprodscus.blob.core.windows.net');
       if (!isDalleUrl) return false;
-
-      // For DALL-E URLs, check the expiration time in the URL
+      
+      // Check for DALL-E URL expiration
       const stParam = url.searchParams.get("st");
-      if (!stParam) return true; // If no timestamp, assume expired
-
+      if (!stParam) return true;
+      
       const startTime = new Date(stParam);
       const now = new Date();
       const hoursElapsed = (now - startTime) / (1000 * 60 * 60);
-
-      // DALL-E URLs typically expire after 1-2 hours
-      return hoursElapsed > 1.5; // Be conservative with the expiration check
+      return hoursElapsed > 1.5; // DALL-E URLs typically expire after 1-2 hours
     } catch (error) {
       console.error("Error parsing image URL:", error);
-      return true; // If we can't parse the URL, assume it's expired to be safe
+      return true;
     }
   };
 
@@ -84,7 +79,8 @@ export default function ImagePreview({
     if (!imageUrl) return false;
     return imageUrl.startsWith("/uploads/") || 
            imageUrl.startsWith("http://localhost") ||
-           imageUrl.startsWith(process.env.NEXT_PUBLIC_APP_URL || "");
+           imageUrl.startsWith(process.env.NEXT_PUBLIC_APP_URL || "") ||
+           imageUrl.startsWith("data:image");
   };
 
   // Get image dimensions based on platform
@@ -150,8 +146,8 @@ export default function ImagePreview({
     setImageError(false);
 
     try {
-      // For DALL-E URLs, try to use the proxy first
-      const downloadUrl = imageUrl.includes('oaidalleapiprodscus.blob.core.windows.net')
+      // Use the proxy for external URLs
+      const downloadUrl = imageUrl.startsWith('http') && !imageUrl.includes('localhost') && !imageUrl.includes(process.env.NEXT_PUBLIC_APP_URL || '')
         ? `/api/image-proxy?url=${encodeURIComponent(imageUrl)}`
         : imageUrl;
 
@@ -192,7 +188,7 @@ export default function ImagePreview({
     
     // If it's a DALL-E URL and likely expired, show a more specific error
     if (isImageLikelyExpired()) {
-      console.warn("DALL-E image URL has likely expired");
+      console.warn("Image URL has likely expired");
     }
   };
 
@@ -230,8 +226,7 @@ export default function ImagePreview({
                 Image May Have Expired
               </h3>
               <div className="mt-1 text-sm text-yellow-700">
-                DALL-E images expire after 1-2 hours. If you're seeing loading
-                issues, please regenerate the campaign for fresh images.
+                If you're seeing loading issues, please regenerate the campaign for fresh images.
               </div>
             </div>
           </div>
@@ -297,7 +292,7 @@ export default function ImagePreview({
                           <div className="mt-2 text-xs text-gray-500">
                             {isImageLikelyExpired() 
                               ? "This image may have expired. Please regenerate the campaign."
-                              : "DALL-E images expire after 1-2 hours"}
+                              : ""}
                           </div>
                         )}
                       </>
@@ -358,9 +353,9 @@ export default function ImagePreview({
           <div className="space-y-1 mb-3">
             <p className="text-sm text-gray-600">
               AI-generated image optimized for {platform?.toLowerCase()}
-              {isPermanentImage()
-                ? " (Permanently stored)"
-                : " (Temporary DALL-E URL)"}
+                {isPermanentImage()
+                  ? " (Permanently stored)"
+                  : ""}
             </p>
             {!isPermanentImage() && isImageLikelyExpired() && (
               <p className="text-xs text-amber-600">

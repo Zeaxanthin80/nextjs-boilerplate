@@ -2,19 +2,18 @@ import { auth } from "@/app/lib/auth";
 import { prisma } from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
 
+// GET handler to fetch a single campaign
 export async function GET(request, { params }) {
   try {
     const session = await auth();
-
     if (!session) {
       return NextResponse.json(
-        { error: "You must be logged in to view this campaign" }, 
+        { error: "You must be logged in to view this campaign" },
         { status: 401 }
       );
     }
 
     const { id } = params;
-
     if (!id) {
       return NextResponse.json(
         { error: "Campaign ID is required" },
@@ -25,7 +24,7 @@ export async function GET(request, { params }) {
     const campaign = await prisma.campaign.findFirst({
       where: {
         id,
-        userId: session.user.id, // Ensure user can only access their own campaigns
+        userId: session.user.id,
       },
       include: {
         content: {
@@ -38,7 +37,7 @@ export async function GET(request, { params }) {
 
     if (!campaign) {
       return NextResponse.json(
-        { 
+        {
           error: "Campaign not found or you don't have permission to view it",
           code: "NOT_FOUND"
         },
@@ -46,12 +45,11 @@ export async function GET(request, { params }) {
       );
     }
 
-    // Return the campaign regardless of its status
     return NextResponse.json(campaign);
   } catch (error) {
     console.error("Error fetching campaign:", error);
     return NextResponse.json(
-      { 
+      {
         error: "An error occurred while fetching the campaign",
         details: process.env.NODE_ENV === 'development' ? error.message : undefined
       },
@@ -60,15 +58,15 @@ export async function GET(request, { params }) {
   }
 }
 
+// PATCH handler to update a campaign's status, name, or description
 export async function PATCH(request, { params }) {
   try {
     const session = await auth();
-
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { id } = await params;
+    const { id } = params;
     const { status, name, description } = await request.json();
 
     const campaign = await prisma.campaign.findFirst({
@@ -105,25 +103,22 @@ export async function PATCH(request, { params }) {
   }
 }
 
+// PUT handler to update the core details of a DRAFT campaign
 export async function PUT(request, { params }) {
-  const session = await auth();
-
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
   try {
-    const { name, product, audience, tone, goals, platforms } =
-      await request.json();
+    const session = await auth();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
-    const { id } = await params;
+    const { id } = params;
+    const { name, product, audience, tone, goals } = await request.json();
 
-    // Verify campaign exists and belongs to user
     const existingCampaign = await prisma.campaign.findFirst({
       where: {
         id,
         userId: session.user.id,
-        status: "DRAFT", // Only allow editing of draft campaigns
+        status: "DRAFT",
       },
     });
 
@@ -134,7 +129,6 @@ export async function PUT(request, { params }) {
       );
     }
 
-    // Update campaign
     const updatedCampaign = await prisma.campaign.update({
       where: { id },
       data: {
@@ -160,17 +154,16 @@ export async function PUT(request, { params }) {
   }
 }
 
+// DELETE handler to remove a campaign
 export async function DELETE(request, { params }) {
-  const session = await auth();
-
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
   try {
-    const { id } = await params;
+    const session = await auth();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
-    // Verify campaign exists and belongs to user
+    const { id } = params;
+
     const existingCampaign = await prisma.campaign.findFirst({
       where: {
         id,
@@ -185,7 +178,6 @@ export async function DELETE(request, { params }) {
       );
     }
 
-    // Delete campaign and related content (cascade delete)
     await prisma.campaign.delete({
       where: { id },
     });
