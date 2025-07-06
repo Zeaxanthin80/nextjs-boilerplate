@@ -1,7 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+
+function getProxiedImageUrl(url) {
+  if (!url) return null;
+  
+  // If it's a local URL, use it directly
+  if (url.startsWith('/') || url.startsWith('http://localhost') || url.startsWith('http://127.0.0.1')) {
+    return url;
+  }
+  
+  // For DALL-E URLs, use our proxy
+  if (url.includes('oaidalleapiprodscus.blob.core.windows.net')) {
+    return `/api/image-proxy?url=${encodeURIComponent(url)}`;
+  }
+  
+  return url;
+}
 
 export default function ImagePreview({
   imageUrl,
@@ -10,94 +26,136 @@ export default function ImagePreview({
   campaignName,
   className = "",
 }) {
-  const [isLoading, setIsLoading] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
+
+  const [proxiedImageUrl, setProxiedImageUrl] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    if (!imageUrl) {
+      setImageError(true);
+      setIsLoading(false);
+      return;
+    }
+
+    const proxiedUrl = getProxiedImageUrl(imageUrl);
+    setProxiedImageUrl(proxiedUrl);
+    
+    // Get the platform dimensions
+    const platformDims = getImageDimensions(platform);
+    setDimensions({
+      width: platformDims.previewWidth || 400,
+      height: platformDims.previewHeight || 400,
+    });
+  }, [imageUrl, platform]);
 
   // Check if DALL-E URL might be expired based on timestamp
   const isImageLikelyExpired = () => {
     // If it's a local permanent image, it's not expired
-    if (imageUrl?.startsWith("/uploads/")) return false;
-
-    if (!imageUrl?.includes("oaidalleapiprodscus.blob.core.windows.net"))
-      return false;
+    if (!imageUrl || imageUrl.startsWith("/uploads/")) return false;
 
     try {
       const url = new URL(imageUrl);
-      const stParam = url.searchParams.get("st"); // Start time
-      if (!stParam) return false;
+      // Check if it's a DALL-E URL
+      const isDalleUrl = url.hostname.includes("oaidalleapiprodscus.blob.core.windows.net");
+      
+      if (!isDalleUrl) return false;
+
+      // For DALL-E URLs, check the expiration time in the URL
+      const stParam = url.searchParams.get("st");
+      if (!stParam) return true; // If no timestamp, assume expired
 
       const startTime = new Date(stParam);
       const now = new Date();
       const hoursElapsed = (now - startTime) / (1000 * 60 * 60);
 
-      return hoursElapsed > 2; // DALL-E images typically expire after 1-2 hours
+      // DALL-E URLs typically expire after 1-2 hours
+      return hoursElapsed > 1.5; // Be conservative with the expiration check
     } catch (error) {
-      console.error("Error parsing image URL timestamp:", error);
-      return false;
+      console.error("Error parsing image URL:", error);
+      return true; // If we can't parse the URL, assume it's expired to be safe
     }
   };
 
   // Check if image is permanently stored
   const isPermanentImage = () => {
-    return imageUrl?.startsWith("/uploads/");
+    if (!imageUrl) return false;
+    return imageUrl.startsWith("/uploads/") || 
+           imageUrl.startsWith("http://localhost") ||
+           imageUrl.startsWith(process.env.NEXT_PUBLIC_APP_URL || "");
   };
 
+  // Get image dimensions based on platform
   const getImageDimensions = (platform) => {
     const dimensions = {
-      TIKTOK: {
-        width: "1024",
-        height: "1792",
-        aspect: "9/16",
+      TIKTOK: { 
+        width: "1024", 
+        height: "1792", 
+        aspect: "9/16", 
         display: "1024×1792",
+        previewWidth: 300,
+        previewHeight: 534
       },
-      INSTAGRAM: {
-        width: "1024",
-        height: "1024",
-        aspect: "1/1",
+      INSTAGRAM: { 
+        width: "1024", 
+        height: "1024", 
+        aspect: "1/1", 
         display: "1024×1024",
+        previewWidth: 400,
+        previewHeight: 400
       },
-      FACEBOOK: {
-        width: "1792",
-        height: "1024",
-        aspect: "16/9",
+      FACEBOOK: { 
+        width: "1792", 
+        height: "1024", 
+        aspect: "16/9", 
         display: "1792×1024",
+        previewWidth: 400,
+        previewHeight: 225
       },
-      YOUTUBE: {
-        width: "1792",
-        height: "1024",
-        aspect: "16/9",
+      YOUTUBE: { 
+        width: "1792", 
+        height: "1024", 
+        aspect: "16/9", 
         display: "1792×1024",
+        previewWidth: 400,
+        previewHeight: 225
       },
-      LINKEDIN: {
-        width: "1792",
-        height: "1024",
-        aspect: "16/9",
+      LINKEDIN: { 
+        width: "1792", 
+        height: "1024", 
+        aspect: "16/9", 
         display: "1792×1024",
+        previewWidth: 400,
+        previewHeight: 225
       },
     };
-    return (
-      dimensions[platform?.toUpperCase()] || {
-        width: "1024",
-        height: "1024",
-        aspect: "1/1",
-        display: "1024×1024",
-      }
-    );
+
+    return dimensions[platform?.toUpperCase()] || { 
+      width: "1024", 
+      height: "1024", 
+      aspect: "1/1", 
+      display: "1024×1024",
+      previewWidth: 400,
+      previewHeight: 400
+    };
   };
 
+  // Download image handler
   const downloadImage = async () => {
-    // Check if image is likely expired before attempting download
-    if (isImageLikelyExpired()) {
-      alert(
-        "This image has likely expired. DALL-E images are only valid for 1-2 hours. Please regenerate the campaign to get fresh images."
-      );
-      return;
-    }
+    if (!imageUrl) return;
 
     setIsLoading(true);
+    setImageError(false);
+
     try {
-      const response = await fetch(imageUrl);
+      // For DALL-E URLs, try to use the proxy first
+      const downloadUrl = imageUrl.includes('oaidalleapiprodscus.blob.core.windows.net')
+        ? `/api/image-proxy?url=${encodeURIComponent(imageUrl)}`
+        : imageUrl;
+
+      const response = await fetch(downloadUrl);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -106,26 +164,35 @@ export default function ImagePreview({
 
       const link = document.createElement("a");
       link.href = url;
-      link.download = `${campaignName}-${platform}-image.png`;
+      link.download = `${campaignName || 'image'}-${platform || 'download'}.png`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Download failed:", error);
-      if (
-        error.message.includes("403") ||
-        error.message.includes("status: 403")
-      ) {
-        alert(
-          "Image has expired. Please regenerate the campaign to get fresh images."
-        );
+      if (error.message.includes("403") || error.message.includes("status: 403") || isImageLikelyExpired()) {
+        alert("This image has expired. Please regenerate the campaign to get fresh images.");
+      } else if (error.message.includes("Failed to fetch") || error.message.includes("NetworkError")) {
+        alert("Failed to download the image. Please check your internet connection and try again.");
       } else {
         // Fallback: try to open in new tab
         window.open(imageUrl, "_blank");
       }
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  // Handle image load error
+  const handleImageError = (e) => {
+    console.error("Image failed to load:", imageUrl);
+    setImageError(true);
+    setIsLoading(false);
+    
+    // If it's a DALL-E URL and likely expired, show a more specific error
+    if (isImageLikelyExpired()) {
+      console.warn("DALL-E image URL has likely expired");
     }
   };
 
@@ -175,50 +242,87 @@ export default function ImagePreview({
         {/* Image Preview */}
         <div className="flex-shrink-0">
           <div className="relative group">
-            <div
-              className="relative rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden bg-gray-100"
-              style={{
-                width: "240px",
-                aspectRatio: getImageDimensions(platform).aspect,
-              }}
-            >
-              {!imageError ? (
-                <Image
-                  src={imageUrl}
-                  alt={alt}
-                  fill
-                  sizes="240px"
-                  className="object-cover"
-                  onError={(e) => {
-                    console.error("Image failed to load:", e);
-                    setImageError(true);
-                  }}
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center bg-gray-50 text-gray-400 border-2 border-dashed border-gray-300">
-                  <div className="text-center p-4">
-                    <div className="text-3xl mb-2">⚠️</div>
-                    <div className="text-xs text-gray-500 mb-1">
-                      Image Expired
-                    </div>
-                    <div className="text-xs text-gray-400">
-                      DALL-E images expire after 1-2 hours
-                    </div>
-                    <div className="text-xs text-blue-500 mt-1">
-                      Please regenerate campaign
-                    </div>
+            <div className="relative" style={{ width: '100%', maxWidth: '400px' }}>
+              <div
+                className="relative bg-gray-50 rounded-lg overflow-hidden"
+                style={{
+                  aspectRatio: getImageDimensions(platform).aspect,
+                  minHeight: '200px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid #e5e7eb',
+                }}
+              >
+                {proxiedImageUrl && !imageError ? (
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={proxiedImageUrl}
+                      alt={alt || `Generated ${platform} image`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 400px"
+                      className="object-contain p-2"
+                      onLoad={() => setIsLoading(false)}
+                      onError={handleImageError}
+                      unoptimized={!isPermanentImage()}
+                      priority
+                    />
                   </div>
+                ) : (
+                  <div className="flex flex-col items-center justify-center p-6 text-center">
+                    {isLoading ? (
+                      <div className="space-y-2">
+                        <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                        <p className="text-sm text-gray-500">Loading preview...</p>
+                      </div>
+                    ) : (
+                      <>
+                        <span className="text-gray-500">
+                          {imageError || !imageUrl
+                            ? "No preview available"
+                            : "Unable to load preview"}
+                        </span>
+                        {imageError && (
+                          <button
+                            onClick={() => {
+                              setImageError(false);
+                              setProxiedImageUrl(getProxiedImageUrl(imageUrl));
+                            }}
+                            className="mt-2 text-sm text-blue-600 hover:text-blue-800"
+                          >
+                            Retry
+                          </button>
+                        )}
+                        {!isPermanentImage() && (
+                          <div className="mt-2 text-xs text-gray-500">
+                            {isImageLikelyExpired() 
+                              ? "This image may have expired. Please regenerate the campaign."
+                              : "DALL-E images expire after 1-2 hours"}
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+              
+              {/* Overlay - Only show on hover */}
+              {proxiedImageUrl && !imageError && !isLoading && (
+                <div className="absolute inset-0 group-hover:bg-black group-hover:bg-opacity-30 transition-all duration-200 rounded-lg flex items-center justify-center pointer-events-none">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(proxiedImageUrl, "_blank");
+                    }}
+                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white text-gray-900 px-3 py-1 rounded-md text-sm font-medium shadow-lg hover:bg-gray-50 flex items-center pointer-events-auto"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    Open Full Size
+                  </button>
                 </div>
               )}
-            </div>
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200 rounded-lg flex items-center justify-center">
-              <button
-                onClick={() => window.open(imageUrl, "_blank")}
-                className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white text-gray-900 px-3 py-1 rounded-md text-sm font-medium shadow-lg hover:bg-gray-50"
-              >
-                View Full Size
-              </button>
             </div>
           </div>
         </div>
@@ -251,12 +355,19 @@ export default function ImagePreview({
               </span>
             </div>
           </div>
-          <p className="text-sm text-gray-600 mb-3">
-            AI-generated image optimized for {platform?.toLowerCase()}
-            {isPermanentImage()
-              ? " (Permanently stored)"
-              : " (Temporary DALL-E URL)"}
-          </p>
+          <div className="space-y-1 mb-3">
+            <p className="text-sm text-gray-600">
+              AI-generated image optimized for {platform?.toLowerCase()}
+              {isPermanentImage()
+                ? " (Permanently stored)"
+                : " (Temporary DALL-E URL)"}
+            </p>
+            {!isPermanentImage() && isImageLikelyExpired() && (
+              <p className="text-xs text-amber-600">
+                ⚠️ This image may have expired. Regenerate the campaign if needed.
+              </p>
+            )}
+          </div>
 
           {/* Action Buttons */}
           <div className="flex space-x-2">

@@ -45,20 +45,27 @@ export default function CampaignDetail() {
     if (session && id) {
       fetchCampaign();
     }
-  }, [session, id, status]);
+  }, [session, id, status, router]);
 
   const fetchCampaign = async () => {
     try {
+      setLoading(true);
       const response = await fetch(`/api/campaigns/${id}`);
 
       if (!response.ok) {
-        throw new Error("Failed to fetch campaign");
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || "Failed to fetch campaign");
       }
 
       const data = await response.json();
+      
+      if (!data) {
+        throw new Error("No campaign data received");
+      }
+
       setCampaign(data);
 
-      // Set first content as selected by default
+      // Set first content as selected by default if available
       if (data.content && data.content.length > 0) {
         setSelectedContent(data.content[0]);
       }
@@ -66,8 +73,12 @@ export default function CampaignDetail() {
       console.error("Error fetching campaign:", error);
       setToast({
         type: "error",
-        message: "Failed to load campaign",
+        message: error.message || "Failed to load campaign. Please try again.",
       });
+      // Redirect to dashboard if campaign not found or unauthorized
+      if (error.message.includes("not found") || error.message.includes("Unauthorized")) {
+        setTimeout(() => router.push('/dashboard'), 2000);
+      }
     } finally {
       setLoading(false);
     }
@@ -186,19 +197,20 @@ export default function CampaignDetail() {
   }
 
   if (status === "loading" || loading) {
-    return <LoadingSpinner />;
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-4">
+        <LoadingSpinner />
+        <p className="mt-4 text-gray-600">Loading campaign details...</p>
+      </div>
+    );
   }
 
   if (!campaign) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Campaign not found
-          </h2>
-          <Link href="/dashboard" className="text-blue-600 hover:text-blue-800">
-            Return to Dashboard
-          </Link>
+      <div className="min-h-screen flex flex-col items-center justify-center p-4">
+        <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 max-w-md w-full" role="alert">
+          <p className="font-bold">Campaign Not Found</p>
+          <p>Redirecting to dashboard...</p>
         </div>
       </div>
     );

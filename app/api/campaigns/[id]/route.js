@@ -7,15 +7,25 @@ export async function GET(request, { params }) {
     const session = await auth();
 
     if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json(
+        { error: "You must be logged in to view this campaign" }, 
+        { status: 401 }
+      );
     }
 
-    const { id } = await params;
+    const { id } = params;
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Campaign ID is required" },
+        { status: 400 }
+      );
+    }
 
     const campaign = await prisma.campaign.findFirst({
       where: {
         id,
-        userId: session.user.id,
+        userId: session.user.id, // Ensure user can only access their own campaigns
       },
       include: {
         content: {
@@ -28,16 +38,23 @@ export async function GET(request, { params }) {
 
     if (!campaign) {
       return NextResponse.json(
-        { error: "Campaign not found" },
+        { 
+          error: "Campaign not found or you don't have permission to view it",
+          code: "NOT_FOUND"
+        },
         { status: 404 }
       );
     }
 
+    // Return the campaign regardless of its status
     return NextResponse.json(campaign);
   } catch (error) {
     console.error("Error fetching campaign:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { 
+        error: "An error occurred while fetching the campaign",
+        details: process.env.NODE_ENV === 'development' ? error.message : undefined
+      },
       { status: 500 }
     );
   }
