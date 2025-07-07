@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* Animated gradient background */
-@keyframes gradient {
+/* @keyframes gradient {
   0% {
     background-position: 0% 50%;
   }
@@ -14,14 +14,14 @@
 }
 
 body {
-  background: linear-gradient(-45deg, #b3c4cd, #f0f2f7, #cdcccc, #eef2fc);
+  background: linear-gradient(-45deg, #696b6c, #f0f2f7, #424242, #eef2fc);
   background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+  animation: gradient 15s ease-in-out infinite;
   position: relative;
   color: var(--foreground);
   font-family: Helvetica, Arial, sans-serif;
   min-height: 100vh;
-}
+} */
 
 /* Fix for form inputs to have proper white backgrounds */
 input[type="text"],
