@@ -59,7 +59,7 @@ export default function CampaignDetail() {
       }
 
       const data = await response.json();
-      
+
       if (!data) {
         throw new Error("No campaign data received");
       }
@@ -77,8 +77,11 @@ export default function CampaignDetail() {
         message: error.message || "Failed to load campaign. Please try again.",
       });
       // Redirect to dashboard if campaign not found or unauthorized
-      if (error.message.includes("not found") || error.message.includes("Unauthorized")) {
-        setTimeout(() => router.push('/dashboard'), 2000);
+      if (
+        error.message.includes("not found") ||
+        error.message.includes("Unauthorized")
+      ) {
+        setTimeout(() => router.push("/dashboard"), 2000);
       }
     } finally {
       setLoading(false);
@@ -209,7 +212,10 @@ export default function CampaignDetail() {
   if (!campaign) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-4">
-        <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 max-w-md w-full" role="alert">
+        <div
+          className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 max-w-md w-full"
+          role="alert"
+        >
           <p className="font-bold">Campaign Not Found</p>
           <p>Redirecting to dashboard...</p>
         </div>
@@ -416,11 +422,13 @@ export default function CampaignDetail() {
               {/* Platform Header */}
               <div className="flex items-center justify-between mb-4 border-b border-gray-20">
                 <div className="flex items-center space-x-3">
-                  <SocialIcon
-                    platform={content.platform}
-                    size="w-16 h-16"
-                    showName={false}
-                  />
+                  <div style={{ marginBottom: "0.9rem" }}>
+                    <SocialIcon
+                      platform={content.platform}
+                      size="w-16 h-16"
+                      showName={false}
+                    />
+                  </div>
                   {/*<h3 className="text-lg font-semibold text-gray-900">
                     {content.platform}
                   </h3>*/}
@@ -460,27 +468,31 @@ export default function CampaignDetail() {
                 <div>
                   <h4 className="font-medium text-gray-900">Hashtags</h4>
                   <div className="flex flex-wrap gap-2 bg-gray-50 p-3 rounded-md">
-                    {typeof content.hashtags === 'string' 
-                      ? content.hashtags.split(/\s+/).filter(tag => tag).map((tag, i) => (
+                    {typeof content.hashtags === "string" ? (
+                      content.hashtags
+                        .split(/\s+/)
+                        .filter((tag) => tag)
+                        .map((tag, i) => (
                           <span key={i} className="text-blue-600">
-                            {tag.startsWith('#') ? tag : `#${tag}`}
+                            {tag.startsWith("#") ? tag : `#${tag}`}
                           </span>
                         ))
-                      : <span className="text-blue-600">{content.hashtags}</span>
-                    }
+                    ) : (
+                      <span className="text-blue-600">{content.hashtags}</span>
+                    )}
                   </div>
                 </div>
               )}
-              
+
               {/* Button to save images permanently */}
               <SaveImagesButton campaignId={campaign.id} />
-              
+
               {content.callToAction && (
                 <div>
-                  <h4 className="font-medium text-gray-900">
-                    Call to Action
-                  </h4>
-                  <p className="text-gray-600 bg-gray-50 p-3 rounded-md">{content.callToAction}</p>
+                  <h4 className="font-medium text-gray-900">Call to Action</h4>
+                  <p className="text-gray-600 bg-gray-50 p-3 rounded-md">
+                    {content.callToAction}
+                  </p>
                 </div>
               )}
 
