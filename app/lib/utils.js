@@ -3,21 +3,21 @@
  */
 
 /**
- * Format hashtags with non-breaking spaces
+ * Format hashtags with regular spaces
  * @param {string[]} hashtags - Array of hashtags
- * @returns {string} - Hashtags joined with non-breaking spaces
+ * @returns {string} - Hashtags joined with regular spaces
  */
 export function formatHashtags(hashtags) {
-  return hashtags.join("\u00A0"); // \u00A0 is the Unicode for non-breaking space
+  return hashtags.join(" "); // Regular space for proper wrapping
 }
 
 /**
- * Format hashtags with double non-breaking spaces for more spacing
+ * Format hashtags with double spaces for more spacing
  * @param {string[]} hashtags - Array of hashtags
- * @returns {string} - Hashtags joined with double non-breaking spaces
+ * @returns {string} - Hashtags joined with double spaces
  */
 export function formatHashtagsWithSpacing(hashtags) {
-  return hashtags.join("\u00A0\u00A0"); // Double non-breaking space
+  return hashtags.join("  "); // Double regular space
 }
 
 /**
@@ -40,7 +40,7 @@ export function processHashtagsForDisplay(hashtags) {
       .split(/\s+/)
       .filter((tag) => tag)
       .map(ensureHashtagPrefix)
-      .join("\u00A0");
+      .join(" ");
   } else if (Array.isArray(hashtags)) {
     return formatHashtags(hashtags.map(ensureHashtagPrefix));
   }

@@ -1,25 +1,31 @@
 "use client";
 
+import Image from "next/image";
+
 const SOCIAL_PLATFORMS = {
   TIKTOK: {
     name: "TikTok",
+    logo: "/logos/tiktok.png",
     emoji: "🎵",
-    color: "bg-black text-white",
+    // color: "bg-black text-white",
   },
   INSTAGRAM: {
     name: "Instagram",
+    logo: "/logos/instagram.png",
     emoji: "📸",
-    color: "bg-gradient-to-br from-purple-500 to-pink-500 text-white",
+    // color: "bg-gradient-to-br from-purple-500 to-pink-500 text-white",
   },
   FACEBOOK: {
     name: "Facebook",
+    logo: "/logos/facebook.png",
     emoji: "📘",
-    color: "bg-blue-600 text-white",
+    // color: "bg-blue-600 text-white",
   },
   YOUTUBE: {
     name: "YouTube",
+    logo: "/logos/youtube.png",
     emoji: "📺",
-    color: "bg-red-600 text-white",
+    // color: "bg-red-600 text-white",
   },
 };
 
@@ -38,9 +44,30 @@ export default function SimpleSocialIcon({ platform, size = "w-8 h-8" }) {
 
   return (
     <div
-      className={`${size} flex items-center justify-center rounded-lg ${config.color}`}
+      className={`${size} relative flex items-center justify-center rounded-lg ${config.color}`}
     >
-      <span className="text-lg">{config.emoji}</span>
+      <Image
+        src={config.logo}
+        alt={`${config.name} logo`}
+        width={32}
+        height={32}
+        className="w-full h-full object-contain p-1"
+        onError={(e) => {
+          // Fallback to emoji if image fails to load
+          e.target.style.display = "none";
+          const fallbackElement =
+            e.target.parentNode.querySelector(".fallback-emoji");
+          if (fallbackElement) {
+            fallbackElement.style.display = "flex";
+          }
+        }}
+      />
+      <span
+        className="fallback-emoji text-white text-lg font-bold hidden items-center justify-center w-full h-full"
+        style={{ display: "none" }}
+      >
+        {config.emoji}
+      </span>
     </div>
   );
 }

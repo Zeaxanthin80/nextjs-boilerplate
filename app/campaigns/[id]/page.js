@@ -446,6 +446,7 @@ export default function CampaignDetail() {
                 <div>
                   <h4 className="font-medium text-gray-900">Hashtags</h4>
                   <div className="bg-gray-50 p-3 rounded-md">
+                    {/* {processHashtagsForDisplay(content.hashtags)} */}
                     <span className="text-blue-600">
                       {processHashtagsForDisplay(content.hashtags)}
                     </span>

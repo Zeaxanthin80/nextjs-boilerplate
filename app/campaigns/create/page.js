@@ -267,7 +267,7 @@ export default function CreateCampaign() {
                       <div className="mb-2 flex justify-center">
                         <SimpleSocialIcon
                           platform={platform.value}
-                          size="w-8 h-8"
+                          size="w-16 h-16"
                         />
                       </div>
                       <div className="text-sm font-medium text-gray-900">
