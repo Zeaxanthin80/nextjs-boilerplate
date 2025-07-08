@@ -233,11 +233,11 @@ export default function ImagePreview({
         </div>
       )}
 
-      <div className="flex items-start space-x-4">
+      <div className="flex flex-col md:flex-row md:items-start md:space-x-4 space-y-4 md:space-y-0">
         {/* Image Preview */}
         <div className="flex-shrink-0">
           <div className="relative group">
-            <div className="relative" style={{ width: '100%', maxWidth: '400px' }}>
+            <div className="relative w-full" style={{ maxWidth: '400px', margin: '0 auto' }}>
               <div
                 className="relative bg-gray-50 rounded-lg overflow-hidden"
                 style={{
@@ -323,8 +323,8 @@ export default function ImagePreview({
         </div>
 
         {/* Image Info and Actions */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between mb-2">
+        <div className="flex-1 min-w-0 w-full">
+          <div className="flex flex-wrap items-center justify-between mb-2 gap-2">
             <h4 className="text-sm font-medium text-gray-900">
               Generated Image
             </h4>
@@ -365,7 +365,7 @@ export default function ImagePreview({
           </div>
 
           {/* Action Buttons */}
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={downloadImage}
               disabled={isLoading}

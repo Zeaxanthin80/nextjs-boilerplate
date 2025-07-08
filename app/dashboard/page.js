@@ -49,7 +49,7 @@ export default async function Dashboard() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">
+        <div className="px-4 py-6 sm:px-0 overflow-hidden">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
             <p className="mt-2 text-gray-600">
@@ -58,17 +58,17 @@ export default async function Dashboard() {
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
             {/* Total Campaigns */}
             <div className="bg-white overflow-hidden shadow rounded-lg">
               <div className="p-5">
-                <div className="flex items-center">
+                <div className="flex flex-wrap items-center">
                   <div className="flex-shrink-0">
                     <div className="w-16 h-16 bg-blue-600 flex items-center justify-center">
                       <span className="text-white text-4xl">📊</span>
                     </div>
                   </div>
-                  <div className="ml-5 w-0 flex-1">
+                  <div className="ml-5 flex-1 min-w-0">
                     <dl>
                       <dt className="text-sm font-medium text-gray-500 truncate">
                         Total Campaigns
@@ -85,13 +85,13 @@ export default async function Dashboard() {
             {/* Published Campaigns */}
             <div className="bg-white overflow-hidden shadow rounded-lg">
               <div className="p-5">
-                <div className="flex items-center">
+                <div className="flex flex-wrap items-center">
                   <div className="flex-shrink-0">
                     <div className="w-16 h-16 bg-green-600  flex items-center justify-center">
                       <span className="text-white text-4xl">✅</span>
                     </div>
                   </div>
-                  <div className="ml-5 w-0 flex-1">
+                  <div className="ml-5 flex-1 min-w-0">
                     <dl>
                       <dt className="text-sm font-medium text-gray-500 truncate">
                         Published
@@ -108,13 +108,13 @@ export default async function Dashboard() {
             {/* Draft Campaigns */}
             <div className="bg-white overflow-hidden shadow rounded-lg">
               <div className="p-5">
-                <div className="flex items-center">
+                <div className="flex flex-wrap items-center">
                   <div className="flex-shrink-0">
                     <div className="w-16 h-16 bg-yellow-600 flex items-center justify-center">
                       <span className="text-white text-4xl">?</span>
                     </div>
                   </div>
-                  <div className="ml-5 w-0 flex-1">
+                  <div className="ml-5 flex-1 min-w-0">
                     <dl>
                       <dt className="text-sm font-medium text-gray-500 truncate">
                         Drafts
@@ -131,13 +131,13 @@ export default async function Dashboard() {
             {/* Archived Campaigns */}
             <div className="bg-white overflow-hidden shadow rounded-lg">
               <div className="p-5">
-                <div className="flex items-center">
+                <div className="flex flex-wrap items-center">
                   <div className="flex-shrink-0">
                     <div className="w-16 h-16 bg-blue-600 flex items-center justify-center">
                       <span className="text-white text-4xl">📦</span>
                     </div>
                   </div>
-                  <div className="ml-5 w-0 flex-1">
+                  <div className="ml-5 flex-1 min-w-0">
                     <dl>
                       <dt className="text-sm font-medium text-gray-500 truncate">
                         Archived
@@ -173,8 +173,8 @@ export default async function Dashboard() {
                 {campaigns.map((campaign) => (
                   <div key={campaign.id} className="px-6 py-4 hover:bg-gray-50">
                     <div className="flex items-center justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-3">
+                      <div className="flex-1 min-w-0 pr-2">
+                        <div className="flex flex-wrap items-center gap-3">
                           <Link
                             href={`/campaigns/${campaign.id}`}
                             className="text-lg font-medium text-gray-900 hover:text-blue-600"
@@ -198,14 +198,14 @@ export default async function Dashboard() {
                         <p className="text-sm text-gray-600 mt-1">
                           {campaign.description}
                         </p>
-                        <div className="flex items-center space-x-4 mt-2 text-xs text-gray-500">
+                        <div className="flex flex-wrap items-center gap-2 mt-2 text-xs text-gray-500">
                           <span>{campaign._count.content} content pieces</span>
                           <span>•</span>
                           <span>
                             {new Date(campaign.updatedAt).toLocaleDateString()}
                           </span>
                           <span>•</span>
-                          <div className="flex space-x-1">
+                          <div className="flex flex-wrap gap-1 mt-1 sm:mt-0">
                             {Array.from(
                               new Set(campaign.content.map((c) => c.platform))
                             ).map((platform) => (

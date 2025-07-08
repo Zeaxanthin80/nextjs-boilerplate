@@ -284,10 +284,10 @@ export default function CampaignDetail() {
       {/* Navigation */}
       <Navigation session={session} />
 
-      <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Campaign Header */}
         <div className="bg-white rounded-lg shadow p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">
                 {campaign.name}
@@ -312,7 +312,7 @@ export default function CampaignDetail() {
 
             {/* DRAFT Actions */}
             {isDraft && (
-              <div className="flex space-x-3">
+              <div className="flex flex-wrap gap-2 mt-3 sm:mt-0">
                 <Link
                   href={`/campaigns/${campaign.id}/edit`}
                   className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
@@ -336,7 +336,7 @@ export default function CampaignDetail() {
 
             {/* ARCHIVED Actions */}
             {isArchived && (
-              <div className="flex space-x-3">
+              <div className="flex flex-wrap gap-2 mt-3 sm:mt-0">
                 <button
                   onClick={() => updateCampaignStatus("PUBLISHED")}
                   className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium"
@@ -354,7 +354,7 @@ export default function CampaignDetail() {
 
             {/* PUBLISHED Actions */}
             {campaign.status === "PUBLISHED" && (
-              <div className="flex space-x-3">
+              <div className="flex flex-wrap gap-2 mt-3 sm:mt-0">
                 <button
                   onClick={() => updateCampaignStatus("ARCHIVED")}
                   className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
@@ -398,7 +398,7 @@ export default function CampaignDetail() {
               className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm"
             >
               {/* Platform Header */}
-              <div className="flex items-center justify-between mb-4 border-b border-gray-20">
+              <div className="flex flex-wrap items-center justify-between mb-4 border-b border-gray-200 pb-2">
                 <div className="flex items-center space-x-3">
                   <div style={{ marginBottom: "0.9rem" }}>
                     <SocialIcon
@@ -415,12 +415,14 @@ export default function CampaignDetail() {
 
               {/* Image Preview with Download */}
               {content.imageUrl && (
-                <ImagePreview
-                  imageUrl={content.imageUrl}
-                  alt={`Generated image for ${content.platform}`}
-                  platform={content.platform}
-                  campaignName={campaign.name}
-                />
+                <div className="w-full overflow-hidden">
+                  <ImagePreview
+                    imageUrl={content.imageUrl}
+                    alt={`Generated image for ${content.platform}`}
+                    platform={content.platform}
+                    campaignName={campaign.name}
+                  />
+                </div>
               )}
 
               {/* Content sections */}
