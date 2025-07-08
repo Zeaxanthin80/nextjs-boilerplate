@@ -7,7 +7,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="bg-gray-50 shadow-lg">
+      <nav className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
@@ -93,7 +93,7 @@ export default async function Home() {
       </div>
 
       {/* Features Section */}
-      <div className="bg-gray-50 py-24 sm:py-32 shadow-[0px_-10px_15px_-3px_rgba(0,0,0,0.1)]">
+      <div className="bg-white py-16 sm:py-24 shadow-[0px_-4px_6px_-1px_rgba(0,0,0,0.1)]">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
             <h2 className="text-base font-semibold leading-7 text-blue-600">
@@ -109,7 +109,7 @@ export default async function Home() {
           </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
             <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
-              <div className="flex flex-col p-4 shadow-md  rounded-md">
+              <div className="flex flex-col p-4 shadow-md outline-1 outline-gray-200  rounded-md">
                 <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
                   <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-blue-600 text-white">
                     <svg
@@ -146,7 +146,7 @@ export default async function Home() {
                 </dd>
               </div>
 
-              <div className="flex flex-col p-4 shadow-md  rounded-md">
+              <div className="flex flex-col p-4 shadow-md outline-1 outline-gray-200 rounded-md">
                 <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
                   <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-blue-600 text-white">
                     <svg
@@ -183,7 +183,7 @@ export default async function Home() {
                 </dd>
               </div>
 
-              <div className="flex flex-col p-4 shadow-md  rounded-md">
+              <div className="flex flex-col p-4 shadow-md outline-1 outline-gray-200  rounded-md">
                 <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
                   <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-blue-600 text-white">
                     <svg

@@ -14,7 +14,7 @@
 }
 
 body {
-  background: linear-gradient(-45deg, #696b6c, #f0f2f7, #424242, #eef2fc);
+  background: linear-gradient(-45deg, #c6c6c6, #ffffff, #bbbec4, #ffffff);
   background-size: 400% 400%;
   animation: gradient 15s ease-in-out infinite;
   position: relative;
@@ -22,6 +22,10 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   min-height: 100vh;
 } */
+
+body {
+  background-color: #f0f0f0; /* Light mode background */
+}
 
 /* Fix for form inputs to have proper white backgrounds */
 input[type="text"],
