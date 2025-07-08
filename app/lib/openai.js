@@ -295,13 +295,3 @@ function generateMockCampaignName(product, goals) {
 
   return templates[Math.floor(Math.random() * templates.length)];
 }
-
-// Add a helper function to format hashtags with non-breaking spaces
-export function formatHashtags(hashtags) {
-  return hashtags.join('\u00A0'); // \u00A0 is the Unicode for non-breaking space
-}
-
-// Alternative: You can also use multiple non-breaking spaces for more spacing
-export function formatHashtagsWithSpacing(hashtags) {
-  return hashtags.join('\u00A0\u00A0'); // Double non-breaking space
-}
