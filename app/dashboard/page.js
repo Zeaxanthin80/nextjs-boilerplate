@@ -2,6 +2,7 @@ import { auth } from "../lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import SignOutButton from "../components/SignOutButton";
+import Navigation from "../components/Navigation";
 import { prisma } from "../lib/prisma";
 
 export default async function Dashboard() {
@@ -44,29 +45,7 @@ export default async function Dashboard() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <Link href="/" className="text-2xl font-bold text-blue-600">
-                MarketingHub
-              </Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link
-                href="/campaigns/create"
-                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-              >
-                Create Campaign
-              </Link>
-              <span className="text-gray-700">
-                Welcome, {session.user?.name}
-              </span>
-              <SignOutButton />
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation session={session} />
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">

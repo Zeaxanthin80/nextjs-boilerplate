@@ -1,5 +1,6 @@
 import { auth } from "./lib/auth";
 import Link from "next/link";
+import Navigation from "./components/Navigation";
 
 export default async function Home() {
   const session = await auth();
@@ -7,47 +8,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="bg-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <Link href="/" className="text-2xl font-bold text-blue-600">
-                MarketingHub
-              </Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              {session ? (
-                <>
-                  <span className="text-gray-700">
-                    Welcome, {session.user?.name}!
-                  </span>
-                  <Link
-                    href="/dashboard"
-                    className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-                  >
-                    Go to Dashboard
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link
-                    href="/auth/signin"
-                    className="text-gray-700 hover:text-gray-900"
-                  >
-                    Sign In
-                  </Link>
-                  <Link
-                    href="/auth/signup"
-                    className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-                  >
-                    Get Started
-                  </Link>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation session={session} />
 
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">

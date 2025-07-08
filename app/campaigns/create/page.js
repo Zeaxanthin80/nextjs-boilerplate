@@ -7,6 +7,7 @@ import Link from "next/link";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import Toast from "../../components/Toast";
 import SimpleSocialIcon from "../../components/SimpleSocialIcon";
+import Navigation from "../../components/Navigation";
 
 const TONES = [
   { value: "PROFESSIONAL", label: "Professional" },
@@ -123,29 +124,7 @@ export default function CreateCampaign() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <Link
-                href="/dashboard"
-                className="text-2xl font-bold text-blue-600"
-              >
-                MarketingHub
-              </Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link
-                href="/dashboard"
-                className="text-gray-600 hover:text-gray-900"
-              >
-                Dashboard
-              </Link>
-              <span className="text-gray-700">{session.user?.name}</span>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation session={session} />
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
