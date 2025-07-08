@@ -11,6 +11,7 @@ import SocialIcon from "../../components/SocialIcon";
 import ImagePreview from "../../components/ImagePreview";
 import SaveImagesButton from "../../components/SaveImagesButton";
 import Navigation from "../../components/Navigation";
+import { formatHashtags } from "../../lib/openai";
 
 const PLATFORM_ICONS = {
   TIKTOK: "🎵",
@@ -444,16 +445,23 @@ export default function CampaignDetail() {
               {content.hashtags && (
                 <div>
                   <h4 className="font-medium text-gray-900">Hashtags</h4>
-                  <div className="flex flex-wrap gap-2 bg-gray-50 p-3 rounded-md">
+                  <div className="bg-gray-50 p-3 rounded-md">
                     {typeof content.hashtags === "string" ? (
-                      content.hashtags
-                        .split(/\s+/)
-                        .filter((tag) => tag)
-                        .map((tag, i) => (
-                          <span key={i} className="text-blue-600">
-                            {tag.startsWith("#") ? tag : `#${tag}`}
-                          </span>
-                        ))
+                      <span className="text-blue-600">
+                        {content.hashtags
+                          .split(/\s+/)
+                          .filter((tag) => tag)
+                          .map((tag) => (tag.startsWith("#") ? tag : `#${tag}`))
+                          .join("\u00A0")}
+                      </span>
+                    ) : Array.isArray(content.hashtags) ? (
+                      <span className="text-blue-600">
+                        {formatHashtags(
+                          content.hashtags.map((tag) =>
+                            tag.startsWith("#") ? tag : `#${tag}`
+                          )
+                        )}
+                      </span>
                     ) : (
                       <span className="text-blue-600">{content.hashtags}</span>
                     )}

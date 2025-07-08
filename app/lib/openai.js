@@ -67,21 +67,6 @@ function generateMockContent(product, audience, tone, goals, platform) {
   };
 
   const platformContent = {
-    TIKTOK: {
-      title: `${platformEmojis[platform]} ${product} - Perfect for ${audience}!`,
-      content: `🎯 Discover ${product}! \n\nThis ${
-        toneAdjectives[tone]
-      } solution is exactly what ${audience} needs. \n\n✨ Goals: ${goals.join(
-        ", "
-      )}\n\n#trending #viral #foryou`,
-      hashtags: [
-        "#trending",
-        "#viral",
-        "#foryou",
-        `#${product.replace(/\s+/g, "").toLowerCase()}`,
-      ],
-      callToAction: "Follow for more amazing content!",
-    },
     INSTAGRAM: {
       title: `${platformEmojis[platform]} Introducing ${product}`,
       content: `Looking for the perfect solution? ${product} is here! 💫\n\nDesigned specifically for ${audience}, this ${
@@ -96,6 +81,21 @@ function generateMockContent(product, audience, tone, goals, platform) {
         `#${product.replace(/\s+/g, "").toLowerCase()}`,
       ],
       callToAction: "Double tap if you love this! 💖",
+    },
+    TIKTOK: {
+      title: `${platformEmojis[platform]} ${product} - Perfect for ${audience}!`,
+      content: `🎯 Discover ${product}! \n\nThis ${
+        toneAdjectives[tone]
+      } solution is exactly what ${audience} needs. \n\n✨ Goals: ${goals.join(
+        ", "
+      )}\n\n#trending #viral #foryou`,
+      hashtags: [
+        "#trending",
+        "#viral",
+        "#foryou",
+        `#${product.replace(/\s+/g, "").toLowerCase()}`,
+      ],
+      callToAction: "Follow for more amazing content!",
     },
     FACEBOOK: {
       title: `${platformEmojis[platform]} ${product} - Now Available!`,
@@ -294,4 +294,14 @@ function generateMockCampaignName(product, goals) {
   ];
 
   return templates[Math.floor(Math.random() * templates.length)];
+}
+
+// Add a helper function to format hashtags with non-breaking spaces
+export function formatHashtags(hashtags) {
+  return hashtags.join('\u00A0'); // \u00A0 is the Unicode for non-breaking space
+}
+
+// Alternative: You can also use multiple non-breaking spaces for more spacing
+export function formatHashtagsWithSpacing(hashtags) {
+  return hashtags.join('\u00A0\u00A0'); // Double non-breaking space
 }
