@@ -16,10 +16,7 @@ export default function Navigation({ session }) {
         <div className="flex justify-between h-16">
           {/* Logo/Name - Always visible */}
           <div className="flex items-center">
-            <Link
-              href="/"
-              className="text-2xl font-bold text-blue-600"
-            >
+            <Link href="/" className="text-2xl font-bold text-blue-600">
               MarketingHub
             </Link>
           </div>{" "}
@@ -33,12 +30,14 @@ export default function Navigation({ session }) {
                 >
                   Create Campaign
                 </Link>
+                <a className="text-gray-300">|</a>
                 <Link
                   href="/dashboard"
                   className="text-gray-700 hover:text-gray-900"
                 >
                   Dashboard
                 </Link>
+                <a className="text-gray-300">|</a>
                 <span className="text-gray-700">
                   Welcome, {session.user?.name}!
                 </span>

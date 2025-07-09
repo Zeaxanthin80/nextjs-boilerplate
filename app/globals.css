@@ -25,6 +25,7 @@ body {
 
 body {
   background-color: #f0f0f0; /* Light mode background */
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 /* Fix for form inputs to have proper white backgrounds */

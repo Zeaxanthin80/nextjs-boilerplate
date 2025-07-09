@@ -1,6 +1,7 @@
 import { auth } from "../lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import SignOutButton from "../components/SignOutButton";
 import Navigation from "../components/Navigation";
 import { prisma } from "../lib/prisma";
@@ -64,8 +65,13 @@ export default async function Dashboard() {
               <div className="p-5">
                 <div className="flex flex-wrap items-center">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-blue-600 flex items-center justify-center">
-                      <span className="text-white text-4xl">📊</span>
+                    <div className="w-16 h-16 bg-white shadow-md flex items-center justify-center rounded-lg">
+                      <Image
+                        src="/logos/graph-svgrepo-com-3.svg"
+                        alt="Total Campaigns"
+                        width={40}
+                        height={40}
+                      />
                     </div>
                   </div>
                   <div className="ml-5 flex-1 min-w-0">
@@ -87,8 +93,13 @@ export default async function Dashboard() {
               <div className="p-5">
                 <div className="flex flex-wrap items-center">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-green-600  flex items-center justify-center">
-                      <span className="text-white text-4xl">✅</span>
+                    <div className="w-16 h-16 bg-white shadow-md  flex items-center justify-center">
+                      <Image
+                        src="/logos/checkbox-filled-svgrepo-com.svg"
+                        alt="Total Campaigns"
+                        width={40}
+                        height={40}
+                      />
                     </div>
                   </div>
                   <div className="ml-5 flex-1 min-w-0">
@@ -110,8 +121,13 @@ export default async function Dashboard() {
               <div className="p-5">
                 <div className="flex flex-wrap items-center">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-yellow-600 flex items-center justify-center">
-                      <span className="text-white text-4xl">?</span>
+                    <div className="w-16 h-16 bg-white shadow-md flex items-center justify-center">
+                      <Image
+                        src="/logos/draft-svgrepo-com-1.svg"
+                        alt="Draft Campaigns"
+                        width={44}
+                        height={44}
+                      />
                     </div>
                   </div>
                   <div className="ml-5 flex-1 min-w-0">
@@ -133,8 +149,13 @@ export default async function Dashboard() {
               <div className="p-5">
                 <div className="flex flex-wrap items-center">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-blue-600 flex items-center justify-center">
-                      <span className="text-white text-4xl">📦</span>
+                    <div className="w-16 h-16 bg-white shadow-md flex items-center justify-center">
+                      <Image
+                        src="/logos/storage-1-svgrepo-com.svg"
+                        alt="Archived Campaigns"
+                        width={40}
+                        height={40}
+                      />
                     </div>
                   </div>
                   <div className="ml-5 flex-1 min-w-0">
