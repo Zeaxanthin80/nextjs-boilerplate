@@ -23,6 +23,22 @@ body {
   min-height: 100vh;
 } */
 
+/* Hero title zoom-in animation */
+@keyframes heroZoomIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.hero-title {
+  animation: heroZoomIn 0.8s ease-out forwards;
+}
+
 body {
   background-color: #f0f0f0; /* Light mode background */
   font-family: Helvetica, Arial, sans-serif;
