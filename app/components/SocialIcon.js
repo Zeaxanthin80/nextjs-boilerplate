@@ -3,31 +3,39 @@ import Image from "next/image";
 const PLATFORM_CONFIGS = {
   TIKTOK: {
     name: "TikTok",
-    logo: "/logos/tiktok.svg",
+    logo: "/logos/tiktok.png",
     fallback: "🎵",
     bgColor: "bg-black",
     textColor: "text-white",
+    width: 24,
+    height: 24,
   },
   INSTAGRAM: {
     name: "Instagram",
-    logo: "/logos/instagram.svg",
+    logo: "/logos/instagram.png",
     fallback: "📸",
     bgColor: "bg-gradient-to-br from-purple-500 to-pink-500",
     textColor: "text-white",
+    width: 24,
+    height: 24,
   },
   FACEBOOK: {
     name: "Facebook",
-    logo: "/logos/facebook.svg",
+    logo: "/logos/facebook.png",
     fallback: "📘",
     bgColor: "bg-blue-600",
     textColor: "text-white",
+    width: 24,
+    height: 24,
   },
   YOUTUBE: {
     name: "YouTube",
-    logo: "/logos/youtube.svg",
+    logo: "/logos/youtube.png",
     fallback: "📺",
     bgColor: "bg-red-600",
     textColor: "text-white",
+    width: 24,
+    height: 24, 
   },
 };
 
@@ -51,8 +59,8 @@ export default function SocialIcon({
         <Image
           src={config.logo}
           alt={`${config.name} logo`}
-          width={24}
-          height={24}
+          width={config.width || 24}
+          height={config.height || 24}
           className="w-full h-full object-contain"
           onError={(e) => {
             // Fallback to emoji if image fails to load
@@ -89,8 +97,8 @@ export function SocialIconOnly({ platform, size = "w-6 h-6", className = "" }) {
       <Image
         src={config.logo}
         alt={`${config.name} logo`}
-        width={32}
-        height={32}
+        width={config.width ? config.width * 1.33 : 32}
+        height={config.height ? config.height * 1.33 : 32}
         className="w-full h-full object-contain p-1"
         onError={(e) => {
           // Fallback to emoji if image fails to load

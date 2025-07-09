@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -13,6 +13,10 @@ export default function RegenerateCampaign({ params }) {
   const [generating, setGenerating] = useState(false);
   const [campaign, setCampaign] = useState(null);
   const [selectedPlatforms, setSelectedPlatforms] = useState([]);
+  
+  // Unwrap params using React.use()
+  const resolvedParams = use(params);
+  const campaignId = resolvedParams.id;
 
   useEffect(() => {
     fetchCampaign();
@@ -20,7 +24,7 @@ export default function RegenerateCampaign({ params }) {
 
   const fetchCampaign = async () => {
     try {
-      const response = await fetch(`/api/campaigns/${params.id}`);
+      const response = await fetch(`/api/campaigns/${campaignId}`);
       if (response.ok) {
         const data = await response.json();
         setCampaign(data);
@@ -50,7 +54,7 @@ export default function RegenerateCampaign({ params }) {
     setGenerating(true);
 
     try {
-      const response = await fetch(`/api/campaigns/${params.id}/regenerate`, {
+      const response = await fetch(`/api/campaigns/${campaignId}/regenerate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +65,7 @@ export default function RegenerateCampaign({ params }) {
       });
 
       if (response.ok) {
-        router.push(`/campaigns/${params.id}`);
+        router.push(`/campaigns/${campaignId}`);
       } else {
         throw new Error("Failed to regenerate content");
       }
@@ -124,7 +128,7 @@ export default function RegenerateCampaign({ params }) {
                 Welcome, {session?.user?.name}!
               </span>
               <Link
-                href={`/campaigns/${params.id}`}
+                href={`/campaigns/${campaignId}`}
                 className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md text-sm font-medium"
               >
                 Cancel
@@ -225,7 +229,7 @@ export default function RegenerateCampaign({ params }) {
           {/* Action Buttons */}
           <div className="flex justify-end space-x-4">
             <Link
-              href={`/campaigns/${params.id}`}
+              href={`/campaigns/${campaignId}`}
               className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
             >
               Cancel

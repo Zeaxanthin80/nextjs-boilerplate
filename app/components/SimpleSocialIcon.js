@@ -8,24 +8,32 @@ const SOCIAL_PLATFORMS = {
     logo: "/logos/tiktok.png",
     emoji: "🎵",
     // color: "bg-black text-white",
+    width: 32,
+    height: 32,
   },
   INSTAGRAM: {
     name: "Instagram",
     logo: "/logos/instagram.png",
     emoji: "📸",
     // color: "bg-gradient-to-br from-purple-500 to-pink-500 text-white",
+    width: 32,
+    height: 32,
   },
   FACEBOOK: {
     name: "Facebook",
     logo: "/logos/facebook.png",
     emoji: "📘",
     // color: "bg-blue-600 text-white",
+    width: 32,
+    height: 32,
   },
   YOUTUBE: {
     name: "YouTube",
     logo: "/logos/youtube.png",
     emoji: "📺",
     // color: "bg-red-600 text-white",
+    width: 32,
+    height: 32,
   },
 };
 
@@ -49,8 +57,8 @@ export default function SimpleSocialIcon({ platform, size = "w-8 h-8" }) {
       <Image
         src={config.logo}
         alt={`${config.name} logo`}
-        width={32}
-        height={32}
+        width={config.width || 32}
+        height={config.height || 32}
         className="w-full h-full object-contain p-1"
         onError={(e) => {
           // Fallback to emoji if image fails to load

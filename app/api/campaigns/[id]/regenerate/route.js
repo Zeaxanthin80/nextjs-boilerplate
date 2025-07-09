@@ -61,6 +61,7 @@ export async function POST(request, { params }) {
             content: content.content,
             hashtags: content.hashtags,
             callToAction: content.callToAction,
+            contentType: "TEXT", // Adding the missing contentType field
           },
         });
 

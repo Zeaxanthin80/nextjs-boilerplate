@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -12,6 +12,11 @@ export default function EditCampaign({ params }) {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [campaign, setCampaign] = useState(null);
+  
+  // Unwrap params using React.use()
+  const resolvedParams = use(params);
+  const campaignId = resolvedParams.id;
+  
   const [formData, setFormData] = useState({
     name: "",
     product: "",
@@ -27,7 +32,7 @@ export default function EditCampaign({ params }) {
 
   const fetchCampaign = async () => {
     try {
-      const response = await fetch(`/api/campaigns/${params.id}`);
+      const response = await fetch(`/api/campaigns/${campaignId}`);
       if (response.ok) {
         const data = await response.json();
         setCampaign(data);
@@ -52,7 +57,7 @@ export default function EditCampaign({ params }) {
     setSaving(true);
 
     try {
-      const response = await fetch(`/api/campaigns/${params.id}`, {
+      const response = await fetch(`/api/campaigns/${campaignId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +66,7 @@ export default function EditCampaign({ params }) {
       });
 
       if (response.ok) {
-        router.push(`/campaigns/${params.id}`);
+        router.push(`/campaigns/${campaignId}`);
       } else {
         throw new Error("Failed to update campaign");
       }
@@ -133,7 +138,7 @@ export default function EditCampaign({ params }) {
                 Welcome, {session?.user?.name}!
               </span>
               <Link
-                href={`/campaigns/${params.id}`}
+                href={`/campaigns/${campaignId}`}
                 className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md text-sm font-medium"
               >
                 Cancel
@@ -277,7 +282,7 @@ export default function EditCampaign({ params }) {
             {/* Submit Button */}
             <div className="flex justify-end space-x-4">
               <Link
-                href={`/campaigns/${params.id}`}
+                href={`/campaigns/${campaignId}`}
                 className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
               >
                 Cancel

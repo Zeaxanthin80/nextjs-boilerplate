@@ -13,7 +13,9 @@ export async function GET(request, { params }) {
       );
     }
 
-    const { id } = params;
+    // Await params before accessing properties
+    const paramValues = await params;
+    const id = paramValues.id;
     if (!id) {
       return NextResponse.json(
         { error: "Campaign ID is required" },
@@ -66,7 +68,9 @@ export async function PATCH(request, { params }) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { id } = params;
+    // Await params before accessing properties
+    const paramValues = await params;
+    const id = paramValues.id;
     const { status, name, description } = await request.json();
 
     const campaign = await prisma.campaign.findFirst({
@@ -111,7 +115,9 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { id } = params;
+    // Await params before accessing properties
+    const paramValues = await params;
+    const id = paramValues.id;
     const { name, product, audience, tone, goals } = await request.json();
 
     const existingCampaign = await prisma.campaign.findFirst({
@@ -162,7 +168,9 @@ export async function DELETE(request, { params }) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { id } = params;
+    // Await params before accessing properties
+    const paramValues = await params;
+    const id = paramValues.id;
 
     const existingCampaign = await prisma.campaign.findFirst({
       where: {

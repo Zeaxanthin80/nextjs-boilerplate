@@ -46,11 +46,11 @@ export async function generateChannelImages({
     social: `${basePrompt}, optimized for social media, square format, eye-catching, detailed, professional quality`,
     email: `${basePrompt}, professional email header style, clean and modern, business appropriate`,
     web: `${basePrompt}, website banner style, wide format, professional, high resolution`,
-    instagram: `${basePrompt}, Instagram post style, vibrant colors, engaging, social media optimized`,
-    facebook: `${basePrompt}, Facebook cover photo style, wide banner format, attention-grabbing`,
-    linkedin: `${basePrompt}, LinkedIn professional style, business-focused, corporate aesthetic`,
-    tiktok: `${basePrompt}, TikTok style, vertical format, trendy and dynamic, youth-oriented`,
-    youtube: `${basePrompt}, YouTube thumbnail style, vibrant and clickable, includes visual hook`,
+    instagram: `${basePrompt}, Instagram post style, vibrant colors, engaging, social media optimized, square format`,
+    facebook: `${basePrompt}, Facebook post style, 1.91:1 aspect ratio, attention-grabbing, optimized for Facebook feed`,
+    linkedin: `${basePrompt}, LinkedIn professional style, business-focused, corporate aesthetic, wide format`,
+    tiktok: `${basePrompt}, TikTok style, 9:16 vertical format, trendy and dynamic, youth-oriented, full-screen mobile optimized`,
+    youtube: `${basePrompt}, YouTube thumbnail style, 16:9 aspect ratio, vibrant and clickable, includes visual hook`,
   };
 
   const results = {};
@@ -63,7 +63,7 @@ export async function generateChannelImages({
     try {
       const result = await generateCampaignImage({
         prompt,
-        size: size.size,
+        size: size,
         style: "vivid",
         quality: "hd"
       });
@@ -85,12 +85,12 @@ function getOptimalSize(channel) {
   const sizes = {
     social: "1024x1024",
     instagram: "1024x1024",
-    facebook: "1792x1024",
-    linkedin: "1792x1024",
+    facebook: "1200x630", // Facebook recommended image size (1.91:1 aspect ratio)
+    linkedin: "1792x1024", // LinkedIn standard wide format
     email: "1792x1024",
     web: "1792x1024",
-    tiktok: "1024x1792", // Vertical format for TikTok
-    youtube: "1792x1024", // Wide format for YouTube thumbnails
+    tiktok: "1080x1920", // TikTok vertical format (9:16 aspect ratio)
+    youtube: "1280x720", // YouTube thumbnail standard format (16:9 aspect ratio)
     default: "1024x1024",
   };
 
