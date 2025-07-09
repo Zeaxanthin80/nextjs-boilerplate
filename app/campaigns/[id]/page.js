@@ -319,6 +319,12 @@ export default function CampaignDetail() {
                 >
                   ✏️ Edit Campaign
                 </Link>
+                <button
+                  onClick={() => updateCampaignStatus("PUBLISHED")}
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+                >
+                  📤 Publish
+                </button>
                 <Link
                   href={`/campaigns/${campaign.id}/regenerate`}
                   className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md text-sm font-medium"

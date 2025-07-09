@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import SignOutButton from "./SignOutButton";
 
 export default function Navigation({ session }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -41,6 +42,8 @@ export default function Navigation({ session }) {
                 <span className="text-gray-700">
                   Welcome, {session.user?.name}!
                 </span>
+                <a className="text-gray-300">|</a>
+                <SignOutButton />
               </>
             ) : (
               <>
@@ -127,6 +130,9 @@ export default function Navigation({ session }) {
               >
                 Create Campaign
               </Link>
+              <div className="px-3 py-2">
+                <SignOutButton />
+              </div>
             </>
           ) : (
             <>
