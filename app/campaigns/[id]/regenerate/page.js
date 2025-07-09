@@ -196,7 +196,7 @@ export default function RegenerateCampaign({ params }) {
                   />
                   <div className="text-center">
                     <div className="mb-1 flex justify-center">
-                      <SocialIconOnly platform={platform.id} size="w-6 h-6" />
+                      <SocialIconOnly platform={platform.id} size="w-16 h-16" />
                     </div>
                     <div className="text-sm font-medium">{platform.name}</div>
                     {campaign.content.some(
