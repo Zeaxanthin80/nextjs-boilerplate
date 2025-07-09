@@ -1,6 +1,7 @@
 import { auth } from "@/app/lib/auth";
 import { prisma } from "@/app/lib/prisma";
 import { generateCampaignContent } from "@/app/lib/openai";
+import { generateChannelImages } from "@/app/lib/openai-images";
 import { NextResponse } from "next/server";
 
 export async function POST(request, { params }) {
@@ -42,6 +43,8 @@ export async function POST(request, { params }) {
 
     // Generate new content for each platform
     const newContent = [];
+    
+    // First, generate text content for all platforms
     for (const platform of platforms) {
       try {
         const content = await generateCampaignContent({
@@ -61,14 +64,43 @@ export async function POST(request, { params }) {
             content: content.content,
             hashtags: content.hashtags,
             callToAction: content.callToAction,
-            contentType: "TEXT", // Adding the missing contentType field
+            contentType: "POST", // Using the correct enum value from ContentType
           },
         });
 
         newContent.push(savedContent);
       } catch (error) {
-        console.error(`Failed to generate content for ${platform}:`, error);
+        console.error(`Failed to generate text content for ${platform}:`, error);
       }
+    }
+    
+    // Then, generate images for all platforms
+    try {
+      const basePrompt = `${campaign.product} for ${campaign.audience}, ${campaign.goals}, ${campaign.tone} tone`;
+      const imageResults = await generateChannelImages({
+        basePrompt,
+        channels: platforms,
+      });
+      
+      // Save the generated images to the database
+      for (const platform of platforms) {
+        if (imageResults[platform] && imageResults[platform].success) {
+          await prisma.campaignContent.create({
+            data: {
+              campaignId: id,
+              platform: platform.toUpperCase(),
+              type: "POST", // Using POST type for image content
+              content: imageResults[platform].revisedPrompt || basePrompt,
+              imageUrl: imageResults[platform].imageUrl,
+              contentType: "POST", // Using the correct enum value from ContentType
+            },
+          });
+        } else {
+          console.error(`Failed to generate image for ${platform}`);
+        }
+      }
+    } catch (error) {
+      console.error(`Failed to generate images:`, error);
     }
 
     return NextResponse.json({
