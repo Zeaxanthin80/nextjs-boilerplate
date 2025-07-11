@@ -39,6 +39,13 @@ export default function Navigation({ session }) {
                   Dashboard
                 </Link>
                 <a className="text-gray-300">|</a>
+                <Link
+                  href="/maintenance"
+                  className="text-gray-700 hover:text-gray-900"
+                >
+                  Maintenance
+                </Link>
+                <a className="text-gray-300">|</a>
                 <span className="text-gray-700">
                   Welcome, {session.user?.name}!
                 </span>
@@ -122,6 +129,13 @@ export default function Navigation({ session }) {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Dashboard
+              </Link>
+              <Link
+                href="/maintenance"
+                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Maintenance
               </Link>
               <Link
                 href="/campaigns/create"

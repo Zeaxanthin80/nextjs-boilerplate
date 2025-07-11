@@ -1,6 +1,7 @@
 import { auth } from "@/app/lib/auth";
 import { prisma } from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
+import { downloadAndSaveImage } from "@/app/lib/image-storage";
 
 // GET handler to fetch a single campaign
 export async function GET(request, { params }) {
@@ -45,6 +46,56 @@ export async function GET(request, { params }) {
         },
         { status: 404 }
       );
+    }
+
+    // Check for any expired images (URLs that don't start with /uploads/)
+    // and automatically save them permanently
+    let updatedContent = false;
+    const contentPromises = campaign.content.map(async (content) => {
+      // Skip if no image URL or already a permanent URL
+      if (!content.imageUrl || content.imageUrl.startsWith('/uploads/')) {
+        return content;
+      }
+
+      try {
+        // Try to download and save the image permanently
+        console.log(`Saving expired image for campaign ${id}, platform ${content.platform}`);
+        const permanentUrl = await downloadAndSaveImage(
+          content.imageUrl,
+          campaign.id,
+          content.platform.toLowerCase()
+        );
+
+        // Update the content record with the permanent URL
+        await prisma.campaignContent.update({
+          where: {
+            id: content.id,
+          },
+          data: {
+            imageUrl: permanentUrl,
+          },
+        });
+
+        // Mark that we've updated content
+        updatedContent = true;
+        
+        // Return updated content
+        return {
+          ...content,
+          imageUrl: permanentUrl
+        };
+      } catch (error) {
+        console.error(`Error auto-saving image for content ${content.id}:`, error);
+        return content;
+      }
+    });
+
+    // Wait for all content processing to complete
+    const processedContent = await Promise.all(contentPromises);
+
+    // If we updated any content, refresh the campaign data
+    if (updatedContent) {
+      campaign.content = processedContent;
     }
 
     return NextResponse.json(campaign);

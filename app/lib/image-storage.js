@@ -1,6 +1,10 @@
 import fs from "fs";
 import path from "path";
 import { writeFile, mkdir } from "fs/promises";
+import { promisify } from "util";
+import { pipeline } from "stream";
+
+const streamPipeline = promisify(pipeline);
 
 /**
  * Downloads an image from a URL and saves it permanently to local storage
@@ -15,9 +19,14 @@ export async function downloadAndSaveImage(imageUrl, campaignId, platform) {
     console.log(`Source image URL: ${imageUrl}`);
     
     // Skip if URL is already a local path
-    if (imageUrl.startsWith('/uploads/')) {
+    if (imageUrl && imageUrl.startsWith('/uploads/')) {
       console.log('Image is already a local path, skipping download');
       return imageUrl;
+    }
+    
+    // Validate URL
+    if (!imageUrl || typeof imageUrl !== 'string' || !imageUrl.startsWith('http')) {
+      throw new Error(`Invalid image URL: ${imageUrl}`);
     }
     
     // Create uploads directory if it doesn't exist
@@ -31,26 +40,53 @@ export async function downloadAndSaveImage(imageUrl, campaignId, platform) {
     await mkdir(uploadsDir, { recursive: true });
     console.log(`Created directory: ${uploadsDir}`);
 
-    // Generate filename
+    // Generate filename with sanitized platform name
     const timestamp = Date.now();
-    const filename = `${platform}-${timestamp}.png`;
+    const sanitizedPlatform = platform.replace(/[^a-z0-9]/gi, '-').toLowerCase();
+    const filename = `${sanitizedPlatform}-${timestamp}.png`;
     const filePath = path.join(uploadsDir, filename);
     console.log(`Target file path: ${filePath}`);
 
-    // Download the image
-    console.log(`Fetching image from: ${imageUrl}`);
-    const response = await fetch(imageUrl, {
-      headers: {
-        'User-Agent': 'MarketingHub/1.0',
-      },
-      // Add a timeout to prevent hanging
-      signal: AbortSignal.timeout(30000) // 30 second timeout
-    });
+    // Download the image with multiple retry attempts
+    let response;
+    let retries = 3;
+    let lastError;
     
-    if (!response.ok) {
-      throw new Error(
-        `Failed to download image: ${response.status} ${response.statusText}`
-      );
+    while (retries > 0) {
+      try {
+        console.log(`Fetching image from: ${imageUrl} (attempts left: ${retries})`);
+        response = await fetch(imageUrl, {
+          headers: {
+            'User-Agent': 'MarketingHub/1.0',
+          },
+          // Add a timeout to prevent hanging
+          signal: AbortSignal.timeout(30000) // 30 second timeout
+        });
+        
+        if (response.ok) break;
+        
+        lastError = new Error(
+          `Failed to download image: ${response.status} ${response.statusText}`
+        );
+        retries--;
+        
+        if (retries > 0) {
+          // Wait before retrying (exponential backoff)
+          await new Promise(resolve => setTimeout(resolve, (3 - retries) * 1000));
+        }
+      } catch (error) {
+        lastError = error;
+        retries--;
+        
+        if (retries > 0) {
+          // Wait before retrying
+          await new Promise(resolve => setTimeout(resolve, (3 - retries) * 1000));
+        }
+      }
+    }
+    
+    if (!response || !response.ok) {
+      throw lastError || new Error('Failed to download image after multiple attempts');
     }
 
     // Get the image buffer
@@ -73,6 +109,14 @@ export async function downloadAndSaveImage(imageUrl, campaignId, platform) {
   } catch (error) {
     console.error(`Error downloading and saving image for campaign ${campaignId}, platform ${platform}:`, error);
     console.error(`Failed URL: ${imageUrl}`);
+    
+    // Return a fallback image URL if available, otherwise rethrow the error
+    const fallbackPath = `/uploads/fallback-${platform.toLowerCase()}.png`;
+    if (fs.existsSync(path.join(process.cwd(), 'public', fallbackPath))) {
+      console.log(`Using fallback image: ${fallbackPath}`);
+      return fallbackPath;
+    }
+    
     throw error;
   }
 }

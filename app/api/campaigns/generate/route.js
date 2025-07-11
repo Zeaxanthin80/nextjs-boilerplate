@@ -62,10 +62,19 @@ export async function POST(request) {
 
     // Download and save images permanently
     console.log("Downloading and saving images permanently...");
-    const savedImages = await downloadAndSaveImages(
-      generatedImages,
-      campaign.id
-    );
+    let savedImages = {};
+    
+    try {
+      savedImages = await downloadAndSaveImages(
+        generatedImages,
+        campaign.id
+      );
+      console.log("Images saved successfully:", Object.keys(savedImages));
+    } catch (error) {
+      console.error("Error saving images permanently:", error);
+      // Continue with campaign creation even if image saving fails
+      // We'll handle this later by auto-saving images when viewing the campaign
+    }
 
     // Generate content for each selected platform
     const contentPromises = platforms.map(async (platform) => {
@@ -80,8 +89,21 @@ export async function POST(request) {
 
         // Get the saved image for this platform
         const platformImage = savedImages[platform.toLowerCase()];
-        const imageUrl =
-          platformImage?.permanentUrl || platformImage?.imageUrl || null;
+        
+        // Prioritize permanent URLs, but fall back to temporary ones if needed
+        // The system will try to save these permanently when the campaign is viewed
+        let imageUrl = null;
+        if (platformImage) {
+          if (platformImage.permanentUrl) {
+            // Use the permanent URL if available
+            imageUrl = platformImage.permanentUrl;
+            console.log(`Using permanent URL for ${platform}: ${imageUrl}`);
+          } else if (platformImage.imageUrl) {
+            // Fall back to the temporary URL
+            imageUrl = platformImage.imageUrl;
+            console.log(`Using temporary URL for ${platform}: ${imageUrl}`);
+          }
+        }
 
         // Create content entry in database
         return prisma.campaignContent.create({

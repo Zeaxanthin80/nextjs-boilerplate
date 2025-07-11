@@ -9,6 +9,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import Toast from "../../components/Toast";
 import SocialIcon from "../../components/SocialIcon";
 import ImagePreview from "../../components/ImagePreview";
+import CampaignImage from "../../components/CampaignImage";
 import SaveImagesButton from "../../components/SaveImagesButton";
 import Navigation from "../../components/Navigation";
 import { processHashtagsForDisplay } from "../../lib/utils";
@@ -422,6 +423,13 @@ export default function CampaignDetail() {
               {/* Image Preview with Download */}
               {content.imageUrl && (
                 <div className="w-full overflow-hidden">
+                  <CampaignImage
+                    src={content.imageUrl}
+                    alt={`Generated image for ${content.platform}`}
+                    platform={content.platform}
+                    campaignId={campaign.id}
+                    className="mb-4"
+                  />
                   <ImagePreview
                     imageUrl={content.imageUrl}
                     alt={`Generated image for ${content.platform}`}
